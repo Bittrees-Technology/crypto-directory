@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-11T09:59:20.667Z",
+  "generated_at": "2026-02-13T11:49:31.189Z",
   "checked_pages": [
     "site/index.html",
     "site/review.html",
@@ -21,22 +21,43 @@
     "site/categories/wallets.html"
   ],
   "internal": {
-    "checked_links": 52,
+    "checked_links": 0,
     "broken_count": 0,
     "broken": []
   },
   "external": {
-    "unique_links": 3103,
+    "unique_links": 3122,
     "invalid_format_count": 0,
     "invalid_format": [],
     "summary": {
       "ok": 0,
       "redirects": 0,
       "bad_status": 0,
-      "errors": 3103
+      "errors": 3122
     },
-    "broken_count": 3103,
+    "broken_count": 3122,
     "broken": [
+      {
+        "url": "https://euc.li/cryptodirectory.eth",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://raging.eth.limo",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
       {
         "url": "https://0g.ai",
         "ok": false,
@@ -7598,14 +7619,14 @@
         "location": null
       },
       {
-        "url": "https://flipsidecrypto.xyz",
+        "url": "https://x.com/flipsidecrypto",
         "ok": false,
         "status": null,
         "error": "fetch failed",
         "location": null
       },
       {
-        "url": "https://x.com/flipsidecrypto",
+        "url": "https://flipsidecrypto.xyz",
         "ok": false,
         "status": null,
         "error": "fetch failed",
@@ -14493,14 +14514,14 @@
         "location": null
       },
       {
-        "url": "https://www.orca.so",
+        "url": "https://www.coingecko.com/en/search?query=ORCA",
         "ok": false,
         "status": null,
         "error": "fetch failed",
         "location": null
       },
       {
-        "url": "https://www.coingecko.com/en/search?query=ORCA",
+        "url": "https://www.orca.so",
         "ok": false,
         "status": null,
         "error": "fetch failed",
@@ -17314,14 +17335,14 @@
         "location": null
       },
       {
-        "url": "https://www.silo.finance",
+        "url": "https://app.silo.finance",
         "ok": false,
         "status": null,
         "error": "fetch failed",
         "location": null
       },
       {
-        "url": "https://app.silo.finance",
+        "url": "https://www.silo.finance",
         "ok": false,
         "status": null,
         "error": "fetch failed",
@@ -17398,14 +17419,14 @@
         "location": null
       },
       {
-        "url": "https://www.coingecko.com/en/search?query=MKR",
+        "url": "https://app.sky.money",
         "ok": false,
         "status": null,
         "error": "fetch failed",
         "location": null
       },
       {
-        "url": "https://app.sky.money",
+        "url": "https://www.coingecko.com/en/search?query=MKR",
         "ok": false,
         "status": null,
         "error": "fetch failed",
@@ -18581,14 +18602,14 @@
         "location": null
       },
       {
-        "url": "https://x.com/SushiSwap",
+        "url": "https://www.swaap.finance",
         "ok": false,
         "status": null,
         "error": "fetch failed",
         "location": null
       },
       {
-        "url": "https://www.swaap.finance",
+        "url": "https://x.com/SushiSwap",
         "ok": false,
         "status": null,
         "error": "fetch failed",
@@ -21738,13 +21759,6 @@
         "location": null
       },
       {
-        "url": "https://zora.co/create",
-        "ok": false,
-        "status": null,
-        "error": "fetch failed",
-        "location": null
-      },
-      {
         "url": "https://zora.co",
         "ok": false,
         "status": null,
@@ -21752,7 +21766,126 @@
         "location": null
       },
       {
+        "url": "https://zora.co/create",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
         "url": "https://x.com/zora",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/review.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/needs-update.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/custody.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/daos-governance.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/data-analytics.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/defi.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/developer-tools.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/gaming.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/identity.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/infrastructure.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/layer-1-layer-2.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/nfts-creator-economy.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/payments.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/real-world-assets-rwa.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/security.html",
+        "ok": false,
+        "status": null,
+        "error": "fetch failed",
+        "location": null
+      },
+      {
+        "url": "https://cryptodirectory.eth.limo/categories/wallets.html",
         "ok": false,
         "status": null,
         "error": "fetch failed",
