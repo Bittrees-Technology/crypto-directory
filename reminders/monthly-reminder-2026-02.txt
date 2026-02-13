@@ -1,0 +1,10 @@
+CryptoDirectory Monthly Reminder
+Generated: 2026-02-11 11:50:14 WET
+
+Suggested monthly checklist:
+1. Review and update project entries in content/projects/.
+2. Run: node scripts/audit-report.mjs
+3. Run: node scripts/check-links.mjs
+4. Rebuild: node scripts/build.mjs
+5. Publish: ./scripts/publish-ipfs.sh
+6. Update ENS contenthash for cryptodirectory.eth

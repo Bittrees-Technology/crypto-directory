@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit Project | CryptoDirectory</title>
+  <link rel="icon" href="https://euc.li/cryptodirectory.eth">
+  <link rel="shortcut icon" href="https://euc.li/cryptodirectory.eth">
+  <link rel="apple-touch-icon" href="https://euc.li/cryptodirectory.eth">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Submit A Project</h1>
+      <p>Static intake form that outputs JSON for manual review and import.</p>
+    </header>
+
+    <section class="card">
+      <p>Fill required fields, then copy the generated JSON into a file under <code>content/submissions/inbox/</code>.</p>
+      <p><a href="index.html">Back to directory</a></p>
+    </section>
+
+    <section class="card" style="margin-top: 12px;">
+      <form id="submissionForm">
+        <div class="controls">
+          <input required id="name" placeholder="Name">
+          <input required id="lead_category" placeholder="Lead category">
+          <input required id="tags" placeholder="Tags (comma separated)">
+          <input required id="ecosystem" placeholder="Ecosystem (comma separated)">
+          <input required id="description" placeholder="1-2 sentence English description">
+          <input required id="primary_url" placeholder="Primary URL">
+          <input required id="product_url" placeholder="Product URL or n/a">
+          <input required id="founded" placeholder="Founded year (e.g. 2021)">
+          <input required id="hq" placeholder="HQ country or Metaverse">
+          <input required id="token" placeholder="Token symbol(s) or n/a">
+          <input required id="twitter" placeholder="Twitter URL or n/a">
+        </div>
+        <button type="submit">Generate JSON</button>
+      </form>
+    </section>
+
+    <section class="card" style="margin-top: 12px;">
+      <h3 style="margin-top:0;">Output</h3>
+      <textarea id="output" style="width:100%;min-height:260px;font-family:monospace;"></textarea>
+      <div class="controls">
+        <button id="copyBtn" type="button">Copy JSON</button>
+      </div>
+    </section>
+
+    <p class="footer">Disclosure: Submission does not guarantee listing.</p>
+  </main>
+
+  <script>
+    const form = document.getElementById('submissionForm');
+    const out = document.getElementById('output');
+    const copyBtn = document.getElementById('copyBtn');
+
+    function splitCSV(value) {
+      return value.split(',').map((s) => s.trim()).filter(Boolean);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const payload = {
+        name: document.getElementById('name').value.trim(),
+        lead_category: document.getElementById('lead_category').value.trim(),
+        tags: splitCSV(document.getElementById('tags').value),
+        ecosystem: splitCSV(document.getElementById('ecosystem').value),
+        description: document.getElementById('description').value.trim(),
+        primary_url: document.getElementById('primary_url').value.trim(),
+        product_url: document.getElementById('product_url').value.trim(),
+        founded: Number(document.getElementById('founded').value.trim()) || document.getElementById('founded').value.trim(),
+        hq: document.getElementById('hq').value.trim(),
+        token: document.getElementById('token').value.trim(),
+        twitter: document.getElementById('twitter').value.trim()
+      };
+      out.value = JSON.stringify(payload, null, 2);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      if (!out.value.trim()) return;
+      await navigator.clipboard.writeText(out.value);
+      copyBtn.textContent = 'Copied';
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy JSON';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

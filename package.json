@@ -1,0 +1,14 @@
+{
+  "name": "crypto-directory",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Static markdown-powered crypto company and project directory",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "audit": "node scripts/audit-report.mjs",
+    "import-submissions": "node scripts/import-submissions.mjs",
+    "update-statuses": "node scripts/update-statuses.mjs",
+    "auto-first-pass": "node scripts/auto-first-pass.mjs",
+    "release:monthly": "./scripts/monthly-release.sh"
+  }
+}

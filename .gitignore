@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.jks
+*.kdbx
+*.sqlite
+*.db
+reports/*.log
+reports/*.tmp
+*.local

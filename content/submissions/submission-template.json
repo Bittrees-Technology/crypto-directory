@@ -1,0 +1,14 @@
+{
+  "name": "Example Protocol",
+  "lead_category": "Infrastructure",
+  "tags": ["Infrastructure", "Developer Tools"],
+  "ecosystem": ["Ethereum"],
+  "description": "One to two sentence English summary of the company or project and its core product.",
+  "primary_url": "https://example.org",
+  "product_url": "https://app.example.org",
+  "founded": 2024,
+  "hq": "United States",
+  "token": "n/a",
+  "twitter": "https://x.com/example"
+}
+
