@@ -2,6 +2,13 @@
 
 Minimal static directory for active onchain companies and projects.
 
+## Current status (February 13, 2026)
+- Repository: https://github.com/Bittrees-Technology/crypto-directory
+- Default branch: `main` (protected)
+- Required status check on `main`: `build-and-check`
+- Latest verified build output: `Built 1030 projects across 14 categories.`
+- Security policy: `SECURITY.md`
+
 ## Scope (v1)
 - Active companies/projects with live products
 - Global coverage; all copy in English
