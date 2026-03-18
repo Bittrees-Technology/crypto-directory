@@ -6,6 +6,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "audit": "node scripts/audit-report.mjs",
+    "publish:ipfs": "node scripts/publish-ipfs.mjs",
+    "process-status": "node scripts/process-status-report.mjs",
     "import-submissions": "node scripts/import-submissions.mjs",
     "update-statuses": "node scripts/update-statuses.mjs",
     "auto-first-pass": "node scripts/auto-first-pass.mjs",

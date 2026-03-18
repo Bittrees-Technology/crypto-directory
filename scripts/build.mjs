@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { loadProcessStatuses } from './lib/process-metrics.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
@@ -193,7 +194,16 @@ Sitemap: ${absoluteUrl('sitemap.xml')}
 `;
 }
 
-function pageShell({ title, subtitle, body, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css' }) {
+function siteNav(navPrefix = '') {
+  return `<nav class="site-nav">
+    <a href="${escapeHtml(navPrefix)}index.html">Directory</a>
+    <a href="${escapeHtml(navPrefix)}review.html">Review Queue</a>
+    <a href="${escapeHtml(navPrefix)}needs-update.html">Needs Update</a>
+    <a href="${escapeHtml(navPrefix)}process-status.html">Process Status</a>
+  </nav>`;
+}
+
+function pageShell({ title, subtitle, body, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css', navPrefix = '' }) {
   return `<!doctype html>
 <html lang=\"en\">
 <head>
@@ -212,6 +222,7 @@ function pageShell({ title, subtitle, body, extraHead = '', extraScript = '', st
       <h1>${escapeHtml(title)}</h1>
       <p>${escapeHtml(subtitle)}</p>
     </header>
+    ${siteNav(navPrefix)}
     ${body}
     <p class=\"footer\">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
@@ -370,7 +381,8 @@ function categoryPage(category, projects) {
     subtitle: 'Sorted by lead category',
     body,
     extraHead: head,
-    stylesheetHref: '../assets/styles.css'
+    stylesheetHref: '../assets/styles.css',
+    navPrefix: '../'
   });
 }
 
@@ -448,6 +460,95 @@ function needsUpdatePage(projects) {
   });
 }
 
+function processStatusPage(statuses) {
+  const cards = statuses.map((status) => {
+    const sectionHtml = status.sections.map((section) => {
+      const requirementHtml = section.requirements.map((requirement) => {
+        const checks = requirement.checks.map((check) => {
+          const observed = check.target !== undefined
+            ? `${check.observed}/${check.target}`
+            : String(check.observed);
+          return `<li><strong>${escapeHtml(check.type)}</strong>: ${escapeHtml(check.path || '')} <span class="status">${escapeHtml(observed)}</span></li>`;
+        }).join('');
+
+        return `<div class="card" style="margin-top:10px">
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap">
+    <div>
+      <strong>${escapeHtml(requirement.title)}</strong>
+      <div class="status">${escapeHtml(requirement.description)}</div>
+    </div>
+    <div><strong>${escapeHtml(String(requirement.progressPercent))}%</strong></div>
+  </div>
+  ${checks ? `<ul>${checks}</ul>` : ''}
+</div>`;
+      }).join('');
+
+      return `<section class="card" style="margin-top:14px">
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap">
+    <div>
+      <h2 style="margin:0">${escapeHtml(section.title)}</h2>
+      <div class="status">Spec path: <code>${escapeHtml(section.specPath)}</code></div>
+    </div>
+    <div><strong>${escapeHtml(String(section.progressPercent))}%</strong></div>
+  </div>
+  ${requirementHtml}
+</section>`;
+    }).join('');
+
+    const timeline = status.completed
+      ? `Completed. Latest milestone date: ${escapeHtml(status.timeline.projectedCompletionDate || 'n/a')}.`
+      : `Projected completion: ${escapeHtml(status.timeline.projectedCompletionDate || 'unknown')}. ${status.timeline.daysRemaining === null ? 'Waiting for more progress data.' : `${escapeHtml(String(status.timeline.daysRemaining))} days remaining at the current velocity.`}`;
+
+    return `<section class="card" style="margin:18px 0">
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap">
+    <div>
+      <h2 style="margin:0">${escapeHtml(status.name)}</h2>
+      <div class="status">${escapeHtml(status.summary)}</div>
+      <div class="status">Owner: ${escapeHtml(status.owner || 'n/a')}</div>
+    </div>
+    <div style="text-align:right">
+      <div><strong>${escapeHtml(String(status.progressPercent))}% complete</strong></div>
+      <div class="status">${status.completed ? 'Completed' : 'In progress'}</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;background:#f7f6f2">
+    <div><strong>Timeline</strong></div>
+    <div class="status">Started: ${escapeHtml(status.timeline.startedOn || 'n/a')}</div>
+    <div class="status">Target: ${escapeHtml(status.timeline.targetDate || 'n/a')}</div>
+    <div class="status">Observed velocity: ${escapeHtml(String(status.timeline.observedVelocityPercentPerDay || 0))}% / day</div>
+    <div style="margin-top:6px">${escapeHtml(timeline)}</div>
+  </div>
+  ${sectionHtml}
+</section>`;
+  }).join('');
+
+  const head = seoHead({
+    title: 'CryptoDirectory | Process Status',
+    description: 'Progress tracking against design and plan specs for CryptoDirectory projects.',
+    canonicalPath: 'process-status.html',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'CryptoDirectory Process Status',
+      url: absoluteUrl('process-status.html'),
+      isPartOf: absoluteUrl(''),
+      inLanguage: 'en'
+    }
+  });
+
+  const body = `<section class="card" style="margin:18px 0">
+  Process status compares each tracked project against explicit design and plan specs, then estimates completion using weighted requirements and recorded history.
+</section>
+${cards || '<section class="card" style="margin:18px 0">No tracked processes found.</section>'}`;
+
+  return pageShell({
+    title: 'Process Status',
+    subtitle: 'Completion tracking against design and plan specs',
+    body,
+    extraHead: head
+  });
+}
+
 async function main() {
   await fs.mkdir(categoryDir, { recursive: true });
   await fs.mkdir(dataDir, { recursive: true });
@@ -466,11 +567,14 @@ async function main() {
 
   projects.sort((a, b) => a.name.localeCompare(b.name));
   const categories = [...new Set(projects.map((p) => p.lead_category))].sort();
+  const processStatuses = await loadProcessStatuses(root);
 
   await fs.writeFile(path.join(dataDir, 'projects.json'), JSON.stringify(projects, null, 2) + '\n');
+  await fs.writeFile(path.join(dataDir, 'process-status.json'), JSON.stringify(processStatuses, null, 2) + '\n');
   await fs.writeFile(path.join(siteDir, 'index.html'), indexPage(projects, categories));
   await fs.writeFile(path.join(siteDir, 'review.html'), reviewPage(projects));
   await fs.writeFile(path.join(siteDir, 'needs-update.html'), needsUpdatePage(projects));
+  await fs.writeFile(path.join(siteDir, 'process-status.html'), processStatusPage(processStatuses));
 
   for (const category of categories) {
     const catProjects = projects.filter((p) => p.lead_category === category);
@@ -481,12 +585,18 @@ async function main() {
   const sitemapPaths = [
     '',
     'index.html',
+    'review.html',
+    'needs-update.html',
+    'process-status.html',
     ...categories.map((c) => `categories/${slugify(c)}.html`)
   ];
   await fs.writeFile(path.join(siteDir, 'sitemap.xml'), sitemapXml(sitemapPaths));
   await fs.writeFile(path.join(siteDir, 'robots.txt'), robotsTxt());
 
-  console.log(`Built ${projects.length} projects across ${categories.length} categories.`);
+  const processSummary = processStatuses.length === 0
+    ? 'No tracked processes.'
+    : processStatuses.map((item) => `${item.name}: ${item.progressPercent}%`).join(' | ');
+  console.log(`Built ${projects.length} projects across ${categories.length} categories. Process status: ${processSummary}`);
 }
 
 main().catch((err) => {

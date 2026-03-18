@@ -44,9 +44,12 @@
 - Run the full monthly release flow in order:
   - `audit -> build -> publish -> ENS update -> append releases.md`
 - Command: `npm run release:monthly -- "Monthly notes here"`
+- Operator runbook: `monthly-release-checklist.md`
 - This runs:
   - `node scripts/audit-report.mjs`
+  - `node scripts/process-status-report.mjs`
   - `node scripts/build.mjs`
-  - `./scripts/publish-ipfs.sh`
+  - `./scripts/publish-ipfs.sh --skip-build`
   - manual ENS reminder
   - release append in `releases.md`
+  - timestamped audit and process-status evidence logs under `reports/`

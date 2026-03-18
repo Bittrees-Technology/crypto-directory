@@ -28,6 +28,21 @@ header p {
   margin: 0;
   color: var(--muted);
 }
+.site-nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.site-nav a {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #f7f6f2;
+  font-size: 13px;
+  font-weight: 600;
+}
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -106,6 +121,9 @@ a:hover { text-decoration: underline; }
   margin-top: 18px;
   font-size: 13px;
   color: var(--muted);
+}
+ul {
+  padding-left: 20px;
 }
 @media (max-width: 760px) {
   th:nth-child(5), td:nth-child(5), th:nth-child(8), td:nth-child(8) { display: none; }

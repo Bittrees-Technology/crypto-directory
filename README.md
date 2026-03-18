@@ -36,16 +36,28 @@ Policy and operations docs:
 - `content/curation-policy.md`
 - `content/monthly-ops.md`
 
+Process/spec tracking:
+- `content/processes/specs/` holds the written design and plan specs
+- `content/processes/projects/` defines tracked projects and weighted requirements
+- `content/processes/history/` stores progress snapshots used for timeline projection
+
 ## Build
 ```bash
 npm run build
 ```
 
 Build output is static HTML/JSON in `site/`.
+- `site/process-status.html` shows project completion vs design/plan specs
+- `site/data/process-status.json` exposes machine-readable progress and timeline data
 
 Audit report:
 ```bash
 node scripts/audit-report.mjs
+```
+
+Direct process status report:
+```bash
+npm run process-status
 ```
 
 Submission import:
@@ -84,7 +96,13 @@ Monthly release ritual:
 ```bash
 npm run release:monthly -- "optional notes for this release"
 ```
-This enforces: `audit -> build -> publish -> ENS update -> append releases.md`.
+Reference checklist: `monthly-release-checklist.md`.
+This enforces the core release order `audit -> build -> publish -> ENS update -> append releases.md` and also records a timestamped `process-status` evidence log under `reports/` for the release.
+
+## Extending completion logic
+- Add new tracked projects in `content/processes/projects/*.json`
+- Add more historical snapshots in `content/processes/history/*.json` to improve timeline projections
+- Extend `scripts/lib/process-metrics.mjs` with new check types as more scripts and data sources become available
 
 ## IPFS + ENS later
 When ready:

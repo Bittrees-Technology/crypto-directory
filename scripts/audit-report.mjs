@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { loadProcessStatuses } from './lib/process-metrics.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
@@ -61,10 +62,19 @@ async function main() {
   for (const p of pending) {
     console.log(`- ${p.name} (${p.file})`);
   }
+
+  const processStatuses = await loadProcessStatuses(root);
+  if (processStatuses.length > 0) {
+    console.log('Process status:');
+    for (const status of processStatuses) {
+      const state = status.completed ? 'completed' : 'in_progress';
+      const projection = status.timeline.projectedCompletionDate || 'unknown';
+      console.log(`- ${status.name}: ${status.progressPercent}% (${state}), projected ${projection}`);
+    }
+  }
 }
 
 main().catch((err) => {
   console.error(err.message || err);
   process.exit(1);
 });
-
