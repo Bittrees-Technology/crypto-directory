@@ -1,0 +1,118 @@
+{
+  "id": "crypto-directory-v1",
+  "name": "CryptoDirectory V1",
+  "owner": "Bob",
+  "summary": "Track delivery of the static directory against the written design and operating plan.",
+  "sections": [
+    {
+      "id": "design-spec",
+      "title": "Design Spec Coverage",
+      "spec_path": "content/processes/specs/crypto-directory-design-spec.md",
+      "weight": 0.55,
+      "requirements": [
+        {
+          "id": "design-doc",
+          "title": "Design spec is documented",
+          "description": "A durable written design spec exists for the project.",
+          "weight": 1,
+          "checks": [
+            { "type": "file_exists", "path": "content/processes/specs/crypto-directory-design-spec.md" }
+          ]
+        },
+        {
+          "id": "static-site-shell",
+          "title": "Static site shell is present",
+          "description": "The public site and shared stylesheet exist.",
+          "weight": 1,
+          "checks": [
+            { "type": "file_exists", "path": "site/index.html" },
+            { "type": "file_exists", "path": "site/assets/styles.css" }
+          ]
+        },
+        {
+          "id": "category-navigation",
+          "title": "Category pages are generated",
+          "description": "The build emits at least one category page.",
+          "weight": 1,
+          "checks": [
+            { "type": "directory_count", "path": "site/categories", "extension": ".html", "min_count": 1 }
+          ]
+        },
+        {
+          "id": "workflow-queues",
+          "title": "Operational queue pages exist",
+          "description": "Review and update queues are visible in the generated site.",
+          "weight": 1,
+          "checks": [
+            { "type": "file_exists", "path": "site/review.html" },
+            { "type": "file_exists", "path": "site/needs-update.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plan-spec",
+      "title": "Plan Spec Coverage",
+      "spec_path": "content/processes/specs/crypto-directory-plan-spec.md",
+      "weight": 0.45,
+      "requirements": [
+        {
+          "id": "plan-doc",
+          "title": "Plan spec is documented",
+          "description": "A written plan spec exists for delivery and operations.",
+          "weight": 1,
+          "checks": [
+            { "type": "file_exists", "path": "content/processes/specs/crypto-directory-plan-spec.md" }
+          ]
+        },
+        {
+          "id": "ops-runbook",
+          "title": "Ops runbook is in repo",
+          "description": "Monthly operating steps are documented.",
+          "weight": 1,
+          "checks": [
+            { "type": "file_exists", "path": "content/monthly-ops.md" },
+            { "type": "file_exists", "path": "content/curation-policy.md" }
+          ]
+        },
+        {
+          "id": "automation-scripts",
+          "title": "Core automation scripts exist",
+          "description": "Build, audit, release, and import scripts are present.",
+          "weight": 1,
+          "checks": [
+            { "type": "file_exists", "path": "scripts/build.mjs" },
+            { "type": "file_exists", "path": "scripts/audit-report.mjs" },
+            { "type": "file_exists", "path": "scripts/monthly-release.sh" },
+            { "type": "file_exists", "path": "scripts/import-submissions.mjs" }
+          ]
+        },
+        {
+          "id": "data-output",
+          "title": "Build output includes project data",
+          "description": "Generated data and public submission flow are available.",
+          "weight": 1,
+          "checks": [
+            { "type": "file_exists", "path": "site/data/projects.json" },
+            { "type": "file_exists", "path": "site/submit.html" }
+          ]
+        },
+        {
+          "id": "timeline-calibration",
+          "title": "Timeline calibration data is being collected",
+          "description": "History snapshots exist so projected completion can improve over time.",
+          "weight": 1,
+          "checks": [
+            { "type": "directory_count", "path": "content/processes/history", "extension": ".json", "min_count": 2 }
+          ]
+        }
+      ]
+    }
+  ],
+  "timeline": {
+    "started_on": "2026-02-13",
+    "target_date": "2026-04-15",
+    "default_velocity_percent_per_day": 1.25,
+    "history_path": "content/processes/history/crypto-directory-v1.json"
+  }
+}
