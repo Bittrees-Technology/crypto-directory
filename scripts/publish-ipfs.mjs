@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import {
   getIpfsStorageConfig,
   IpfsStorageClient,
+  publishProjectPath,
 } from "../../ipfs-evm-system/src/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,17 +28,21 @@ async function main() {
     return;
   }
 
-  console.log("Publishing site/ to IPFS...");
-  const result = await client.publishDirectory({
-    directoryPath: siteDir,
-    sourceProject: "crypto-directory",
-    metadata: {
-      artifact: "site-release",
-      path: siteDir,
+  console.log("Publishing site/ to IPFS through the shared storage contract...");
+  const result = await publishProjectPath(client, {
+    project: "crypto-directory",
+    inputPath: siteDir,
+    artifactKind: "site-release",
+    wrapWithDirectory: true,
+    extraMetadata: {
+      releaseSurface: "site",
+      contentType: "text/html",
     },
   });
 
   console.log(`CID: ${result.cid}`);
+  console.log(`Pinned: ${result.pinStatus.pinned ? "yes" : "no"}`);
+  console.log(`Gateway available: ${result.health.available ? "yes" : "no"}`);
   console.log("");
   console.log("Gateway URL:");
   console.log(`${result.gatewayUrl}/`);
