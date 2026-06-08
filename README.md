@@ -104,12 +104,13 @@ This enforces the core release order `audit -> build -> publish -> ENS update ->
 - Add more historical snapshots in `content/processes/history/*.json` to improve timeline projections
 - Extend `scripts/lib/process-metrics.mjs` with new check types as more scripts and data sources become available
 
-## IPFS + ENS later
+## IPFS + ENS release
 When ready:
 1. Build site (`npm run build`)
-2. Add/pin `site/` to IPFS
-3. Point `cryptodirectory.eth` `contenthash` to the IPFS CID
-4. Keep monthly release notes with CID history in `releases.md`
+2. Publish and pin `site/` through the shared IPFS storage path (`npm run publish:ipfs`)
+3. Review the generated `cryptodirectory.eth` ENS contenthash packet (`npm run ens:contenthash -- <cid>`)
+4. Dry-run the current resolver value before sending the guarded `setContenthash` transaction
+5. Keep monthly release notes with CID history in `releases.md`
 
 ## Snapshot strategy (recommended)
 - Keep immutable release folders/CIDs: `v1`, `v2`, `v3`
