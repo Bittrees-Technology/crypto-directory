@@ -109,10 +109,30 @@ When ready:
 1. Build site (`npm run build`)
 2. Publish and pin `site/` through the shared IPFS storage path (`npm run publish:ipfs`)
 3. Review the generated `cryptodirectory.eth` ENS contenthash packet (`npm run ens:contenthash -- <cid>`)
-4. Dry-run the current resolver value before sending the guarded `setContenthash` transaction
-5. Keep monthly release notes with CID history in `releases.md`
+4. Dry-run the current resolver value before sending the guarded transaction (`npm run ens:set-contenthash -- --cid <cid>`)
+5. Execute only after the ENS manager gate passes and signer env is present (`npm run ens:set-contenthash -- --execute --cid <cid>`)
+6. Keep monthly release notes with CID history in `releases.md`
 
 ## Snapshot strategy (recommended)
 - Keep immutable release folders/CIDs: `v1`, `v2`, `v3`
 - Update ENS to latest stable CID
 - Preserve old CIDs in `releases.md` for rollback/audit
+
+### ENS signing environment
+The guarded ENS executor requires these local-only values and refuses to print the private key:
+
+```bash
+ENS_RESOLVER_ADDRESS=0x...
+ETH_RPC_URL=https://...
+ENS_OWNER_PRIVATE_KEY=0x...
+```
+
+Dry-run first:
+```bash
+npm run ens:set-contenthash -- --cid <cid>
+```
+
+Execute only after Bob's ENS publication gate passes:
+```bash
+npm run ens:set-contenthash -- --execute --cid <cid>
+```

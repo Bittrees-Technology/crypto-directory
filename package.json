@@ -13,6 +13,8 @@
     "import-submissions": "node scripts/import-submissions.mjs",
     "update-statuses": "node scripts/update-statuses.mjs",
     "auto-first-pass": "node scripts/auto-first-pass.mjs",
-    "release:monthly": "./scripts/monthly-release.sh"
+    "release:monthly": "./scripts/monthly-release.sh",
+    "ens:set-contenthash": "node scripts/ens-set-contenthash.mjs",
+    "test:ens-set-contenthash": "node --test scripts/ens-set-contenthash.test.mjs"
   }
 }
