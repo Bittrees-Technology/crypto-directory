@@ -7,10 +7,16 @@
     "build": "node scripts/build.mjs",
     "audit": "node scripts/audit-report.mjs",
     "publish:ipfs": "node scripts/publish-ipfs.mjs",
+    "ens:contenthash": "node scripts/ens-contenthash.mjs",
+    "test:ens-contenthash": "node --test scripts/ens-contenthash.test.mjs",
     "process-status": "node scripts/process-status-report.mjs",
     "import-submissions": "node scripts/import-submissions.mjs",
     "update-statuses": "node scripts/update-statuses.mjs",
     "auto-first-pass": "node scripts/auto-first-pass.mjs",
-    "release:monthly": "./scripts/monthly-release.sh"
+    "release:monthly": "./scripts/monthly-release.sh",
+    "ens:set-contenthash": "node scripts/ens-set-contenthash.mjs",
+    "test:ens-set-contenthash": "node --test scripts/ens-set-contenthash.test.mjs",
+    "ens:gate": "node scripts/ens-publication-gate.mjs",
+    "test:ens-gate": "node --test scripts/ens-publication-gate.test.mjs"
   }
 }

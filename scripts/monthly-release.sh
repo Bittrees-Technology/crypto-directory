@@ -13,11 +13,6 @@ NOTES="${1:-Monthly release}"
 
 mkdir -p "$REPORTS_DIR"
 
-if ! command -v ipfs >/dev/null 2>&1; then
-  echo "ERROR: ipfs CLI not found. Install Kubo first: https://docs.ipfs.tech/install/command-line/"
-  exit 1
-fi
-
 echo "Step 1/6: audit"
 node "$ROOT_DIR/scripts/audit-report.mjs" | tee "$AUDIT_LOG"
 
@@ -37,8 +32,8 @@ if [ -z "$CID" ]; then
   exit 1
 fi
 
-echo "Step 5/6: ENS update (manual)"
-echo "Set cryptodirectory.eth contenthash to: ipfs://$CID"
+echo "Step 5/6: ENS update packet"
+node "$ROOT_DIR/scripts/ens-contenthash.mjs" "$CID"
 
 ENTRY_COUNT="$(node -e "const fs=require(\"fs\"); const p=\"$ROOT_DIR/site/data/projects.json\"; const data=JSON.parse(fs.readFileSync(p,\"utf8\")); console.log(Array.isArray(data)?data.length:0);")"
 RELEASE_LINE="- $DATE_UTC: CID=$CID | entries=$ENTRY_COUNT | notes=$NOTES"
