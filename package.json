@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "Static markdown-powered crypto company and project directory",
   "scripts": {
+    "test": "node scripts/validate-independence-draft.mjs",
     "build": "node scripts/build.mjs",
     "audit": "node scripts/audit-report.mjs",
     "publish:ipfs": "node scripts/publish-ipfs.mjs",
