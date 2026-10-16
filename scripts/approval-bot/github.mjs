@@ -1,3 +1,5 @@
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import {createHash} from 'node:crypto';
 import {ensure, eligible, checksPass, REPOSITORY, CI_WORKFLOW_ID} from './policy.mjs';
 export class GitHub {
@@ -5,9 +7,19 @@ export class GitHub {
   async request(path, method = 'GET', body) {
     ensure(path.startsWith(`/repos/${REPOSITORY}/`), 'Unexpected GitHub resource');
     const response = await fetch(`https://api.github.com${path}`, {method, redirect:'error', signal:AbortSignal.timeout(30000), headers:{Authorization:`Bearer ${this.token}`, Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'}, body:body === undefined ? undefined : JSON.stringify(body)});
-    ensure(response.ok, `GitHub request failed (${response.status})`);
+    if(!response.ok){const error=Error(`GitHub request failed (${response.status})`);error.status=response.status;throw error;}
     const text = await response.text(); ensure(Buffer.byteLength(text) <= 2000000, 'GitHub response exceeds limit');
     return text ? JSON.parse(text) : null;
+  }
+  async deleteBranch(branch, expectedHead) {
+    ensure(/^codex\/[A-Za-z0-9_./-]+$/.test(branch) && !branch.includes('..') && /^[a-f0-9]{40}$/.test(expectedHead),'Invalid cleanup ref');
+    const ref=`refs/heads/${branch}`;
+    try {
+      await promisify(execFile)('git',['-c','credential.helper=','push',`--force-with-lease=${ref}:${expectedHead}`,`https://github.com/${REPOSITORY}.git`, `:${ref}`],{
+        timeout:30000,maxBuffer:64000,
+        env:{PATH:process.env.PATH,GIT_TERMINAL_PROMPT:'0',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_CONFIG_COUNT:'1',GIT_CONFIG_KEY_0:'http.https://github.com/.extraheader',GIT_CONFIG_VALUE_0:`AUTHORIZATION: basic ${Buffer.from(`x-access-token:${this.token}`).toString('base64')}`}
+      });
+    } catch { throw Error('Conditional branch deletion failed; source branch preserved or cleanup unconfirmed'); }
   }
   async list(path, field) {
     const rows = [];
@@ -86,6 +98,28 @@ export async function merge(github, envelope) {
   ensure(receipt.merged===true && /^[a-f0-9]{40}$/.test(receipt.sha),'GitHub did not confirm merge');
   const after=await github.request(p);
   ensure(after.merged===true && after.head.sha===fresh.snapshot.head && after.merge_commit_sha===receipt.sha,'Merge verification failed');
-  // GitHub deletes merged branches through delete_branch_on_merge; never delete refs ourselves.
-  return {state:'merged',head:fresh.snapshot.head,mergeCommit:receipt.sha,branchCleanup:'repository automatic deletion'};
+  const branchCleanup=await pruneMergedBranch(github,after,fresh.snapshot.head);
+  return {state:'merged',head:fresh.snapshot.head,mergeCommit:receipt.sha,branchCleanup};
+}
+
+export async function pruneMergedBranch(github, pr, expectedHead) {
+  ensure(pr.merged===true && pr.state==='closed' && pr.head?.sha===expectedHead,'Only the verified merged commit may be pruned');
+  ensure(pr.head.repo?.full_name===REPOSITORY && pr.base.repo?.full_name===REPOSITORY && pr.base.ref==='main','Unexpected merged repository or base');
+  const branch=pr.head.ref;
+  ensure(typeof branch==='string' && branch.startsWith('codex/') && !branch.includes('..'),'Only pilot source branches may be pruned');
+  const encoded=branch.split('/').map(encodeURIComponent).join('/');
+  let ref;
+  try { ref=await github.request(`${prefix}/git/ref/heads/${encoded}`); }
+  catch(error) { if(error.status===404)return 'already-deleted'; throw error; }
+  ensure(ref.object?.sha===expectedHead,'Source branch advanced after merge; preserving it');
+  const info=await github.request(`${prefix}/branches/${encoded}`);
+  ensure(info.protected===false,'Protected source branch must be preserved');
+  const open=await github.list(`${prefix}/pulls?state=open`);
+  ensure(!open.some(p=>p.base?.ref===branch || (p.head?.repo?.full_name===REPOSITORY && p.head.ref===branch)),'Another open PR uses this branch');
+  const current=await github.request(`${prefix}/git/ref/heads/${encoded}`);
+  ensure(current.object?.sha===expectedHead,'Source branch changed before cleanup');
+  await github.deleteBranch(branch,expectedHead);
+  try { await github.request(`${prefix}/git/ref/heads/${encoded}`); }
+  catch(error) { if(error.status===404)return 'deleted'; throw error; }
+  throw Error('Merged source branch deletion not confirmed');
 }

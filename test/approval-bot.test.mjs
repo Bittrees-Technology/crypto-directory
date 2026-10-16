@@ -4,7 +4,7 @@ import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {eligible,checksPass,approvalAllowed,sameSnapshot,REPOSITORY,CI_WORKFLOW_ID} from '../scripts/approval-bot/policy.mjs';
-import {snapshot,approve,merge} from '../scripts/approval-bot/github.mjs';
+import {snapshot,approve,merge,pruneMergedBranch} from '../scripts/approval-bot/github.mjs';
 import {reviewWithClaude,claudeFailure} from '../scripts/approval-bot/run.mjs';
 const head='a'.repeat(40),base='b'.repeat(40),newHead='c'.repeat(40);
 const pr=()=>({state:'open',draft:false,merged:false,changed_files:1,head:{sha:head,repo:{full_name:REPOSITORY}},base:{ref:'main',sha:base,repo:{full_name:REPOSITORY}}});
@@ -98,8 +98,9 @@ class MergeGitHub extends FakeGitHub {
       if(this.rejectMerge)throw Error('GitHub branch protection rejected merge');
       this.merged=true;return {merged:true,sha:newHead};
     }
+    if(path.includes('/git/ref/')){const error=Error('missing');error.status=404;throw error;}
     const result=await super.request(path,method,body);
-    if(this.merged && /\/pulls\/6$/.test(path))return {...result,merged:true,merge_commit_sha:newHead};
+    if(this.merged && /\/pulls\/6$/.test(path))return {...result,state:'closed',merged:true,head:{...result.head,ref:'codex/test'},merge_commit_sha:newHead};
     return result;
   }
 }
@@ -108,7 +109,7 @@ async function mergeFixture() {
   g.reviews=[{user:{id:2,login:'github-actions[bot]'},state:'APPROVED',commit_id:head,body:`Review digest: ${state.snapshot.digest}`}];
   return {g,envelope:{version:1,snapshot:state.snapshot,review:clear()}};
 }
-test('merge submits exact reviewed SHA and never manually deletes branches',async()=>{
+test('merge submits exact reviewed SHA and tolerates already-deleted branches',async()=>{
   const {g,envelope}=await mergeFixture();assert.equal((await merge(g,envelope)).state,'merged');
   assert.deepEqual(g.writes.map(w=>({method:w.method,body:w.body})),[{method:'PUT',body:{sha:head,merge_method:'squash'}}]);
 });
@@ -135,4 +136,19 @@ test('provider diagnostics expose only fixed labels and allowlisted numeric code
   }
   assert.ok(!claudeFailure({api_error_status:'401 synthetic-secret',subtype:'synthetic-secret'},1).includes('synthetic-secret'));
   assert.match(claudeFailure({subtype:'error_max_turns'},1),/turn limit/);
+});
+
+test('cleanup preserves advanced, protected and in-use branches and verifies deletion',async()=>{
+  for(const mode of ['ok','advanced','protected','in-use']) {
+    const writes=[];let deleted=false;
+    const g={async deleteBranch(branch,sha){assert.equal(branch,'codex/test');assert.equal(sha,head);writes.push(branch);deleted=true;},async request(path,method='GET') {
+      if(method==='DELETE'){writes.push(path);deleted=true;return null;}
+      if(path.includes('/git/ref/')){if(deleted){const e=Error('missing');e.status=404;throw e;}return {object:{sha:mode==='advanced'?newHead:head}};}
+      if(path.includes('/branches/'))return {protected:mode==='protected'};
+      throw Error('unexpected');
+    },async list(){return mode==='in-use'?[{base:{ref:'codex/test'}}]:[];}};
+    const merged={...pr(),state:'closed',merged:true,head:{...pr().head,ref:'codex/test'}};
+    if(mode==='ok'){assert.equal(await pruneMergedBranch(g,merged,head),'deleted');assert.equal(writes.length,1);}
+    else {await assert.rejects(pruneMergedBranch(g,merged,head));assert.equal(writes.length,0);}
+  }
 });
