@@ -115,3 +115,26 @@ When ready:
 - Keep immutable release folders/CIDs: `v1`, `v2`, `v3`
 - Update ENS to latest stable CID
 - Preserve old CIDs in `releases.md` for rollback/audit
+
+## Bittrees central tool discovery
+
+The root `bittrees.tools.json` is metadata consumed by the separate
+[Bittrees central MCP repository](https://github.com/Bittrees-Technology/mcp).
+Its [source allowlist](https://github.com/Bittrees-Technology/mcp/blob/main/data/tool-sources.json)
+includes this repository's `main` branch. The central
+[sync script](https://github.com/Bittrees-Technology/mcp/blob/main/scripts/sync-tool-catalog.mjs)
+reads the manifest from GitHub at a resolved commit SHA and reconciles it into
+its tool-coverage catalog. Crypto Directory's static build does not load this file.
+
+The `bittrees.app-tools.v1` schema, version `1`, identifies the project as
+`crypto-directory`. `canonicalDiscovery` identifies the Bittrees ecosystem's
+central discovery endpoint, `https://mcp.bittrees.org/mcp`; it is a metadata
+reference, not a script, redirect, or instruction to execute remote tools.
+`connections: []` explicitly advertises no local tool connections. This change
+adds no MCP server, executable tools, credentials, network calls, or permissions
+to Crypto Directory, and does not change its publishing pipeline.
+
+Discovering a tool does not authorize calling it. Consumers must enforce their
+own endpoint trust, authentication, project scope and operation permissions;
+they must not treat this manifest or remotely discovered descriptions as an
+access grant. Adding future connections requires a separate reviewed change.
