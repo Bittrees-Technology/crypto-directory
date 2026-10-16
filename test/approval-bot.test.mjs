@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {eligible,checksPass,approvalAllowed,sameSnapshot,REPOSITORY,CI_WORKFLOW_ID} from '../scripts/approval-bot/policy.mjs';
 import {snapshot,approve,merge} from '../scripts/approval-bot/github.mjs';
-import {reviewWithClaude} from '../scripts/approval-bot/run.mjs';
+import {reviewWithClaude,claudeFailure} from '../scripts/approval-bot/run.mjs';
 const head='a'.repeat(40),base='b'.repeat(40),newHead='c'.repeat(40);
 const pr=()=>({state:'open',draft:false,merged:false,changed_files:1,head:{sha:head,repo:{full_name:REPOSITORY}},base:{ref:'main',sha:base,repo:{full_name:REPOSITORY}}});
 const files=()=>[{filename:'bittrees.tools.json',status:'added',patch:'+{"connections":[]}'}];
@@ -126,4 +126,13 @@ test('missing, stale or dismissed approval, head race, or failed checks prevent 
 test('GitHub merge rejection never retries with a bypass',async()=>{
   const {g,envelope}=await mergeFixture();g.rejectMerge=true;
   await assert.rejects(merge(g,envelope),/branch protection/);assert.equal(g.writes.length,1);
+});
+
+test('provider diagnostics expose only fixed labels and allowlisted numeric codes',()=>{
+  for(const status of [401,403,429,500]) {
+    const message=claudeFailure({api_error_status:status,result:'synthetic-secret',errors:['synthetic-secret']},1);
+    assert.match(message,new RegExp(`HTTP ${status}`));assert.ok(!message.includes('synthetic-secret'));
+  }
+  assert.ok(!claudeFailure({api_error_status:'401 synthetic-secret',subtype:'synthetic-secret'},1).includes('synthetic-secret'));
+  assert.match(claudeFailure({subtype:'error_max_turns'},1),/turn limit/);
 });
