@@ -1,0 +1,7 @@
+{
+  "schema": "bittrees.app-tools.v1",
+  "version": 1,
+  "projectId": "crypto-directory",
+  "canonicalDiscovery": "https://mcp.bittrees.org/mcp",
+  "connections": []
+}
