@@ -67,3 +67,27 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REVIEW_ENVELOPE: ${{ needs.review.outputs.envelope }}
+  merge:
+    needs: [review, approve]
+    if: needs.review.outputs.envelope != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: read
+      checks: read
+      statuses: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Recheck review and CI, then merge the exact approved commit
+        run: node scripts/approval-bot/run.mjs merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_ENVELOPE: ${{ needs.review.outputs.envelope }}

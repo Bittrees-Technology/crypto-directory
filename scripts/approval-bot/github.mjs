@@ -70,3 +70,22 @@ export async function approve(github, envelope) {
   }
   return {state:'approved',head:fresh.snapshot.head,reviewId:receipt.id};
 }
+
+export async function merge(github, envelope) {
+  const {approvalAllowed,sameSnapshot}=await import('./policy.mjs');
+  ensure(envelope?.version===1,'Invalid review envelope'); approvalAllowed(envelope.review,envelope.snapshot);
+  const fresh=await snapshot(github,envelope.snapshot.number); sameSnapshot(envelope.snapshot,fresh.snapshot);
+  const botReviews=fresh.reviews.filter(r=>r.user?.login==='github-actions[bot]' && ['APPROVED','CHANGES_REQUESTED','DISMISSED'].includes(r.state));
+  const approval=botReviews.at(-1);
+  ensure(approval?.state==='APPROVED' && approval.commit_id===fresh.snapshot.head && approval.body?.includes(`Review digest: ${fresh.snapshot.digest}`),'Missing current bot approval for this review');
+  const p=`${prefix}/pulls/${fresh.snapshot.number}`;
+  const current=await github.request(p);
+  ensure(current.state==='open' && !current.draft && current.head.sha===fresh.snapshot.head && current.base.sha===fresh.snapshot.base,'PR changed immediately before merge');
+  // The ordinary Actions token must satisfy GitHub branch protections. Never use an admin bypass.
+  const receipt=await github.request(`${p}/merge`,'PUT',{sha:fresh.snapshot.head,merge_method:'squash'});
+  ensure(receipt.merged===true && /^[a-f0-9]{40}$/.test(receipt.sha),'GitHub did not confirm merge');
+  const after=await github.request(p);
+  ensure(after.merged===true && after.head.sha===fresh.snapshot.head && after.merge_commit_sha===receipt.sha,'Merge verification failed');
+  // GitHub deletes merged branches through delete_branch_on_merge; never delete refs ourselves.
+  return {state:'merged',head:fresh.snapshot.head,mergeCommit:receipt.sha,branchCleanup:'repository automatic deletion'};
+}

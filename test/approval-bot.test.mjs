@@ -4,7 +4,7 @@ import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {eligible,checksPass,approvalAllowed,sameSnapshot,REPOSITORY,CI_WORKFLOW_ID} from '../scripts/approval-bot/policy.mjs';
-import {snapshot,approve} from '../scripts/approval-bot/github.mjs';
+import {snapshot,approve,merge} from '../scripts/approval-bot/github.mjs';
 import {reviewWithClaude} from '../scripts/approval-bot/run.mjs';
 const head='a'.repeat(40),base='b'.repeat(40),newHead='c'.repeat(40);
 const pr=()=>({state:'open',draft:false,merged:false,changed_files:1,head:{sha:head,repo:{full_name:REPOSITORY}},base:{ref:'main',sha:base,repo:{full_name:REPOSITORY}}});
@@ -89,4 +89,41 @@ test('Claude refusals, truncated output and malformed JSON cannot become reviews
       await assert.rejects(reviewWithClaude({head,base},'synthetic-oauth',executable));
     }
   } finally {await rm(dir,{recursive:true,force:true});}
+});
+
+class MergeGitHub extends FakeGitHub {
+  async request(path,method='GET',body) {
+    if(path.endsWith('/merge') && method==='PUT') {
+      this.writes.push({path,method,body});
+      if(this.rejectMerge)throw Error('GitHub branch protection rejected merge');
+      this.merged=true;return {merged:true,sha:newHead};
+    }
+    const result=await super.request(path,method,body);
+    if(this.merged && /\/pulls\/6$/.test(path))return {...result,merged:true,merge_commit_sha:newHead};
+    return result;
+  }
+}
+async function mergeFixture() {
+  const g=new MergeGitHub(),state=await snapshot(g,6);g.prReads=0;
+  g.reviews=[{user:{id:2,login:'github-actions[bot]'},state:'APPROVED',commit_id:head,body:`Review digest: ${state.snapshot.digest}`}];
+  return {g,envelope:{version:1,snapshot:state.snapshot,review:clear()}};
+}
+test('merge submits exact reviewed SHA and never manually deletes branches',async()=>{
+  const {g,envelope}=await mergeFixture();assert.equal((await merge(g,envelope)).state,'merged');
+  assert.deepEqual(g.writes.map(w=>({method:w.method,body:w.body})),[{method:'PUT',body:{sha:head,merge_method:'squash'}}]);
+});
+test('missing, stale or dismissed approval, head race, or failed checks prevent merge',async()=>{
+  for(const mode of ['missing','stale','dismissed','head','check']) {
+    const {g,envelope}=await mergeFixture();
+    if(mode==='missing')g.reviews=[];
+    if(mode==='stale')g.reviews[0].commit_id=newHead;
+    if(mode==='dismissed')g.reviews.push({...g.reviews[0],state:'DISMISSED'});
+    if(mode==='head')g.changedAt=2;
+    if(mode==='check')g.checks[0].conclusion='failure';
+    await assert.rejects(merge(g,envelope));assert.equal(g.writes.length,0);
+  }
+});
+test('GitHub merge rejection never retries with a bypass',async()=>{
+  const {g,envelope}=await mergeFixture();g.rejectMerge=true;
+  await assert.rejects(merge(g,envelope),/branch protection/);assert.equal(g.writes.length,1);
 });
