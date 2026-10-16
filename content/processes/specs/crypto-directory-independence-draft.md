@@ -37,5 +37,5 @@ Any integrations are optional boundaries. IPFS, ENS contenthash updates, submiss
 - Runtime entry: `site/index.html` generated from repository-local content.
 - Local build: `npm run build`.
 - Local audit: `npm run audit`.
-- Independence validation: `npm test`.
+- Independence review: inspect build/runtime dependencies and optional integration boundaries; this planning document is not an automated independence test.
 - Product review blocker: support/trust copy owner and launch approval are not identified in this draft.
