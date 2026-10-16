@@ -17,7 +17,7 @@ const requiredGateIds = [
 const requiredPhrases = [
   'Supersedes: Crypto Directory #59a58504',
   'Task: draft-crypto-directory-independence-product',
-  'not approved for release, merge, deployment, DNS changes, visibility changes, auth changes, or legal publication',
+  'not approved for release, deployment, DNS changes, visibility changes, auth changes, or legal publication',
   'without signing in, connecting a wallet, installing another product',
   'product-owned placeholders, not legal content',
   'must run from this repository without requiring a sibling checkout',

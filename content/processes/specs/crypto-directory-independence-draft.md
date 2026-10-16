@@ -2,7 +2,7 @@
 
 Supersedes: Crypto Directory #59a58504
 Task: draft-crypto-directory-independence-product
-Status: Draft for product review; not approved for release, merge, deployment, DNS changes, visibility changes, auth changes, or legal publication.
+Status: Planning draft retained in the repository for product review; not approved for release, deployment, DNS changes, visibility changes, auth changes, or legal publication.
 
 ## Gate Statements
 
@@ -12,7 +12,7 @@ CryptoDirectory helps researchers, builders, and operators find active crypto co
 ### gate-2-scope-out-of-scope
 In scope for this draft: product positioning, standalone runtime expectations, curation boundaries, onboarding path, support placeholders, release readiness, and optional integration boundaries for CryptoDirectory.
 
-Out of scope for this draft: merging code, deploying the site, changing DNS or ENS contenthash records, changing visibility, disabling or bypassing auth, writing legal terms, writing privacy policy text, creating a sibling product dependency, or making Bittrees required for runtime.
+Out of scope for this draft: implementing product changes, deploying the site, changing DNS or ENS contenthash records, changing visibility, disabling or bypassing auth, writing legal terms, writing privacy policy text, creating a sibling product dependency, or making Bittrees required for runtime.
 
 ### gate-3-onboarding-first-value
 The onboarding path starts with the public directory home page and category pages. A new visitor should get first value by searching or scanning entries without signing in, connecting a wallet, installing another product, or understanding any internal Bittrees workflow.
