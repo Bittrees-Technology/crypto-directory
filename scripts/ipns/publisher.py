@@ -63,15 +63,21 @@ def run(root, publish=False):
             check_file('http://127.0.0.1:8080',cid,path,digest)
             check_file('https://ipfs.nftfactory.org',cid,path,digest)
         # A small cached file is not evidence that the full site is retrievable.
-        check_file('https://gateway.pinata.cloud',cid,'index.html',release['files']['index.html'])
-        if not publish: return {'status':'verified-dry-run','cid':cid}
+        failures=[]
+        for independent in ('https://ipfs.io','https://dweb.link','https://gateway.pinata.cloud'):
+            try:
+                check_file(independent,cid,'index.html',release['files']['index.html'])
+                break
+            except Exception as exc: failures.append(str(exc))
+        else: raise ValueError('Independent retrieval unavailable: '+'; '.join(failures))
+        if not publish: return {'status':'verified-dry-run','cid':cid,'independentGateway':independent}
         # Reserve before signing; crashes and failed/uncertain attempts consume the slot.
         state.update(lastAttemptAt=int(time.time()), attemptedCid=cid, status='attempt-reserved')
         write(statefile,state)
         try:
             result = json.loads(subprocess.check_output(IPFS + ['name','publish','--key='+KEY,'--lifetime=720h','--ttl=1h','--enc=json','--timeout=120s','/ipfs/'+cid],timeout=130))
             if result['Name'] != NAME or result['Value'] != '/ipfs/'+cid: raise ValueError('Unexpected publication response')
-            state.update(publishedCid=cid,status='published',publishedAt=int(time.time()))
+            state.update(publishedCid=cid,status='published',publishedAt=int(time.time()),independentGateway=independent)
         except Exception as exc:
             state.update(status='publication-unconfirmed',error=type(exc).__name__)
             write(statefile,state)
