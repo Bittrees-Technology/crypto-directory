@@ -42,7 +42,7 @@ def stage(root):
         subprocess.run(['git','clone','--depth=1','--single-branch','--branch=main','https://github.com/'+REPO+'.git',str(checkout)],check=True,timeout=90,stdout=subprocess.DEVNULL)
         actual=subprocess.check_output(['git','-C',str(checkout),'rev-parse','HEAD'],text=True).strip()
         if actual!=sha: raise ValueError('Main moved during staging; retry after next checks')
-        subprocess.run(['npm','run','build'],cwd=checkout,env={'PATH':'/usr/bin:/bin','SITE_URL':'https://cryptodirectory.eth.limo'},check=True,timeout=90,stdout=subprocess.DEVNULL)
+        subprocess.run(['/opt/nftfactory-node24/bin/npm','run','build'],cwd=checkout,env={'PATH':'/opt/nftfactory-node24/bin:/usr/bin:/bin','SITE_URL':'https://cryptodirectory.eth.limo'},check=True,timeout=90,stdout=subprocess.DEVNULL)
         site=checkout/'site'; files={}; total=0
         for path in sorted(site.rglob('*')):
             if path.is_symlink(): raise ValueError('Symlinks are not release files')

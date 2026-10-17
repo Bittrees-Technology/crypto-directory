@@ -64,7 +64,7 @@ def run(root, publish=False):
             check_file('https://ipfs.nftfactory.org',cid,path,digest)
         # A small cached file is not evidence that the full site is retrievable.
         failures=[]
-        for independent in ('https://ipfs.io','https://dweb.link','https://gateway.pinata.cloud'):
+        for independent in ('https://ipfs.filebase.io','https://ipfs.io','https://dweb.link','https://gateway.pinata.cloud'):
             try:
                 check_file(independent,cid,'index.html',release['files']['index.html'])
                 break
