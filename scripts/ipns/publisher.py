@@ -47,12 +47,13 @@ def run(root, publish=False):
         except BlockingIOError: return {'status':'already-running'}
         statefile = root / 'state.json'
         state = json.loads(statefile.read_text()) if statefile.exists() else {}
-        release = json.loads((root / 'candidate.json').read_text())
-        validate(release)
         if (root / 'disabled').exists(): return {'status':'disabled'}
         budget = Path('/var/lib/ipfs-budget/status.json')
         if budget.exists() and json.loads(budget.read_text()).get('managed_pause'):
             return {'status':'ipfs-budget-paused'}
+        if not (root / 'candidate.json').exists(): return {'status':'no-candidate-queued'}
+        release = json.loads((root / 'candidate.json').read_text())
+        validate(release)
         cid = release['cid']
         if state.get('publishedCid') == cid: return {'status':'unchanged', 'cid':cid}
         if not eligible(state, int(time.time())): return {'status':'weekly-limit', 'nextAttemptAt':state['lastAttemptAt']+WINDOW}

@@ -9,9 +9,9 @@ The user service checks daily for a queued release, with at most one publication
 
 ## Release queue
 
-Install `publisher.py` at `/home/raging/.local/lib/cryptodirectory-publisher/publisher.py` and the supplied units under the user's systemd directory. The existing user has lingering enabled. State and the queued `candidate.json` live in `/home/raging/.local/state/cryptodirectory-publisher/`.
+Install `publisher.py` and `stage.py` at `/home/raging/.local/lib/cryptodirectory-publisher/publisher.py` and the supplied units under the user's systemd directory. The existing user has lingering enabled. State and the queued `candidate.json` live in `/home/raging/.local/state/cryptodirectory-publisher/`.
 
-Candidate format: `{"cid":"bafy…","sourceCommit":"…","files":{"index.html":"64-character SHA256", "assets/styles.css":"…"}}`. Stage a release only after source checks and pinning finish. Replace the candidate atomically. This implementation consumes that manifest; it does not fetch or build arbitrary GitHub commits. Automatic release creation and staging remain separate integration work.
+Candidate format: `{"cid":"bafy…","sourceCommit":"…","files":{"index.html":"64-character SHA256", "assets/styles.css":"…"}}`. Stage a release only after source checks and pinning finish. Replace the candidate atomically. The service automatically stages `main` only when its exact source tree has successful repository CI: either a push check, or an identical tree from a merged PR with successful PR CI. It builds in a temporary checkout, checks output sizes and paths, pins the release, queues its blocks for announcement, and atomically replaces the manifest. A branch change during checkout aborts the run. No arbitrary source URLs are accepted. Old pins remain available for rollback.
 
 Before signing IPNS, the worker requires a recursive local pin, verifies every manifest file through the local and public Bittrees gateways, and retrieves the full homepage through an independent gateway. It respects the existing IPFS daily-budget pause. There are no Ethereum transactions or recurring gas costs.
 
