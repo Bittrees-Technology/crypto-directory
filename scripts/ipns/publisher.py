@@ -47,12 +47,13 @@ def run(root, publish=False):
         except BlockingIOError: return {'status':'already-running'}
         statefile = root / 'state.json'
         state = json.loads(statefile.read_text()) if statefile.exists() else {}
-        release = json.loads((root / 'candidate.json').read_text())
-        validate(release)
         if (root / 'disabled').exists(): return {'status':'disabled'}
         budget = Path('/var/lib/ipfs-budget/status.json')
         if budget.exists() and json.loads(budget.read_text()).get('managed_pause'):
             return {'status':'ipfs-budget-paused'}
+        if not (root / 'candidate.json').exists(): return {'status':'no-candidate-queued'}
+        release = json.loads((root / 'candidate.json').read_text())
+        validate(release)
         cid = release['cid']
         if state.get('publishedCid') == cid: return {'status':'unchanged', 'cid':cid}
         if not eligible(state, int(time.time())): return {'status':'weekly-limit', 'nextAttemptAt':state['lastAttemptAt']+WINDOW}
@@ -62,15 +63,21 @@ def run(root, publish=False):
             check_file('http://127.0.0.1:8080',cid,path,digest)
             check_file('https://ipfs.nftfactory.org',cid,path,digest)
         # A small cached file is not evidence that the full site is retrievable.
-        check_file('https://gateway.pinata.cloud',cid,'index.html',release['files']['index.html'])
-        if not publish: return {'status':'verified-dry-run','cid':cid}
+        failures=[]
+        for independent in ('https://ipfs.filebase.io','https://ipfs.io','https://dweb.link','https://gateway.pinata.cloud'):
+            try:
+                check_file(independent,cid,'index.html',release['files']['index.html'])
+                break
+            except Exception as exc: failures.append(str(exc))
+        else: raise ValueError('Independent retrieval unavailable: '+'; '.join(failures))
+        if not publish: return {'status':'verified-dry-run','cid':cid,'independentGateway':independent}
         # Reserve before signing; crashes and failed/uncertain attempts consume the slot.
         state.update(lastAttemptAt=int(time.time()), attemptedCid=cid, status='attempt-reserved')
         write(statefile,state)
         try:
             result = json.loads(subprocess.check_output(IPFS + ['name','publish','--key='+KEY,'--lifetime=720h','--ttl=1h','--enc=json','--timeout=120s','/ipfs/'+cid],timeout=130))
             if result['Name'] != NAME or result['Value'] != '/ipfs/'+cid: raise ValueError('Unexpected publication response')
-            state.update(publishedCid=cid,status='published',publishedAt=int(time.time()))
+            state.update(publishedCid=cid,status='published',publishedAt=int(time.time()),independentGateway=independent)
         except Exception as exc:
             state.update(status='publication-unconfirmed',error=type(exc).__name__)
             write(statefile,state)

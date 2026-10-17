@@ -9,9 +9,9 @@ The user service checks daily for a queued release, with at most one publication
 
 ## Release queue
 
-Install `publisher.py` at `/home/raging/.local/lib/cryptodirectory-publisher/publisher.py` and the supplied units under the user's systemd directory. The existing user has lingering enabled. State and the queued `candidate.json` live in `/home/raging/.local/state/cryptodirectory-publisher/`.
+Install `publisher.py` and `stage.py` in `/home/raging/.local/lib/cryptodirectory-publisher/`, retaining their separate filenames and the supplied units under the user's systemd directory. The existing user has lingering enabled. State and the queued `candidate.json` live in `/home/raging/.local/state/cryptodirectory-publisher/`.
 
-Candidate format: `{"cid":"bafy…","sourceCommit":"…","files":{"index.html":"64-character SHA256", "assets/styles.css":"…"}}`. Stage a release only after source checks and pinning finish. Replace the candidate atomically. This implementation consumes that manifest; it does not fetch or build arbitrary GitHub commits. Automatic release creation and staging remain separate integration work.
+Candidate format: `{"cid":"bafy…","sourceCommit":"…","files":{"index.html":"64-character SHA256", "assets/styles.css":"…"}}`. Stage a release only after source checks and pinning finish. Replace the candidate atomically. The service automatically stages `main` only when its exact source tree has successful repository CI: either a push check, or an identical tree from a merged PR with successful PR CI. It builds in a temporary checkout, checks output sizes and paths, pins the release, queues its blocks for announcement, and atomically replaces the manifest. A branch change during checkout aborts the run. No arbitrary source URLs are accepted. Old pins remain available for rollback.
 
 Before signing IPNS, the worker requires a recursive local pin, verifies every manifest file through the local and public Bittrees gateways, and retrieves the full homepage through an independent gateway. It respects the existing IPFS daily-budget pause. There are no Ethereum transactions or recurring gas costs.
 
@@ -24,3 +24,5 @@ After independent IPNS resolution and file checks succeed, the ENS manager signs
 To pause, create the `disabled` file in the state directory and stop the timer. To revoke the key's connection to the ENS website, the ENS manager changes contenthash back to a trusted IPFS CID or another IPNS name. Stopping the publisher alone does not revoke a stolen key. The seven-day rule is enforced by trusted publisher software, not cryptography; an attacker controlling Kubo or its keystore could publish more often. Retain the previous IPFS release for rollback.
 
 No news-model services, models, configuration, or data are changed by these units. Existing IPFS bandwidth restrictions remain active.
+
+Staging failures do not suppress verification of an existing queued candidate. CI lookup is filtered by the exact commit and event. Temporary builds use the state filesystem, and pin manifests are persisted before announcement so announcement retries cannot create abandoned daily pins.
