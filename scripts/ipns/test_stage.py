@@ -21,7 +21,7 @@ class StageTests(unittest.TestCase):
   run={'head_sha':head,'event':'pull_request','head_repository':{'full_name':stage.REPO}}
   pr={'merged_at':'2026-10-17','merge_commit_sha':sha,'base':{'ref':'main'},'head':{'sha':head,'repo':{'full_name':stage.REPO}}}
   for tree, accepted in [('same',True),('different',False)]:
-   responses=[{'sha':sha},{'workflow_runs':[run]},{'tree':{'sha':'same'}},[pr],{'tree':{'sha':tree}}]
+   responses=[{'sha':sha},{'workflow_runs':[run]},{'tree':{'sha':'same'}},[pr],{'workflow_runs':[run]},{'tree':{'sha':tree}}]
    with tempfile.TemporaryDirectory() as d, patch.object(stage,'github',side_effect=responses):
     root=Path(d);(root/'candidate.json').write_text(json.dumps({'sourceCommit':sha}))
     if accepted: self.assertEqual(stage.stage(root)['status'],'already-staged')
