@@ -94,6 +94,34 @@ class OperationTests(unittest.TestCase):
             for _ in range(3):last=sync.run(self.root,True)
             self.assertEqual(last['status'],'held');command.assert_not_called()
 
+    def test_successful_dry_runs_never_consume_failure_budget(self):
+        def command(*args,**kwargs):
+            if args[:2]==('key','list'):return json.dumps({'Keys':[{'Name':sync.KEY,'Id':sync.NAME}]})
+            if args[:2]==('name','publish'):return json.dumps({'Name':sync.NAME,'Value':'/ipfs/'+CID})
+            raise AssertionError(args)
+        with patch.object(sync,'guard',return_value=None),patch.object(sync,'fetch',return_value=(self.raw,{})),patch.object(sync,'prepare',side_effect=self.prepared),patch.object(sync,'github',return_value={'sha':SOURCE}),patch.object(sync,'ipfs',side_effect=command) as calls,patch.object(sync,'verify_public',return_value={'verifiedAt':100,'contentFilesMatched':2}):
+            for _ in range(5):self.assertEqual(sync.run(self.root)['status'],'verified-dry-run')
+            self.assertEqual(sync.run(self.root,True)['status'],'synchronized')
+            self.assertEqual(sum(c.args[:2]==('name','publish') for c in calls.call_args_list),1)
+
+    def test_crash_while_repairing_state_keeps_reconciliation_resumable(self):
+        op=self.root/'releases'/SOURCE;op.mkdir(parents=True)
+        sync.write(op/'candidate.json',self.candidate)
+        sync.write(op/'journal.json',{'phase':'publication-unconfirmed','sourceCommit':SOURCE,'manifestSHA256':sync.sha(self.raw),'cid':CID,'verificationAttempts':0,'lastAttemptAt':10})
+        sync.write(self.root/'state.json',{'status':'publication-unconfirmed','attemptedCid':CID})
+        real_write=sync.write
+        def crash(path,value):
+            if path==self.root/'state.json':raise OSError('interrupted state repair')
+            return real_write(path,value)
+        with patch.object(sync,'guard',return_value=None),patch.object(sync,'fetch',return_value=(self.raw,{})),patch.object(sync,'verify_public',return_value={'verifiedAt':100,'contentFilesMatched':2}),patch.object(sync,'write',side_effect=crash),patch.object(sync,'ipfs') as command:
+            with self.assertRaises(OSError):sync.run(self.root,True)
+            self.assertEqual(json.loads((op/'journal.json').read_text())['phase'],'publication-unconfirmed')
+            command.assert_not_called()
+        with patch.object(sync,'guard',return_value=None),patch.object(sync,'fetch',return_value=(self.raw,{})),patch.object(sync,'verify_public',return_value={'verifiedAt':100,'contentFilesMatched':2}),patch.object(sync,'ipfs') as command:
+            self.assertEqual(sync.run(self.root,True)['status'],'synchronized')
+            self.assertEqual(json.loads((self.root/'state.json').read_text())['status'],'published')
+            command.assert_not_called()
+
     def test_changed_bytes_for_same_source_hold_without_signing(self):
         op=self.root/'releases'/SOURCE;op.mkdir(parents=True)
         sync.write(op/'journal.json',{'phase':'synced','sourceCommit':SOURCE,'manifestSHA256':'wrong','cid':CID})
@@ -116,6 +144,15 @@ class OperationTests(unittest.TestCase):
             sync.prepare(self.root,op,self.raw,self.value,{'phase':'new'})
         command.assert_not_called()
 
+    def test_resumed_candidate_restores_approval_proof_before_publication(self):
+        op=self.root/'release';op.mkdir()
+        candidate=dict(self.candidate,artifactManifestSHA256=sync.sha(self.raw),deploymentId=DEPLOYMENT)
+        sync.write(op/'candidate.json',candidate)
+        proof={'sourceCommit':SOURCE,'ciRunId':123,'deploymentId':DEPLOYMENT}
+        with patch.object(sync,'approved',return_value=proof),patch.object(sync,'fetch',return_value=(self.raw,{})),patch.object(sync,'pin'),patch.object(sync,'file_check'):
+            sync.prepare(self.root,op,self.raw,self.value,{'phase':'new'})
+        self.assertEqual(json.loads((op/'approval.json').read_text()),proof)
+
     def test_uncertain_previous_release_blocks_a_new_source(self):
         active='b'*40;op=self.root/'releases'/active;op.mkdir(parents=True)
         sync.write(self.root/'sync-state.json',{'activeSourceCommit':active})
@@ -126,9 +163,18 @@ class OperationTests(unittest.TestCase):
     def test_unchanged_synced_source_uses_only_two_small_manifest_reads(self):
         op=self.root/'releases'/SOURCE;op.mkdir(parents=True)
         sync.write(op/'journal.json',{'phase':'synced','sourceCommit':SOURCE,'manifestSHA256':sync.sha(self.raw),'cid':CID})
-        with patch.object(sync,'guard',return_value=None),patch.object(sync,'fetch',return_value=(self.raw,{})) as fetch,patch.object(sync,'github') as github,patch.object(sync,'ipfs') as command:
+        with patch.object(sync,'guard',return_value=None),patch.object(sync,'fetch',return_value=(self.raw,{'X-Ipfs-Roots':CID+',bafychild'})) as fetch,patch.object(sync,'github') as github,patch.object(sync,'ipfs') as command:
             self.assertEqual(sync.run(self.root,True)['status'],'synchronized-unchanged')
             self.assertEqual(fetch.call_count,2);github.assert_not_called();command.assert_not_called()
+
+    def test_copied_manifest_under_another_cid_is_never_marked_healthy(self):
+        op=self.root/'releases'/SOURCE;op.mkdir(parents=True)
+        sync.write(op/'candidate.json',self.candidate)
+        sync.write(op/'journal.json',{'phase':'synced','sourceCommit':SOURCE,'manifestSHA256':sync.sha(self.raw),'cid':CID,'verificationAttempts':0})
+        sync.write(self.root/'state.json',{'status':'published','publishedCid':CID})
+        with patch.object(sync,'guard',return_value=None),patch.object(sync,'fetch',return_value=(self.raw,{'X-Ipfs-Roots':'bafywrong'})),patch.object(sync,'verify_public',side_effect=ValueError('root differs')),patch.object(sync,'ipfs') as command:
+            self.assertEqual(sync.run(self.root,True)['status'],'awaiting-public-convergence')
+            command.assert_not_called()
 
     def test_public_match_checks_both_domains_and_gateway_owned_robots_exception(self):
         def fetch(url,limit=sync.MAX_FILE):

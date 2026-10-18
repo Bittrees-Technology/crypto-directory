@@ -130,6 +130,8 @@ def prepare(root,op,raw,value,journal):
     base='https://'+value['deploymentHost']
     if fetch(base+'/release.json',MAX_MANIFEST)[0]!=raw:
         raise ValueError('Production and immutable deployment manifests differ')
+    # Refresh durable evidence for resumed candidates as well as new imports.
+    write(op/'approval.json',proof)
     candidate=op/'candidate.json'
     if candidate.exists():
         release=json.loads(candidate.read_text())
@@ -156,7 +158,6 @@ def prepare(root,op,raw,value,journal):
                  'artifactManifestSHA256':sha(raw),'deploymentId':value['deploymentId']}
         validate(release)
         write(candidate,release) # Persist pin identity before any announcement/retrieval failure.
-        write(op/'approval.json',proof)
         try:
             ipfs('provide','once','--recursive',cid,timeout=40)
         except subprocess.TimeoutExpired:
@@ -170,7 +171,7 @@ def prepare(root,op,raw,value,journal):
         file_check('https://ipfs.nftfactory.org',release['cid'],path,digest)
     file_check('https://ipfs.filebase.io',release['cid'],'index.html',release['files']['index.html'])
     same_production(raw)
-    journal.update(phase='verified',cid=release['cid'],verifiedAt=int(time.time()))
+    journal.update(phase='verified',cid=release['cid'],verifiedAt=int(time.time()),preflightAttempts=0)
     write(op/'journal.json',journal)
     return release
 
@@ -232,8 +233,8 @@ def run(root,publish=False):
         write(summaryfile,{'activeSourceCommit':source})
         journal.update(lastInvocationId=os.environ.get('INVOCATION_ID'),lastCheckAt=int(time.time()))
         if journal['phase']=='synced':
-            public,_=fetch(ENS+'/release.json',MAX_MANIFEST)
-            if public==raw:
+            public,headers=fetch(ENS+'/release.json',MAX_MANIFEST)
+            if public==raw and headers.get('X-Ipfs-Roots','').split(',')[0]==journal['cid']:
                 return record(root,{'status':'synchronized-unchanged','sourceCommit':source,'cid':journal['cid']})
             journal.update(phase='published',verificationAttempts=0)
         if journal['phase'] in ('new','verified','preflight-blocked'):
@@ -247,6 +248,8 @@ def run(root,publish=False):
                 journal.update(phase='preflight-blocked',error=(type(exc).__name__+': '+str(exc))[:500])
                 write(path,journal)
                 return record(root,{'status':'held' if journal['preflightAttempts']>=MAX_PREFLIGHT else 'preflight-retry','reason':journal['error'],'sourceCommit':source})
+            journal['preflightAttempts']=0
+            write(path,journal)
             if not publish:
                 return record(root,{'status':'verified-dry-run','sourceCommit':source,'cid':release['cid']})
             same_production(raw)
@@ -297,11 +300,13 @@ def run(root,publish=False):
             return record(root,{'status':'held' if journal['verificationAttempts']>=MAX_VERIFY else 'awaiting-public-convergence','sourceCommit':source,'cid':release['cid'],'publicationPhase':journal['phase']})
         # A public full-site match reconciles a timeout without another signature.
         journal.update(phase='synced',**verification)
-        write(path,journal)
         statefile=root/'state.json'
         state=json.loads(statefile.read_text())
         state.update(status='published',publishedCid=release['cid'],sourceCommit=source,publishedAt=journal.get('publishedAt',journal.get('lastAttemptAt')),synchronizedAt=verification['verifiedAt'])
         write(statefile,state)
+        # Commit the journal only after the shared publisher state is repaired.
+        # A crash before this write leaves a resumable verification phase.
+        write(path,journal)
         return record(root,{'status':'synchronized','sourceCommit':source,'cid':release['cid'],**verification})
 
 if __name__=='__main__':
