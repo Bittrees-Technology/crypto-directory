@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Verify approval policy
+        run: node --test test/approval-bot.test.mjs
+
       - name: Build site
         run: npm run build
 

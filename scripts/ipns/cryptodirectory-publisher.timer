@@ -1,0 +1,8 @@
+[Unit]
+Description=Check CryptoDirectory weekly release eligibility
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=24h
+RandomizedDelaySec=10min
+[Install]
+WantedBy=timers.target

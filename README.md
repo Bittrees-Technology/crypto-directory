@@ -142,3 +142,20 @@ Execute only after Bob's ENS publication gate passes:
 ```bash
 npm run ens:set-contenthash -- --execute --cid <cid>
 ```
+
+## Bittrees central tool discovery
+
+The root `bittrees.tools.json` registers Crypto Directory in the
+[Bittrees central MCP catalog](https://github.com/Bittrees-Technology/mcp).
+The catalog's [source allowlist](https://github.com/Bittrees-Technology/mcp/blob/main/data/tool-sources.json)
+includes this repository; its [sync script](https://github.com/Bittrees-Technology/mcp/blob/main/scripts/sync-tool-catalog.mjs)
+reads the manifest from `main` at a resolved commit SHA.
+
+The manifest uses `bittrees.app-tools.v1`, version `1`, with project ID
+`crypto-directory` and discovery endpoint `https://mcp.bittrees.org/mcp`.
+Its empty `connections` array advertises no local tools. The static site build
+does not read the manifest, so publishing is unchanged.
+
+Consumers remain responsible for endpoint trust, authentication, project scope
+and operation permissions. Catalog discovery grants no access; future tool
+connections require a separate reviewed change.
