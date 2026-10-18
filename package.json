@@ -17,6 +17,10 @@
     "ens:set-contenthash": "node scripts/ens-set-contenthash.mjs",
     "test:ens-set-contenthash": "node --test scripts/ens-set-contenthash.test.mjs",
     "ens:gate": "node scripts/ens-publication-gate.mjs",
-    "test:ens-gate": "node --test scripts/ens-publication-gate.test.mjs"
+    "test:ens-gate": "node --test scripts/ens-publication-gate.test.mjs",
+    "test:ens": "node --test scripts/ens-*.test.mjs"
+  },
+  "dependencies": {
+    "multiformats": "14.0.5"
   }
 }

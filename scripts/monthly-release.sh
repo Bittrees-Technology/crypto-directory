@@ -32,19 +32,19 @@ if [ -z "$CID" ]; then
   exit 1
 fi
 
-echo "Step 5/6: ENS update packet"
-node "$ROOT_DIR/scripts/ens-contenthash.mjs" "$CID"
-
 ENTRY_COUNT="$(node -e "const fs=require(\"fs\"); const p=\"$ROOT_DIR/site/data/projects.json\"; const data=JSON.parse(fs.readFileSync(p,\"utf8\")); console.log(Array.isArray(data)?data.length:0);")"
 RELEASE_LINE="- $DATE_UTC: CID=$CID | entries=$ENTRY_COUNT | notes=$NOTES"
 
-echo "Step 6/6: append releases.md"
+echo "Step 5/6: append releases.md"
 if ! grep -q "$CID" "$RELEASES_FILE"; then
   echo "$RELEASE_LINE" >> "$RELEASES_FILE"
   echo "Appended release record: $RELEASE_LINE"
 else
   echo "CID already present in releases.md; skipped append."
 fi
+
+echo "Step 6/6: offline ENS recovery packet (no signing or ENS update)"
+node "$ROOT_DIR/scripts/ens-contenthash.mjs" "$CID"
 
 echo
 printf "Release evidence:\n- audit log: %s\n- process status log: %s\n" "$AUDIT_LOG" "$PROCESS_STATUS_LOG"

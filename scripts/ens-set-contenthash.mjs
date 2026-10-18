@@ -1,155 +1,49 @@
 #!/usr/bin/env node
-import { spawnSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { buildEnsPublicationGate, readReleases } from './ens-publication-gate.mjs';
+import { CHAIN_ID, ENS_NODE, ENS_REGISTRY, EnsReleaseError, createEnsContenthash, encodeSetContenthash, isAddress, parseArgs, validateSetContenthashEnv } from './lib/ens-release.mjs';
 
-import { createEnsContenthash } from "../../ipfs-evm-system/src/index.js";
-
-function isHex(value, bytes) {
-  return new RegExp("^0x[0-9a-fA-F]{" + (bytes * 2) + "}$").test(String(value || ""));
-}
-
-function normalizePrivateKey(value) {
-  const trimmed = String(value || "").trim();
-  if (/^[0-9a-fA-F]{64}$/.test(trimmed)) return "0x" + trimmed;
-  return trimmed;
-}
-
-export function parseArgs(argv = process.argv.slice(2), env = process.env) {
-  const result = {
-    cid: env.CRYPTO_DIRECTORY_IPFS_CID || "",
-    ensName: env.CRYPTO_DIRECTORY_ENS_NAME || "cryptodirectory.eth",
-    execute: ["1", "true", "yes", "on"].includes(String(env.ENS_SET_CONTENTHASH_EXECUTE || "").toLowerCase()),
-  };
-
-  for (let index = 0; index < argv.length; index += 1) {
-    const arg = argv[index];
-    if (arg === "--execute") result.execute = true;
-    else if (arg === "--dry-run") result.execute = false;
-    else if (arg === "--name") result.ensName = argv[++index] || "";
-    else if (arg === "--cid") result.cid = argv[++index] || "";
-    else if (!arg.startsWith("--") && !result.cid) result.cid = arg;
-    else throw new Error("unknown argument: " + arg);
-  }
-
-  return result;
-}
-
-export function validateSetContenthashEnv({ cid, ensName, execute }, env = process.env) {
-  const normalizedKey = normalizePrivateKey(env.ENS_OWNER_PRIVATE_KEY);
-  const missing = [];
-  const invalid = [];
-
-  if (!cid) missing.push("CRYPTO_DIRECTORY_IPFS_CID or --cid");
-  if (!ensName) missing.push("CRYPTO_DIRECTORY_ENS_NAME or --name");
-  if (!env.ENS_RESOLVER_ADDRESS) missing.push("ENS_RESOLVER_ADDRESS");
-  if (!env.ETH_RPC_URL) missing.push("ETH_RPC_URL");
-  if (execute && !normalizedKey) missing.push("ENS_OWNER_PRIVATE_KEY");
-
-  if (env.ENS_RESOLVER_ADDRESS && !isHex(env.ENS_RESOLVER_ADDRESS, 20)) invalid.push("ENS_RESOLVER_ADDRESS must be a 20-byte hex address");
-  if (env.ETH_RPC_URL && !/^https?:\/\//.test(env.ETH_RPC_URL)) invalid.push("ETH_RPC_URL must be an http(s) URL");
-  if (execute && normalizedKey && !isHex(normalizedKey, 32)) invalid.push("ENS_OWNER_PRIVATE_KEY must be a 32-byte hex private key");
-
-  return {
-    ok: missing.length === 0 && invalid.length === 0,
-    missing,
-    invalid,
-    privateKeyPresent: Boolean(normalizedKey),
-    normalizedPrivateKey: normalizedKey,
-  };
-}
+export { parseArgs, validateSetContenthashEnv } from './lib/ens-release.mjs';
 
 export function buildSetContenthashPlan(args, env = process.env) {
-  const packet = createEnsContenthash(args.cid);
-  const validation = validateSetContenthashEnv(args, env);
-
-  return {
-    ensName: args.ensName,
-    cid: packet.cid,
-    uri: packet.uri,
-    contenthash: packet.contenthash,
-    resolverAddress: env.ENS_RESOLVER_ADDRESS || null,
-    rpcConfigured: Boolean(env.ETH_RPC_URL),
-    execute: Boolean(args.execute),
-    validation: {
-      ok: validation.ok,
-      missing: validation.missing,
-      invalid: validation.invalid,
-      privateKeyPresent: validation.privateKeyPresent,
-    },
-  };
+  return { ensName: args.ensName, ...createEnsContenthash(args.cid), chainId: CHAIN_ID, mode: args.prepare ? 'prepare' : 'dry-run', execute: false, transactionSubmitted: false, validation: validateSetContenthashEnv(args, env) };
 }
 
-function runCast(castBin, args, options = {}) {
-  const result = spawnSync(castBin, args, {
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
-    ...options,
-  });
-
-  if (result.error) throw result.error;
-  if (result.status !== 0) {
-    const detail = (result.stderr || result.stdout || "cast command failed").trim();
-    throw new Error(detail);
-  }
-
-  return String(result.stdout || "").trim();
+export function runCast(argv, env = process.env) {
+  if (!['chain-id', 'call'].includes(argv[0])) throw new EnsReleaseError('Unsupported read operation');
+  // RPC credentials stay out of argv; signer variables and unrelated secrets are never inherited.
+  const result = spawnSync(env.CAST_BIN || 'cast', argv, { encoding: 'utf8', shell: false, timeout: 20000, maxBuffer: 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'], env: { PATH: env.PATH || process.env.PATH || '', ETH_RPC_URL: env.ETH_RPC_URL } });
+  // Never expose raw tool diagnostics: they may include RPC credentials or inherited input.
+  if (result.error || result.signal || result.status !== 0) throw new EnsReleaseError('ENS read operation failed; check the local RPC and Foundry configuration');
+  return String(result.stdout || '').trim();
 }
 
-export async function main(argv = process.argv.slice(2), env = process.env) {
+export function main(argv = process.argv.slice(2), env = process.env, runtime = {}) {
   const args = parseArgs(argv, env);
   const plan = buildSetContenthashPlan(args, env);
-  const validation = validateSetContenthashEnv(args, env);
-
-  if (!validation.ok) {
-    console.error(JSON.stringify(plan, null, 2));
-    process.exitCode = 1;
-    return;
-  }
-
-  const castBin = env.CAST_BIN || "cast";
-  const namehash = runCast(castBin, ["namehash", args.ensName]);
-  const currentContenthash = runCast(castBin, [
-    "call",
-    env.ENS_RESOLVER_ADDRESS,
-    "contenthash(bytes32)(bytes)",
-    namehash,
-    "--rpc-url",
-    env.ETH_RPC_URL,
-  ]);
+  const gate = buildEnsPublicationGate(args, env, (runtime.readReleases || readReleases)());
+  if (gate.blockers.length) throw new EnsReleaseError('ENS publication gate blocked: ' + gate.blockers.join('; '));
+  const read = values => (runtime.runCast || runCast)(values, env);
+  if (read(['chain-id']) !== String(CHAIN_ID)) throw new EnsReleaseError('Expected Ethereum mainnet (chain ID 1)');
+  const resolver = read(['call', ENS_REGISTRY, 'resolver(bytes32)(address)', ENS_NODE]);
+  if (!isAddress(resolver)) throw new EnsReleaseError('ENS registry did not return a valid resolver');
+  if (env.ENS_RESOLVER_ADDRESS && resolver.toLowerCase() !== env.ENS_RESOLVER_ADDRESS.toLowerCase()) throw new EnsReleaseError('Current ENS resolver differs from ENS_RESOLVER_ADDRESS');
+  if (read(['call', resolver, 'supportsInterface(bytes4)(bool)', '0xbc1c58d1']) !== 'true') throw new EnsReleaseError('Resolver does not support ENS contenthash');
+  const currentContenthash = read(['call', resolver, 'contenthash(bytes32)(bytes)', ENS_NODE]);
+  if (!/^0x(?:[a-fA-F0-9]{2})*$/.test(currentContenthash) || currentContenthash.length > 2048) throw new EnsReleaseError('Resolver returned malformed contenthash data');
   const alreadyCurrent = currentContenthash.toLowerCase() === plan.contenthash.toLowerCase();
-
-  const evidence = {
-    ...plan,
-    node: namehash,
-    currentContenthash,
-    alreadyCurrent,
-    action: alreadyCurrent ? "skip-already-current" : (args.execute ? "send-setContenthash" : "dry-run-only"),
-  };
-
-  if (alreadyCurrent || !args.execute) {
-    console.log(JSON.stringify(evidence, null, 2));
-    return;
+  const evidence = { ...plan, gate, node: ENS_NODE, resolverAddress: resolver, currentContenthash, alreadyCurrent, action: alreadyCurrent ? 'skip-already-current' : args.prepare ? 'unsigned-transaction-prepared' : 'dry-run-only' };
+  if (args.prepare && !alreadyCurrent) {
+    // IPNS is the live weekly publisher. Replacing it is a separate, approved migration.
+    if (currentContenthash.toLowerCase().startsWith('0xe501')) throw new EnsReleaseError('Active ENS contenthash uses IPNS; use the existing TLD/Safe migration flow instead of replacing it with an IPFS release');
+    evidence.transaction = { chainId: CHAIN_ID, to: resolver, value: '0', data: encodeSetContenthash(ENS_NODE, plan.contenthash) };
+    evidence.approvalRequired = 'Unsigned proposal only. Verify current ENS authority, release availability and simulation through the existing wallet, Safe and TLD approval flow.';
   }
-
-  const sendOutput = runCast(castBin, [
-    "send",
-    env.ENS_RESOLVER_ADDRESS,
-    "setContenthash(bytes32,bytes)",
-    namehash,
-    plan.contenthash,
-    "--rpc-url",
-    env.ETH_RPC_URL,
-    "--private-key",
-    validation.normalizedPrivateKey,
-  ]);
-
-  console.log(JSON.stringify({
-    ...evidence,
-    transactionSubmitted: true,
-    castOutput: sendOutput,
-  }, null, 2));
+  return evidence;
 }
 
-if (process.argv[1] && process.argv[1] === fileURLToPath(import.meta.url)) {
-  await main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  try { console.log(JSON.stringify(main(), null, 2)); }
+  catch (error) { console.error(JSON.stringify({ error: error instanceof EnsReleaseError ? error.message : 'ENS operation failed', transactionSubmitted: false })); process.exitCode = 1; }
 }

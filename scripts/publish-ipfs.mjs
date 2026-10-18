@@ -6,13 +6,12 @@ import {
   IpfsStorageClient,
   publishProjectPath,
 } from "../../ipfs-evm-system/src/index.js";
-import { createEnsContenthash } from "../../ipfs-evm-system/src/index.js";
+import { createEnsContenthash, ENS_NAME } from "./lib/ens-release.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 const siteDir = path.join(rootDir, "site");
-const ensName = process.env.CRYPTO_DIRECTORY_ENS_NAME || "cryptodirectory.eth";
 
 async function main() {
   const client = new IpfsStorageClient({
@@ -52,13 +51,14 @@ async function main() {
   console.log(`${result.gatewayUrl}/`);
   console.log("");
   console.log("ENS contenthash packet:");
-  console.log(`ENS name: ${ensName}`);
+  console.log(`ENS name: ${ENS_NAME}`);
   console.log(`URI: ${ensPacket.uri}`);
   console.log(`Contenthash: ${ensPacket.contenthash}`);
-  console.log("Dry-run current resolver value before sending:");
-  console.log(`cast call "$ENS_RESOLVER_ADDRESS" "contenthash(bytes32)(bytes)" "$(cast namehash ${ensName})"`);
-  console.log("Guarded send template:");
-  console.log(`cast send "$ENS_RESOLVER_ADDRESS" "setContenthash(bytes32,bytes)" "$(cast namehash ${ensName})" "${ensPacket.contenthash}" --rpc-url "$ETH_RPC_URL" --private-key "$ENS_OWNER_PRIVATE_KEY"`);
+  console.log("After recording the release, inspect the current resolver (read-only):");
+  console.log(`npm run ens:set-contenthash -- --dry-run --cid ${ensPacket.cid}`);
+  console.log("For a reviewed recovery proposal, prepare an unsigned wallet/Safe transaction:");
+  console.log(`npm run ens:set-contenthash -- --prepare --cid ${ensPacket.cid}`);
+  console.log("Normal weekly releases use the existing IPNS publisher; this does not update ENS.");
 }
 
 await main();

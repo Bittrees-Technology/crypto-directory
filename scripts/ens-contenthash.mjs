@@ -1,22 +1,13 @@
 #!/usr/bin/env node
-import { createEnsContenthash } from "../../ipfs-evm-system/src/index.js";
+import { fileURLToPath } from 'node:url';
+import { createEnsContenthash, ENS_NAME } from './lib/ens-release.mjs';
 
-const cid = process.argv[2] || process.env.CRYPTO_DIRECTORY_IPFS_CID || "";
-const ensName = process.env.CRYPTO_DIRECTORY_ENS_NAME || "cryptodirectory.eth";
+export function main(argv = process.argv.slice(2), env = process.env) {
+  if (argv.length > 1) throw new Error();
+  return { ensName: ENS_NAME, ...createEnsContenthash(argv[0] || env.CRYPTO_DIRECTORY_IPFS_CID || ''), transactionSubmitted: false, approvalRequired: 'Use ens:set-contenthash -- --prepare, then the existing ENS wallet, Safe or TLD approval flow.' };
+}
 
-if (!cid) {
-  console.error("usage: node scripts/ens-contenthash.mjs <ipfs-cid>");
-  process.exitCode = 1;
-} else {
-  const result = createEnsContenthash(cid);
-  console.log(JSON.stringify({
-    ensName,
-    ...result,
-    resolverCall: {
-      function: "setContenthash(bytes32 node, bytes hash)",
-      dryRunCommand: `cast call "$ENS_RESOLVER_ADDRESS" "contenthash(bytes32)(bytes)" "$(cast namehash ${ensName})"`,
-      sendCommandTemplate: `cast send "$ENS_RESOLVER_ADDRESS" "setContenthash(bytes32,bytes)" "$(cast namehash ${ensName})" "${result.contenthash}" --rpc-url "$ETH_RPC_URL" --private-key "$ENS_OWNER_PRIVATE_KEY"`,
-    },
-    safety: "Dry-run only. Confirm resolver address, owner wallet, gas, and current contenthash before sending.",
-  }, null, 2));
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  try { console.log(JSON.stringify(main(), null, 2)); }
+  catch { console.error(JSON.stringify({ error: 'Expected one valid IPFS root CID; no transaction was submitted' })); process.exitCode = 1; }
 }

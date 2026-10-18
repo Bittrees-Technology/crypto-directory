@@ -1,38 +1,36 @@
-import assert from "node:assert/strict";
-import test from "node:test";
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { buildEnsPublicationGate, releaseRecordIncludesCid } from './ens-publication-gate.mjs';
+import { parseArgs, normalizeIpfsCid } from './lib/ens-release.mjs';
 
-import { buildEnsPublicationGate, releaseRecordIncludesCid } from "./ens-publication-gate.mjs";
-import { parseArgs } from "./ens-set-contenthash.mjs";
+const cid = 'QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4';
+const env = { ETH_RPC_URL: 'https://mainnet.example/rpc' };
+const record = '- 2026-10-18: CID=' + cid + ' | entries=1030 | notes=reviewed';
 
-const cid = "QmYwAPJzv5CZsnAzt8auVTL9JmUbsL7op5c8ALoA4WJxE3";
-const env = {
-  ENS_RESOLVER_ADDRESS: "0x1234567890123456789012345678901234567890",
-  ETH_RPC_URL: "https://mainnet.example/rpc",
-  IPFS_GATEWAY_BASE_URL: "https://gateway.example",
-};
-
-test("checks whether release records include a CID", () => {
-  assert.equal(releaseRecordIncludesCid(cid, "CID=" + cid), true);
-  assert.equal(releaseRecordIncludesCid(cid, "CID=other"), false);
+test('release gate requires a complete dated CID field and accepts equivalent CID encodings', () => {
+  assert.equal(releaseRecordIncludesCid(cid, record), true);
+  assert.equal(releaseRecordIncludesCid(normalizeIpfsCid(cid), record), true);
+  for (const value of ['CID=' + cid, '- ' + cid, '# ' + record, record.replace(cid, cid + 'suffix'), '- 2026-10-18: CID=other | notes=' + cid, '- 2026-10-18: CID=invalid\nnotes=' + cid]) {
+    assert.equal(releaseRecordIncludesCid(cid, value), false);
+  }
 });
 
-test("passes dry-run gate with recorded CID and resolver env", () => {
-  const args = parseArgs(["--cid", cid], {});
-  const gate = buildEnsPublicationGate(args, env, "- CID=" + cid);
-  assert.equal(gate.ensManager, "bao-bo");
-  assert.equal(gate.signerAuthority, "bob");
-  assert.equal(gate.secretSafetyReviewer, "hob");
+test('valid gate permits only read or unsigned preparation and never grants execution authority', () => {
+  const gate = buildEnsPublicationGate(parseArgs(['--prepare', '--cid', cid], {}), env, record);
   assert.equal(gate.releaseRecorded, true);
   assert.equal(gate.dryRunReady, true);
+  assert.equal(gate.prepareReady, true);
   assert.equal(gate.executeReady, false);
-  assert.deepEqual(gate.missingForExecute, ["ENS_OWNER_PRIVATE_KEY"]);
-  assert.equal(gate.recommendedBobDecision, "dry-run-resolver-check");
+  assert.deepEqual(gate.blockers, []);
+  assert.match(gate.approvalRequired, /grants no signing authority/);
 });
 
-test("blocks when CID is not recorded", () => {
-  const args = parseArgs(["--cid", cid], {});
-  const gate = buildEnsPublicationGate(args, env, "");
-  assert.equal(gate.releaseRecorded, false);
-  assert.deepEqual(gate.blockers, ["release CID is not recorded in releases.md"]);
-  assert.equal(gate.recommendedBobDecision, "blocked-before-dry-run");
+test('missing release or RPC configuration blocks the gate', () => {
+  for (const [config, ledger] of [[env, ''], [{}, record], [{ ETH_RPC_URL: 'file:///secret' }, record]]) {
+    const gate = buildEnsPublicationGate(parseArgs(['--cid', cid], {}), config, ledger);
+    assert.equal(gate.prepareReady, false);
+    assert.equal(gate.dryRunReady, false);
+    assert.ok(gate.blockers.length);
+    assert.equal(gate.executeReady, false);
+  }
 });
