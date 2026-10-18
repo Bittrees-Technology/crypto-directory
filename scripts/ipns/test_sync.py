@@ -18,7 +18,7 @@ def release():
             'files':{'index.html':hashlib.sha256(PAGE).hexdigest(),'robots.txt':hashlib.sha256(b'policy').hexdigest()}}
 
 def ci(conclusion='success'):
-    return {'workflow_runs':[{'head_sha':SOURCE,'event':'push','head_repository':{'full_name':sync.REPO},'conclusion':conclusion,'status':'completed'}]}
+    return {'workflow_runs':[{'id':123,'run_attempt':1,'head_sha':SOURCE,'event':'push','head_repository':{'full_name':sync.REPO},'conclusion':conclusion,'status':'completed'}]}
 
 def status(state='success',id=DEPLOYMENT):
     return {'statuses':[{'context':'Vercel','state':state,'target_url':sync.VERCEL+id[4:],'id':7}]}

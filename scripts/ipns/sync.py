@@ -70,12 +70,16 @@ def approved(value):
     source = value['sourceCommit']
     if github('commits/main')['sha']!=source:
         raise ValueError('Production is not the current main release')
+    ci_proof={}
     def checked(head,event):
         runs = github(f'actions/workflows/ci.yml/runs?head_sha={head}&event={event}&per_page=1')['workflow_runs']
         if not runs:
             return None
         r=runs[0]
-        return r['head_sha']==head and r['event']==event and r['head_repository']['full_name']==REPO and r['conclusion']=='success' and r['status']=='completed'
+        valid=r['head_sha']==head and r['event']==event and r['head_repository']['full_name']==REPO and r['conclusion']=='success' and r['status']=='completed'
+        if valid:
+            ci_proof.update(ciRunId=r['id'],ciAttempt=r['run_attempt'],ciHead=head,ciEvent=event)
+        return valid
     verified = checked(source,'push')
     if verified is False:
         raise ValueError('Latest main CI is not successful')
@@ -93,7 +97,7 @@ def approved(value):
     status=next((s for s in statuses if s['context']=='Vercel'),None)
     if not status or status['state']!='success' or status['target_url']!=VERCEL+value['deploymentId'][4:]:
         raise ValueError('Exact Vercel deployment has not passed')
-    return {'sourceCommit':source,'deploymentId':value['deploymentId'],'vercelStatusId':status['id'],'checkedAt':int(time.time())}
+    return {'sourceCommit':source,'deploymentId':value['deploymentId'],'vercelStatusId':status['id'],'checkedAt':int(time.time()),**ci_proof}
 
 def ipfs(*args,timeout=40):
     return subprocess.check_output(IPFS+list(args),timeout=timeout,text=True).strip()
@@ -189,7 +193,7 @@ def verify_public(raw,release):
     return {'contentFilesMatched':len(release['files'])-1,'verifiedAt':int(time.time())}
 
 def record(root,result):
-    write(root/'latest-sync.json',dict(result,checkedAt=int(time.time())))
+    write(root/'latest-sync.json',dict(result,checkedAt=int(time.time()),invocationId=os.environ.get('INVOCATION_ID'),workerSHA256=sha(Path(__file__).read_bytes())))
     if result['status']=='held':
         write(root/'sync-exception.json',dict(result,checkedAt=int(time.time())))
     elif result['status'] in ('synchronized','synchronized-unchanged') and (root/'sync-exception.json').exists():
