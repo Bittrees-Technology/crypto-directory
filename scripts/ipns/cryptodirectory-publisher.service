@@ -1,11 +1,12 @@
 [Unit]
-Description=Verify and publish the queued CryptoDirectory IPNS release
+Description=Synchronize approved CryptoDirectory production releases
 [Service]
 Type=oneshot
-ExecStartPre=-/usr/bin/python3 /home/raging/.local/lib/cryptodirectory-publisher/stage.py --state-dir /home/raging/.local/state/cryptodirectory-publisher
-ExecStart=/usr/bin/python3 /home/raging/.local/lib/cryptodirectory-publisher/publisher.py --state-dir /home/raging/.local/state/cryptodirectory-publisher --publish
+ExecStart=/usr/bin/python3 /home/raging/.local/lib/cryptodirectory-publisher/sync.py --state-dir /home/raging/.local/state/cryptodirectory-publisher --publish
 TimeoutStartSec=1800
 UMask=0077
 NoNewPrivileges=true
 StandardOutput=journal
 StandardError=journal
+LogRateLimitIntervalSec=1h
+LogRateLimitBurst=20

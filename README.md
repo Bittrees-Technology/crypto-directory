@@ -97,7 +97,7 @@ Monthly release ritual:
 npm run release:monthly -- "optional notes for this release"
 ```
 Reference checklist: `monthly-release-checklist.md`.
-This records audit and process-status evidence, builds and pins a release, appends its CID to `releases.md`, and prints an offline ENS contenthash packet. It does not sign or submit an ENS transaction. Normal live updates use the gated weekly IPNS publisher described in `docs/ipns-publishing.md`.
+This records audit and process-status evidence, builds and pins a release, appends its CID to `releases.md`, and prints an offline ENS contenthash packet. It does not sign or submit an ENS transaction. Normal live updates use the approved production IPNS synchronizer described in `docs/ipns-publishing.md`.
 
 ## Extending completion logic
 - Add new tracked projects in `content/processes/projects/*.json`
@@ -106,7 +106,7 @@ This records audit and process-status evidence, builds and pins a release, appen
 
 ## IPFS releases and ENS recovery packets
 
-The deployed ENS name uses the existing weekly IPNS publisher. Keep that IPNS
+The deployed ENS name uses the existing IPNS publisher. Keep that IPNS
 record for normal site releases; publishing a new release does not require a new
 ENS transaction. These commands prepare recovery information for
 `cryptodirectory.eth` on Ethereum mainnet. They do not hold a signer or send
