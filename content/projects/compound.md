@@ -4,7 +4,8 @@ lead_category: DeFi
 tags: [DeFi, Lending]
 ecosystem: [Ethereum]
 description: Algorithmic money market protocol for decentralized lending and borrowing.
-primary_url: https://compound.finance
+primary_url: https://www.compound.xyz
+research_url: https://docs.compound.xyz/
 product_url: https://compound.finance
 founded: 2018
 hq: United States
