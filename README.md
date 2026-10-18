@@ -97,24 +97,64 @@ Monthly release ritual:
 npm run release:monthly -- "optional notes for this release"
 ```
 Reference checklist: `monthly-release-checklist.md`.
-This enforces the core release order `audit -> build -> publish -> ENS update -> append releases.md` and also records a timestamped `process-status` evidence log under `reports/` for the release.
+This records audit and process-status evidence, builds and pins a release, appends its CID to `releases.md`, and prints an offline ENS contenthash packet. It does not sign or submit an ENS transaction. Normal live updates use the gated weekly IPNS publisher described in `docs/ipns-publishing.md`.
 
 ## Extending completion logic
 - Add new tracked projects in `content/processes/projects/*.json`
 - Add more historical snapshots in `content/processes/history/*.json` to improve timeline projections
 - Extend `scripts/lib/process-metrics.mjs` with new check types as more scripts and data sources become available
 
-## IPFS + ENS later
-When ready:
-1. Build site (`npm run build`)
-2. Add/pin `site/` to IPFS
-3. Point `cryptodirectory.eth` `contenthash` to the IPFS CID
-4. Keep monthly release notes with CID history in `releases.md`
+## IPFS releases and ENS recovery packets
 
-## Snapshot strategy (recommended)
-- Keep immutable release folders/CIDs: `v1`, `v2`, `v3`
-- Update ENS to latest stable CID
-- Preserve old CIDs in `releases.md` for rollback/audit
+The deployed ENS name uses the existing weekly IPNS publisher. Keep that IPNS
+record for normal site releases; publishing a new release does not require a new
+ENS transaction. These commands prepare recovery information for
+`cryptodirectory.eth` on Ethereum mainnet. They do not hold a signer or send
+transactions, and cannot prepare a direct IPFS replacement for an active IPNS
+record. Any such migration belongs in the existing TLD/Safe review flow.
+
+Install the declared, locked CID dependency and run the tests:
+
+```bash
+npm ci --ignore-scripts --no-audit --no-fund
+npm run test:ens
+```
+
+`multiformats` validates CIDs and normalizes them to CIDv1. Contenthash packets
+follow [ERC-1577](https://eips.ethereum.org/EIPS/eip-1577), including its CIDv1
+payload requirement for CIDv0 input. ENS packet generation, gating and tests are
+self-contained. The pre-existing `publish:ipfs` uploader still requires the
+separately installed shared IPFS storage integration; these ENS tools do not
+import that sibling installation.
+
+For a manual recovery review:
+
+1. Build (`npm run build`), publish and verify a pinned release through the existing shared IPFS storage process.
+2. Record the complete CID in a dated entry in `releases.md`: `- YYYY-MM-DD: CID=<cid> | entries=... | notes=...`.
+3. Inspect an offline packet: `npm run ens:contenthash -- <cid>`.
+4. Configure `ETH_RPC_URL` locally and install Foundry's `cast` for read-only chain checks. Optionally set `ENS_RESOLVER_ADDRESS` to the expected resolver; a mismatch with the live ENS registry blocks the operation. Keep RPC credentials out of source control and command-line arguments.
+5. Run `npm run ens:gate -- --cid <cid>` and `npm run ens:set-contenthash -- --dry-run --cid <cid>`.
+6. Where appropriate, explicitly request an unsigned proposal: `npm run ens:set-contenthash -- --prepare --cid <cid>`.
+7. Review availability, current ENS authority, the transaction destination and calldata, and simulation in the existing wallet, Safe or TLD approval flow. All owner, membership, controller and Safe threshold requirements still apply there.
+
+The release gate runs before external reads or unsigned transaction preparation.
+CIDv0 and equivalent CIDv1 entries match by content identity; substring matches
+or mentions in notes do not satisfy the gate. Read-only checks verify mainnet,
+the current registry resolver, contenthash support and the current record.
+An already-current record produces no transaction proposal.
+
+The default is read-only even when an inherited environment sets
+`ENS_SET_CONTENTHASH_EXECUTE`. `--execute` is rejected. No signer key is accepted
+or forwarded to child processes. RPC secrets stay out of argv, and raw child
+errors are suppressed because they may contain credentials. The `--prepare`
+result is unsigned and grants no authority; it must go through the existing
+wallet/Safe/TLD approvals.
+
+## Snapshot strategy
+
+Keep immutable release CIDs in `releases.md` for rollback and audit. Preserve old
+pins. A packet or an entry in that file does not prove network availability or
+grant permission to change the live ENS record.
 
 ## Bittrees central tool discovery
 

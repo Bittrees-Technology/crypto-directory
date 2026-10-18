@@ -26,6 +26,15 @@ jobs:
       - name: Verify approval policy
         run: node --test test/approval-bot.test.mjs
 
+      - name: Install declared ENS dependency
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Verify ENS packet and signing boundaries
+        run: npm run test:ens
+
+      - name: Verify weekly publishing policy
+        run: python3 -m unittest discover -s scripts/ipns -v
+
       - name: Build site
         run: npm run build
 
