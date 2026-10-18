@@ -43,4 +43,12 @@ class ExecutionTests(unittest.TestCase):
     self.assertEqual(command.call_count,1)
     self.assertFalse((root/'state.json').exists())
 
+class IdleTests(unittest.TestCase):
+ def test_disabled_before_missing_candidate(self):
+  import tempfile
+  from pathlib import Path
+  from publisher import run
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);self.assertEqual(run(root)['status'],'no-candidate-queued')
+   (root/'disabled').touch();self.assertEqual(run(root)['status'],'disabled')
 if __name__=='__main__': unittest.main()
