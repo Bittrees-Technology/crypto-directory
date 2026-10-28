@@ -1,0 +1,22 @@
+{
+  "name": "Block Lottos",
+  "lead_category": "Gaming",
+  "tags": [
+    "Gaming",
+    "Gambling",
+    "Lottery",
+    "dApp",
+    "API"
+  ],
+  "ecosystem": [
+    "Polygon",
+    "Base"
+  ],
+  "description": "Blockchain lottery project with browser games on Polygon and Base and a public API for lottery data and unsigned ticket transactions.",
+  "primary_url": "https://blocklottos.com/games",
+  "product_url": "https://blocklottos.com/base-future-ledger",
+  "founded": "n/a",
+  "hq": "Metaverse",
+  "token": "n/a",
+  "twitter": "n/a"
+}
