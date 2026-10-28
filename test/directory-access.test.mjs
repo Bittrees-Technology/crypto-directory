@@ -104,6 +104,12 @@ test('acceptance preflight preserves pending state on an ID collision and suppor
   assert.equal((await f.call('review',{id,revision:1,decision:'accept',reason:'Checked official product evidence.'})).status,409);assert.equal(f.state.value.submissions[0].status,'pending');assert.equal(f.state.writes,0);
   assert.match(newProjectId('未来'),/^project-[a-f0-9]{16}\.md$/);assert.notEqual(newProjectId('未来'),newProjectId('明日'));
 });
+test('queued and accepted entries also block a different-name submission of the same domain',async()=>{
+  const f=fixture(),id=randomUUID();f.state.value.submissions.push({id,submitter:'other',entry:entry(newEntry),revision:1,status:'accepted',history:[]});
+  assert.equal((await f.call('submit',{entry:{...newEntry,name:'Another Brand',primary_url:'https://www.new.example.org./other-path'},operationId:randomUUID()})).status,409);assert.equal(f.state.writes,0);
+  const review=fixture(['role.reviewer']);review.state.value.submissions=structuredClone(f.state.value.submissions);review.state.value.submissions.push({id:randomUUID(),submitter:'different',entry:entry({...newEntry,name:'Another Brand'}),revision:1,status:'pending',history:[]});
+  assert.equal((await review.call('review',{id:review.state.value.submissions[1].id,revision:1,decision:'accept',reason:'Checked the official live product.'})).status,409);assert.equal(review.state.writes,0);
+});
 test('stale, other-project and nonauthoritative role snapshots never grant staff powers',()=>{
   const now=Date.now(),snapshot={authoritative:true,enrolled:true,audience:'cd.bittrees.org',request:{project:'crypto-directory',source:'cd.bittrees.org',subjects:[wallet],authenticatedWallet:wallet},actions:['project.admin','role.editor','role.reviewer'],checkedAt:now,expiresAt:now+5000};
   assert(permissions(snapshot,now).staff);
