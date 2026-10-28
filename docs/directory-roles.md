@@ -45,6 +45,10 @@ proposals are marked verified but remain unpublished until the protected release
 The app never merges, bypasses checks or deploys. The existing repository review,
 CI, production deployment and verified IPNS synchronizer publish approved source
 to both public addresses. Acceptance means accepted for release review, not live.
+Duplicate checks use the production listing index only when its release source
+matches current main and its bytes match the release manifest. A stale or changing
+release is held; generated repository files are not assumed current after later
+listing-only PRs. No GitHub token or session cookie is sent with these public reads.
 
 Storage uses signed records and GitHub's expected-content-SHA update. Operations
 are reserved durably before source writes. A retry reconciles an exact existing

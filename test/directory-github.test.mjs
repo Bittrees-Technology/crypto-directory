@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {generateKeyPairSync} from 'node:crypto';
 import {GitHubStore} from '../lib/directory/github.mjs';
-import {signedState,frontMatter} from '../lib/directory/model.mjs';
+import {signedState,frontMatter,hash} from '../lib/directory/model.mjs';
 const privateKey=generateKeyPairSync('rsa',{modulusLength:2048}).privateKey.export({format:'pem',type:'pkcs8'});
 const env={DIRECTORY_GITHUB_APP_ID:'123',DIRECTORY_GITHUB_INSTALLATION_ID:'456',DIRECTORY_GITHUB_APP_PRIVATE_KEY:privateKey,DIRECTORY_JOURNAL_SECRET:'separate-private-journal-key-'.repeat(2)};
 function storeWith(handler){const calls=[];const store=new GitHubStore({env,fetcher:async(url,options)=>{calls.push({url,method:options.method,body:options.body?JSON.parse(options.body):null});return handler(url,options,calls);}});store.token={value:'ephemeral-test-token',expires:Date.now()+300000};store.authorize=async()=>{};return {store,calls};}
@@ -34,4 +34,18 @@ test('proposal reconciliation verifies repository, exact sole file, contents and
 });
 test('provider failures do not disclose credentials or untrusted diagnostics',async()=>{
   const f=storeWith(()=>new Response('SECRET=ephemeral-test-token private-key-value',{status:500}));await assert.rejects(()=>f.store.main(),error=>!error.message.includes('token')&&!error.message.includes('private-key'));
+});
+test('duplicate checks use the current release index and hold stale or changed artifacts without leaking credentials',async()=>{
+  const source='a'.repeat(40),rows=[{id:'fresh.md',name:'Freshly Added',primary_url:'https://fresh.example.org/'}],raw=JSON.stringify(rows);
+  for(const problem of [null,'stale-source','changed-bytes']){
+    const f=storeWith((url,options)=>{
+      if(url.startsWith('https://api.github.com/')){assert(url.endsWith('/git/ref/heads/main'));return Response.json({object:{sha:source}});}
+      assert.equal(options.headers.Authorization,undefined);assert.equal(options.headers.cookie,undefined);
+      if(url==='https://cd.bittrees.org/release.json')return Response.json({schemaVersion:1,repository:'Bittrees-Technology/crypto-directory',sourceCommit:problem==='stale-source'?'b'.repeat(40):source,files:{'data/projects.json':hash(raw)}});
+      assert.equal(url,'https://cd.bittrees.org/data/projects.json');return new Response(problem==='changed-bytes'?'[]':raw);
+    });
+    if(problem)await assert.rejects(()=>f.store.duplicate({name:'Different Brand',primary_url:'https://fresh.example.org/'}),e=>e.status===503);
+    else {assert(await f.store.duplicate({name:'Different Brand',primary_url:'https://fresh.example.org/'}));assert.equal(await f.store.duplicate({name:'Freshly Added',primary_url:'https://fresh.example.org/'},'fresh.md'),false);}
+    assert(!f.calls.some(c=>c.url.includes('/contents/site/data/projects.json')));
+  }
 });
