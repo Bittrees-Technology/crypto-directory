@@ -6,7 +6,7 @@ const show=(selector,visible)=>document.querySelectorAll(selector).forEach(node=
 function message(text){const node=byId('directory-message');if(node)node.textContent=text;}
 async function api(route,body){
   const response=await fetch('/api/directory/'+route,{credentials:'same-origin',cache:'no-store',...(body?{method:'POST',headers:{'Content-Type':'application/json','X-Directory-CSRF':session?.csrf||''},body:JSON.stringify(body)}:{})});
-  const result=await response.json();if(!response.ok){if([401,403].includes(response.status))clear();throw Error(result.error||'Unable to complete the request.');}return result;
+  const result=await response.json();if(!response.ok){if([401,403].includes(response.status))clear();throw Object.assign(Error(result.error||'Unable to complete the request.'),{status:response.status});}return result;
 }
 function clear(){session=null;show('[data-staff]',false);show('[data-can-edit]',false);show('[data-can-review]',false);show('[data-can-submit]',false);show('[data-signed-in]',false);show('[data-signed-out]',true);}
 function apply(value){
@@ -20,7 +20,7 @@ async function refresh({resume=false}={}){
   if(loading||!local)return;loading=true;
   try{const previous=session?JSON.stringify([session.identity,session.staff,session.canEdit,session.canReview,session.canSubmit]):null;const value=await api('session');apply(value);if(initialized&&previous!==JSON.stringify([value.identity,value.staff,value.canEdit,value.canReview,value.canSubmit]))location.reload();}
   catch(error){clear();if(resume){try{const response=await fetch('/api/project-admin/sso/status',{credentials:'same-origin',cache:'no-store'}),value=await response.json();if(value.configured&&value.action==='resume'){location.replace('/api/project-admin/sso/start?'+new URLSearchParams({mode:'resume',return_to:location.pathname+location.search}));return;}}catch{}}
-    message(error.message);
+    message(error.status===401?'':error.message);
   }finally{loading=false;}
 }
 function readEntry(form){const data=new FormData(form),result={};for(const key of ['name','lead_category','description','primary_url','product_url','founded','hq','token','twitter'])result[key]=String(data.get(key)||'').trim()||(['product_url','founded','token','twitter'].includes(key)?'n/a':key==='hq'?'Metaverse':'');for(const key of ['tags','ecosystem'])result[key]=String(data.get(key)||'').split(',').map(v=>v.trim()).filter(Boolean);return result;}
@@ -45,7 +45,7 @@ async function ownSubmissions(){const root=byId('my-submissions');if(!root||!ses
 async function start(){
   clear();
   document.querySelectorAll('[data-login-link]').forEach(link=>{link.href=canonical+'/sign-in?'+new URLSearchParams({return_to:location.pathname+location.search});});
-  if(!local){message('Sign in and manage listings securely at cd.bittrees.org.');return;}
+  if(!local)return;
   if(location.pathname==='/sign-in'||location.pathname==='/sign-in.html'){
     const query=new URLSearchParams(location.search),target=new URL('https://roles.bittrees.org/sign-in');target.searchParams.set('app','crypto-directory');target.searchParams.set('return_to',query.get('return_to')||'/');location.replace(target.href);return;
   }
@@ -66,7 +66,7 @@ async function start(){
     await reviewQueue();await ownSubmissions();
   }
 }
-byId('directory-logout')?.addEventListener('click',async()=>{await fetch('/api/project-admin/logout',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:'{}'});clear();message('Signed out.');});
+byId('directory-logout')?.addEventListener('click',async()=>{await fetch('/api/project-admin/logout',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:'{}'});clear();message('');});
 window.addEventListener('focus',()=>refresh());
 document.addEventListener('directory-rows-rendered',()=>show('[data-can-edit]',Boolean(session?.canEdit)));
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh();});

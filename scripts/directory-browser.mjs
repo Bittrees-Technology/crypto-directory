@@ -12,6 +12,7 @@ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const origin='http://127.0.0.1:'+server.address().port;
 const browser=await chromium.launch({headless:true});
 const errors=[],checks=[];
+async function screenshot(page,name){if(process.env.DIRECTORY_SCREENSHOT_DIR){await mkdir(process.env.DIRECTORY_SCREENSHOT_DIR,{recursive:true});await page.screenshot({path:path.join(process.env.DIRECTORY_SCREENSHOT_DIR,name+'.png')});}}
 const base={name:'Browser Fixture Project',lead_category:'Infrastructure',tags:['Infrastructure'],ecosystem:['Ethereum'],description:'A synthetic onchain project used only for local browser acceptance.',primary_url:'https://fixture.example.org',product_url:'https://fixture.example.org/app',founded:'2024',hq:'Metaverse',token:'n/a',twitter:'n/a'};
 async function scenario(role,run){
   const context=await browser.newContext({viewport:{width:1360,height:900}}),page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
@@ -31,13 +32,36 @@ async function scenario(role,run){
 }
 try{
   await scenario('anonymous',async({page})=>{
-    await page.goto(origin+'/');await page.getByText('Sign in with email or Ethereum to continue.',{exact:true}).waitFor();
+    await page.goto(origin+'/');await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
     assert.equal(await page.locator('.site-nav').isVisible(),false);assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);assert(await page.locator('table').isVisible());
     await page.evaluate(()=>localStorage.setItem('role','superadmin'));await page.reload();await page.locator('[data-login-link]').waitFor();assert.equal(await page.locator('.site-nav').isVisible(),false);
     await page.goto(origin+'/submit.html');assert.equal(await page.locator('#listing-form').isVisible(),false);
+    assert.equal(await page.locator('h1').count(),1);assert.equal(await page.locator('[data-login-link]:visible').count(),1);
+    assert.equal(await page.locator('.submission-nav').count(),0);assert.equal(await page.locator('#directory-message').isVisible(),false);
+    const back=page.getByRole('link',{name:'Back to directory',exact:true});assert(await back.isVisible());
+    assert.equal(await page.getByRole('link',{name:'CryptoDirectory home',exact:true}).getAttribute('href'),'index.html');
+    await screenshot(page,'signed-out-desktop');
+    await page.setViewportSize({width:360,height:800});
+    const brand=await page.locator('.directory-brand').boundingBox(),account=await page.locator('.directory-account').boundingBox();
+    assert(brand.x+brand.width<=account.x);assert(Math.abs((brand.y+brand.height/2)-(account.y+account.height/2))<=1);
+    assert(await back.isVisible());await screenshot(page,'signed-out-mobile');
+    await back.click();await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
+    await page.goto(origin+'/categories/wallets.html');assert.equal(await page.getByRole('link',{name:'Back to directory',exact:true}).getAttribute('href'),'../index.html');
+    await page.getByRole('link',{name:'Back to directory',exact:true}).click();await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
+    let mirrorApiCalls=0;
+    await page.route('https://cryptodirectory.eth.limo/**',async route=>{
+      const u=new URL(route.request().url());if(u.pathname.startsWith('/api/')){mirrorApiCalls++;return route.fulfill({status:404,json:{}});}
+      const file=path.resolve(root,'.'+u.pathname);assert(file.startsWith(root+path.sep));await route.fulfill({body:await readFile(file),contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html'});
+    });
+    await page.goto('https://cryptodirectory.eth.limo/submit.html');
+    await page.waitForFunction(()=>document.querySelector('[data-login-link]').href.includes('?return_to='));
+    assert.equal(await page.locator('#directory-message').isVisible(),false);assert(await page.getByRole('link',{name:'Back to directory',exact:true}).isVisible());
+    assert.equal(new URL(await page.locator('[data-login-link]').getAttribute('href')).origin,'https://cd.bittrees.org');assert.equal(mirrorApiCalls,0);
   });
   await scenario('submitter',async({page,writes})=>{
     await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});assert.equal(await page.locator('.site-nav').isVisible(),false);
+    assert(await page.getByRole('link',{name:'Back to directory',exact:true}).isVisible());await screenshot(page,'submission-desktop');
+    await page.setViewportSize({width:390,height:844});await screenshot(page,'submission-mobile');await page.setViewportSize({width:1360,height:900});
     for(const [key,value] of Object.entries(base)){const field=page.locator('[name="'+key+'"]');if(key==='lead_category')await field.selectOption(value);else await field.fill(Array.isArray(value)?value.join(', '):value);}
     await page.getByRole('button',{name:'Submit for review',exact:true}).click();await page.getByText('Submission received. It is awaiting an independent reviewer.',{exact:true}).waitFor();
     assert.equal(writes.length,1);assert.equal(writes[0].endpoint,'submit');assert.equal(writes[0].value.entry.name,base.name);

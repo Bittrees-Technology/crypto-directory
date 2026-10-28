@@ -13,31 +13,32 @@
 <body>
   <main>
     <header class="directory-header">
-      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Submit a listing</h1>
-      <p>CryptoDirectory</p>
-      </div>
+      <a class="directory-brand" href="index.html" aria-label="CryptoDirectory home"><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
       <div class="directory-account">
-        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
-        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in" title="Sign in with email or Ethereum">Sign in</a>
+        <div data-signed-in hidden class="account-session"><span class="account-details"><span id="directory-identity"></span><small id="directory-role"></small></span><button type="button" id="directory-logout">Sign out</button></div>
       </div>
     </header>
+    <div class="directory-navigation">
     <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="index.html">Directory</a>
     <a href="review.html">Review Queue</a>
     <a href="needs-update.html">Needs Update</a>
     <a href="process-status.html">Process Status</a>
   </nav>
-    <nav class="submission-nav"><a data-can-submit hidden href="submit.html">Submit a project</a></nav>
+
+    </div>
+    <a class="directory-back" href="index.html"><span aria-hidden="true">←</span>Back to directory</a>
+    <section class="page-heading"><h1>Submit a listing</h1><p>Suggest a project, company or organization for review.</p></section>
     <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card listing-form-card" data-can-submit hidden>
-  <h2>Submit a project, company or organization</h2>
-  <p>Submissions are reviewed before they can become directory entries.</p>
-  <p>Submission details, review rationale and release proposals are stored in our public GitHub repository. Do not include private information. Your sign-in email is not published.</p>
-  <form id="listing-form" method="post" data-mode="submit"><label>Name<input name="name" type="text" maxlength="700" required></label><label>Description<textarea name="description" maxlength="500" minlength="20" required></textarea></label><label>Official website<input name="primary_url" type="url" maxlength="700" required></label><label>Product or app URL (or n/a)<input name="product_url" type="text" maxlength="700" required></label><label>Tags, separated by commas<input name="tags" type="text" maxlength="700" required></label><label>Networks / ecosystem, separated by commas<input name="ecosystem" type="text" maxlength="700" required></label><label>Founding year (or n/a)<input name="founded" type="text" maxlength="700" ></label><label>Country (Metaverse if unknown)<input name="hq" type="text" maxlength="700" ></label><label>Token (or n/a)<input name="token" type="text" maxlength="700" ></label><label>X / social URL (or n/a)<input name="twitter" type="text" maxlength="700" ></label><label>Lead category<select name="lead_category" required><option value="">Select a category</option><option>Custody</option><option>DAOs &amp; Governance</option><option>Data &amp; Analytics</option><option>DeFi</option><option>Developer Tools</option><option>Gaming</option><option>Identity</option><option>Infrastructure</option><option>Layer 1 / Layer 2</option><option>NFTs &amp; Creator Economy</option><option>Payments</option><option>Real World Assets (RWA)</option><option>Security</option><option>Wallets</option></select></label>
+  <h2>Listing details</h2>
+  <form id="listing-form" method="post" data-mode="submit"><label>Name<input name="name" type="text" maxlength="700" required></label><label>Lead category<select name="lead_category" required><option value="">Select a category</option><option>Custody</option><option>DAOs &amp; Governance</option><option>Data &amp; Analytics</option><option>DeFi</option><option>Developer Tools</option><option>Gaming</option><option>Identity</option><option>Infrastructure</option><option>Layer 1 / Layer 2</option><option>NFTs &amp; Creator Economy</option><option>Payments</option><option>Real World Assets (RWA)</option><option>Security</option><option>Wallets</option></select></label><label class="form-field-wide">Description<textarea name="description" maxlength="500" minlength="20" required></textarea></label><label>Official website<input name="primary_url" type="url" maxlength="700" required></label><label>Product or app URL (or n/a)<input name="product_url" type="text" maxlength="700" required></label><label>Tags, separated by commas<input name="tags" type="text" maxlength="700" required></label><label>Networks / ecosystem, separated by commas<input name="ecosystem" type="text" maxlength="700" required></label><label>Founding year (or n/a)<input name="founded" type="text" maxlength="700" ></label><label>Country (Metaverse if unknown)<input name="hq" type="text" maxlength="700" ></label><label>Token (or n/a)<input name="token" type="text" maxlength="700" ></label><label>X / social URL (or n/a)<input name="twitter" type="text" maxlength="700" ></label>
 
+  <p class="submission-disclosure form-field-wide">Listing details, review notes and release proposals are public on GitHub. Do not include private information. Your sign-in email stays private.</p>
   <button type="submit">Submit for review</button></form></section>
-  <section class="card" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>
-  <p data-signed-out>Sign in with email or Ethereum to continue.</p>
+  <section class="card my-submissions" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>
+  <section class="signed-out-notice" data-signed-out><p>Sign in with your Bittrees email or Ethereum wallet to continue.</p><p class="status">You can browse the directory without signing in.</p></section>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
 
