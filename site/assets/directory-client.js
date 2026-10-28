@@ -14,7 +14,7 @@ function apply(value){
   show('[data-staff]',value.staff);show('[data-can-edit]',value.canEdit);show('[data-can-review]',value.canReview);show('[data-can-submit]',value.canSubmit);show('[data-signed-in]',true);show('[data-signed-out]',false);
   show('[data-review-unavailable]',value.staff&&!value.canReview);
   const identity=byId('directory-identity');if(identity)identity.textContent=value.identity.startsWith('0x')?value.identity.slice(0,6)+'…'+value.identity.slice(-4):value.identity;
-  const role=byId('directory-role');if(role)role.textContent=value.admin?'Admin / Superadmin':value.editor&&value.reviewer?'Editor · Reviewer':value.editor?'Editor':value.reviewer?'Reviewer':'Submitter';
+  const role=byId('directory-role');if(role)role.textContent=value.superadmin?'Superadmin':value.admin?'Admin':value.editor&&value.reviewer?'Editor · Reviewer':value.editor?'Editor':value.reviewer?'Reviewer':'Submitter';
 }
 async function refresh({resume=false}={}){
   if(loading||!local)return;loading=true;
