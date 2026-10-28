@@ -136,6 +136,32 @@ class OperationTests(unittest.TestCase):
             sync.prepare(self.root,op,self.raw,self.value,{'phase':'new'})
         command.assert_not_called()
 
+    def test_public_production_copy_needs_no_access_to_protected_deployment(self):
+        op=self.root/'release';op.mkdir()
+        def fetch(url,limit=sync.MAX_FILE):
+            if not url.startswith(sync.PRODUCTION+'/'):
+                raise ValueError('Protected deployment redirects to sign-in')
+            if url.endswith('/release.json'):return self.raw,{}
+            return (b'policy' if url.endswith('/robots.txt') else PAGE),{}
+        def ipfs(*args,**kwargs):
+            if args[0]=='add':return CID
+            return ''
+        with patch.object(sync,'approved',return_value={}),patch.object(sync,'fetch',side_effect=fetch),patch.object(sync,'ipfs',side_effect=ipfs),patch.object(sync,'pin'),patch.object(sync,'file_check'):
+            candidate=sync.prepare(self.root,op,self.raw,self.value,{'phase':'new'})
+        self.assertEqual(candidate['cid'],CID)
+        self.assertEqual(candidate['files']['index.html'],sync.sha(PAGE))
+        self.assertEqual((op/'site'/'release.json').read_bytes(),self.raw)
+
+    def test_production_change_during_copy_is_never_pinned(self):
+        op=self.root/'release';op.mkdir()
+        manifests=iter([self.raw,b'changed release'])
+        def fetch(url,limit=sync.MAX_FILE):
+            if url.endswith('/release.json'):return next(manifests),{}
+            return (b'policy' if url.endswith('/robots.txt') else PAGE),{}
+        with patch.object(sync,'approved',return_value={}),patch.object(sync,'fetch',side_effect=fetch),patch.object(sync,'ipfs') as command,self.assertRaisesRegex(ValueError,'Production changed'):
+            sync.prepare(self.root,op,self.raw,self.value,{'phase':'new'})
+        command.assert_not_called()
+
     def test_tampered_candidate_cannot_omit_approved_files(self):
         op=self.root/'release';op.mkdir()
         bad=dict(self.candidate,artifactManifestSHA256=sync.sha(self.raw),deploymentId=DEPLOYMENT,files={'index.html':sync.sha(PAGE)})
