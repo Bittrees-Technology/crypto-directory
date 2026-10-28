@@ -34,6 +34,10 @@ review rationales. Sign-in emails and wallets are replaced with keyed opaque
 identifiers before storage. An individual may have at most three pending items.
 Each queue and edit journal holds at most 256 records / 1 MiB total and stops when
 full; no automatic deletion or archival is performed.
+The data-only `directory-intake` branch is excluded from Vercel Git deployments,
+and the existing CI push trigger remains main-only. Intake journal updates must
+not create preview builds or model-review jobs. Actual listing proposals retain
+the ordinary required PR checks and release process.
 
 An independent Reviewer/Admin accepts or rejects the unchanged submission with a
 rationale. Self-review is denied. Acceptance creates a pull request adding exactly

@@ -1,4 +1,9 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "directory-intake": false
+    }
+  },
   "rewrites": [
     {
       "source": "/api/directory/:path*",
