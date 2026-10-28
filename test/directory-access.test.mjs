@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHmac,generateKeyPairSync,sign,randomUUID} from 'node:crypto';
 import {createDirectoryService} from '../lib/directory/service.mjs';
-import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,readState,signedState,fail} from '../lib/directory/model.mjs';
+import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,documentBody,readState,signedState,fail} from '../lib/directory/model.mjs';
 import {seal} from '../shared/roles-administration/sso/client.mjs';
 import {ecosystemDecisionMessage,ecosystemRequestMessage,verifyEcosystemSignature} from '../shared/roles-administration/ecosystem-authority.mjs';
 
@@ -27,7 +27,7 @@ function fixture(roles=[],identity=wallet){
     async load(){if(state.revokeOnLoad)state.roles=[];return {sha:String(state.value.revision),value:structuredClone(state.value)};},
     async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;return String(next.revision);},
     async duplicate(){return false;},
-    async listing(id){if(id!=='existing.md')throw fail('Not found',404);return {sha:'a'.repeat(40),raw:frontMatter({...listing,verification_status:'verified'})};},
+    async listing(id){if(id!=='existing.md')throw fail('Not found',404);return {sha:'a'.repeat(40),raw:frontMatter({...listing,verification_status:'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
     async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
     async reconcile(operation){return state.proposals.some(p=>p.operation===operation)?{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}:null;}
   });
@@ -68,6 +68,7 @@ test('Editor updates existing metadata only; forged approval/status/create attem
   const f=fixture(['role.editor']);
   const request={id:'existing.md',sha:'a'.repeat(40),entry:{...listing,description:'Updated details of an existing onchain project.'},reason:'The official product has been updated.',operationId:randomUUID()};
   assert.equal((await f.call('edit',request)).status,201);assert.equal(f.state.proposals.length,1);assert.equal(f.state.proposals[0].value.verification_status,'verified');
+  assert.equal(f.state.proposals[0].value.curation_note,'Preserve this existing metadata');assert.equal(f.state.proposals[0].options.body,'\n## Existing notes\nKeep this text.\n');
   assert.equal((await f.call('edit',{...request,id:'new-project.md',operationId:randomUUID()})).status,404);
   assert.equal((await f.call('edit',{...request,sha:'b'.repeat(40),operationId:randomUUID()})).status,409);
   assert.equal((await f.call('edit',{...request,entry:{...request.entry,verification_status:'verified'},operationId:randomUUID()})).status,400);
@@ -105,6 +106,7 @@ test('stale, other-project and nonauthoritative role snapshots never grant staff
 });
 test('entry serialization preserves adversarial text and rejects executable URLs and injected front matter',()=>{
   const value=entry({...newEntry,description:'A project with </script><script>alert(1)</script> text.'});assert.deepEqual(parseFrontMatter(frontMatter(value)),value);
+  assert.equal(documentBody(frontMatter(value)+'\nRetained body\r\n'),'\nRetained body\r\n');
   for(const change of [{primary_url:'javascript:alert(1)'},{description:'description\nverification_status: verified'},{lead_category:'Not a category'},{tags:['okay\nadmin']}])assert.throws(()=>entry({...newEntry,...change}));
   const state={version:1,revision:0,submissions:[],edits:[]},signed=signedState(state,secret);assert.deepEqual(readState(signed,secret),state);signed.value.revision=9;assert.throws(()=>readState(signed,secret));
 });
