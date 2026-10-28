@@ -125,11 +125,13 @@ def same_production(raw):
         raise ValueError('Production changed during release; do not publish stale content')
 
 def prepare(root,op,raw,value,journal):
-    """Download only immutable, hash-bound public files; never execute them."""
+    """Copy public production files checked against one approved manifest."""
     proof=approved(value)
-    base='https://'+value['deploymentHost']
-    if fetch(base+'/release.json',MAX_MANIFEST)[0]!=raw:
-        raise ValueError('Production and immutable deployment manifests differ')
+    # Vercel can protect deployment URLs even when the production domain is
+    # public. Keep credentials off the seed: use only the fixed public origin,
+    # check each file's approved digest, and reject a changing release manifest.
+    base=PRODUCTION
+    same_production(raw)
     # Refresh durable evidence for resumed candidates as well as new imports.
     write(op/'approval.json',proof)
     candidate=op/'candidate.json'
