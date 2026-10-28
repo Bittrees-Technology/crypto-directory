@@ -35,6 +35,9 @@ jobs:
       - name: Verify weekly publishing policy
         run: python3 -m unittest discover -s scripts/ipns -v
 
+      - name: Verify shared session refresh boundaries
+        run: node --test scripts/shared-session-refresh.node.mjs
+
       - name: Build site
         run: npm run build
 
