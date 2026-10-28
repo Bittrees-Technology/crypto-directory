@@ -25,6 +25,8 @@ export function createSsoClient({clientId,origin,issuer,secret,enabled,adapter,f
  if(!/^[a-z][a-z0-9-]{2,48}$/.test(cookiePrefix))throw Error('Invalid cookie prefix');
  const name=suffix=>cookiePrefix+'-'+suffix;
  const callback=()=>origin+callbackPath;
+ // Negative handoff results only: never an identity or authorization cache.
+ const retryCookie=session=>cookie(name('skip'),seal({retry:true,sessionHash:session?digest(session.key):null,expires:Date.now()+30000},secret),30,origin);
  async function call(action,data){const r=await fetcher(issuer+'/api/sso/'+action,{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{'Content-Type':'application/json',Authorization:'Bearer '+secret},body:JSON.stringify({...data,client_id:clientId,redirect_uri:callback()})});if(!r.ok)throw Error('Shared sign-in unavailable');return action==='profile-read'?body(r):r.json();}
  function transaction(req){const t=unseal(readCookie(req,name('flow'),origin),secret);if(!t||!Number.isFinite(t.expires)||t.expires<Date.now()||!equal(t.state,new URL(req.url).searchParams.get('state')))throw Error('Sign-in request expired');return t;}
  return async function handle(req){
@@ -33,9 +35,9 @@ export function createSsoClient({clientId,origin,issuer,secret,enabled,adapter,f
   if(url.origin!==origin)return json({error:'Unexpected application origin'},403);
   if(req.method!=='GET')return json({error:'Method not allowed'},405);
   if(req.headers.get('sec-fetch-site')==='cross-site'&&!['callback','publish'].includes(action))return json({error:'Cross-site request rejected'},403);
-  let t;
+  let t,session;
   try{
-   let session=await adapter.current(req);
+   session=await adapter.current(req);
    const proof=unseal(readCookie(req,name('proof'),origin),secret);
    if(session&&proof&&equal(proof.sessionHash,digest(session.key))&&Number.isFinite(proof.authTime)){
     // Recover only the original sealed, session-bound proof when a legacy
@@ -53,9 +55,13 @@ export function createSsoClient({clientId,origin,issuer,secret,enabled,adapter,f
    }
    if(action==='status'){
     const published=readCookie(req,name('published'),origin),suppressed=readCookie(req,name('skip'),origin);
-    const next=session?(published===digest(session.key)?null:'publish'):(suppressed?null:'resume');
+    const retry=unseal(suppressed,secret);
+    const cooling=retry?.retry===true&&Number.isFinite(retry.expires)&&retry.expires>Date.now()&&retry.expires<=Date.now()+30000&&retry.sessionHash===(session?digest(session.key):null);
+    const next=cooling||suppressed==='once'?null:session?(published===digest(session.key)?null:'publish'):(suppressed==='1'?null:'resume');
     const response=json({configured:true,action:next});
-    if(suppressed==='once')response.headers.append('Set-Cookie',cookie(name('skip'),'',0,origin));
+    // A failed automatic handoff gets a short host-only retry cooldown.
+    // Keep explicit sign-out suppression unchanged; neither cookie grants access.
+    if(suppressed==='once')response.headers.append('Set-Cookie',retryCookie(session));
     return response;
    }
    if(action==='start'){
@@ -72,7 +78,7 @@ export function createSsoClient({clientId,origin,issuer,secret,enabled,adapter,f
    }
    if(action==='callback'){
     t=transaction(req);const done=[cookie(name('flow'),'',0,origin)];
-    if(url.searchParams.get('error'))return redirect(origin+t.returnTo,[...done,cookie(name('skip'),'once',300,origin)]);
+    if(url.searchParams.get('error'))return redirect(origin+t.returnTo,[...done,retryCookie(session)]);
     if(t.mode==='publish'){
      if(!session||!equal(t.sessionHash,digest(session.key))||url.searchParams.get('published')!=='1')throw Error('Local sign-in changed');
      return redirect(origin+t.returnTo,[...done,cookie(name('published'),digest(session.key),604800,origin),cookie(name('skip'),'',0,origin)]);
@@ -89,7 +95,7 @@ export function createSsoClient({clientId,origin,issuer,secret,enabled,adapter,f
    // Ordinary local sign-in remains available, including when the issuer is down.
    if(action==='profile')return json({error:'Shared profile unavailable'},503);
    if(action==='status')return json({configured:true,action:null});
-   return redirect(origin+returnPath(t?.returnTo),[cookie(name('flow'),'',0,origin),cookie(name('skip'),'once',300,origin)]);
+   return redirect(origin+returnPath(t?.returnTo),[cookie(name('flow'),'',0,origin),retryCookie(session)]);
   }
  };
 }
