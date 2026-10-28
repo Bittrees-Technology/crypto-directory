@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Category: Real World Assets (RWA)</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Real World Assets (RWA)</h1>
       <p>Sorted by lead category</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">26 entries in <strong>Real World Assets (RWA)</strong>. <a href="../index.html">Back to index</a></section>
 <table>
   <thead>
@@ -41,7 +48,7 @@
     </tr>
   </thead>
   <tbody><tr>
-<td><strong>Anzen</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Anzen</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=anzen.md">Edit listing</a></td>
 <td>Protocol offering collateralized real-world credit exposure onchain.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://anzen.finance" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://anzen.finance/app" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -52,7 +59,7 @@
 <td><a href="https://x.com/anzenfinance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Archax</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Archax</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=archax.md">Edit listing</a></td>
 <td>Regulated digital asset exchange and tokenization platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://archax.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Exchange</span></td>
@@ -63,7 +70,7 @@
 <td><a href="https://x.com/ArchaxEx" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Backed</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Backed</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=backed.md">Edit listing</a></td>
 <td>Issuer of tokenized real-world financial assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://backed.fi" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -74,7 +81,7 @@
 <td><a href="https://x.com/BackedFi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Canton Network</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Canton Network</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=canton-network.md">Edit listing</a></td>
 <td>Institutional blockchain network for tokenized financial markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://canton.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://canton.network/learn" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Infrastructure</span></td>
@@ -85,7 +92,7 @@
 <td><a href="https://x.com/CantonNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Centrifuge</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Centrifuge</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=centrifuge.md">Edit listing</a></td>
 <td>Infrastructure for tokenizing and financing real-world assets onchain.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://centrifuge.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://app.centrifuge.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -96,7 +103,7 @@
 <td><a href="https://x.com/centrifuge" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Figure Markets</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Figure Markets</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=figure-markets.md">Edit listing</a></td>
 <td>Blockchain-based financial marketplace for tokenized products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.figuremarkets.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.figuremarkets.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Payments</span></td>
@@ -107,7 +114,7 @@
 <td><a href="https://x.com/FigureMarkets" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Goldfinch</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Goldfinch</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=goldfinch.md">Edit listing</a></td>
 <td>Credit protocol connecting onchain capital with offchain private credit opportunities.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://goldfinch.finance" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://app.goldfinch.finance" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Lending</span></td>
@@ -118,7 +125,7 @@
 <td><a href="https://x.com/goldfinch_fi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hashnote</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Hashnote</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hashnote.md">Edit listing</a></td>
 <td>Onchain cash and tokenized short-duration yield products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.hashnote.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -129,7 +136,7 @@
 <td><a href="https://x.com/hashnote_lab" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>INX</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>INX</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=inx.md">Edit listing</a></td>
 <td>Regulated marketplace for digital securities and tokenized assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.inx.co" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Exchange</span></td>
@@ -140,7 +147,7 @@
 <td><a href="https://x.com/INX_Group" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Lofty</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Lofty</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lofty.md">Edit listing</a></td>
 <td>Fractional tokenized real estate marketplace.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.lofty.ai" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.lofty.ai/marketplace" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span></td>
@@ -151,7 +158,7 @@
 <td><a href="https://x.com/lofty_ai" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Maple Finance</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Maple Finance</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=maple-finance.md">Edit listing</a></td>
 <td>Institutional lending and credit infrastructure bridging onchain capital with offchain borrowers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://maple.finance" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://app.maple.finance" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Lending</span><span class="badge">DeFi</span></td>
@@ -162,7 +169,7 @@
 <td><a href="https://x.com/maplefinance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Matrixdock</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Matrixdock</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=matrixdock.md">Edit listing</a></td>
 <td>Tokenized treasury and RWA product issuer.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.matrixdock.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.matrixdock.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span></td>
@@ -173,7 +180,7 @@
 <td><a href="https://x.com/Matrixdock_HQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mavryk</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Mavryk</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mavryk.md">Edit listing</a></td>
 <td>Tokenization-focused blockchain ecosystem for real-world assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.mavryk.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.mavryk.org/ecosystem" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Layer 1 / Layer 2</span></td>
@@ -184,7 +191,7 @@
 <td><a href="https://x.com/MavrykNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Midas</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Midas</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=midas.md">Edit listing</a></td>
 <td>Tokenized yield and treasury strategy products for onchain users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://midas.app" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://midas.app/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -195,7 +202,7 @@
 <td><a href="https://x.com/MidasRWA" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mountain Protocol</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Mountain Protocol</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mountain-protocol.md">Edit listing</a></td>
 <td>Yield-bearing stablecoin protocol backed by treasury assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.mountainprotocol.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.mountainprotocol.com/usdm" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Stablecoin</span></td>
@@ -206,7 +213,7 @@
 <td><a href="https://x.com/MountainUSDM" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ondo Finance</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Ondo Finance</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ondo-finance.md">Edit listing</a></td>
 <td>Tokenized treasury and real-world asset platform for onchain access to traditional financial products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ondo.finance" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -217,7 +224,7 @@
 <td><a href="https://x.com/OndoFinance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OpenEden</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>OpenEden</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=openeden.md">Edit listing</a></td>
 <td>Tokenized treasury and institutional-grade onchain fixed-income products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://openeden.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -228,7 +235,7 @@
 <td><a href="https://x.com/OpenEden_Labs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OpenTrade</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>OpenTrade</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=opentrade.md">Edit listing</a></td>
 <td>Institutional-grade onchain fixed-income infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://opentrade.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://opentrade.io/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -239,7 +246,7 @@
 <td><a href="https://x.com/opentrade_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Pendulum</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Pendulum</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=pendulum.md">Edit listing</a></td>
 <td>Network focused on bridging traditional finance rails with DeFi.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://pendulumchain.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://pendulumchain.org/ecosystem" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Payments</span></td>
@@ -250,7 +257,7 @@
 <td><a href="https://x.com/pendulum_chain" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Polymesh Association</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Polymesh Association</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=polymesh-association.md">Edit listing</a></td>
 <td>Association supporting security-token focused Polymesh network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://polymesh.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://polymesh.network/ecosystem" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Layer 1 / Layer 2</span></td>
@@ -261,7 +268,7 @@
 <td><a href="https://x.com/PolymeshNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Propbase</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Propbase</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=propbase.md">Edit listing</a></td>
 <td>Real estate tokenization platform for fractional ownership.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://propbase.app" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span></td>
@@ -272,7 +279,7 @@
 <td><a href="https://x.com/PropbaseApp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>RealT</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>RealT</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=realt.md">Edit listing</a></td>
 <td>Tokenized real estate investment and rental income platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://realt.co" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://realt.co/marketplace" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -283,7 +290,7 @@
 <td><a href="https://x.com/RealTPlatform" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Securitize</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Securitize</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=securitize.md">Edit listing</a></td>
 <td>Tokenization platform for regulated real-world securities and funds.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.securitize.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.securitize.io/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Infrastructure</span></td>
@@ -294,7 +301,7 @@
 <td><a href="https://x.com/Securitize" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Superstate</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Superstate</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=superstate.md">Edit listing</a></td>
 <td>Asset management firm building tokenized regulated investment products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://superstate.co" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://superstate.co/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span></td>
@@ -305,7 +312,7 @@
 <td><a href="https://x.com/superstatefunds" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Swarm Markets</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Swarm Markets</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=swarm-markets.md">Edit listing</a></td>
 <td>Regulated DeFi venue for tokenized real-world assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://swarm.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://app.swarm.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">DeFi</span></td>
@@ -316,7 +323,7 @@
 <td><a href="https://x.com/SwarmMarkets" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Tokeny</strong><br><small>Real World Assets (RWA)</small></td>
+<td><strong>Tokeny</strong><br><small>Real World Assets (RWA)</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=tokeny.md">Edit listing</a></td>
 <td>Institutional tokenization platform for compliant digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://tokeny.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Real World Assets (RWA)</span><span class="badge">Infrastructure</span></td>
@@ -329,6 +336,7 @@
 </table>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="../assets/directory-client.js"></script>
 </body>
 </html>

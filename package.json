@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "description": "Static markdown-powered crypto company and project directory",
   "scripts": {
+    "test:directory": "node --test test/directory-*.test.mjs",
+    "test:directory-browser": "node scripts/directory-browser.mjs",
     "build": "node scripts/build.mjs",
     "audit": "node scripts/audit-report.mjs",
     "publish:ipfs": "node scripts/publish-ipfs.mjs",
@@ -22,5 +24,8 @@
   },
   "dependencies": {
     "multiformats": "14.0.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
   }
 }

@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Category: Security</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Security</h1>
       <p>Sorted by lead category</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">69 entries in <strong>Security</strong>. <a href="../index.html">Back to index</a></section>
 <table>
   <thead>
@@ -41,7 +48,7 @@
     </tr>
   </thead>
   <tbody><tr>
-<td><strong>Ackee Blockchain</strong><br><small>Security</small></td>
+<td><strong>Ackee Blockchain</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ackee-blockchain.md">Edit listing</a></td>
 <td>Security research and smart contract audit firm.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ackee.xyz" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -52,7 +59,7 @@
 <td><a href="https://x.com/ackeeblockchain" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ancilia</strong><br><small>Security</small></td>
+<td><strong>Ancilia</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ancilia.md">Edit listing</a></td>
 <td>Threat detection and incident response platform for web3.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ancilia.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://ancilia.com/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -63,7 +70,7 @@
 <td><a href="https://x.com/ancilia_inc" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Argus</strong><br><small>Security</small></td>
+<td><strong>Argus</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=argus.md">Edit listing</a></td>
 <td>Onchain threat detection and security operations tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://argus.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://argus.xyz/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -74,7 +81,7 @@
 <td><a href="https://x.com/arguslabs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Beosin</strong><br><small>Security</small></td>
+<td><strong>Beosin</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=beosin.md">Edit listing</a></td>
 <td>Security and compliance solutions for blockchain organizations.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://beosin.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://beosin.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -85,7 +92,7 @@
 <td><a href="https://x.com/Beosin_com" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Blockaid</strong><br><small>Security</small></td>
+<td><strong>Blockaid</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blockaid.md">Edit listing</a></td>
 <td>Transaction and dapp threat detection infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://blockaid.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://blockaid.io/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -96,7 +103,7 @@
 <td><a href="https://x.com/blockaid_" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BlockApex</strong><br><small>Security</small></td>
+<td><strong>BlockApex</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blockapex.md">Edit listing</a></td>
 <td>Security audit and smart contract review provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://blockapex.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://blockapex.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -107,7 +114,7 @@
 <td><a href="https://x.com/blockapex_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BlockSec</strong><br><small>Security</small></td>
+<td><strong>BlockSec</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blocksec.md">Edit listing</a></td>
 <td>Security products focused on onchain monitoring and incident defense.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://blocksec.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -118,7 +125,7 @@
 <td><a href="https://x.com/BlockSecTeam" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BlockSec Phalcon</strong><br><small>Security</small></td>
+<td><strong>BlockSec Phalcon</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blocksec-phalcon.md">Edit listing</a></td>
 <td>Security observability and simulation tooling suite.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://phalcon.blocksec.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://phalcon.blocksec.com/explorer" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -129,7 +136,7 @@
 <td><a href="https://x.com/BlockSecTeam" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Blowfish</strong><br><small>Security</small></td>
+<td><strong>Blowfish</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blowfish.md">Edit listing</a></td>
 <td>Transaction simulation and risk protection APIs.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://blowfish.xyz" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -140,7 +147,7 @@
 <td><a href="https://x.com/blowfishxyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BugRap</strong><br><small>Security</small></td>
+<td><strong>BugRap</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bugrap.md">Edit listing</a></td>
 <td>Security contest and bounty aggregation platform for web3.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bugrap.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bugrap.io/contests" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Bug Bounty</span></td>
@@ -151,7 +158,7 @@
 <td><a href="https://x.com/bugrap_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cantina</strong><br><small>Security</small></td>
+<td><strong>Cantina</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cantina.md">Edit listing</a></td>
 <td>Security marketplace connecting projects with audit experts.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://cantina.xyz" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -162,7 +169,7 @@
 <td><a href="https://x.com/cantinaxyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CertiK</strong><br><small>Security</small></td>
+<td><strong>CertiK</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=certik.md">Edit listing</a></td>
 <td>Smart contract auditing and blockchain security monitoring platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.certik.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.certik.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -173,7 +180,7 @@
 <td><a href="https://x.com/CertiK" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Certora</strong><br><small>Security</small></td>
+<td><strong>Certora</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=certora.md">Edit listing</a></td>
 <td>Formal verification tooling and services for smart contracts.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.certora.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.certora.com/prover" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Developer Tools</span></td>
@@ -184,7 +191,7 @@
 <td><a href="https://x.com/CertoraInc" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ChainPatrol</strong><br><small>Security</small></td>
+<td><strong>ChainPatrol</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainpatrol.md">Edit listing</a></td>
 <td>Brand and phishing protection platform for web3 teams.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chainpatrol.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://chainpatrol.io/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -195,7 +202,7 @@
 <td><a href="https://x.com/chain_patrol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ChainSecurity</strong><br><small>Security</small></td>
+<td><strong>ChainSecurity</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainsecurity.md">Edit listing</a></td>
 <td>Security firm providing audits and formal analysis.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chainsecurity.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://chainsecurity.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -206,7 +213,7 @@
 <td><a href="https://x.com/Chain_Security" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Code4rena</strong><br><small>Security</small></td>
+<td><strong>Code4rena</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=code4rena.md">Edit listing</a></td>
 <td>Competitive audit platform for smart contract security reviews.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://code4rena.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://code4rena.com/contests" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Bug Bounty</span></td>
@@ -217,7 +224,7 @@
 <td><a href="https://x.com/code4rena" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coinspect</strong><br><small>Security</small></td>
+<td><strong>Coinspect</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinspect.md">Edit listing</a></td>
 <td>Smart contract and blockchain security auditing firm.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinspect.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.coinspect.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -228,7 +235,7 @@
 <td><a href="https://x.com/Coinspect" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cyberscope</strong><br><small>Security</small></td>
+<td><strong>Cyberscope</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cyberscope.md">Edit listing</a></td>
 <td>Blockchain audit and security assessment provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.cyberscope.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.cyberscope.io/audits" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -239,7 +246,7 @@
 <td><a href="https://x.com/Cyberscope_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cyfrin</strong><br><small>Security</small></td>
+<td><strong>Cyfrin</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cyfrin.md">Edit listing</a></td>
 <td>Smart contract security training, tooling, and audit services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.cyfrin.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.cyfrin.io/audits" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Developer Tools</span></td>
@@ -250,7 +257,7 @@
 <td><a href="https://x.com/CyfrinAudits" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cyfrin Updraft</strong><br><small>Security</small></td>
+<td><strong>Cyfrin Updraft</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cyfrin-updraft.md">Edit listing</a></td>
 <td>Security education and tooling ecosystem for Solidity developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://updraft.cyfrin.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://updraft.cyfrin.io/courses" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Developer Tools</span></td>
@@ -261,7 +268,7 @@
 <td><a href="https://x.com/CyfrinAudits" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cyvers</strong><br><small>Security</small></td>
+<td><strong>Cyvers</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cyvers.md">Edit listing</a></td>
 <td>Real-time blockchain threat detection and risk intelligence platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://cyvers.ai" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://cyvers.ai/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -272,7 +279,7 @@
 <td><a href="https://x.com/cyvers_" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Dedaub</strong><br><small>Security</small></td>
+<td><strong>Dedaub</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=dedaub.md">Edit listing</a></td>
 <td>Smart contract security company focused on audits and tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://dedaub.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -283,7 +290,7 @@
 <td><a href="https://x.com/dedaub" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Forta</strong><br><small>Security</small></td>
+<td><strong>Forta</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=forta.md">Edit listing</a></td>
 <td>Decentralized monitoring network for smart contract and protocol threats.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://forta.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.forta.network" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -294,7 +301,7 @@
 <td><a href="https://x.com/FortaNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fuzzland</strong><br><small>Security</small></td>
+<td><strong>Fuzzland</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fuzzland.md">Edit listing</a></td>
 <td>Smart contract fuzzing and security services provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://fuzz.land" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://fuzz.land/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -305,7 +312,7 @@
 <td><a href="https://x.com/fuzzland" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>GoPlus Security</strong><br><small>Security</small></td>
+<td><strong>GoPlus Security</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=goplus-security.md">Edit listing</a></td>
 <td>Open security data and APIs for wallets and dapps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://gopluslabs.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.gopluslabs.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Infrastructure</span></td>
@@ -316,7 +323,7 @@
 <td><a href="https://x.com/GoPlusSecurity" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Guardian Audits</strong><br><small>Security</small></td>
+<td><strong>Guardian Audits</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=guardian-audits.md">Edit listing</a></td>
 <td>Smart contract audit and security review provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://guardianaudits.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://guardianaudits.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -327,7 +334,7 @@
 <td><a href="https://x.com/GuardianAudits" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hacken</strong><br><small>Security</small></td>
+<td><strong>Hacken</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hacken.md">Edit listing</a></td>
 <td>Blockchain cybersecurity provider offering audits, monitoring, and incident response.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hacken.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hacken.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -338,7 +345,7 @@
 <td><a href="https://x.com/hackenclub" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>HackenProof</strong><br><small>Security</small></td>
+<td><strong>HackenProof</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hackenproof.md">Edit listing</a></td>
 <td>Bug bounty platform and security coordination service.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hackenproof.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hackenproof.com/programs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Bug Bounty</span></td>
@@ -349,7 +356,7 @@
 <td><a href="https://x.com/hackenproof" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Halborn</strong><br><small>Security</small></td>
+<td><strong>Halborn</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=halborn.md">Edit listing</a></td>
 <td>Blockchain security firm providing smart contract audits and incident response services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.halborn.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -360,7 +367,7 @@
 <td><a href="https://x.com/HalbornSecurity" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Harpie</strong><br><small>Security</small></td>
+<td><strong>Harpie</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=harpie.md">Edit listing</a></td>
 <td>Onchain wallet security and exploit prevention platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.harpie.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.harpie.io/security" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Wallets</span></td>
@@ -371,7 +378,7 @@
 <td><a href="https://x.com/harpieio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>HashDit</strong><br><small>Security</small></td>
+<td><strong>HashDit</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hashdit.md">Edit listing</a></td>
 <td>Web3 security platform focused on scam prevention and alerts.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hashdit.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hashdit.io/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -382,7 +389,7 @@
 <td><a href="https://x.com/hashdit" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>HashEx</strong><br><small>Security</small></td>
+<td><strong>HashEx</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hashex.md">Edit listing</a></td>
 <td>Smart contract audit and blockchain security services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hashex.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hashex.org/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -393,7 +400,7 @@
 <td><a href="https://x.com/HashExOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hexagate</strong><br><small>Security</small></td>
+<td><strong>Hexagate</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hexagate.md">Edit listing</a></td>
 <td>Onchain threat detection and prevention platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.hexagate.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.hexagate.com/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -404,7 +411,7 @@
 <td><a href="https://x.com/Hexagate_" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hexens</strong><br><small>Security</small></td>
+<td><strong>Hexens</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hexens.md">Edit listing</a></td>
 <td>Blockchain security company focused on audits and threat research.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hexens.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hexens.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -415,7 +422,7 @@
 <td><a href="https://x.com/Hexensio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hypernative</strong><br><small>Security</small></td>
+<td><strong>Hypernative</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hypernative.md">Edit listing</a></td>
 <td>Real-time threat prevention and incident response for web3 protocols.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.hypernative.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -426,7 +433,7 @@
 <td><a href="https://x.com/HypernativeLabs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Immunebytes</strong><br><small>Security</small></td>
+<td><strong>Immunebytes</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=immunebytes.md">Edit listing</a></td>
 <td>Smart contract audit and blockchain security provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://immunebytes.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://immunebytes.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -437,7 +444,7 @@
 <td><a href="https://x.com/immunebytes" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Immunefi</strong><br><small>Security</small></td>
+<td><strong>Immunefi</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=immunefi.md">Edit listing</a></td>
 <td>Web3 security platform focused on bug bounty programs and vulnerability coordination.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://immunefi.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://immunefi.com/bug-bounty" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Bug Bounty</span></td>
@@ -448,7 +455,7 @@
 <td><a href="https://x.com/immunefi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OpenAudit</strong><br><small>Security</small></td>
+<td><strong>OpenAudit</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=openaudit.md">Edit listing</a></td>
 <td>Audit marketplace connecting protocols with security providers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://openaudit.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://openaudit.org/marketplace" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -459,7 +466,7 @@
 <td><a href="https://x.com/openauditorg" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OpenZeppelin</strong><br><small>Security</small></td>
+<td><strong>OpenZeppelin</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=openzeppelin.md">Edit listing</a></td>
 <td>Security company and tooling provider for smart contract development, audits, and monitoring.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://openzeppelin.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.openzeppelin.com/contracts" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Developer Tools</span></td>
@@ -470,7 +477,7 @@
 <td><a href="https://x.com/OpenZeppelin" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OpenZeppelin Defender</strong><br><small>Security</small></td>
+<td><strong>OpenZeppelin Defender</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=openzeppelin-defender.md">Edit listing</a></td>
 <td>Transaction automation and security operations platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://openzeppelin.com/defender" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Developer Tools</span></td>
@@ -481,7 +488,7 @@
 <td><a href="https://x.com/OpenZeppelin" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OtterSec</strong><br><small>Security</small></td>
+<td><strong>OtterSec</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ottersec.md">Edit listing</a></td>
 <td>Security audits and research for smart contracts and protocols.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://osec.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://osec.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -492,7 +499,7 @@
 <td><a href="https://x.com/osec_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Oxorio</strong><br><small>Security</small></td>
+<td><strong>Oxorio</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=oxorio.md">Edit listing</a></td>
 <td>Security research and audit firm for smart contracts.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://oxor.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://oxor.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -503,7 +510,7 @@
 <td><a href="https://x.com/oxorio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Paladin Blockchain Security</strong><br><small>Security</small></td>
+<td><strong>Paladin Blockchain Security</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=paladin-blockchain-security.md">Edit listing</a></td>
 <td>Security firm providing audits and risk reviews for blockchain projects.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://paladinsec.co" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://paladinsec.co/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -514,7 +521,7 @@
 <td><a href="https://x.com/0xPaladinSec" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>PeckShield</strong><br><small>Security</small></td>
+<td><strong>PeckShield</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=peckshield.md">Edit listing</a></td>
 <td>Blockchain security and analytics provider known for audits and incident intelligence.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://peckshield.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://peckshield.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -525,7 +532,7 @@
 <td><a href="https://x.com/peckshield" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Pessimistic</strong><br><small>Security</small></td>
+<td><strong>Pessimistic</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=pessimistic.md">Edit listing</a></td>
 <td>Blockchain security company providing audits and monitoring.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://pessimistic.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -536,7 +543,7 @@
 <td><a href="https://x.com/pessimistic_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Phalcon</strong><br><small>Security</small></td>
+<td><strong>Phalcon</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=phalcon.md">Edit listing</a></td>
 <td>Transaction simulation and threat detection tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://phalcon.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://phalcon.xyz/explorer" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -547,7 +554,7 @@
 <td><a href="https://x.com/BlockSecTeam" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Quantstamp</strong><br><small>Security</small></td>
+<td><strong>Quantstamp</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=quantstamp.md">Edit listing</a></td>
 <td>Smart contract and blockchain security audits for protocols and enterprises.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://quantstamp.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -558,7 +565,7 @@
 <td><a href="https://x.com/Quantstamp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Quick Intel</strong><br><small>Security</small></td>
+<td><strong>Quick Intel</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=quick-intel.md">Edit listing</a></td>
 <td>Realtime token and contract risk intelligence platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://quickintel.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://quickintel.io/app" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -569,7 +576,7 @@
 <td><a href="https://x.com/QuickIntel_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>QuillAudits</strong><br><small>Security</small></td>
+<td><strong>QuillAudits</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=quillaudits.md">Edit listing</a></td>
 <td>Smart contract audit and security assessment provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://quillaudits.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://quillaudits.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -580,7 +587,7 @@
 <td><a href="https://x.com/QuillAudits" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Redefine Security</strong><br><small>Security</small></td>
+<td><strong>Redefine Security</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=redefine-security.md">Edit listing</a></td>
 <td>Specialized security reviews for DeFi protocols.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://redefine.security" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://redefine.security/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -591,7 +598,7 @@
 <td><a href="https://x.com/redefine_sec" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>RugDoc</strong><br><small>Security</small></td>
+<td><strong>RugDoc</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=rugdoc.md">Edit listing</a></td>
 <td>DeFi protocol risk assessment and security research platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://rugdoc.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Research</span></td>
@@ -602,7 +609,7 @@
 <td><a href="https://x.com/RugDocIO" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Runtime Verification</strong><br><small>Security</small></td>
+<td><strong>Runtime Verification</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=runtime-verification.md">Edit listing</a></td>
 <td>Formal methods and security analysis for blockchain systems.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://runtimeverification.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Formal Verification</span></td>
@@ -613,7 +620,7 @@
 <td><a href="https://x.com/rv_inc" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Salus Security</strong><br><small>Security</small></td>
+<td><strong>Salus Security</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=salus-security.md">Edit listing</a></td>
 <td>Security audits and formal review services for blockchain projects.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://salusec.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://salusec.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -624,7 +631,7 @@
 <td><a href="https://x.com/salusecio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Scam Sniffer</strong><br><small>Security</small></td>
+<td><strong>Scam Sniffer</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=scam-sniffer.md">Edit listing</a></td>
 <td>Anti-phishing and threat intelligence for web3 users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.scamsniffer.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -635,7 +642,7 @@
 <td><a href="https://x.com/realScamSniffer" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Sec3</strong><br><small>Security</small></td>
+<td><strong>Sec3</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=sec3.md">Edit listing</a></td>
 <td>Security audits and tooling focused on Move and Solana ecosystems.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.sec3.dev" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -646,7 +653,7 @@
 <td><a href="https://x.com/sec3dev" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Sherlock</strong><br><small>Security</small></td>
+<td><strong>Sherlock</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=sherlock.md">Edit listing</a></td>
 <td>Security platform combining smart contract audits with coverage and contest models.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.sherlock.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://audits.sherlock.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -657,7 +664,7 @@
 <td><a href="https://x.com/sherlockdefi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Shieldify</strong><br><small>Security</small></td>
+<td><strong>Shieldify</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=shieldify.md">Edit listing</a></td>
 <td>Runtime monitoring and incident response tooling for web3.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://shieldify.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -668,7 +675,7 @@
 <td><a href="https://x.com/shieldifysec" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Skynet Security</strong><br><small>Security</small></td>
+<td><strong>Skynet Security</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=skynet-security.md">Edit listing</a></td>
 <td>Automated threat monitoring platform for protocols and wallets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://skynet.security" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://skynet.security/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -679,7 +686,7 @@
 <td><a href="https://x.com/skynet_security" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>SlowMist</strong><br><small>Security</small></td>
+<td><strong>SlowMist</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=slowmist.md">Edit listing</a></td>
 <td>Blockchain security company providing audits, threat intelligence, and incident services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.slowmist.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.slowmist.com/en/service-smart-contract-security-audit.html" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -690,7 +697,7 @@
 <td><a href="https://x.com/SlowMist_Team" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>SolidProof</strong><br><small>Security</small></td>
+<td><strong>SolidProof</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=solidproof.md">Edit listing</a></td>
 <td>Security audit provider for smart contracts and tokens.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://solidproof.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://solidproof.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -701,7 +708,7 @@
 <td><a href="https://x.com/SolidProof_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Spearbit</strong><br><small>Security</small></td>
+<td><strong>Spearbit</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=spearbit.md">Edit listing</a></td>
 <td>Distributed security review network for blockchain projects.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://spearbit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://cantina.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -712,7 +719,7 @@
 <td><a href="https://x.com/spearbitdao" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Trail of Bits</strong><br><small>Security</small></td>
+<td><strong>Trail of Bits</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=trail-of-bits.md">Edit listing</a></td>
 <td>Cybersecurity research and audit firm working across smart contracts and cryptographic systems.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.trailofbits.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -723,7 +730,7 @@
 <td><a href="https://x.com/trailofbits" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Trailblaze Security</strong><br><small>Security</small></td>
+<td><strong>Trailblaze Security</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=trailblaze-security.md">Edit listing</a></td>
 <td>Runtime security monitoring and incident response tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://trailblaze.security" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://trailblaze.security/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Monitoring</span></td>
@@ -734,7 +741,7 @@
 <td><a href="https://x.com/trailblaze_sec" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Verichains</strong><br><small>Security</small></td>
+<td><strong>Verichains</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=verichains.md">Edit listing</a></td>
 <td>Security services firm for blockchain infrastructure and applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://verichains.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -745,7 +752,7 @@
 <td><a href="https://x.com/verichains" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Veridise</strong><br><small>Security</small></td>
+<td><strong>Veridise</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=veridise.md">Edit listing</a></td>
 <td>Security auditing and formal verification for smart contracts and ZK systems.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://veridise.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://veridise.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Formal Verification</span></td>
@@ -756,7 +763,7 @@
 <td><a href="https://x.com/veridiseInc" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Wallet Guard</strong><br><small>Security</small></td>
+<td><strong>Wallet Guard</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=wallet-guard.md">Edit listing</a></td>
 <td>Browser extension and wallet security tooling for users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://walletguard.app" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://walletguard.app/download" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Wallets</span></td>
@@ -767,7 +774,7 @@
 <td><a href="https://x.com/wallet_guard" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>WatchPug</strong><br><small>Security</small></td>
+<td><strong>WatchPug</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=watchpug.md">Edit listing</a></td>
 <td>Security reviews and smart contract auditing services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://watchpug.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -778,7 +785,7 @@
 <td><a href="https://x.com/watchpugsec" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Webacy</strong><br><small>Security</small></td>
+<td><strong>Webacy</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=webacy.md">Edit listing</a></td>
 <td>Wallet protection and beneficiary safety tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.webacy.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Wallets</span></td>
@@ -789,7 +796,7 @@
 <td><a href="https://x.com/mywebacy" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Zellic</strong><br><small>Security</small></td>
+<td><strong>Zellic</strong><br><small>Security</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zellic.md">Edit listing</a></td>
 <td>Security research and smart contract auditing firm.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.zellic.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.zellic.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Security</span><span class="badge">Auditing</span></td>
@@ -802,6 +809,7 @@
 </table>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="../assets/directory-client.js"></script>
 </body>
 </html>

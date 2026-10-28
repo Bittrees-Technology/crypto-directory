@@ -2,6 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { loadProcessStatuses } from './lib/process-metrics.mjs';
 import { writeReleaseManifest } from './lib/release-manifest.mjs';
+import {CATEGORIES} from '../lib/directory/model.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
@@ -52,6 +53,7 @@ function absoluteUrl(relativePath = '') {
 
 function parseValue(raw) {
   const trimmed = raw.trim();
+  if(trimmed.startsWith('"')||trimmed.startsWith('[')){try{return JSON.parse(trimmed);}catch{/* Existing unquoted front matter retains its legacy format. */}}
   const listMatch = trimmed.match(/^\[(.*)\]$/);
   if (listMatch) {
     const inner = listMatch[1].trim();
@@ -135,11 +137,11 @@ function twitterCellHtml(twitter) {
   return xLink;
 }
 
-function tableRows(projects) {
+function tableRows(projects,navPrefix='') {
   return projects
     .map((p) => {
       return `<tr>
-<td><strong>${escapeHtml(p.name)}</strong><br><small>${escapeHtml(p.lead_category)}</small></td>
+<td><strong>${escapeHtml(p.name)}</strong><br><small>${escapeHtml(p.lead_category)}</small><br><a data-edit-entry data-can-edit hidden href="${escapeHtml(navPrefix+'edit.html?id='+encodeURIComponent(p.id||''))}">Edit listing</a></td>
 <td>${escapeHtml(p.description)}</td>
 <td>${linksCellHtml(p)}</td>
 <td>${badges(p.tags)}</td>
@@ -158,7 +160,7 @@ function seoHead({ title, description, canonicalPath = '', jsonLd = null }) {
   const descriptionEscaped = escapeHtml(description);
   const titleEscaped = escapeHtml(title);
   const jsonLdScript = jsonLd
-    ? `<script type=\"application/ld+json\">${JSON.stringify(jsonLd)}</script>`
+    ? `<script type=\"application/ld+json\">${JSON.stringify(jsonLd).replaceAll('<','\\u003c')}</script>`
     : '';
   return `<meta name=\"description\" content=\"${descriptionEscaped}\">
   <meta name=\"robots\" content=\"index,follow\">
@@ -196,7 +198,7 @@ Sitemap: ${absoluteUrl('sitemap.xml')}
 }
 
 function siteNav(navPrefix = '') {
-  return `<nav class="site-nav">
+  return `<nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="${escapeHtml(navPrefix)}index.html">Directory</a>
     <a href="${escapeHtml(navPrefix)}review.html">Review Queue</a>
     <a href="${escapeHtml(navPrefix)}needs-update.html">Needs Update</a>
@@ -219,17 +221,25 @@ function pageShell({ title, subtitle, body, extraHead = '', extraScript = '', st
 </head>
 <body>
   <main>
-    <header>
-      <h1>${escapeHtml(title)}</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt="">${escapeHtml(title)}</h1>
       <p>${escapeHtml(subtitle)}</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
     ${siteNav(navPrefix)}
+    <nav class="submission-nav"><a data-can-submit hidden href="${escapeHtml(navPrefix)}submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     ${body}
     <p class=\"footer\">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
   ${extraScript}
+  <script type="module" src="${escapeHtml(navPrefix)}assets/directory-client.js"></script>
 </body>
-</html>`;
+</html>`.replace(/[ \t]+(?=\n)/g,'');
 }
 
 function indexPage(projects, categories) {
@@ -258,7 +268,7 @@ function indexPage(projects, categories) {
 </table>`;
 
   const script = `<script>
-const projects = ${JSON.stringify(projects)};
+const projects = ${JSON.stringify(projects).replaceAll('<','\\u003c')};
 const rowsEl = document.getElementById('rows');
 const searchEl = document.getElementById('search');
 const categoryEl = document.getElementById('category');
@@ -298,7 +308,7 @@ function row(p) {
     ? '<a href="' + esc(p.twitter) + '" target="_blank" rel="noopener">X</a>'
     : 'n/a';
   return '<tr>' +
-    '<td><strong>' + esc(p.name) + '</strong><br><small>' + esc(p.lead_category) + '</small></td>' +
+    '<td><strong>' + esc(p.name) + '</strong><br><small>' + esc(p.lead_category) + '</small><br><a data-edit-entry data-can-edit hidden href="edit.html?id=' + encodeURIComponent(p.id||'') + '">Edit listing</a></td>' +
     '<td>' + esc(p.description) + '</td>' +
     '<td>' + links + '</td>' +
     '<td>' + p.tags.map(badge).join('') + '</td>' +
@@ -321,6 +331,7 @@ function render() {
     return inCategory && inStatus && inQuery;
   });
   rowsEl.innerHTML = filtered.map(row).join('');
+  document.dispatchEvent(new Event('directory-rows-rendered'));
 }
 
 searchEl.addEventListener('input', render);
@@ -360,7 +371,7 @@ function categoryPage(category, projects) {
       <th>Name</th><th>Description</th><th>Links</th><th>Tags</th><th>Ecosystem</th><th>Founded</th><th>HQ</th><th>Token</th><th>X</th>
     </tr>
   </thead>
-  <tbody>${tableRows(visible)}</tbody>
+  <tbody>${tableRows(visible,'../')}</tbody>
 </table>`;
 
   const head = seoHead({
@@ -388,40 +399,22 @@ function categoryPage(category, projects) {
 }
 
 function reviewPage(projects) {
-  const pending = projects.filter((p) => p.verification_status === 'pending_audit');
-  const body = `<section class=\"card\" style=\"margin:18px 0\">
-<strong>${pending.length}</strong> entries currently require audit.
-<div style=\"margin-top:8px\"><a href=\"index.html\">Back to index</a></div>
-</section>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th><th>Description</th><th>Links</th><th>Tags</th><th>Ecosystem</th><th>Founded</th><th>HQ</th><th>Token</th><th>X</th>
-    </tr>
-  </thead>
-  <tbody>${tableRows(pending)}</tbody>
-</table>`;
+  return pageShell({title:'Review Queue',subtitle:'Review new project, company and organization submissions',body:'<section data-can-review hidden id="directory-review" class="card">Loading submissions…</section><p data-review-unavailable hidden>A Reviewer, Admin or Superadmin role is required to review new submissions.</p><p data-signed-out>Sign in with a Reviewer, Admin or Superadmin role to review new submissions.</p>'});
+}
 
-  const head = seoHead({
-    title: 'CryptoDirectory | Review Queue',
-    description: 'Entries pending audit in CryptoDirectory.',
-    canonicalPath: 'review.html',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: 'CryptoDirectory Review Queue',
-      url: absoluteUrl('review.html'),
-      isPartOf: absoluteUrl(''),
-      inLanguage: 'en'
-    }
-  });
-
-  return pageShell({
-    title: 'Review Queue',
-    subtitle: 'Entries with verification_status: pending_audit',
-    body,
-    extraHead: head
-  });
+function listingFormPage(edit) {
+  const fields=[['name','Name','text',true],['description','Description','textarea',true],['primary_url','Official website','url',true],['product_url','Product or app URL (or n/a)','text',true],['tags','Tags, separated by commas','text',true],['ecosystem','Networks / ecosystem, separated by commas','text',true],['founded','Founding year (or n/a)','text',false],['hq','Country (Metaverse if unknown)','text',false],['token','Token (or n/a)','text',false],['twitter','X / social URL (or n/a)','text',false]];
+  const controls=fields.map(([name,label,type,required])=>`<label>${label}${type==='textarea'?`<textarea name="${name}" maxlength="500" minlength="20" required></textarea>`:`<input name="${name}" type="${type}" maxlength="700" ${required?'required':''}>`}</label>`).join('');
+  const body=`<section class="card listing-form-card" ${edit?'data-can-edit':'data-can-submit'} hidden>
+  <h2>${edit?'Update an existing listing':'Submit a project, company or organization'}</h2>
+  <p>${edit?'Describe the changes to this existing listing. Verification and approval state stay unchanged.':'Submissions are reviewed before they can become directory entries.'}</p>
+  <p>Submission details, review rationale and release proposals are stored in our public GitHub repository. Do not include private information. Your sign-in email is not published.</p>
+  <form id="listing-form" method="post" data-mode="${edit?'edit':'submit'}">${controls}<label>Lead category<select name="lead_category" required><option value="">Select a category</option>${CATEGORIES.map(c=>`<option>${escapeHtml(c)}</option>`).join('')}</select></label>
+  ${edit?'<label>Why is this update needed?<textarea name="reason" required minlength="10" maxlength="1000"></textarea></label>':''}
+  <button type="submit">${edit?'Propose update':'Submit for review'}</button></form></section>
+  ${edit?'':'<section class="card" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>'}
+  <p data-signed-out>Sign in with email or Ethereum to continue.</p>`;
+  return pageShell({title:edit?'Update listing':'Submit a listing',subtitle:'CryptoDirectory',body});
 }
 
 function needsUpdatePage(projects) {
@@ -563,7 +556,7 @@ async function main() {
     const fullPath = path.join(contentDir, file);
     const raw = await fs.readFile(fullPath, 'utf8');
     const parsed = parseFrontMatter(file, raw);
-    projects.push(parsed);
+    projects.push({...parsed,id:file});
   }
 
   projects.sort((a, b) => a.name.localeCompare(b.name));
@@ -576,6 +569,10 @@ async function main() {
   await fs.writeFile(path.join(siteDir, 'review.html'), reviewPage(projects));
   await fs.writeFile(path.join(siteDir, 'needs-update.html'), needsUpdatePage(projects));
   await fs.writeFile(path.join(siteDir, 'process-status.html'), processStatusPage(processStatuses));
+  await fs.writeFile(path.join(siteDir,'submit.html'),listingFormPage(false));
+  await fs.writeFile(path.join(siteDir,'edit.html'),listingFormPage(true));
+  await fs.writeFile(path.join(siteDir,'sign-in.html'),pageShell({title:'CryptoDirectory',subtitle:'Sign in with email or Ethereum',body:'<section class="card"><p>Opening the shared Bittrees sign-in…</p><a href="https://roles.bittrees.org/sign-in?app=crypto-directory">Continue to sign-in</a></section>'}));
+  await fs.copyFile(path.join(root,'web/directory-client.js'),path.join(siteDir,'assets/directory-client.js'));
 
   for (const category of categories) {
     const catProjects = projects.filter((p) => p.lead_category === category);

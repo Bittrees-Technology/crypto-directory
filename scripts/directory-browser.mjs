@@ -1,0 +1,64 @@
+import {createServer} from 'node:http';
+import {readFile,mkdir} from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {chromium} from '@playwright/test';
+
+// Synthetic browser acceptance. This does not claim live identities, grants,
+// GitHub writes, email delivery or ENS transaction approval.
+const root=path.resolve('site');
+const server=createServer(async(req,res)=>{try{const u=new URL(req.url,'http://localhost'),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep))throw Error('Path rejected');const content=await readFile(file);res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html');res.end(content);}catch{res.statusCode=404;res.end('Not found');}});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const origin='http://127.0.0.1:'+server.address().port;
+const browser=await chromium.launch({headless:true});
+const errors=[],checks=[];
+const base={name:'Browser Fixture Project',lead_category:'Infrastructure',tags:['Infrastructure'],ecosystem:['Ethereum'],description:'A synthetic onchain project used only for local browser acceptance.',primary_url:'https://fixture.example.org',product_url:'https://fixture.example.org/app',founded:'2024',hq:'Metaverse',token:'n/a',twitter:'n/a'};
+async function scenario(role,run){
+  const context=await browser.newContext({viewport:{width:1360,height:900}}),page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
+  const staff=['admin','editor','reviewer'].includes(role),session={identity:role==='admin'?'0x'+'1'.repeat(40):'fixture@example.org',staff,admin:role==='admin',editor:role==='editor',reviewer:role==='reviewer',canEdit:['admin','editor'].includes(role),canReview:['admin','reviewer'].includes(role),canSubmit:['admin','submitter'].includes(role),csrf:'fixture-csrf',storageConfigured:true};
+  const records=[{id:'11111111-1111-4111-8111-111111111111',entry:{...base,verification_status:'pending_audit'},status:'pending',revision:1,history:[]}];let writes=[];
+  await page.route('**/api/**',async route=>{
+    const u=new URL(route.request().url()),endpoint=u.pathname.split('/').pop();let data={},status=200;
+    if(endpoint==='session'){if(role==='anonymous'){status=401;data={error:'Sign in with email or Ethereum to continue.'};}else data=session;}
+    else if(endpoint==='status')data={configured:true,action:null};
+    else if(endpoint==='project')data={id:'existing.md',sha:'a'.repeat(40),entry:{...base,verification_status:'verified'}};
+    else if(endpoint==='submissions')data={revision:1,submissions:records};
+    else if(['submit','edit','review'].includes(endpoint)){const value=route.request().postDataJSON();writes.push({endpoint,value});if(endpoint==='review')records[0].status=value.decision==='accept'?'accepted':'rejected';data=endpoint==='submit'?{id:value.operationId,status:'pending'}:{status:endpoint==='review'&&value.decision==='reject'?'rejected':'release-pending',proposal:{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}};}
+    else data={ok:true};
+    await route.fulfill({status,json:data});
+  });
+  try{await run({context,page,session,writes});checks.push(role);}finally{await context.close();}
+}
+try{
+  await scenario('anonymous',async({page})=>{
+    await page.goto(origin+'/');await page.getByText('Sign in with email or Ethereum to continue.',{exact:true}).waitFor();
+    assert.equal(await page.locator('.site-nav').isVisible(),false);assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);assert(await page.locator('table').isVisible());
+    await page.evaluate(()=>localStorage.setItem('role','superadmin'));await page.reload();await page.locator('[data-login-link]').waitFor();assert.equal(await page.locator('.site-nav').isVisible(),false);
+    await page.goto(origin+'/submit.html');assert.equal(await page.locator('#listing-form').isVisible(),false);
+  });
+  await scenario('submitter',async({page,writes})=>{
+    await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});assert.equal(await page.locator('.site-nav').isVisible(),false);
+    for(const [key,value] of Object.entries(base)){const field=page.locator('[name="'+key+'"]');if(key==='lead_category')await field.selectOption(value);else await field.fill(Array.isArray(value)?value.join(', '):value);}
+    await page.getByRole('button',{name:'Submit for review',exact:true}).click();await page.getByText('Submission received. It is awaiting an independent reviewer.',{exact:true}).waitFor();
+    assert.equal(writes.length,1);assert.equal(writes[0].endpoint,'submit');assert.equal(writes[0].value.entry.name,base.name);
+    await page.setViewportSize({width:390,height:844});const box=await page.locator('.listing-form-card').boundingBox();assert(box.x>=0&&box.x+box.width<=390);
+  });
+  await scenario('editor',async({page,writes})=>{
+    await page.goto(origin+'/');await page.locator('.site-nav').waitFor({state:'visible'});assert.equal(await page.locator('.site-nav a').count(),4);assert(await page.locator('[data-edit-entry]').first().isVisible());
+    await page.locator('#search').fill('aave');await page.locator('[data-edit-entry]').first().waitFor({state:'visible'});
+    await page.goto(origin+'/edit.html?id=existing.md');await page.locator('[name="name"]').waitFor({state:'visible'});assert.equal(await page.locator('[name="name"]').inputValue(),base.name);
+    await page.locator('[name="description"]').fill('Updated synthetic details of this existing project.');await page.locator('[name="reason"]').fill('Official fixture details have changed.');await page.getByRole('button',{name:'Propose update',exact:true}).click();await page.locator('#directory-result').waitFor({state:'visible'});
+    assert.equal(writes[0].endpoint,'edit');assert.equal('verification_status' in writes[0].value.entry,false);
+    await page.goto(origin+'/review.html');await page.locator('[data-review-unavailable]').waitFor({state:'visible'});assert.equal(await page.locator('#directory-review').isVisible(),false);
+  });
+  await scenario('reviewer',async({page,writes})=>{
+    await page.goto(origin+'/review.html');await page.getByRole('button',{name:'Accept for release review',exact:true}).waitFor();assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
+    await page.getByLabel('Review rationale').fill('Reviewed official website and live onchain product.');await page.getByRole('button',{name:'Accept for release review',exact:true}).click();await page.getByText('No new submissions are waiting for review.',{exact:true}).waitFor();
+    assert.equal(writes[0].endpoint,'review');assert.equal(writes[0].value.decision,'accept');assert.equal('entry' in writes[0].value,false);
+  });
+  await scenario('admin',async({page})=>{
+    await page.goto(origin+'/');await page.locator('.site-nav').waitFor({state:'visible'});assert(await page.locator('[data-can-submit]').isVisible());assert(await page.locator('[data-edit-entry]').first().isVisible());
+    if(process.env.DIRECTORY_SCREENSHOT_DIR){await mkdir(process.env.DIRECTORY_SCREENSHOT_DIR,{recursive:true});await page.screenshot({path:path.join(process.env.DIRECTORY_SCREENSHOT_DIR,'staff-navigation.png')});}
+  });
+  assert.deepEqual(errors,[]);console.log(JSON.stringify({syntheticBrowserChecks:checks,pageErrors:errors}));
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

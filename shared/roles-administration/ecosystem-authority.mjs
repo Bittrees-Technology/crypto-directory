@@ -18,7 +18,7 @@ export const ecosystemSources={
  ai:{host:'ai.bittrees.org',roles:['operations-viewer']},wallet:{host:'wallet.bittrees.org',roles:['operations-viewer']},chat:{host:'chat.bittrees.org',roles:['operations-viewer']},roles:{host:'roles.bittrees.org',roles:['directory-viewer']},
  agent:{host:'agent.bittrees.org',roles:['operations-viewer']},verse:{host:'verse.bittrees.org',roles:['operations-viewer']},
  bounties:{host:'bounties.bittrees.org',roles:['moderator']},
- 'bittrees-org':{host:'bittrees.org',roles:[]},'crypto-directory':{host:'cd.bittrees.org',roles:[]},
+ 'bittrees-org':{host:'bittrees.org',roles:[]},'crypto-directory':{host:'cd.bittrees.org',roles:['editor','reviewer']},
  'id-agent-control-center':{host:'idacc.bittrees.org',roles:[]},nftfactory:{host:'nftfactory.org',roles:[]},tcp:{host:'tcp.bittrees.org',roles:[]},
  index:{host:'index.bittrees.org',roles:[]},calendar:{host:'calendar.bittrees.org',roles:[]},spacetrader:{host:'captain.bittrees.org',roles:[]},
  'bbrf-pt':{host:'bbrf-pt.bittrees.org',roles:[]},ecrypt:{host:'ecrypt.bittrees.org',roles:[]},cryptoalegre:{host:'ca.bittrees.org',roles:[]},

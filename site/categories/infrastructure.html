@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Category: Infrastructure</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Infrastructure</h1>
       <p>Sorted by lead category</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">131 entries in <strong>Infrastructure</strong>. <a href="../index.html">Back to index</a></section>
 <table>
   <thead>
@@ -41,7 +48,7 @@
     </tr>
   </thead>
   <tbody><tr>
-<td><strong>0G Labs</strong><br><small>Infrastructure</small></td>
+<td><strong>0G Labs</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=0g-labs.md">Edit listing</a></td>
 <td>Modular AI and data availability infrastructure stack.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://0g.ai" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data Availability</span></td>
@@ -52,7 +59,7 @@
 <td><a href="https://x.com/0G_labs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Aethir</strong><br><small>Infrastructure</small></td>
+<td><strong>Aethir</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=aethir.md">Edit listing</a></td>
 <td>Decentralized cloud GPU infrastructure and streaming stack.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://aethir.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://aethir.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Compute</span></td>
@@ -63,7 +70,7 @@
 <td><a href="https://x.com/AethirCloud" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Akash Network</strong><br><small>Infrastructure</small></td>
+<td><strong>Akash Network</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=akash-network.md">Edit listing</a></td>
 <td>Decentralized cloud compute marketplace.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://akash.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Compute</span></td>
@@ -74,7 +81,7 @@
 <td><a href="https://x.com/akashnet_" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Alchemy</strong><br><small>Infrastructure</small></td>
+<td><strong>Alchemy</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=alchemy.md">Edit listing</a></td>
 <td>Developer platform for blockchain APIs, node services, and app growth tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.alchemy.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -85,7 +92,7 @@
 <td><a href="https://x.com/Alchemy" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Aleo</strong><br><small>Infrastructure</small></td>
+<td><strong>Aleo</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=aleo.md">Edit listing</a></td>
 <td>Privacy-preserving blockchain platform and developer tools.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://aleo.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://developer.aleo.org" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Privacy</span></td>
@@ -96,7 +103,7 @@
 <td><a href="https://x.com/AleoHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Aleph.im</strong><br><small>Infrastructure</small></td>
+<td><strong>Aleph.im</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=aleph-im.md">Edit listing</a></td>
 <td>Decentralized cloud for compute, storage, and indexing.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://aleph.im" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://aleph.im/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Compute</span></td>
@@ -107,7 +114,7 @@
 <td><a href="https://x.com/aleph_im" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Allnodes</strong><br><small>Infrastructure</small></td>
+<td><strong>Allnodes</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=allnodes.md">Edit listing</a></td>
 <td>Node hosting and validator services platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.allnodes.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.allnodes.com/hosting" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -118,7 +125,7 @@
 <td><a href="https://x.com/Allnodes" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>AltLayer</strong><br><small>Infrastructure</small></td>
+<td><strong>AltLayer</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=altlayer.md">Edit listing</a></td>
 <td>Rollup-as-a-service and restaked rollup infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.altlayer.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Layer 1 / Layer 2</span></td>
@@ -129,7 +136,7 @@
 <td><a href="https://x.com/alt_layer" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Amboss</strong><br><small>Infrastructure</small></td>
+<td><strong>Amboss</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=amboss.md">Edit listing</a></td>
 <td>Lightning Network analytics, liquidity, and routing marketplace platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://amboss.space" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://amboss.space/magma" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Bitcoin</span></td>
@@ -140,7 +147,7 @@
 <td><a href="https://x.com/ambosstech" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ankr</strong><br><small>Infrastructure</small></td>
+<td><strong>Ankr</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ankr.md">Edit listing</a></td>
 <td>Web3 infrastructure provider for RPC, staking, and chain services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.ankr.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.ankr.com/rpc" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -151,7 +158,7 @@
 <td><a href="https://x.com/ankr" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ankr AppChain</strong><br><small>Infrastructure</small></td>
+<td><strong>Ankr AppChain</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ankr-appchain.md">Edit listing</a></td>
 <td>Appchain and rollup tooling by Ankr.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.ankr.com/appchains" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Layer 1 / Layer 2</span></td>
@@ -162,7 +169,7 @@
 <td><a href="https://x.com/ankr" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Anoma</strong><br><small>Infrastructure</small></td>
+<td><strong>Anoma</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=anoma.md">Edit listing</a></td>
 <td>Intent-centric architecture for decentralized applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://anoma.net" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://anoma.net/research" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Privacy</span></td>
@@ -173,7 +180,7 @@
 <td><a href="https://x.com/anoma" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>API3</strong><br><small>Infrastructure</small></td>
+<td><strong>API3</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=api3.md">Edit listing</a></td>
 <td>First-party oracle protocol and API data marketplace.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://api3.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.api3.org" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -184,7 +191,7 @@
 <td><a href="https://x.com/API3DAO" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Arweave</strong><br><small>Infrastructure</small></td>
+<td><strong>Arweave</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=arweave.md">Edit listing</a></td>
 <td>Permanent decentralized storage network and ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.arweave.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.arweave.org/ecosystem" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -195,7 +202,7 @@
 <td><a href="https://x.com/arweaveeco" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Automata</strong><br><small>Infrastructure</small></td>
+<td><strong>Automata</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=automata.md">Edit listing</a></td>
 <td>Privacy middleware and confidential computing infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.ata.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Privacy</span></td>
@@ -206,7 +213,7 @@
 <td><a href="https://x.com/AutomataNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Avail</strong><br><small>Infrastructure</small></td>
+<td><strong>Avail</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=avail.md">Edit listing</a></td>
 <td>Data availability and modular blockchain infrastructure stack.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.availproject.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.availproject.org/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Layer 1 / Layer 2</span></td>
@@ -217,7 +224,7 @@
 <td><a href="https://x.com/AvailProject" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Axelar</strong><br><small>Infrastructure</small></td>
+<td><strong>Axelar</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=axelar.md">Edit listing</a></td>
 <td>Interchain network and tooling for cross-chain messaging and connectivity.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://axelar.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://axelar.network/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -228,7 +235,7 @@
 <td><a href="https://x.com/axelar" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Band Protocol</strong><br><small>Infrastructure</small></td>
+<td><strong>Band Protocol</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=band-protocol.md">Edit listing</a></td>
 <td>Cross-chain oracle network for decentralized apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bandprotocol.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.bandchain.org" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -239,7 +246,7 @@
 <td><a href="https://x.com/BandProtocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Biconomy</strong><br><small>Infrastructure</small></td>
+<td><strong>Biconomy</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=biconomy.md">Edit listing</a></td>
 <td>Transaction relaying and account abstraction infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.biconomy.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.biconomy.io/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -250,7 +257,7 @@
 <td><a href="https://x.com/biconomy" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Blast API</strong><br><small>Infrastructure</small></td>
+<td><strong>Blast API</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blast-api.md">Edit listing</a></td>
 <td>Managed blockchain node and API platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://blastapi.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://blastapi.io/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -261,7 +268,7 @@
 <td><a href="https://x.com/blastapi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Blockdaemon</strong><br><small>Infrastructure</small></td>
+<td><strong>Blockdaemon</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blockdaemon.md">Edit listing</a></td>
 <td>Institutional infrastructure provider for staking, node operations, and blockchain connectivity.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.blockdaemon.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.blockdaemon.com/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -272,7 +279,7 @@
 <td><a href="https://x.com/BlockdaemonHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Blocknative</strong><br><small>Infrastructure</small></td>
+<td><strong>Blocknative</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blocknative.md">Edit listing</a></td>
 <td>Real-time blockchain data and transaction monitoring infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.blocknative.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -283,7 +290,7 @@
 <td><a href="https://x.com/blocknative" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BlockPI</strong><br><small>Infrastructure</small></td>
+<td><strong>BlockPI</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blockpi.md">Edit listing</a></td>
 <td>Decentralized RPC and API marketplace for developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://blockpi.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -294,7 +301,7 @@
 <td><a href="https://x.com/RealBlockPI" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Blockstream</strong><br><small>Infrastructure</small></td>
+<td><strong>Blockstream</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blockstream.md">Edit listing</a></td>
 <td>Infrastructure company focused on Bitcoin scaling, custody, and sidechain technologies.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://blockstream.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://blockstream.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Bitcoin</span></td>
@@ -305,7 +312,7 @@
 <td><a href="https://x.com/Blockstream" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BloXroute</strong><br><small>Infrastructure</small></td>
+<td><strong>BloXroute</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bloxroute.md">Edit listing</a></td>
 <td>High-performance blockchain connectivity and transaction propagation network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bloxroute.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -316,7 +323,7 @@
 <td><a href="https://x.com/bloXrouteLabs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bware Labs</strong><br><small>Infrastructure</small></td>
+<td><strong>Bware Labs</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bware-labs.md">Edit listing</a></td>
 <td>Blockchain API and node provider for decentralized applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bwarelabs.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -327,7 +334,7 @@
 <td><a href="https://x.com/BwareLabs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Caldera</strong><br><small>Infrastructure</small></td>
+<td><strong>Caldera</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=caldera.md">Edit listing</a></td>
 <td>Rollup platform for launching app-specific chains.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.caldera.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.caldera.xyz/product" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -338,7 +345,7 @@
 <td><a href="https://x.com/Calderaxyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Calimero</strong><br><small>Infrastructure</small></td>
+<td><strong>Calimero</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=calimero.md">Edit listing</a></td>
 <td>Private shard and app-specific infrastructure framework.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://calimero.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Privacy</span></td>
@@ -349,7 +356,7 @@
 <td>n/a</td>
 </tr>
 <tr>
-<td><strong>Cartesi</strong><br><small>Infrastructure</small></td>
+<td><strong>Cartesi</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cartesi.md">Edit listing</a></td>
 <td>Application-specific rollup framework with Linux runtime.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://cartesi.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.cartesi.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -360,7 +367,7 @@
 <td><a href="https://x.com/cartesiproject" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Celer Network</strong><br><small>Infrastructure</small></td>
+<td><strong>Celer Network</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=celer-network.md">Edit listing</a></td>
 <td>Inter-chain messaging and bridging infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.celer.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.celer.network/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -371,7 +378,7 @@
 <td><a href="https://x.com/CelerNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ceramic</strong><br><small>Infrastructure</small></td>
+<td><strong>Ceramic</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ceramic.md">Edit listing</a></td>
 <td>Decentralized data network for user-owned application data.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ceramic.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://developers.ceramic.network" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data</span></td>
@@ -382,7 +389,7 @@
 <td><a href="https://x.com/ceramicnetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Chainbase</strong><br><small>Infrastructure</small></td>
+<td><strong>Chainbase</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainbase.md">Edit listing</a></td>
 <td>Data infrastructure platform for blockchain indexing and APIs.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chainbase.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://chainbase.com/product" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data &amp; Analytics</span></td>
@@ -393,7 +400,7 @@
 <td><a href="https://x.com/ChainbaseHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Chainflip</strong><br><small>Infrastructure</small></td>
+<td><strong>Chainflip</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainflip.md">Edit listing</a></td>
 <td>Cross-chain AMM protocol for native asset swaps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chainflip.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -404,7 +411,7 @@
 <td><a href="https://x.com/chainflip" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Chainlink Labs</strong><br><small>Infrastructure</small></td>
+<td><strong>Chainlink Labs</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainlink-labs.md">Edit listing</a></td>
 <td>Oracle network and tooling for bringing external data and cross-chain messaging into smart contracts.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chain.link" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -415,7 +422,7 @@
 <td><a href="https://x.com/chainlink" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Chainnodes</strong><br><small>Infrastructure</small></td>
+<td><strong>Chainnodes</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainnodes.md">Edit listing</a></td>
 <td>Node infrastructure provider for blockchain developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.chainnodes.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.chainnodes.org/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -426,7 +433,7 @@
 <td><a href="https://x.com/chainnodes" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ChainSafe</strong><br><small>Infrastructure</small></td>
+<td><strong>ChainSafe</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainsafe.md">Edit listing</a></td>
 <td>Blockchain R&amp;D and protocol engineering company.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chainsafe.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -437,7 +444,7 @@
 <td><a href="https://x.com/chainsafeth" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Chainstack</strong><br><small>Infrastructure</small></td>
+<td><strong>Chainstack</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainstack.md">Edit listing</a></td>
 <td>Managed blockchain node and API infrastructure for builders and enterprises.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chainstack.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://chainstack.com/build-better" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -448,7 +455,7 @@
 <td><a href="https://x.com/chainstackhq" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ChainUp</strong><br><small>Infrastructure</small></td>
+<td><strong>ChainUp</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chainup.md">Edit listing</a></td>
 <td>Digital asset infrastructure for exchanges and custodians.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.chainup.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.chainup.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Custody</span></td>
@@ -459,7 +466,7 @@
 <td><a href="https://x.com/ChainUpOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Chorus One</strong><br><small>Infrastructure</small></td>
+<td><strong>Chorus One</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chorus-one.md">Edit listing</a></td>
 <td>Institutional staking and validator operations company.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chorus.one" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -470,7 +477,7 @@
 <td><a href="https://x.com/ChorusOne" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Chronicle</strong><br><small>Infrastructure</small></td>
+<td><strong>Chronicle</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=chronicle.md">Edit listing</a></td>
 <td>Oracle infrastructure focused on secure and transparent data feeds.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://chroniclelabs.org" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -481,7 +488,7 @@
 <td><a href="https://x.com/ChronicleLabs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ComposeDB</strong><br><small>Infrastructure</small></td>
+<td><strong>ComposeDB</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=composedb.md">Edit listing</a></td>
 <td>Composable decentralized data models in Ceramic ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://developers.ceramic.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://developers.ceramic.network/docs/composedb" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data</span></td>
@@ -492,7 +499,7 @@
 <td><a href="https://x.com/ceramicnetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Conduit</strong><br><small>Infrastructure</small></td>
+<td><strong>Conduit</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=conduit.md">Edit listing</a></td>
 <td>Developer platform for deploying and managing rollups.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://conduit.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://conduit.xyz/product" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -503,7 +510,7 @@
 <td><a href="https://x.com/conduitxyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Connext</strong><br><small>Infrastructure</small></td>
+<td><strong>Connext</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=connext.md">Edit listing</a></td>
 <td>Interoperability protocol for cross-chain messaging and value transfer.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.connext.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.connext.network" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -514,7 +521,7 @@
 <td><a href="https://x.com/connextnetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>deBridge</strong><br><small>Infrastructure</small></td>
+<td><strong>deBridge</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=debridge.md">Edit listing</a></td>
 <td>Cross-chain interoperability and messaging infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://debridge.finance" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://app.debridge.finance" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -525,7 +532,7 @@
 <td><a href="https://x.com/deBridgeFinance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>DIA</strong><br><small>Infrastructure</small></td>
+<td><strong>DIA</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=dia.md">Edit listing</a></td>
 <td>Open-source oracle and data provider for web3 applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.diadata.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.diadata.org/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -536,7 +543,7 @@
 <td><a href="https://x.com/DIADATA_org" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>dRPC</strong><br><small>Infrastructure</small></td>
+<td><strong>dRPC</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=drpc.md">Edit listing</a></td>
 <td>Decentralized RPC marketplace and connectivity layer.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://drpc.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://drpc.org/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -547,7 +554,7 @@
 <td><a href="https://x.com/drpcorg" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>EigenDA</strong><br><small>Infrastructure</small></td>
+<td><strong>EigenDA</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=eigenda.md">Edit listing</a></td>
 <td>Data availability service for rollups and modular blockchain stacks.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.eigenda.xyz" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data Availability</span></td>
@@ -558,7 +565,7 @@
 <td><a href="https://x.com/eigen_da" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>EigenLayer</strong><br><small>Infrastructure</small></td>
+<td><strong>EigenLayer</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=eigenlayer.md">Edit listing</a></td>
 <td>Restaking marketplace for cryptoeconomic security and middleware services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.eigenlayer.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://app.eigenlayer.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Restaking</span></td>
@@ -569,7 +576,7 @@
 <td><a href="https://x.com/eigenlayer" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Envio</strong><br><small>Infrastructure</small></td>
+<td><strong>Envio</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=envio.md">Edit listing</a></td>
 <td>Hyperindexing infrastructure for blockchain applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://envio.dev" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.envio.dev" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data &amp; Analytics</span></td>
@@ -580,7 +587,7 @@
 <td><a href="https://x.com/envio_indexer" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Espresso Systems</strong><br><small>Infrastructure</small></td>
+<td><strong>Espresso Systems</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=espresso-systems.md">Edit listing</a></td>
 <td>Coordination and sequencing infrastructure for scalable chains.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.espressosys.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Zero Knowledge</span></td>
@@ -591,7 +598,7 @@
 <td><a href="https://x.com/EspressoSys" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fedimint</strong><br><small>Infrastructure</small></td>
+<td><strong>Fedimint</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fedimint.md">Edit listing</a></td>
 <td>Open-source federated custody and payments protocol.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://fedimint.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://fedimint.org/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Bitcoin</span></td>
@@ -602,7 +609,7 @@
 <td><a href="https://x.com/fedimint" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Figment</strong><br><small>Infrastructure</small></td>
+<td><strong>Figment</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=figment.md">Edit listing</a></td>
 <td>Staking infrastructure and validator services for institutional participants.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://figment.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://figment.io/staking" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -613,7 +620,7 @@
 <td><a href="https://x.com/Figment_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Filecoin Foundation</strong><br><small>Infrastructure</small></td>
+<td><strong>Filecoin Foundation</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=filecoin-foundation.md">Edit listing</a></td>
 <td>Foundation supporting Filecoin and decentralized storage adoption.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://fil.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://fil.org/ecosystem" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -624,7 +631,7 @@
 <td><a href="https://x.com/Filecoin" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Flashbots</strong><br><small>Infrastructure</small></td>
+<td><strong>Flashbots</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=flashbots.md">Edit listing</a></td>
 <td>Research and infrastructure organization focused on MEV and block building.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.flashbots.net" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.flashbots.net" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -635,7 +642,7 @@
 <td><a href="https://x.com/flashbots" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fleek</strong><br><small>Infrastructure</small></td>
+<td><strong>Fleek</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fleek.md">Edit listing</a></td>
 <td>Edge cloud and hosting platform for decentralized apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://fleek.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://fleek.xyz/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -646,7 +653,7 @@
 <td><a href="https://x.com/Fleek" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fluence</strong><br><small>Infrastructure</small></td>
+<td><strong>Fluence</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fluence.md">Edit listing</a></td>
 <td>Decentralized compute protocol for resilient applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://fluence.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://fluence.network/developers" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Compute</span></td>
@@ -657,7 +664,7 @@
 <td><a href="https://x.com/fluence_project" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fuel Labs</strong><br><small>Infrastructure</small></td>
+<td><strong>Fuel Labs</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fuel-labs.md">Edit listing</a></td>
 <td>Modular execution layer and tooling for high-throughput apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://fuel.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.fuel.network" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Layer 1 / Layer 2</span></td>
@@ -668,7 +675,7 @@
 <td><a href="https://x.com/fuel_network" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Galoy</strong><br><small>Infrastructure</small></td>
+<td><strong>Galoy</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=galoy.md">Edit listing</a></td>
 <td>Open-source Bitcoin banking and payments infrastructure provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://galoy.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://galoy.io/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Payments</span></td>
@@ -679,7 +686,7 @@
 <td><a href="https://x.com/GaloyMoney" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Gelato</strong><br><small>Infrastructure</small></td>
+<td><strong>Gelato</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=gelato.md">Edit listing</a></td>
 <td>Web3 automation and relayer network for recurring tasks and gas abstraction.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://gelato.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.gelato.network" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span><span class="badge">Automation</span></td>
@@ -690,7 +697,7 @@
 <td><a href="https://x.com/GelatoNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>GetBlock</strong><br><small>Infrastructure</small></td>
+<td><strong>GetBlock</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=getblock.md">Edit listing</a></td>
 <td>Node-as-a-service and blockchain API provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://getblock.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://getblock.io/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -701,7 +708,7 @@
 <td><a href="https://x.com/getblockio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Goldsky</strong><br><small>Infrastructure</small></td>
+<td><strong>Goldsky</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=goldsky.md">Edit listing</a></td>
 <td>Real-time indexing and data pipelines for web3 developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://goldsky.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data &amp; Analytics</span></td>
@@ -712,7 +719,7 @@
 <td><a href="https://x.com/goldskyio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Helium</strong><br><small>Infrastructure</small></td>
+<td><strong>Helium</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=helium.md">Edit listing</a></td>
 <td>Decentralized wireless infrastructure network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.helium.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">DePIN</span></td>
@@ -723,7 +730,7 @@
 <td><a href="https://x.com/helium" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Helius</strong><br><small>Infrastructure</small></td>
+<td><strong>Helius</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=helius.md">Edit listing</a></td>
 <td>Solana developer platform for APIs, indexing, and enhanced node services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.helius.dev" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.helius.dev/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -734,7 +741,7 @@
 <td><a href="https://x.com/heliuslabs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hivemapper</strong><br><small>Infrastructure</small></td>
+<td><strong>Hivemapper</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hivemapper.md">Edit listing</a></td>
 <td>Decentralized mapping network and geospatial data marketplace.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hivemapper.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">DePIN</span></td>
@@ -745,7 +752,7 @@
 <td><a href="https://x.com/Hivemapper" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hyperlane</strong><br><small>Infrastructure</small></td>
+<td><strong>Hyperlane</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hyperlane.md">Edit listing</a></td>
 <td>Open interoperability framework for permissionless cross-chain messaging.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.hyperlane.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.hyperlane.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -756,7 +763,7 @@
 <td><a href="https://x.com/hyperlane" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>HyperSDK</strong><br><small>Infrastructure</small></td>
+<td><strong>HyperSDK</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hypersdk.md">Edit listing</a></td>
 <td>Framework and ecosystem for custom high-performance chains.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://docs.avax.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -767,7 +774,7 @@
 <td><a href="https://x.com/avax" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>InfStones</strong><br><small>Infrastructure</small></td>
+<td><strong>InfStones</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=infstones.md">Edit listing</a></td>
 <td>Institutional blockchain infrastructure and staking services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://infstones.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -778,7 +785,7 @@
 <td><a href="https://x.com/InfStones" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Infura</strong><br><small>Infrastructure</small></td>
+<td><strong>Infura</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=infura.md">Edit listing</a></td>
 <td>API and node access platform for Ethereum ecosystem applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.infura.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.infura.io/networks/ethereum" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -789,7 +796,7 @@
 <td><a href="https://x.com/infura_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>io.net</strong><br><small>Infrastructure</small></td>
+<td><strong>io.net</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=io-net.md">Edit listing</a></td>
 <td>Distributed GPU compute network for AI workloads.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://io.net" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Compute</span></td>
@@ -800,7 +807,7 @@
 <td><a href="https://x.com/ionet" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Jito Labs</strong><br><small>Infrastructure</small></td>
+<td><strong>Jito Labs</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=jito-labs.md">Edit listing</a></td>
 <td>Solana infrastructure team building validator, MEV, and staking products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.jito.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.jito.network/stake" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -811,7 +818,7 @@
 <td><a href="https://x.com/jito_sol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Kiln</strong><br><small>Infrastructure</small></td>
+<td><strong>Kiln</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=kiln.md">Edit listing</a></td>
 <td>Enterprise staking and reward infrastructure API platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.kiln.fi" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -822,7 +829,7 @@
 <td><a href="https://x.com/Kiln_finance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Lava Network</strong><br><small>Infrastructure</small></td>
+<td><strong>Lava Network</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lava-network.md">Edit listing</a></td>
 <td>Decentralized RPC protocol and marketplace for blockchain access.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.lavanet.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.lavanet.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -833,7 +840,7 @@
 <td><a href="https://x.com/lavanetxyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>LayerSwap</strong><br><small>Infrastructure</small></td>
+<td><strong>LayerSwap</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=layerswap.md">Edit listing</a></td>
 <td>Cross-chain transfer infrastructure for exchanges and L2s.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.layerswap.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.layerswap.io/app" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -844,7 +851,7 @@
 <td><a href="https://x.com/layerswap" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>LayerZero Labs</strong><br><small>Infrastructure</small></td>
+<td><strong>LayerZero Labs</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=layerzero-labs.md">Edit listing</a></td>
 <td>Omnichain messaging infrastructure for applications across multiple blockchains.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://layerzero.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://layerzero.network/developers" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -855,7 +862,7 @@
 <td><a href="https://x.com/LayerZero_Labs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>LI.FI</strong><br><small>Infrastructure</small></td>
+<td><strong>LI.FI</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=li-fi.md">Edit listing</a></td>
 <td>Aggregation layer for cross-chain swaps and bridges.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://li.fi" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://li.fi/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -866,7 +873,7 @@
 <td><a href="https://x.com/lifiprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Lighthouse</strong><br><small>Infrastructure</small></td>
+<td><strong>Lighthouse</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lighthouse.md">Edit listing</a></td>
 <td>Decentralized perpetual storage for web3 data.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.lighthouse.storage" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.lighthouse.storage" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -877,7 +884,7 @@
 <td>n/a</td>
 </tr>
 <tr>
-<td><strong>Lightning Labs</strong><br><small>Infrastructure</small></td>
+<td><strong>Lightning Labs</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lightning-labs.md">Edit listing</a></td>
 <td>Core Lightning Network infrastructure company building developer protocols and tools.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://lightning.engineering" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://lightning.engineering/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Bitcoin</span></td>
@@ -888,7 +895,7 @@
 <td><a href="https://x.com/lightning" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Litentry</strong><br><small>Infrastructure</small></td>
+<td><strong>Litentry</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=litentry.md">Edit listing</a></td>
 <td>Identity aggregation and credential infrastructure protocol.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.litentry.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Identity</span></td>
@@ -899,7 +906,7 @@
 <td><a href="https://x.com/litentry" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Magic</strong><br><small>Infrastructure</small></td>
+<td><strong>Magic</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=magic.md">Edit listing</a></td>
 <td>Embedded wallet and authentication SDK platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://magic.link" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -910,7 +917,7 @@
 <td><a href="https://x.com/magic_labs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mellow Protocol</strong><br><small>Infrastructure</small></td>
+<td><strong>Mellow Protocol</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mellow-protocol.md">Edit listing</a></td>
 <td>Modular restaking and vault infrastructure layer.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://mellow.finance" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://mellow.finance/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Restaking</span></td>
@@ -921,7 +928,7 @@
 <td><a href="https://x.com/mellowprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>MEV Blocker</strong><br><small>Infrastructure</small></td>
+<td><strong>MEV Blocker</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mev-blocker.md">Edit listing</a></td>
 <td>Transaction routing product aimed at reducing harmful MEV for users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://mevblocker.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://mevblocker.io/#how" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">DeFi</span></td>
@@ -932,7 +939,7 @@
 <td><a href="https://x.com/mevblocker" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mina Foundation</strong><br><small>Infrastructure</small></td>
+<td><strong>Mina Foundation</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mina-foundation.md">Edit listing</a></td>
 <td>Ecosystem steward for lightweight zk-powered Mina protocol.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://mina.foundation" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://minaprotocol.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Zero Knowledge</span></td>
@@ -943,7 +950,7 @@
 <td><a href="https://x.com/minaprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mysterium</strong><br><small>Infrastructure</small></td>
+<td><strong>Mysterium</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mysterium.md">Edit listing</a></td>
 <td>Decentralized VPN and privacy network marketplace.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.mysterium.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Privacy</span></td>
@@ -954,7 +961,7 @@
 <td><a href="https://x.com/MysteriumNet" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nethermind</strong><br><small>Infrastructure</small></td>
+<td><strong>Nethermind</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nethermind.md">Edit listing</a></td>
 <td>Engineering organization building Ethereum clients and tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.nethermind.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -965,7 +972,7 @@
 <td><a href="https://x.com/NethermindEth" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>nft.storage</strong><br><small>Infrastructure</small></td>
+<td><strong>nft.storage</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nft-storage.md">Edit listing</a></td>
 <td>NFT media storage and retrieval tooling.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nft.storage" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -976,7 +983,7 @@
 <td><a href="https://x.com/nft_storage" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nillion</strong><br><small>Infrastructure</small></td>
+<td><strong>Nillion</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nillion.md">Edit listing</a></td>
 <td>Decentralized privacy-preserving computation network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nillion.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://nillion.com/developers" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Privacy</span></td>
@@ -987,7 +994,7 @@
 <td><a href="https://x.com/nillionnetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>NodeReal</strong><br><small>Infrastructure</small></td>
+<td><strong>NodeReal</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nodereal.md">Edit listing</a></td>
 <td>Node and API infrastructure provider for developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nodereal.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -998,7 +1005,7 @@
 <td><a href="https://x.com/Nodereal_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nodle</strong><br><small>Infrastructure</small></td>
+<td><strong>Nodle</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nodle.md">Edit listing</a></td>
 <td>Decentralized network for IoT data and connectivity.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.nodle.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">IoT</span></td>
@@ -1009,7 +1016,7 @@
 <td><a href="https://x.com/NodleNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>NOWNodes</strong><br><small>Infrastructure</small></td>
+<td><strong>NOWNodes</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nownodes.md">Edit listing</a></td>
 <td>Shared and dedicated blockchain node infrastructure provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nownodes.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://nownodes.io/pricing" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1020,7 +1027,7 @@
 <td><a href="https://x.com/NOWNodes" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nym</strong><br><small>Infrastructure</small></td>
+<td><strong>Nym</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nym.md">Edit listing</a></td>
 <td>Privacy infrastructure and mixnet network for metadata protection.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nymtech.net" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Privacy</span></td>
@@ -1031,7 +1038,7 @@
 <td><a href="https://x.com/nymproject" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Obol</strong><br><small>Infrastructure</small></td>
+<td><strong>Obol</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=obol.md">Edit listing</a></td>
 <td>Distributed validator technology for resilient Ethereum staking.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://obol.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://obol.org/learn" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -1042,7 +1049,7 @@
 <td><a href="https://x.com/Obol_Collective" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Orbiter Finance</strong><br><small>Infrastructure</small></td>
+<td><strong>Orbiter Finance</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=orbiter-finance.md">Edit listing</a></td>
 <td>Bridge and transfer infrastructure for L2 users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.orbiter.finance" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -1053,7 +1060,7 @@
 <td><a href="https://x.com/Orbiter_Finance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>P2P.org</strong><br><small>Infrastructure</small></td>
+<td><strong>P2P.org</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=p2p-org.md">Edit listing</a></td>
 <td>Institutional staking and validator operator for proof-of-stake networks.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://p2p.org" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -1064,7 +1071,7 @@
 <td><a href="https://x.com/p2pvalidator" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Particle Network</strong><br><small>Infrastructure</small></td>
+<td><strong>Particle Network</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=particle-network.md">Edit listing</a></td>
 <td>Chain abstraction and universal accounts infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://particle.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1075,7 +1082,7 @@
 <td><a href="https://x.com/ParticleNtwrk" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Pimlico</strong><br><small>Infrastructure</small></td>
+<td><strong>Pimlico</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=pimlico.md">Edit listing</a></td>
 <td>ERC-4337 infrastructure and bundler services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.pimlico.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.pimlico.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1086,7 +1093,7 @@
 <td><a href="https://x.com/pimlicoHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Pinata</strong><br><small>Infrastructure</small></td>
+<td><strong>Pinata</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=pinata.md">Edit listing</a></td>
 <td>IPFS media and file infrastructure for web3 builders.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.pinata.cloud" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.pinata.cloud/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -1097,7 +1104,7 @@
 <td><a href="https://x.com/pinatacloud" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Pocket Network</strong><br><small>Infrastructure</small></td>
+<td><strong>Pocket Network</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=pocket-network.md">Edit listing</a></td>
 <td>Decentralized RPC infrastructure for blockchain applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.pokt.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1108,7 +1115,7 @@
 <td><a href="https://x.com/POKTnetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Portal Bridge</strong><br><small>Infrastructure</small></td>
+<td><strong>Portal Bridge</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=portal-bridge.md">Edit listing</a></td>
 <td>Cross-chain bridge interface built on Wormhole.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://portalbridge.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -1119,7 +1126,7 @@
 <td><a href="https://x.com/wormhole" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Pyth Network</strong><br><small>Infrastructure</small></td>
+<td><strong>Pyth Network</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=pyth-network.md">Edit listing</a></td>
 <td>Oracle network delivering real-time market data onchain.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.pyth.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -1130,7 +1137,7 @@
 <td><a href="https://x.com/PythNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>QuickNode</strong><br><small>Infrastructure</small></td>
+<td><strong>QuickNode</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=quiknode.md">Edit listing</a></td>
 <td>Managed blockchain node platform and APIs for developers and enterprise teams.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.quicknode.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1141,7 +1148,7 @@
 <td><a href="https://x.com/QuickNode" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>QuickSwap</strong><br><small>Infrastructure</small></td>
+<td><strong>QuickSwap</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=quickswap.md">Edit listing</a></td>
 <td>DEX and liquidity infrastructure hub in Polygon ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://quickswap.exchange" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://quickswap.exchange/#/swap" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">DeFi</span></td>
@@ -1152,7 +1159,7 @@
 <td><a href="https://x.com/QuickswapDEX" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>RedStone</strong><br><small>Infrastructure</small></td>
+<td><strong>RedStone</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=redstone.md">Edit listing</a></td>
 <td>Oracle infrastructure with modular data delivery models.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://redstone.finance" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://redstone.finance/developers" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -1163,7 +1170,7 @@
 <td><a href="https://x.com/redstone_defi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Render Network</strong><br><small>Infrastructure</small></td>
+<td><strong>Render Network</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=render-network.md">Edit listing</a></td>
 <td>Decentralized GPU rendering and compute network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://rendernetwork.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Compute</span></td>
@@ -1174,7 +1181,7 @@
 <td><a href="https://x.com/rendernetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Risc Zero</strong><br><small>Infrastructure</small></td>
+<td><strong>Risc Zero</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=risc-zero.md">Edit listing</a></td>
 <td>Zero-knowledge virtual machine and proving infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.risczero.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://dev.risczero.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Zero Knowledge</span></td>
@@ -1185,7 +1192,7 @@
 <td><a href="https://x.com/risczero" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Router Protocol</strong><br><small>Infrastructure</small></td>
+<td><strong>Router Protocol</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=router-protocol.md">Edit listing</a></td>
 <td>Interoperability infrastructure for cross-chain messaging and intents.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://routerprotocol.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -1196,7 +1203,7 @@
 <td><a href="https://x.com/routerprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Seda</strong><br><small>Infrastructure</small></td>
+<td><strong>Seda</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=seda.md">Edit listing</a></td>
 <td>Programmable oracle and data query network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.seda.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.seda.xyz/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -1207,7 +1214,7 @@
 <td><a href="https://x.com/sedanetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Sia Foundation</strong><br><small>Infrastructure</small></td>
+<td><strong>Sia Foundation</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=sia-foundation.md">Edit listing</a></td>
 <td>Organization stewarding Sia decentralized storage ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://sia.tech" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -1218,7 +1225,7 @@
 <td><a href="https://x.com/Sia__Foundation" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Skip</strong><br><small>Infrastructure</small></td>
+<td><strong>Skip</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=skip.md">Edit listing</a></td>
 <td>Infrastructure team focused on transaction flow and MEV tooling in Cosmos.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://skip.money" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://skip.money/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1229,7 +1236,7 @@
 <td><a href="https://x.com/skipprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Socket</strong><br><small>Infrastructure</small></td>
+<td><strong>Socket</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=socket.md">Edit listing</a></td>
 <td>Developer and user infrastructure for cross-chain actions.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://socket.tech" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.socket.tech" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -1240,7 +1247,7 @@
 <td><a href="https://x.com/socketprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Space and Time</strong><br><small>Infrastructure</small></td>
+<td><strong>Space and Time</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=space-and-time.md">Edit listing</a></td>
 <td>Decentralized data warehouse and query infrastructure for web3.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.spaceandtime.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data &amp; Analytics</span></td>
@@ -1251,7 +1258,7 @@
 <td><a href="https://x.com/SpaceandTimeDB" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Spheron</strong><br><small>Infrastructure</small></td>
+<td><strong>Spheron</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=spheron.md">Edit listing</a></td>
 <td>Decentralized compute and hosting platform for web3 developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://spheron.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://spheron.network/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1262,7 +1269,7 @@
 <td><a href="https://x.com/SpheronFDN" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Stackup</strong><br><small>Infrastructure</small></td>
+<td><strong>Stackup</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=stackup.md">Edit listing</a></td>
 <td>Account abstraction and bundler infrastructure for developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.stackup.fi" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1273,7 +1280,7 @@
 <td><a href="https://x.com/stackupdotsh" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Stakin</strong><br><small>Infrastructure</small></td>
+<td><strong>Stakin</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=stakin.md">Edit listing</a></td>
 <td>Validator and staking infrastructure provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://stakin.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Staking</span></td>
@@ -1284,7 +1291,7 @@
 <td><a href="https://x.com/stakingfac" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Storj</strong><br><small>Infrastructure</small></td>
+<td><strong>Storj</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=storj.md">Edit listing</a></td>
 <td>Decentralized cloud object storage platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.storj.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -1295,7 +1302,7 @@
 <td><a href="https://x.com/storj" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>SubQuery</strong><br><small>Infrastructure</small></td>
+<td><strong>SubQuery</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=subquery.md">Edit listing</a></td>
 <td>Data indexing framework for multichain applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://subquery.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://academy.subquery.network" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data &amp; Analytics</span></td>
@@ -1306,7 +1313,7 @@
 <td><a href="https://x.com/subquerynetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Subsquid</strong><br><small>Infrastructure</small></td>
+<td><strong>Subsquid</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=subsquid.md">Edit listing</a></td>
 <td>Open data indexing stack for web3 developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://subsquid.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.subsquid.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data &amp; Analytics</span></td>
@@ -1317,7 +1324,7 @@
 <td><a href="https://x.com/subsquid" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Succinct</strong><br><small>Infrastructure</small></td>
+<td><strong>Succinct</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=succinct.md">Edit listing</a></td>
 <td>ZK proof generation and interoperability infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.succinct.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.succinct.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Zero Knowledge</span></td>
@@ -1328,7 +1335,7 @@
 <td><a href="https://x.com/succinctlabs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Supra</strong><br><small>Infrastructure</small></td>
+<td><strong>Supra</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=supra.md">Edit listing</a></td>
 <td>Oracle and verifiable randomness infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://supra.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://supra.com/developers" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -1339,7 +1346,7 @@
 <td><a href="https://x.com/SUPRA_Labs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Symbiotic</strong><br><small>Infrastructure</small></td>
+<td><strong>Symbiotic</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=symbiotic.md">Edit listing</a></td>
 <td>Shared security and restaking coordination layer.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://symbiotic.fi" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.symbiotic.fi" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Restaking</span></td>
@@ -1350,7 +1357,7 @@
 <td><a href="https://x.com/symbioticfi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Syndicate</strong><br><small>Infrastructure</small></td>
+<td><strong>Syndicate</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=syndicate.md">Edit listing</a></td>
 <td>Developer platform for launching and operating onchain organizations.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://syndicate.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.syndicate.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1361,7 +1368,7 @@
 <td><a href="https://x.com/syndicateio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Tableland</strong><br><small>Infrastructure</small></td>
+<td><strong>Tableland</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=tableland.md">Edit listing</a></td>
 <td>Decentralized SQL database for smart contract applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://tableland.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.tableland.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Data</span></td>
@@ -1372,7 +1379,7 @@
 <td><a href="https://x.com/tableland" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Tatum</strong><br><small>Infrastructure</small></td>
+<td><strong>Tatum</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=tatum.md">Edit listing</a></td>
 <td>Blockchain API platform for rapid product integrations.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://tatum.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.tatum.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1383,7 +1390,7 @@
 <td><a href="https://x.com/tatum_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Tellor</strong><br><small>Infrastructure</small></td>
+<td><strong>Tellor</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=tellor.md">Edit listing</a></td>
 <td>Decentralized oracle protocol for permissionless data feeds.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://tellor.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://tellor.io/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -1394,7 +1401,7 @@
 <td><a href="https://x.com/WeAreTellor" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>UMA</strong><br><small>Infrastructure</small></td>
+<td><strong>UMA</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=uma.md">Edit listing</a></td>
 <td>Optimistic oracle and decentralized financial contract infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://uma.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://uma.xyz/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -1405,7 +1412,7 @@
 <td><a href="https://x.com/UMAprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Union</strong><br><small>Infrastructure</small></td>
+<td><strong>Union</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=union.md">Edit listing</a></td>
 <td>Interoperability layer for trust-minimized cross-chain messaging.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://union.build" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.union.build" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -1416,7 +1423,7 @@
 <td><a href="https://x.com/union_build" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Voltage</strong><br><small>Infrastructure</small></td>
+<td><strong>Voltage</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=voltage.md">Edit listing</a></td>
 <td>Managed Lightning and Bitcoin infrastructure for businesses and developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://voltage.cloud" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Bitcoin</span></td>
@@ -1427,7 +1434,7 @@
 <td><a href="https://x.com/voltage_cloud" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>web3.storage</strong><br><small>Infrastructure</small></td>
+<td><strong>web3.storage</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=web3-storage.md">Edit listing</a></td>
 <td>Developer storage platform for IPFS and Filecoin.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://web3.storage" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://web3.storage/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Storage</span></td>
@@ -1438,7 +1445,7 @@
 <td><a href="https://x.com/web3_storage" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Witnet</strong><br><small>Infrastructure</small></td>
+<td><strong>Witnet</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=witnet.md">Edit listing</a></td>
 <td>Decentralized oracle network and randomness provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://witnet.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.witnet.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Oracles</span></td>
@@ -1449,7 +1456,7 @@
 <td><a href="https://x.com/witnet_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Wormhole Foundation</strong><br><small>Infrastructure</small></td>
+<td><strong>Wormhole Foundation</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=wormhole-foundation.md">Edit listing</a></td>
 <td>Cross-chain interoperability ecosystem for messaging and asset movement.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://wormhole.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Cross-chain</span></td>
@@ -1460,7 +1467,7 @@
 <td><a href="https://x.com/wormhole" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Zeeve</strong><br><small>Infrastructure</small></td>
+<td><strong>Zeeve</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zeeve.md">Edit listing</a></td>
 <td>Managed infrastructure for nodes, rollups, and blockchain networks.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.zeeve.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.zeeve.io/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1471,7 +1478,7 @@
 <td><a href="https://x.com/zeeveio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ZeroDev</strong><br><small>Infrastructure</small></td>
+<td><strong>ZeroDev</strong><br><small>Infrastructure</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zerodev.md">Edit listing</a></td>
 <td>Smart account infrastructure and developer SDKs.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://zerodev.app" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.zerodev.app" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Infrastructure</span><span class="badge">Developer Tools</span></td>
@@ -1484,6 +1491,7 @@
 </table>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="../assets/directory-client.js"></script>
 </body>
 </html>
