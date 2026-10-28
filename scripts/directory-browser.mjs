@@ -48,6 +48,15 @@ try{
     await back.click();await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
     await page.goto(origin+'/categories/wallets.html');assert.equal(await page.getByRole('link',{name:'Back to directory',exact:true}).getAttribute('href'),'../index.html');
     await page.getByRole('link',{name:'Back to directory',exact:true}).click();await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
+    let mirrorApiCalls=0;
+    await page.route('https://cryptodirectory.eth.limo/**',async route=>{
+      const u=new URL(route.request().url());if(u.pathname.startsWith('/api/')){mirrorApiCalls++;return route.fulfill({status:404,json:{}});}
+      const file=path.resolve(root,'.'+u.pathname);assert(file.startsWith(root+path.sep));await route.fulfill({body:await readFile(file),contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html'});
+    });
+    await page.goto('https://cryptodirectory.eth.limo/submit.html');
+    await page.waitForFunction(()=>document.querySelector('[data-login-link]').href.includes('?return_to='));
+    assert.equal(await page.locator('#directory-message').isVisible(),false);assert(await page.getByRole('link',{name:'Back to directory',exact:true}).isVisible());
+    assert.equal(new URL(await page.locator('[data-login-link]').getAttribute('href')).origin,'https://cd.bittrees.org');assert.equal(mirrorApiCalls,0);
   });
   await scenario('submitter',async({page,writes})=>{
     await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});assert.equal(await page.locator('.site-nav').isVisible(),false);

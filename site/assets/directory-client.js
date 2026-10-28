@@ -45,7 +45,7 @@ async function ownSubmissions(){const root=byId('my-submissions');if(!root||!ses
 async function start(){
   clear();
   document.querySelectorAll('[data-login-link]').forEach(link=>{link.href=canonical+'/sign-in?'+new URLSearchParams({return_to:location.pathname+location.search});});
-  if(!local){message('Sign in and manage listings securely at cd.bittrees.org.');return;}
+  if(!local)return;
   if(location.pathname==='/sign-in'||location.pathname==='/sign-in.html'){
     const query=new URLSearchParams(location.search),target=new URL('https://roles.bittrees.org/sign-in');target.searchParams.set('app','crypto-directory');target.searchParams.set('return_to',query.get('return_to')||'/');location.replace(target.href);return;
   }
