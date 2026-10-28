@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHmac,generateKeyPairSync,sign,randomUUID} from 'node:crypto';
 import {createDirectoryService} from '../lib/directory/service.mjs';
-import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,documentBody,readState,signedState,fail} from '../lib/directory/model.mjs';
+import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,documentBody,newProjectId,readState,signedState,fail} from '../lib/directory/model.mjs';
 import {seal} from '../shared/roles-administration/sso/client.mjs';
 import {ecosystemDecisionMessage,ecosystemRequestMessage,verifyEcosystemSignature} from '../shared/roles-administration/ecosystem-authority.mjs';
 
@@ -27,7 +27,7 @@ function fixture(roles=[],identity=wallet){
     async load(){if(state.revokeOnLoad)state.roles=[];return {sha:String(state.value.revision),value:structuredClone(state.value)};},
     async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;return String(next.revision);},
     async duplicate(){return false;},
-    async listing(id){if(id!=='existing.md')throw fail('Not found',404);return {sha:'a'.repeat(40),raw:frontMatter({...listing,verification_status:'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
+    async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:'a'.repeat(40),raw:frontMatter({...listing,verification_status:'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
     async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
     async reconcile(operation){return state.proposals.some(p=>p.operation===operation)?{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}:null;}
   });
@@ -98,6 +98,11 @@ test('role revocation between read and write stops the mutation',async()=>{
   const f=fixture(['role.editor']);f.state.revokeOnLoad=true;
   const response=await f.call('edit',{id:'existing.md',sha:'a'.repeat(40),entry:listing,reason:'Official details have changed.',operationId:randomUUID()});
   assert.equal(response.status,403);assert.equal(f.state.writes,0);assert.equal(f.state.proposals.length,0);
+});
+test('acceptance preflight preserves pending state on an ID collision and supports non-Latin project names',async()=>{
+  const f=fixture(['role.reviewer']),id=randomUUID();f.state.collideId='new-project.md';f.state.value.submissions.push({id,submitter:'other',entry:entry(newEntry),revision:1,status:'pending',history:[]});
+  assert.equal((await f.call('review',{id,revision:1,decision:'accept',reason:'Checked official product evidence.'})).status,409);assert.equal(f.state.value.submissions[0].status,'pending');assert.equal(f.state.writes,0);
+  assert.match(newProjectId('未来'),/^project-[a-f0-9]{16}\.md$/);assert.notEqual(newProjectId('未来'),newProjectId('明日'));
 });
 test('stale, other-project and nonauthoritative role snapshots never grant staff powers',()=>{
   const now=Date.now(),snapshot={authoritative:true,enrolled:true,audience:'cd.bittrees.org',request:{project:'crypto-directory',source:'cd.bittrees.org',subjects:[wallet],authenticatedWallet:wallet},actions:['project.admin','role.editor','role.reviewer'],checkedAt:now,expiresAt:now+5000};
