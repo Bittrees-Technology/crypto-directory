@@ -24,21 +24,23 @@
 <body>
   <main>
     <header class="directory-header">
-      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Developer Tools</h1>
-      <p>Sorted by lead category</p>
-      </div>
+      <a class="directory-brand" href="../index.html" aria-label="CryptoDirectory home"><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
       <div class="directory-account">
-        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
-        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in" title="Sign in with email or Ethereum">Sign in</a>
+        <div data-signed-in hidden class="account-session"><span class="account-details"><span id="directory-identity"></span><small id="directory-role"></small></span><button type="button" id="directory-logout">Sign out</button></div>
       </div>
     </header>
+    <div class="directory-navigation">
     <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
-    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <nav class="submission-nav" data-can-submit hidden><a href="../submit.html">Submit a project</a></nav>
+    </div>
+    <a class="directory-back" href="../index.html"><span aria-hidden="true">←</span>Back to directory</a>
+    <section class="page-heading"><h1>Category: Developer Tools</h1><p>Sorted by lead category</p></section>
     <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">26 entries in <strong>Developer Tools</strong>. <a href="../index.html">Back to index</a></section>
 <table>

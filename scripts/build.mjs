@@ -206,7 +206,7 @@ function siteNav(navPrefix = '') {
   </nav>`;
 }
 
-function pageShell({ title, subtitle, body, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css', navPrefix = '' }) {
+function pageShell({ title, heading = title, subtitle, body, home = false, showSubmissionLink = true, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css', navPrefix = '' }) {
   return `<!doctype html>
 <html lang=\"en\">
 <head>
@@ -222,16 +222,18 @@ function pageShell({ title, subtitle, body, extraHead = '', extraScript = '', st
 <body>
   <main>
     <header class="directory-header">
-      <div><h1><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt="">${escapeHtml(title)}</h1>
-      <p>${escapeHtml(subtitle)}</p>
-      </div>
+      <a class="directory-brand" href="${escapeHtml(navPrefix)}index.html" aria-label="CryptoDirectory home"><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
       <div class="directory-account">
-        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
-        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in" title="Sign in with email or Ethereum">Sign in</a>
+        <div data-signed-in hidden class="account-session"><span class="account-details"><span id="directory-identity"></span><small id="directory-role"></small></span><button type="button" id="directory-logout">Sign out</button></div>
       </div>
     </header>
+    <div class="directory-navigation">
     ${siteNav(navPrefix)}
-    <nav class="submission-nav"><a data-can-submit hidden href="${escapeHtml(navPrefix)}submit.html">Submit a project</a></nav>
+    ${showSubmissionLink?`<nav class="submission-nav" data-can-submit hidden><a href="${escapeHtml(navPrefix)}submit.html">Submit a project</a></nav>`:''}
+    </div>
+    ${home?'':`<a class="directory-back" href="${escapeHtml(navPrefix)}index.html"><span aria-hidden="true">←</span>Back to directory</a>`}
+    <section class="page-heading"><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(subtitle)}</p></section>
     <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     ${body}
     <p class=\"footer\">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
@@ -354,6 +356,8 @@ categoryEl.addEventListener('change', render);
 
   return pageShell({
     title: 'CryptoDirectory',
+    heading: 'Explore the directory',
+    home: true,
     subtitle: 'Active global onchain companies and projects',
     body,
     extraHead: head,
@@ -404,17 +408,17 @@ function reviewPage(projects) {
 
 function listingFormPage(edit) {
   const fields=[['name','Name','text',true],['description','Description','textarea',true],['primary_url','Official website','url',true],['product_url','Product or app URL (or n/a)','text',true],['tags','Tags, separated by commas','text',true],['ecosystem','Networks / ecosystem, separated by commas','text',true],['founded','Founding year (or n/a)','text',false],['hq','Country (Metaverse if unknown)','text',false],['token','Token (or n/a)','text',false],['twitter','X / social URL (or n/a)','text',false]];
-  const controls=fields.map(([name,label,type,required])=>`<label>${label}${type==='textarea'?`<textarea name="${name}" maxlength="500" minlength="20" required></textarea>`:`<input name="${name}" type="${type}" maxlength="700" ${required?'required':''}>`}</label>`).join('');
+  const categoryControl=`<label>Lead category<select name="lead_category" required><option value="">Select a category</option>${CATEGORIES.map(c=>`<option>${escapeHtml(c)}</option>`).join('')}</select></label>`;
+  const controls=fields.map(([name,label,type,required])=>`<label${type==='textarea'?' class="form-field-wide"':''}>${label}${type==='textarea'?`<textarea name="${name}" maxlength="500" minlength="20" required></textarea>`:`<input name="${name}" type="${type}" maxlength="700" ${required?'required':''}>`}</label>${name==='name'?categoryControl:''}`).join('');
   const body=`<section class="card listing-form-card" ${edit?'data-can-edit':'data-can-submit'} hidden>
-  <h2>${edit?'Update an existing listing':'Submit a project, company or organization'}</h2>
-  <p>${edit?'Describe the changes to this existing listing. Verification and approval state stay unchanged.':'Submissions are reviewed before they can become directory entries.'}</p>
-  <p>Submission details, review rationale and release proposals are stored in our public GitHub repository. Do not include private information. Your sign-in email is not published.</p>
-  <form id="listing-form" method="post" data-mode="${edit?'edit':'submit'}">${controls}<label>Lead category<select name="lead_category" required><option value="">Select a category</option>${CATEGORIES.map(c=>`<option>${escapeHtml(c)}</option>`).join('')}</select></label>
-  ${edit?'<label>Why is this update needed?<textarea name="reason" required minlength="10" maxlength="1000"></textarea></label>':''}
+  <h2>Listing details</h2>
+  <form id="listing-form" method="post" data-mode="${edit?'edit':'submit'}">${controls}
+  ${edit?'<label class="form-field-wide">Why is this update needed?<textarea name="reason" required minlength="10" maxlength="1000"></textarea></label>':''}
+  <p class="submission-disclosure form-field-wide">Listing details, review notes and release proposals are public on GitHub. Do not include private information. Your sign-in email stays private.</p>
   <button type="submit">${edit?'Propose update':'Submit for review'}</button></form></section>
-  ${edit?'':'<section class="card" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>'}
-  <p data-signed-out>Sign in with email or Ethereum to continue.</p>`;
-  return pageShell({title:edit?'Update listing':'Submit a listing',subtitle:'CryptoDirectory',body});
+  ${edit?'':'<section class="card my-submissions" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>'}
+  <section class="signed-out-notice" data-signed-out><p>${edit?'Sign in with an Editor, Admin or Superadmin role to update this listing.':'Sign in with your Bittrees email or Ethereum wallet to continue.'}</p><p class="status">You can browse the directory without signing in.</p></section>`;
+  return pageShell({title:edit?'Update a listing':'Submit a listing',subtitle:edit?'Propose changes to an existing listing. Verification and approval stay unchanged.':'Suggest a project, company or organization for review.',showSubmissionLink:edit,body});
 }
 
 function needsUpdatePage(projects) {
