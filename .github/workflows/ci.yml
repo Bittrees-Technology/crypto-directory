@@ -26,6 +26,9 @@ jobs:
       - name: Verify approval policy
         run: node --test test/approval-bot.test.mjs
 
+      - name: Verify directory roles, intake and review boundaries
+        run: npm run test:directory
+
       - name: Install declared ENS dependency
         run: npm ci --ignore-scripts --no-audit --no-fund
 
@@ -40,6 +43,12 @@ jobs:
 
       - name: Build site
         run: npm run build
+
+      - name: Prepare browser validation
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify role-based navigation and intake forms
+        run: npm run test:directory-browser
 
       - name: Check links
         run: node scripts/check-links.mjs

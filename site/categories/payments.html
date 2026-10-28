@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Category: Payments</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Payments</h1>
       <p>Sorted by lead category</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">127 entries in <strong>Payments</strong>. <a href="../index.html">Back to index</a></section>
 <table>
   <thead>
@@ -41,7 +48,7 @@
     </tr>
   </thead>
   <tbody><tr>
-<td><strong>Alchemy Pay</strong><br><small>Payments</small></td>
+<td><strong>Alchemy Pay</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=alchemy-pay.md">Edit listing</a></td>
 <td>Fiat-crypto payment gateway and on/off-ramp infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://alchemypay.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://alchemypay.org/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -52,7 +59,7 @@
 <td><a href="https://x.com/AlchemyPay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>AscendEX</strong><br><small>Payments</small></td>
+<td><strong>AscendEX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ascendex.md">Edit listing</a></td>
 <td>Global exchange platform for spot and derivatives.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ascendex.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -63,7 +70,7 @@
 <td><a href="https://x.com/_AscendEX" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>B2C2</strong><br><small>Payments</small></td>
+<td><strong>B2C2</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=b2c2.md">Edit listing</a></td>
 <td>Institutional digital asset liquidity and execution provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.b2c2.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Liquidity</span></td>
@@ -74,7 +81,7 @@
 <td><a href="https://x.com/b2c2group" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Backpack Exchange</strong><br><small>Payments</small></td>
+<td><strong>Backpack Exchange</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=backpack-exchange.md">Edit listing</a></td>
 <td>Exchange platform integrated with Backpack ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://backpack.exchange" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -85,7 +92,7 @@
 <td><a href="https://x.com/Backpack" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Banxa</strong><br><small>Payments</small></td>
+<td><strong>Banxa</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=banxa.md">Edit listing</a></td>
 <td>Global fiat-to-crypto payment infrastructure with compliance-first onboarding.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://banxa.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://banxa.com/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -96,7 +103,7 @@
 <td><a href="https://x.com/BanxaOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Binance</strong><br><small>Payments</small></td>
+<td><strong>Binance</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=binance.md">Edit listing</a></td>
 <td>Global crypto platform with exchange, custody, and payments products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.binance.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.binance.com/en/pay" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -107,7 +114,7 @@
 <td><a href="https://x.com/binance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BingX</strong><br><small>Payments</small></td>
+<td><strong>BingX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bingx.md">Edit listing</a></td>
 <td>Crypto exchange focused on derivatives and copy trading.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bingx.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bingx.com/en-us/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -118,7 +125,7 @@
 <td><a href="https://x.com/BingXOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bit2Me</strong><br><small>Payments</small></td>
+<td><strong>Bit2Me</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bit2me.md">Edit listing</a></td>
 <td>Spanish crypto exchange and digital asset platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bit2me.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -129,7 +136,7 @@
 <td><a href="https://x.com/bit2me" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitbank</strong><br><small>Payments</small></td>
+<td><strong>Bitbank</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitbank.md">Edit listing</a></td>
 <td>Japanese crypto exchange and spot trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bitbank.cc" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bitbank.cc/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -140,7 +147,7 @@
 <td><a href="https://x.com/bitbank_inc" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitfinex</strong><br><small>Payments</small></td>
+<td><strong>Bitfinex</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitfinex.md">Edit listing</a></td>
 <td>Global digital asset trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitfinex.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://trading.bitfinex.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -151,7 +158,7 @@
 <td><a href="https://x.com/bitfinex" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>bitFlyer</strong><br><small>Payments</small></td>
+<td><strong>bitFlyer</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitflyer.md">Edit listing</a></td>
 <td>Crypto exchange platform with presence in Japan and other regions.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bitflyer.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bitflyer.com/en-jp/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -162,7 +169,7 @@
 <td><a href="https://x.com/bitFlyer" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitget</strong><br><small>Payments</small></td>
+<td><strong>Bitget</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitget.md">Edit listing</a></td>
 <td>Exchange platform focused on spot and derivatives markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitget.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bitget.com/spot/BTCUSDT" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -173,7 +180,7 @@
 <td><a href="https://x.com/bitgetglobal" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bithumb</strong><br><small>Payments</small></td>
+<td><strong>Bithumb</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bithumb.md">Edit listing</a></td>
 <td>Korean digital asset exchange and market platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bithumb.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bithumb.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -184,7 +191,7 @@
 <td><a href="https://x.com/BithumbOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitkan</strong><br><small>Payments</small></td>
+<td><strong>Bitkan</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitkan.md">Edit listing</a></td>
 <td>Crypto market platform and trading gateway.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bitkan.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bitkan.com/markets" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -195,7 +202,7 @@
 <td><a href="https://x.com/BitKanOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitkub</strong><br><small>Payments</small></td>
+<td><strong>Bitkub</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitkub.md">Edit listing</a></td>
 <td>Thailand-based digital asset exchange platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitkub.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bitkub.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -206,7 +213,7 @@
 <td><a href="https://x.com/BitkubOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BitMart</strong><br><small>Payments</small></td>
+<td><strong>BitMart</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitmart.md">Edit listing</a></td>
 <td>Digital asset exchange with global market listings.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitmart.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bitmart.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -217,7 +224,7 @@
 <td><a href="https://x.com/BitMartExchange" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BitMEX</strong><br><small>Payments</small></td>
+<td><strong>BitMEX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitmex.md">Edit listing</a></td>
 <td>Crypto derivatives exchange and trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitmex.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bitmex.com/app/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -228,7 +235,7 @@
 <td><a href="https://x.com/BitMEX" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitpanda</strong><br><small>Payments</small></td>
+<td><strong>Bitpanda</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitpanda.md">Edit listing</a></td>
 <td>European crypto broker and trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitpanda.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -239,7 +246,7 @@
 <td><a href="https://x.com/Bitpanda_global" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BitPay</strong><br><small>Payments</small></td>
+<td><strong>BitPay</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitpay.md">Edit listing</a></td>
 <td>Payment processor enabling crypto checkout and settlement tools for merchants.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bitpay.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bitpay.com/business" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span></td>
@@ -250,7 +257,7 @@
 <td><a href="https://x.com/BitPay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BitPay Card</strong><br><small>Payments</small></td>
+<td><strong>BitPay Card</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitpay-card.md">Edit listing</a></td>
 <td>Prepaid card and payments layer for BitPay users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bitpay.com/card" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Cards</span></td>
@@ -261,7 +268,7 @@
 <td><a href="https://x.com/BitPay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitrefill</strong><br><small>Payments</small></td>
+<td><strong>Bitrefill</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitrefill.md">Edit listing</a></td>
 <td>Crypto commerce platform for gift cards and bills.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitrefill.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span></td>
@@ -272,7 +279,7 @@
 <td><a href="https://x.com/bitrefill" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitrue</strong><br><small>Payments</small></td>
+<td><strong>Bitrue</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitrue.md">Edit listing</a></td>
 <td>Global crypto exchange and wealth products platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitrue.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bitrue.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -283,7 +290,7 @@
 <td><a href="https://x.com/BitrueOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitso</strong><br><small>Payments</small></td>
+<td><strong>Bitso</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitso.md">Edit listing</a></td>
 <td>Latin American crypto exchange and payments company.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bitso.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bitso.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -294,7 +301,7 @@
 <td><a href="https://x.com/Bitso" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitstamp</strong><br><small>Payments</small></td>
+<td><strong>Bitstamp</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitstamp.md">Edit listing</a></td>
 <td>Long-running crypto exchange and institutional trading venue.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitstamp.net" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bitstamp.net/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -305,7 +312,7 @@
 <td><a href="https://x.com/Bitstamp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitvavo</strong><br><small>Payments</small></td>
+<td><strong>Bitvavo</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitvavo.md">Edit listing</a></td>
 <td>European cryptocurrency exchange for retail and pro users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bitvavo.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bitvavo.com/en/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -316,7 +323,7 @@
 <td><a href="https://x.com/bitvavocom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Breez</strong><br><small>Payments</small></td>
+<td><strong>Breez</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=breez.md">Edit listing</a></td>
 <td>Lightning payments SDK and wallet infrastructure for apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://breez.technology" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://breez.technology/sdk" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Bitcoin</span></td>
@@ -327,7 +334,7 @@
 <td><a href="https://x.com/Breez_Tech" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bridge</strong><br><small>Payments</small></td>
+<td><strong>Bridge</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bridge.md">Edit listing</a></td>
 <td>Stablecoin and payments infrastructure for global money movement.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bridge.xyz" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -338,7 +345,7 @@
 <td><a href="https://x.com/bridge_xyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BTC Markets</strong><br><small>Payments</small></td>
+<td><strong>BTC Markets</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=btc-markets.md">Edit listing</a></td>
 <td>Australian crypto exchange and trading venue.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.btcmarkets.net" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.btcmarkets.net/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -349,7 +356,7 @@
 <td><a href="https://x.com/BTCMarkets" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BTCC</strong><br><small>Payments</small></td>
+<td><strong>BTCC</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=btcc.md">Edit listing</a></td>
 <td>Long-running crypto exchange and derivatives venue.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.btcc.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.btcc.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -360,7 +367,7 @@
 <td><a href="https://x.com/BTCCexchange" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BTCPay Server</strong><br><small>Payments</small></td>
+<td><strong>BTCPay Server</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=btcpay-server.md">Edit listing</a></td>
 <td>Open-source self-hosted Bitcoin payment processor.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://btcpayserver.org" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -371,7 +378,7 @@
 <td><a href="https://x.com/btcpayserver" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BTSE</strong><br><small>Payments</small></td>
+<td><strong>BTSE</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=btse.md">Edit listing</a></td>
 <td>Digital asset exchange and derivatives venue.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.btse.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.btse.com/en/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -382,7 +389,7 @@
 <td><a href="https://x.com/BTSE_Official" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bullish</strong><br><small>Payments</small></td>
+<td><strong>Bullish</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bullish.md">Edit listing</a></td>
 <td>Institutional-focused digital asset exchange platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://bullish.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://bullish.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -393,7 +400,7 @@
 <td><a href="https://x.com/Bullish" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BVNK</strong><br><small>Payments</small></td>
+<td><strong>BVNK</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bvnk.md">Edit listing</a></td>
 <td>Stablecoin payments and business treasury infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bvnk.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bvnk.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -404,7 +411,7 @@
 <td><a href="https://x.com/BVNKFinance" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bybit</strong><br><small>Payments</small></td>
+<td><strong>Bybit</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bybit.md">Edit listing</a></td>
 <td>Crypto trading and asset platform with global derivatives and spot markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bybit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bybit.com/trade/usdt/BTCUSDT" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -415,7 +422,7 @@
 <td><a href="https://x.com/Bybit_Official" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BYDFi</strong><br><small>Payments</small></td>
+<td><strong>BYDFi</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bydfi.md">Edit listing</a></td>
 <td>Global exchange platform for spot and derivatives.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bydfi.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bydfi.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -426,7 +433,7 @@
 <td><a href="https://x.com/BYDFi_Official" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CEX.IO</strong><br><small>Payments</small></td>
+<td><strong>CEX.IO</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cex-io.md">Edit listing</a></td>
 <td>Global exchange and brokerage platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://cex.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://cex.io/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -437,7 +444,7 @@
 <td><a href="https://x.com/cex_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Circle</strong><br><small>Payments</small></td>
+<td><strong>Circle</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=circle.md">Edit listing</a></td>
 <td>Fintech company focused on stablecoin rails and programmable money infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.circle.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.circle.com/en/usdc" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Stablecoin</span><span class="badge">Infrastructure</span></td>
@@ -448,7 +455,7 @@
 <td><a href="https://x.com/circle" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coinbase</strong><br><small>Payments</small></td>
+<td><strong>Coinbase</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinbase.md">Edit listing</a></td>
 <td>Crypto platform offering exchange, custody, payments rails, and developer infrastructure including Base ecosystem services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinbase.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.coinbase.com/advanced-trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -459,7 +466,7 @@
 <td><a href="https://x.com/coinbase" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coincheck</strong><br><small>Payments</small></td>
+<td><strong>Coincheck</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coincheck.md">Edit listing</a></td>
 <td>Japan-based crypto exchange and consumer platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coincheck.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://coincheck.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -470,7 +477,7 @@
 <td><a href="https://x.com/coincheckjp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinDCX</strong><br><small>Payments</small></td>
+<td><strong>CoinDCX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coindcx.md">Edit listing</a></td>
 <td>Indian crypto exchange and investing platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coindcx.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://coindcx.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -481,7 +488,7 @@
 <td><a href="https://x.com/CoinDCX" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinEx</strong><br><small>Payments</small></td>
+<td><strong>CoinEx</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinex.md">Edit listing</a></td>
 <td>Digital asset exchange with spot and futures markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinex.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.coinex.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -492,7 +499,7 @@
 <td><a href="https://x.com/coinexcom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinGate</strong><br><small>Payments</small></td>
+<td><strong>CoinGate</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coingate.md">Edit listing</a></td>
 <td>Merchant payment processing and invoicing platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coingate.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -503,7 +510,7 @@
 <td><a href="https://x.com/CoinGatecom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coinhako</strong><br><small>Payments</small></td>
+<td><strong>Coinhako</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinhako.md">Edit listing</a></td>
 <td>Singapore-based crypto trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinhako.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.coinhako.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -514,7 +521,7 @@
 <td><a href="https://x.com/coinhako" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinJar</strong><br><small>Payments</small></td>
+<td><strong>CoinJar</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinjar.md">Edit listing</a></td>
 <td>Crypto trading and payments app for multiple regions.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinjar.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.coinjar.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -525,7 +532,7 @@
 <td><a href="https://x.com/coinjar" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinList</strong><br><small>Payments</small></td>
+<td><strong>CoinList</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinlist.md">Edit listing</a></td>
 <td>Token launch and exchange platform for early-stage crypto projects.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coinlist.co" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -536,7 +543,7 @@
 <td><a href="https://x.com/CoinList" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinMENA</strong><br><small>Payments</small></td>
+<td><strong>CoinMENA</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinmena.md">Edit listing</a></td>
 <td>MENA-focused licensed digital asset exchange.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coinmena.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://coinmena.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -547,7 +554,7 @@
 <td><a href="https://x.com/CoinMENA" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coinmetro</strong><br><small>Payments</small></td>
+<td><strong>Coinmetro</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinmetro.md">Edit listing</a></td>
 <td>Regulated exchange and trading platform for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coinmetro.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -558,7 +565,7 @@
 <td><a href="https://x.com/CoinMetro" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coinone</strong><br><small>Payments</small></td>
+<td><strong>Coinone</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinone.md">Edit listing</a></td>
 <td>Korean crypto exchange platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coinone.co.kr" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://coinone.co.kr/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -569,7 +576,7 @@
 <td><a href="https://x.com/CoinoneOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coins.ph</strong><br><small>Payments</small></td>
+<td><strong>Coins.ph</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coins-ph.md">Edit listing</a></td>
 <td>Consumer wallet and payments platform in Southeast Asia.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://coins.ph" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://coins.ph/app" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span></td>
@@ -580,7 +587,7 @@
 <td><a href="https://x.com/coinsph" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinSpot</strong><br><small>Payments</small></td>
+<td><strong>CoinSpot</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinspot.md">Edit listing</a></td>
 <td>Australian digital asset exchange and brokerage platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinspot.com.au" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -591,7 +598,7 @@
 <td><a href="https://x.com/coinspotau" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coinsquare</strong><br><small>Payments</small></td>
+<td><strong>Coinsquare</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinsquare.md">Edit listing</a></td>
 <td>Canadian digital asset exchange platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinsquare.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.coinsquare.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -602,7 +609,7 @@
 <td><a href="https://x.com/Coinsquare" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coinstore</strong><br><small>Payments</small></td>
+<td><strong>Coinstore</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coinstore.md">Edit listing</a></td>
 <td>Global exchange and digital asset trading venue.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coinstore.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.coinstore.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -613,7 +620,7 @@
 <td><a href="https://x.com/CoinstoreExc" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>CoinTR</strong><br><small>Payments</small></td>
+<td><strong>CoinTR</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cointr.md">Edit listing</a></td>
 <td>Digital asset exchange platform for Turkish market.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.cointr.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.cointr.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -624,7 +631,7 @@
 <td><a href="https://x.com/CoinTR" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Crypto.com</strong><br><small>Payments</small></td>
+<td><strong>Crypto.com</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=crypto-com.md">Edit listing</a></td>
 <td>Consumer crypto platform with payments, cards, and exchange products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://crypto.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -635,7 +642,7 @@
 <td><a href="https://x.com/cryptocom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cumberland</strong><br><small>Payments</small></td>
+<td><strong>Cumberland</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cumberland.md">Edit listing</a></td>
 <td>Institutional OTC liquidity provider for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://cumberland.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://cumberland.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Liquidity</span></td>
@@ -646,7 +653,7 @@
 <td><a href="https://x.com/cumberlandDRW" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cypher Capital Markets</strong><br><small>Payments</small></td>
+<td><strong>Cypher Capital Markets</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cypher-capital-markets.md">Edit listing</a></td>
 <td>Institutional brokerage and market services for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://cyphercm.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://cyphercm.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -657,7 +664,7 @@
 <td><a href="https://x.com/cyphercapitals" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Deribit</strong><br><small>Payments</small></td>
+<td><strong>Deribit</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=deribit.md">Edit listing</a></td>
 <td>Derivatives exchange focused on options and futures.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.deribit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.deribit.com/trading" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -668,7 +675,7 @@
 <td><a href="https://x.com/DeribitOfficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>DigiFinex</strong><br><small>Payments</small></td>
+<td><strong>DigiFinex</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=digifinex.md">Edit listing</a></td>
 <td>Global exchange platform for spot and derivatives markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.digifinex.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.digifinex.com/en-ww/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -679,7 +686,7 @@
 <td><a href="https://x.com/digifinex" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>eToro Crypto</strong><br><small>Payments</small></td>
+<td><strong>eToro Crypto</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=etoro-crypto.md">Edit listing</a></td>
 <td>Retail trading platform with integrated crypto markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.etoro.com/crypto" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -690,7 +697,7 @@
 <td><a href="https://x.com/eToro" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>FalconX</strong><br><small>Payments</small></td>
+<td><strong>FalconX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=falconx.md">Edit listing</a></td>
 <td>Institutional digital asset prime brokerage platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.falconx.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -701,7 +708,7 @@
 <td><a href="https://x.com/falconxnetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Flexa</strong><br><small>Payments</small></td>
+<td><strong>Flexa</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=flexa.md">Edit listing</a></td>
 <td>Merchant payments network for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://flexa.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -712,7 +719,7 @@
 <td><a href="https://x.com/flexahq" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fold</strong><br><small>Payments</small></td>
+<td><strong>Fold</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fold.md">Edit listing</a></td>
 <td>Bitcoin rewards and payments platform for consumers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://foldapp.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://foldapp.com/card" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Bitcoin</span></td>
@@ -723,7 +730,7 @@
 <td><a href="https://x.com/fold_app" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Gate.io</strong><br><small>Payments</small></td>
+<td><strong>Gate.io</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=gate-io.md">Edit listing</a></td>
 <td>Crypto exchange and digital asset market platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.gate.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.gate.io/trade/BTC_USDT" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -734,7 +741,7 @@
 <td><a href="https://x.com/gate_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Gemini</strong><br><small>Payments</small></td>
+<td><strong>Gemini</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=gemini.md">Edit listing</a></td>
 <td>Crypto platform for exchange, custody, and payment infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.gemini.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Custody</span></td>
@@ -745,7 +752,7 @@
 <td><a href="https://x.com/Gemini" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>GSR</strong><br><small>Payments</small></td>
+<td><strong>GSR</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=gsr.md">Edit listing</a></td>
 <td>Institutional crypto trading, liquidity, and investment firm.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.gsr.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.gsr.io/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Liquidity</span></td>
@@ -756,7 +763,7 @@
 <td><a href="https://x.com/GSR_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Helio</strong><br><small>Payments</small></td>
+<td><strong>Helio</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=helio.md">Edit listing</a></td>
 <td>Crypto checkout and merchant payment infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hel.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hel.io/business" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -767,7 +774,7 @@
 <td><a href="https://x.com/helio_pay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>HTX</strong><br><small>Payments</small></td>
+<td><strong>HTX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=htx.md">Edit listing</a></td>
 <td>Digital asset exchange and market platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.htx.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.htx.com/en-us/trade/btc_usdt" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -778,7 +785,7 @@
 <td><a href="https://x.com/HTX_Global" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Independent Reserve</strong><br><small>Payments</small></td>
+<td><strong>Independent Reserve</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=independent-reserve.md">Edit listing</a></td>
 <td>Institutional and retail crypto exchange in APAC.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.independentreserve.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.independentreserve.com/au/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -789,7 +796,7 @@
 <td><a href="https://x.com/indepreserve" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>IvendPay</strong><br><small>Payments</small></td>
+<td><strong>IvendPay</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ivendpay.md">Edit listing</a></td>
 <td>Crypto payment terminals and merchant checkout infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ivendpay.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://ivendpay.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -800,7 +807,7 @@
 <td><a href="https://x.com/IvendPay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Korbit</strong><br><small>Payments</small></td>
+<td><strong>Korbit</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=korbit.md">Edit listing</a></td>
 <td>Korean exchange and trading platform for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.korbit.co.kr" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.korbit.co.kr/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -811,7 +818,7 @@
 <td><a href="https://x.com/korbit_official" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Kraken</strong><br><small>Payments</small></td>
+<td><strong>Kraken</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=kraken.md">Edit listing</a></td>
 <td>Crypto exchange and financial services platform with trading and custody products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.kraken.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://pro.kraken.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span><span class="badge">Custody</span></td>
@@ -822,7 +829,7 @@
 <td><a href="https://x.com/krakenfx" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Kriptomat</strong><br><small>Payments</small></td>
+<td><strong>Kriptomat</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=kriptomat.md">Edit listing</a></td>
 <td>European crypto brokerage and exchange platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://kriptomat.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -833,7 +840,7 @@
 <td><a href="https://x.com/kriptomat" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>KuCoin</strong><br><small>Payments</small></td>
+<td><strong>KuCoin</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=kucoin.md">Edit listing</a></td>
 <td>Global exchange platform with spot, derivatives, and bot products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.kucoin.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.kucoin.com/trade/BTC-USDT" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -844,7 +851,7 @@
 <td><a href="https://x.com/kucoincom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>LATOKEN</strong><br><small>Payments</small></td>
+<td><strong>LATOKEN</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=latoken.md">Edit listing</a></td>
 <td>Digital asset exchange with broad token listings.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://latoken.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://latoken.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -855,7 +862,7 @@
 <td><a href="https://x.com/latokens" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>LBank</strong><br><small>Payments</small></td>
+<td><strong>LBank</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lbank.md">Edit listing</a></td>
 <td>Global digital asset exchange and derivatives venue.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.lbank.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.lbank.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -866,7 +873,7 @@
 <td><a href="https://x.com/LBank_Exchange" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Lightspark</strong><br><small>Payments</small></td>
+<td><strong>Lightspark</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lightspark.md">Edit listing</a></td>
 <td>Bitcoin Lightning enterprise payments infrastructure platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.lightspark.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.lightspark.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Bitcoin</span></td>
@@ -877,7 +884,7 @@
 <td><a href="https://x.com/lightspark" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Luno</strong><br><small>Payments</small></td>
+<td><strong>Luno</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=luno.md">Edit listing</a></td>
 <td>Crypto investing and payments platform in multiple markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.luno.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -888,7 +895,7 @@
 <td><a href="https://x.com/luno" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Lykke</strong><br><small>Payments</small></td>
+<td><strong>Lykke</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lykke.md">Edit listing</a></td>
 <td>Digital asset exchange and fintech platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.lykke.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.lykke.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -899,7 +906,7 @@
 <td><a href="https://x.com/Lykke" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mercado Bitcoin</strong><br><small>Payments</small></td>
+<td><strong>Mercado Bitcoin</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mercado-bitcoin.md">Edit listing</a></td>
 <td>Brazilian crypto exchange and digital asset marketplace.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.mercadobitcoin.com.br" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.mercadobitcoin.com.br/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -910,7 +917,7 @@
 <td><a href="https://x.com/MercadoBitcoin" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mercuryo</strong><br><small>Payments</small></td>
+<td><strong>Mercuryo</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mercuryo.md">Edit listing</a></td>
 <td>Payments and on-ramp infrastructure provider for web3 platforms.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://mercuryo.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://mercuryo.io/for-business" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -921,7 +928,7 @@
 <td><a href="https://x.com/Mercuryo_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Mesh</strong><br><small>Payments</small></td>
+<td><strong>Mesh</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mesh.md">Edit listing</a></td>
 <td>Connected finance infrastructure for linking exchanges, wallets, and payment flows.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.meshconnect.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.meshconnect.com/product" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -932,7 +939,7 @@
 <td><a href="https://x.com/meshconnectapi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>MEXC</strong><br><small>Payments</small></td>
+<td><strong>MEXC</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=mexc.md">Edit listing</a></td>
 <td>Global crypto exchange for spot and futures trading.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.mexc.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.mexc.com/exchange/BTC_USDT" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -943,7 +950,7 @@
 <td><a href="https://x.com/MEXC_Official" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>MoonPay</strong><br><small>Payments</small></td>
+<td><strong>MoonPay</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=moonpay.md">Edit listing</a></td>
 <td>Fiat-to-crypto and crypto-to-fiat payments infrastructure used by consumer apps and wallets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.moonpay.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.moonpay.com/business" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -954,7 +961,7 @@
 <td><a href="https://x.com/moonpay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>NDAX</strong><br><small>Payments</small></td>
+<td><strong>NDAX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ndax.md">Edit listing</a></td>
 <td>Canadian crypto trading and exchange platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ndax.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://ndax.io/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -965,7 +972,7 @@
 <td><a href="https://x.com/ndaxio" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Newton</strong><br><small>Payments</small></td>
+<td><strong>Newton</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=newton.md">Edit listing</a></td>
 <td>Canadian crypto app and exchange services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.newton.co" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.newton.co/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -976,7 +983,7 @@
 <td><a href="https://x.com/newton_crypto" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nexo</strong><br><small>Payments</small></td>
+<td><strong>Nexo</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nexo.md">Edit listing</a></td>
 <td>Digital asset platform for payments, lending, and trading.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nexo.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Lending</span></td>
@@ -987,7 +994,7 @@
 <td><a href="https://x.com/Nexo" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nexo Card</strong><br><small>Payments</small></td>
+<td><strong>Nexo Card</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nexo-card.md">Edit listing</a></td>
 <td>Card and payment products integrated with Nexo accounts.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nexo.com/card" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Cards</span></td>
@@ -998,7 +1005,7 @@
 <td><a href="https://x.com/Nexo" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>NOWPayments</strong><br><small>Payments</small></td>
+<td><strong>NOWPayments</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nowpayments.md">Edit listing</a></td>
 <td>Crypto payment gateway with broad token support.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nowpayments.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://nowpayments.io/merchant-tools" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1009,7 +1016,7 @@
 <td><a href="https://x.com/NOWPayments_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OKCoin</strong><br><small>Payments</small></td>
+<td><strong>OKCoin</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=okcoin.md">Edit listing</a></td>
 <td>Exchange platform and fiat gateway in select regions.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.okcoin.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.okcoin.com/trade-spot" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1020,7 +1027,7 @@
 <td><a href="https://x.com/OKCoin" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OKX</strong><br><small>Payments</small></td>
+<td><strong>OKX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=okx.md">Edit listing</a></td>
 <td>Crypto exchange and web3 products including wallet and trading services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.okx.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.okx.com/trade-spot" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1031,7 +1038,7 @@
 <td><a href="https://x.com/okx" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Onramper</strong><br><small>Payments</small></td>
+<td><strong>Onramper</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=onramper.md">Edit listing</a></td>
 <td>Aggregated fiat on-ramp infrastructure for wallets and dapps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://onramper.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://onramper.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1042,7 +1049,7 @@
 <td><a href="https://x.com/onramper" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>OpenNode</strong><br><small>Payments</small></td>
+<td><strong>OpenNode</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=opennode.md">Edit listing</a></td>
 <td>Bitcoin payment processing and settlement infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://opennode.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Bitcoin</span></td>
@@ -1053,7 +1060,7 @@
 <td><a href="https://x.com/opennode" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Paxful</strong><br><small>Payments</small></td>
+<td><strong>Paxful</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=paxful.md">Edit listing</a></td>
 <td>Peer-to-peer Bitcoin marketplace and payments platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://paxful.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1064,7 +1071,7 @@
 <td><a href="https://x.com/paxful" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Paxos</strong><br><small>Payments</small></td>
+<td><strong>Paxos</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=paxos.md">Edit listing</a></td>
 <td>Regulated blockchain infrastructure and stablecoin issuer.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.paxos.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1075,7 +1082,7 @@
 <td><a href="https://x.com/Paxos" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Paybis</strong><br><small>Payments</small></td>
+<td><strong>Paybis</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=paybis.md">Edit listing</a></td>
 <td>Fiat-crypto on-ramp and exchange infrastructure provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://paybis.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://paybis.com/business" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1086,7 +1093,7 @@
 <td><a href="https://x.com/paybis" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>PayPal USD</strong><br><small>Payments</small></td>
+<td><strong>PayPal USD</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=paypal-usd.md">Edit listing</a></td>
 <td>Stablecoin payment product ecosystem associated with PayPal.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.paypal.com/pyusd" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Stablecoin</span></td>
@@ -1097,7 +1104,7 @@
 <td><a href="https://x.com/PayPal" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Phemex</strong><br><small>Payments</small></td>
+<td><strong>Phemex</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=phemex.md">Edit listing</a></td>
 <td>Crypto exchange for spot and derivatives markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://phemex.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://phemex.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1108,7 +1115,7 @@
 <td><a href="https://x.com/Phemex_official" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Pintu</strong><br><small>Payments</small></td>
+<td><strong>Pintu</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=pintu.md">Edit listing</a></td>
 <td>Indonesian crypto trading and payments app.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://pintu.co.id" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1119,7 +1126,7 @@
 <td><a href="https://x.com/pintucoid" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ProBit</strong><br><small>Payments</small></td>
+<td><strong>ProBit</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=probit.md">Edit listing</a></td>
 <td>Global exchange with spot markets and token listings.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.probit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.probit.com/en-us/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1130,7 +1137,7 @@
 <td><a href="https://x.com/ProBit_Exchange" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Rain</strong><br><small>Payments</small></td>
+<td><strong>Rain</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=rain.md">Edit listing</a></td>
 <td>MENA-focused crypto trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.rain.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.rain.com/en/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1141,7 +1148,7 @@
 <td><a href="https://x.com/rain" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ramp Network</strong><br><small>Payments</small></td>
+<td><strong>Ramp Network</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ramp-network.md">Edit listing</a></td>
 <td>On-ramp and off-ramp infrastructure for wallets and onchain applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ramp.network" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://ramp.network/developers" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1152,7 +1159,7 @@
 <td><a href="https://x.com/RampNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Reap</strong><br><small>Payments</small></td>
+<td><strong>Reap</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=reap.md">Edit listing</a></td>
 <td>Web3-enabled corporate card and treasury payment platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://reap.global" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://reap.global/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1163,7 +1170,7 @@
 <td><a href="https://x.com/reap_global" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ripple</strong><br><small>Payments</small></td>
+<td><strong>Ripple</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ripple.md">Edit listing</a></td>
 <td>Enterprise-focused blockchain company building payment rails and liquidity services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ripple.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://ripple.com/payments" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1174,7 +1181,7 @@
 <td><a href="https://x.com/Ripple" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>River</strong><br><small>Payments</small></td>
+<td><strong>River</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=river.md">Edit listing</a></td>
 <td>Bitcoin financial services platform focused on long-term holders.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://river.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Bitcoin</span></td>
@@ -1185,7 +1192,7 @@
 <td><a href="https://x.com/River" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Robinhood Crypto</strong><br><small>Payments</small></td>
+<td><strong>Robinhood Crypto</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=robinhood-crypto.md">Edit listing</a></td>
 <td>Crypto trading and custody products integrated in Robinhood.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://robinhood.com/us/en/crypto" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1196,7 +1203,7 @@
 <td><a href="https://x.com/RobinhoodApp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Shakepay</strong><br><small>Payments</small></td>
+<td><strong>Shakepay</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=shakepay.md">Edit listing</a></td>
 <td>Canadian crypto payments and trading app.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://shakepay.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1207,7 +1214,7 @@
 <td><a href="https://x.com/shakepay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Sphere</strong><br><small>Payments</small></td>
+<td><strong>Sphere</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=sphere.md">Edit listing</a></td>
 <td>Stablecoin payments and treasury operations infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.spherepay.co" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.spherepay.co/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1218,7 +1225,7 @@
 <td><a href="https://x.com/sphere_labs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Strike</strong><br><small>Payments</small></td>
+<td><strong>Strike</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=strike.md">Edit listing</a></td>
 <td>Bitcoin payments platform focused on fast settlements.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://strike.me" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://strike.me/app" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Bitcoin</span></td>
@@ -1229,7 +1236,7 @@
 <td><a href="https://x.com/Strike" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Swyftx</strong><br><small>Payments</small></td>
+<td><strong>Swyftx</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=swyftx.md">Edit listing</a></td>
 <td>Australian digital asset trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://swyftx.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1240,7 +1247,7 @@
 <td><a href="https://x.com/SwyftxAU" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Tapbit</strong><br><small>Payments</small></td>
+<td><strong>Tapbit</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=tapbit.md">Edit listing</a></td>
 <td>Global crypto exchange for spot and futures.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.tapbit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.tapbit.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1251,7 +1258,7 @@
 <td><a href="https://x.com/tapbitglobal" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Tether</strong><br><small>Payments</small></td>
+<td><strong>Tether</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=tether.md">Edit listing</a></td>
 <td>Stablecoin issuer providing tokenized fiat-pegged assets across multiple blockchains.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://tether.to" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://tether.to/en/transparency" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Stablecoin</span></td>
@@ -1262,7 +1269,7 @@
 <td><a href="https://x.com/Tether_to" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Toobit</strong><br><small>Payments</small></td>
+<td><strong>Toobit</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=toobit.md">Edit listing</a></td>
 <td>Global crypto exchange for spot and derivatives.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.toobit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.toobit.com/en-US/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1273,7 +1280,7 @@
 <td><a href="https://x.com/Toobit_official" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Transak</strong><br><small>Payments</small></td>
+<td><strong>Transak</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=transak.md">Edit listing</a></td>
 <td>Fiat on-ramp and off-ramp infrastructure for wallets and applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://transak.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1284,7 +1291,7 @@
 <td><a href="https://x.com/transak" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>TripleA</strong><br><small>Payments</small></td>
+<td><strong>TripleA</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=triplea.md">Edit listing</a></td>
 <td>Crypto payment gateway for global merchants.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://triple-a.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://triple-a.io/merchants" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1295,7 +1302,7 @@
 <td><a href="https://x.com/tripleA_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Upbit</strong><br><small>Payments</small></td>
+<td><strong>Upbit</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=upbit.md">Edit listing</a></td>
 <td>Major centralized exchange serving global and Korean markets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://upbit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://upbit.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1306,7 +1313,7 @@
 <td><a href="https://x.com/upbitglobal" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Uphold</strong><br><small>Payments</small></td>
+<td><strong>Uphold</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=uphold.md">Edit listing</a></td>
 <td>Multi-asset trading and payments platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://uphold.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1317,7 +1324,7 @@
 <td><a href="https://x.com/UpholdInc" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Utorg</strong><br><small>Payments</small></td>
+<td><strong>Utorg</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=utorg.md">Edit listing</a></td>
 <td>Fiat on-ramp and web3 payment integration provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://utorg.pro" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://utorg.pro/business" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1328,7 +1335,7 @@
 <td><a href="https://x.com/utorgapp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>VALR</strong><br><small>Payments</small></td>
+<td><strong>VALR</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=valr.md">Edit listing</a></td>
 <td>African crypto exchange and trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.valr.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.valr.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1339,7 +1346,7 @@
 <td><a href="https://x.com/VALRdotcom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>WazirX</strong><br><small>Payments</small></td>
+<td><strong>WazirX</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=wazirx.md">Edit listing</a></td>
 <td>India-focused crypto exchange and trading platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://wazirx.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://wazirx.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1350,7 +1357,7 @@
 <td><a href="https://x.com/WazirXIndia" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>WhiteBIT</strong><br><small>Payments</small></td>
+<td><strong>WhiteBIT</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=whitebit.md">Edit listing</a></td>
 <td>Centralized exchange and trading platform with global coverage.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://whitebit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://whitebit.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1361,7 +1368,7 @@
 <td><a href="https://x.com/WhiteBit" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Wintermute</strong><br><small>Payments</small></td>
+<td><strong>Wintermute</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=wintermute.md">Edit listing</a></td>
 <td>Global digital asset market maker and liquidity provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.wintermute.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.wintermute.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Liquidity</span></td>
@@ -1372,7 +1379,7 @@
 <td><a href="https://x.com/wintermute_t" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Wirex</strong><br><small>Payments</small></td>
+<td><strong>Wirex</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=wirex.md">Edit listing</a></td>
 <td>Crypto payments and card platform for retail users.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://wirexapp.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://wirexapp.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Cards</span></td>
@@ -1383,7 +1390,7 @@
 <td><a href="https://x.com/wirexapp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Yellow Card</strong><br><small>Payments</small></td>
+<td><strong>Yellow Card</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=yellow-card.md">Edit listing</a></td>
 <td>African payments and digital asset platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://yellowcard.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://yellowcard.io/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span></td>
@@ -1394,7 +1401,7 @@
 <td><a href="https://x.com/yellowcard_app" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Zaprite</strong><br><small>Payments</small></td>
+<td><strong>Zaprite</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zaprite.md">Edit listing</a></td>
 <td>Bitcoin invoicing and payments platform for merchants and creators.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://zaprite.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1405,7 +1412,7 @@
 <td><a href="https://x.com/zapriteapp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ZebPay</strong><br><small>Payments</small></td>
+<td><strong>ZebPay</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zebpay.md">Edit listing</a></td>
 <td>Long-running crypto exchange platform in India.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://zebpay.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://zebpay.com/exchange" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1416,7 +1423,7 @@
 <td><a href="https://x.com/zebpay" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Zero Hash</strong><br><small>Payments</small></td>
+<td><strong>Zero Hash</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zero-hash.md">Edit listing</a></td>
 <td>Embedded digital asset and stablecoin infrastructure for fintechs.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://zerohash.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Infrastructure</span></td>
@@ -1427,7 +1434,7 @@
 <td><a href="https://x.com/ZeroHashX" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Zipmex</strong><br><small>Payments</small></td>
+<td><strong>Zipmex</strong><br><small>Payments</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zipmex.md">Edit listing</a></td>
 <td>Regional exchange and digital asset service platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://zipmex.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://zipmex.com/trade" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Payments</span><span class="badge">Exchange</span></td>
@@ -1440,6 +1447,7 @@
 </table>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="../assets/directory-client.js"></script>
 </body>
 </html>

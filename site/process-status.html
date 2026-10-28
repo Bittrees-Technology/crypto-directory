@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Process Status</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Process Status</h1>
       <p>Completion tracking against design and plan specs</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="index.html">Directory</a>
     <a href="review.html">Review Queue</a>
     <a href="needs-update.html">Needs Update</a>
     <a href="process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">
   Process status compares each tracked project against explicit design and plan specs, then estimates completion using weighted requirements and recorded history.
 </section>
@@ -53,7 +60,7 @@
     <div class="status">Started: 2026-02-13</div>
     <div class="status">Target: 2026-04-15</div>
     <div class="status">Observed velocity: 1.19% / day</div>
-    <div style="margin-top:6px">Projected completion: 2026-06-11. 3.8 days remaining at the current velocity.</div>
+    <div style="margin-top:6px">Projected completion: 2026-11-01. 3.8 days remaining at the current velocity.</div>
   </div>
   <section class="card" style="margin-top:14px">
   <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap">
@@ -158,6 +165,7 @@
 </section>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="assets/directory-client.js"></script>
 </body>
 </html>

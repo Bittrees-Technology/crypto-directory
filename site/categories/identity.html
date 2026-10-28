@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Category: Identity</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Identity</h1>
       <p>Sorted by lead category</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">34 entries in <strong>Identity</strong>. <a href="../index.html">Back to index</a></section>
 <table>
   <thead>
@@ -41,7 +48,7 @@
     </tr>
   </thead>
   <tbody><tr>
-<td><strong>BrightID</strong><br><small>Identity</small></td>
+<td><strong>BrightID</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=brightid.md">Edit listing</a></td>
 <td>Social verification protocol for unique human identity.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.brightid.org" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -52,7 +59,7 @@
 <td><a href="https://x.com/BrightIDProject" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Civic</strong><br><small>Identity</small></td>
+<td><strong>Civic</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=civic.md">Edit listing</a></td>
 <td>Identity and access products for verification and compliance in web3 applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.civic.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -63,7 +70,7 @@
 <td><a href="https://x.com/civickey" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Civic Pass</strong><br><small>Identity</small></td>
+<td><strong>Civic Pass</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=civic-pass.md">Edit listing</a></td>
 <td>Reusable identity and compliance pass for applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.civic.com/pass" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -74,7 +81,7 @@
 <td><a href="https://x.com/civickey" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>DID.id</strong><br><small>Identity</small></td>
+<td><strong>DID.id</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=did-id.md">Edit listing</a></td>
 <td>Decentralized identity protocol and DID toolkit.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.did.id" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.did.id/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -85,7 +92,7 @@
 <td><a href="https://x.com/dotdid" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Disco</strong><br><small>Identity</small></td>
+<td><strong>Disco</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=disco.md">Edit listing</a></td>
 <td>Decentralized identity and credential profile platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.disco.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.disco.xyz/features" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -96,7 +103,7 @@
 <td><a href="https://x.com/discoxyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Dock</strong><br><small>Identity</small></td>
+<td><strong>Dock</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=dock.md">Edit listing</a></td>
 <td>Verifiable credential and decentralized identity platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.dock.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -107,7 +114,7 @@
 <td><a href="https://x.com/docknetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ENS Labs</strong><br><small>Identity</small></td>
+<td><strong>ENS Labs</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ens-labs.md">Edit listing</a></td>
 <td>Core contributor organization for Ethereum Name Service and related naming infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://ens.domains" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://app.ens.domains" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Infrastructure</span></td>
@@ -118,7 +125,7 @@
 <td><a href="https://x.com/ensdomains" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Farcaster</strong><br><small>Identity</small></td>
+<td><strong>Farcaster</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=farcaster.md">Edit listing</a></td>
 <td>Decentralized social protocol with portable identity and client interoperability.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.farcaster.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.farcaster.xyz/developers" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Social</span></td>
@@ -129,7 +136,7 @@
 <td><a href="https://x.com/farcaster_xyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fractal ID</strong><br><small>Identity</small></td>
+<td><strong>Fractal ID</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fractal-id.md">Edit listing</a></td>
 <td>Identity verification platform for web3 users and apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://fractal.id" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://fractal.id/for-users" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -140,7 +147,7 @@
 <td><a href="https://x.com/Fractal_ID" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Galxe</strong><br><small>Identity</small></td>
+<td><strong>Galxe</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=galxe.md">Edit listing</a></td>
 <td>Web3 identity and credential platform for communities.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://galxe.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://galxe.com/quest" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">DAOs &amp; Governance</span></td>
@@ -151,7 +158,7 @@
 <td><a href="https://x.com/Galxe" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Gitcoin Passport</strong><br><small>Identity</small></td>
+<td><strong>Gitcoin Passport</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=gitcoin-passport.md">Edit listing</a></td>
 <td>Reputation and identity credential system for sybil resistance.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://passport.gitcoin.co" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://support.passport.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">DAOs &amp; Governance</span></td>
@@ -162,7 +169,7 @@
 <td><a href="https://x.com/gitcoinpassport" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Holonym</strong><br><small>Identity</small></td>
+<td><strong>Holonym</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=holonym.md">Edit listing</a></td>
 <td>Privacy-preserving identity infrastructure using zero-knowledge proofs.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://holonym.id" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Zero Knowledge</span></td>
@@ -173,7 +180,7 @@
 <td><a href="https://x.com/holonymid" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Humanity Protocol</strong><br><small>Identity</small></td>
+<td><strong>Humanity Protocol</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=humanity-protocol.md">Edit listing</a></td>
 <td>Human identity verification network for sybil resistance.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://humanity.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://humanity.org/technology" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Zero Knowledge</span></td>
@@ -184,7 +191,7 @@
 <td><a href="https://x.com/Humanityprot" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Humanode</strong><br><small>Identity</small></td>
+<td><strong>Humanode</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=humanode.md">Edit listing</a></td>
 <td>Biometric sybil-resistant blockchain identity network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://humanode.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Biometrics</span></td>
@@ -195,7 +202,7 @@
 <td><a href="https://x.com/humanode_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>idOS</strong><br><small>Identity</small></td>
+<td><strong>idOS</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=idos.md">Edit listing</a></td>
 <td>Decentralized identity layer for reusable KYC and user data.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.idos.network" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Infrastructure</span></td>
@@ -206,7 +213,7 @@
 <td><a href="https://x.com/idos_network" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Kilt Protocol</strong><br><small>Identity</small></td>
+<td><strong>Kilt Protocol</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=kilt-protocol.md">Edit listing</a></td>
 <td>Decentralized identity protocol for verifiable credentials.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.kilt.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -217,7 +224,7 @@
 <td><a href="https://x.com/Kiltprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Lens Protocol</strong><br><small>Identity</small></td>
+<td><strong>Lens Protocol</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lens-protocol.md">Edit listing</a></td>
 <td>Onchain social graph and identity protocol for portable profiles and content.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://lens.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://lens.xyz/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Social</span></td>
@@ -228,7 +235,7 @@
 <td><a href="https://x.com/lensprotocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Lit Protocol</strong><br><small>Identity</small></td>
+<td><strong>Lit Protocol</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=lit-protocol.md">Edit listing</a></td>
 <td>Decentralized key management and programmable access control infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://litprotocol.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://developer.litprotocol.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Infrastructure</span></td>
@@ -239,7 +246,7 @@
 <td><a href="https://x.com/LitProtocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Masa</strong><br><small>Identity</small></td>
+<td><strong>Masa</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=masa.md">Edit listing</a></td>
 <td>Decentralized identity and personal data network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.masa.finance" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.masa.finance/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Data</span></td>
@@ -250,7 +257,7 @@
 <td><a href="https://x.com/getmasafi" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Notabene</strong><br><small>Identity</small></td>
+<td><strong>Notabene</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=notabene.md">Edit listing</a></td>
 <td>Travel Rule and identity compliance infrastructure for VASPs.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.notabene.id" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.notabene.id/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -261,7 +268,7 @@
 <td><a href="https://x.com/notabene_id" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Persona</strong><br><small>Identity</small></td>
+<td><strong>Persona</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=persona.md">Edit listing</a></td>
 <td>Identity verification and KYB/KYC platform for web3 apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://withpersona.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://withpersona.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -272,7 +279,7 @@
 <td><a href="https://x.com/withpersona" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Polygon AggLayer</strong><br><small>Identity</small></td>
+<td><strong>Polygon AggLayer</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=polygon-agglayer.md">Edit listing</a></td>
 <td>Cross-chain identity and liquidity coordination layer in Polygon ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://polygon.technology/agglayer" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Infrastructure</span></td>
@@ -283,7 +290,7 @@
 <td><a href="https://x.com/0xPolygon" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Polygon ID</strong><br><small>Identity</small></td>
+<td><strong>Polygon ID</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=polygon-id.md">Edit listing</a></td>
 <td>Zero-knowledge identity framework for private credential verification.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://polygon.technology/polygon-id" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Zero Knowledge</span></td>
@@ -294,7 +301,7 @@
 <td><a href="https://x.com/0xPolygon" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Privado ID</strong><br><small>Identity</small></td>
+<td><strong>Privado ID</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=privado-id.md">Edit listing</a></td>
 <td>Self-sovereign identity tools based on zk credential verification.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.privado.id" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Zero Knowledge</span></td>
@@ -305,7 +312,7 @@
 <td><a href="https://x.com/PrivadoID" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Proof of Humanity</strong><br><small>Identity</small></td>
+<td><strong>Proof of Humanity</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=proof-of-humanity.md">Edit listing</a></td>
 <td>Human registry protocol for sybil-resistant identity.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.proofofhumanity.id" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.proofofhumanity.id/how-it-works" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">DAOs &amp; Governance</span></td>
@@ -316,7 +323,7 @@
 <td><a href="https://x.com/proofofhumanity" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Quadrata</strong><br><small>Identity</small></td>
+<td><strong>Quadrata</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=quadrata.md">Edit listing</a></td>
 <td>Onchain passport and compliance credential infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.quadrata.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.quadrata.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -327,7 +334,7 @@
 <td><a href="https://x.com/quadrataNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Sardine</strong><br><small>Identity</small></td>
+<td><strong>Sardine</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=sardine.md">Edit listing</a></td>
 <td>Fraud prevention and identity infrastructure for web3 onboarding.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.sardine.ai" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -338,7 +345,7 @@
 <td><a href="https://x.com/sardine" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>SelfKey</strong><br><small>Identity</small></td>
+<td><strong>SelfKey</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=selfkey.md">Edit listing</a></td>
 <td>Self-sovereign identity and KYC marketplace ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://selfkey.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://selfkey.org/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Compliance</span></td>
@@ -349,7 +356,7 @@
 <td><a href="https://x.com/selfkey" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Space ID</strong><br><small>Identity</small></td>
+<td><strong>Space ID</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=space-id.md">Edit listing</a></td>
 <td>Multi-chain name service and identity protocol.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://space.id" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://space.id/name" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -360,7 +367,7 @@
 <td><a href="https://x.com/SpaceIDProtocol" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>SpruceID</strong><br><small>Identity</small></td>
+<td><strong>SpruceID</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=spruceid.md">Edit listing</a></td>
 <td>Identity infrastructure provider for decentralized credentials and sign-in flows.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.spruceid.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.spruceid.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Developer Tools</span></td>
@@ -371,7 +378,7 @@
 <td><a href="https://x.com/spruceid" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Trinsic</strong><br><small>Identity</small></td>
+<td><strong>Trinsic</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=trinsic.md">Edit listing</a></td>
 <td>Identity API platform for verifiable credentials.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://trinsic.id" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Identity</span><span class="badge">Developer Tools</span></td>
@@ -382,7 +389,7 @@
 <td><a href="https://x.com/trinsic_id" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Unstoppable Domains</strong><br><small>Identity</small></td>
+<td><strong>Unstoppable Domains</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=unstoppable-domains.md">Edit listing</a></td>
 <td>Onchain naming and digital identity platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://unstoppabledomains.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://unstoppabledomains.com/search" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -393,7 +400,7 @@
 <td><a href="https://x.com/unstoppableweb" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Verite</strong><br><small>Identity</small></td>
+<td><strong>Verite</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=verite.md">Edit listing</a></td>
 <td>Open framework for identity credentials and attestations.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://verite.id" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://verite.id/docs" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -404,7 +411,7 @@
 <td><a href="https://x.com/verite_id" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>World</strong><br><small>Identity</small></td>
+<td><strong>World</strong><br><small>Identity</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=world.md">Edit listing</a></td>
 <td>Identity and proof-of-personhood ecosystem with wallet and verification products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://world.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://world.org/world-app" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Identity</span></td>
@@ -417,6 +424,7 @@
 </table>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="../assets/directory-client.js"></script>
 </body>
 </html>

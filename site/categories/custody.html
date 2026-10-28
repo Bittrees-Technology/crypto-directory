@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Category: Custody</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Custody</h1>
       <p>Sorted by lead category</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">34 entries in <strong>Custody</strong>. <a href="../index.html">Back to index</a></section>
 <table>
   <thead>
@@ -41,7 +48,7 @@
     </tr>
   </thead>
   <tbody><tr>
-<td><strong>Anchorage Digital</strong><br><small>Custody</small></td>
+<td><strong>Anchorage Digital</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=anchorage-digital.md">Edit listing</a></td>
 <td>Digital asset platform focused on institutional custody, staking, and trading services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.anchorage.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -52,7 +59,7 @@
 <td><a href="https://x.com/Anchorage" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bakkt</strong><br><small>Custody</small></td>
+<td><strong>Bakkt</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bakkt.md">Edit listing</a></td>
 <td>Digital asset platform for custody and trading infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bakkt.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bakkt.com/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Payments</span></td>
@@ -63,7 +70,7 @@
 <td><a href="https://x.com/Bakkt" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BitGo</strong><br><small>Custody</small></td>
+<td><strong>BitGo</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitgo.md">Edit listing</a></td>
 <td>Institutional custody and wallet infrastructure provider for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitgo.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.bitgo.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Payments</span></td>
@@ -74,7 +81,7 @@
 <td><a href="https://x.com/BitGo" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>BitMEX Custody</strong><br><small>Custody</small></td>
+<td><strong>BitMEX Custody</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitmex-custody.md">Edit listing</a></td>
 <td>Custody services linked to BitMEX institutional offerings.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitmex.com/custody" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -85,7 +92,7 @@
 <td><a href="https://x.com/BitMEX" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Bitpanda Custody</strong><br><small>Custody</small></td>
+<td><strong>Bitpanda Custody</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=bitpanda-custody.md">Edit listing</a></td>
 <td>Custody services for institutional digital asset clients.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.bitpanda.com/en/custody" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -96,7 +103,7 @@
 <td><a href="https://x.com/Bitpanda_global" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cactus Custody</strong><br><small>Custody</small></td>
+<td><strong>Cactus Custody</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cactus-custody.md">Edit listing</a></td>
 <td>Institutional digital asset custody and staking services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.cactuscustody.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.cactuscustody.com/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -107,7 +114,7 @@
 <td><a href="https://x.com/CactusCustody" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Casa</strong><br><small>Custody</small></td>
+<td><strong>Casa</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=casa.md">Edit listing</a></td>
 <td>Self-custody and key management services for Bitcoin holders.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://casa.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Security</span></td>
@@ -118,7 +125,7 @@
 <td><a href="https://x.com/CasaHODL" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ceffu</strong><br><small>Custody</small></td>
+<td><strong>Ceffu</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ceffu.md">Edit listing</a></td>
 <td>Institutional custody and settlement platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.ceffu.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -129,7 +136,7 @@
 <td><a href="https://x.com/CeffuGlobal" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cobo</strong><br><small>Custody</small></td>
+<td><strong>Cobo</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cobo.md">Edit listing</a></td>
 <td>Institutional custody and wallet infrastructure for digital asset operations.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.cobo.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -140,7 +147,7 @@
 <td><a href="https://x.com/Cobo_Global" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Coincover</strong><br><small>Custody</small></td>
+<td><strong>Coincover</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=coincover.md">Edit listing</a></td>
 <td>Digital asset protection and recovery solutions for institutions and platforms.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.coincover.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Security</span></td>
@@ -151,7 +158,7 @@
 <td><a href="https://x.com/coincover" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Copper</strong><br><small>Custody</small></td>
+<td><strong>Copper</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=copper.md">Edit listing</a></td>
 <td>Institutional custody and collateral management platform for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.copper.co" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.copper.co/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -162,7 +169,7 @@
 <td><a href="https://x.com/CopperHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cubist</strong><br><small>Custody</small></td>
+<td><strong>Cubist</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cubist.md">Edit listing</a></td>
 <td>Key management and policy engine for developers and institutions.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://cubist.dev" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Security</span></td>
@@ -173,7 +180,7 @@
 <td><a href="https://x.com/cubistdev" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Cypherock</strong><br><small>Custody</small></td>
+<td><strong>Cypherock</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=cypherock.md">Edit listing</a></td>
 <td>Hardware-based key custody and inheritance solution.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.cypherock.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Security</span></td>
@@ -184,7 +191,7 @@
 <td><a href="https://x.com/CypherockWallet" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Dfns</strong><br><small>Custody</small></td>
+<td><strong>Dfns</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=dfns.md">Edit listing</a></td>
 <td>Wallet-as-a-service and secure key management infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.dfns.co" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -195,7 +202,7 @@
 <td><a href="https://x.com/dfnsHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fidelity Digital Assets</strong><br><small>Custody</small></td>
+<td><strong>Fidelity Digital Assets</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fidelity-digital-assets.md">Edit listing</a></td>
 <td>Institutional digital asset custody and execution services.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.fidelitydigitalassets.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -206,7 +213,7 @@
 <td><a href="https://x.com/Fidelity" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Finoa</strong><br><small>Custody</small></td>
+<td><strong>Finoa</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=finoa.md">Edit listing</a></td>
 <td>Institutional-grade custody and staking service provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://finoa.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://finoa.io/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -217,7 +224,7 @@
 <td><a href="https://x.com/Finoa_IO" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Fireblocks</strong><br><small>Custody</small></td>
+<td><strong>Fireblocks</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fireblocks.md">Edit listing</a></td>
 <td>Institutional-grade custody and transfer infrastructure for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.fireblocks.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.fireblocks.com/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span><span class="badge">Security</span></td>
@@ -228,7 +235,7 @@
 <td><a href="https://x.com/FireblocksHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>ForDeFi</strong><br><small>Custody</small></td>
+<td><strong>ForDeFi</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=fordefi.md">Edit listing</a></td>
 <td>Institutional wallet and policy engine for secure operations.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.fordefi.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Wallets</span><span class="badge">Security</span></td>
@@ -239,7 +246,7 @@
 <td><a href="https://x.com/ForDeFiHQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>GK8</strong><br><small>Custody</small></td>
+<td><strong>GK8</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=gk8.md">Edit listing</a></td>
 <td>Institutional-grade digital asset custody technology.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.gk8.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Security</span></td>
@@ -250,7 +257,7 @@
 <td><a href="https://x.com/GK8_Security" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Hex Trust</strong><br><small>Custody</small></td>
+<td><strong>Hex Trust</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=hex-trust.md">Edit listing</a></td>
 <td>Institutional custody platform for digital assets.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://hextrust.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hextrust.com/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -261,7 +268,7 @@
 <td><a href="https://x.com/Hex_Trust" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Komainu</strong><br><small>Custody</small></td>
+<td><strong>Komainu</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=komainu.md">Edit listing</a></td>
 <td>Institutional-grade digital asset custody provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.komainu.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.komainu.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -272,7 +279,7 @@
 <td><a href="https://x.com/komainuhq" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Ledger Enterprise</strong><br><small>Custody</small></td>
+<td><strong>Ledger Enterprise</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=ledger-enterprise.md">Edit listing</a></td>
 <td>Institutional custody and governance tooling from Ledger.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://enterprise.ledger.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Security</span></td>
@@ -283,7 +290,7 @@
 <td><a href="https://x.com/Ledger" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Liminal</strong><br><small>Custody</small></td>
+<td><strong>Liminal</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=liminal.md">Edit listing</a></td>
 <td>Enterprise-grade wallet operations and custody platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.liminalcustody.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -294,7 +301,7 @@
 <td><a href="https://x.com/LiminalCustody" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Metaco</strong><br><small>Custody</small></td>
+<td><strong>Metaco</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=metaco.md">Edit listing</a></td>
 <td>Institutional digital asset custody technology provider.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://metaco.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://metaco.com/platform" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -305,7 +312,7 @@
 <td><a href="https://x.com/MetacoSA" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nunchuk</strong><br><small>Custody</small></td>
+<td><strong>Nunchuk</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nunchuk.md">Edit listing</a></td>
 <td>Multisig wallet and collaborative custody platform for Bitcoin.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nunchuk.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://nunchuk.io/download" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Bitcoin</span></td>
@@ -316,7 +323,7 @@
 <td><a href="https://x.com/nunchuk_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>NYDIG</strong><br><small>Custody</small></td>
+<td><strong>NYDIG</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nydig.md">Edit listing</a></td>
 <td>Bitcoin custody and financial infrastructure for institutions.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nydig.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://nydig.com/solutions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -327,7 +334,7 @@
 <td><a href="https://x.com/NYDIG_BTC" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Prosegur Crypto</strong><br><small>Custody</small></td>
+<td><strong>Prosegur Crypto</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=prosegur-crypto.md">Edit listing</a></td>
 <td>Institutional custody solutions by Prosegur group.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.prosegurcrypto.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -338,7 +345,7 @@
 <td><a href="https://x.com/prosegurcrypto" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Qredo</strong><br><small>Custody</small></td>
+<td><strong>Qredo</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=qredo.md">Edit listing</a></td>
 <td>Institutional digital asset infrastructure for custody and settlement.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.qredo.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -349,7 +356,7 @@
 <td><a href="https://x.com/QredoNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Safeheron</strong><br><small>Custody</small></td>
+<td><strong>Safeheron</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=safeheron.md">Edit listing</a></td>
 <td>Institutional self-custody infrastructure and MPC wallet stack.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://safeheron.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://safeheron.com/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -360,7 +367,7 @@
 <td><a href="https://x.com/safeheron" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>SwissBorg Vault</strong><br><small>Custody</small></td>
+<td><strong>SwissBorg Vault</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=swissborg-vault.md">Edit listing</a></td>
 <td>Custody and asset management features within SwissBorg ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://swissborg.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Payments</span></td>
@@ -371,7 +378,7 @@
 <td><a href="https://x.com/swissborg" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Taurus</strong><br><small>Custody</small></td>
+<td><strong>Taurus</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=taurus.md">Edit listing</a></td>
 <td>Enterprise digital asset custody and tokenization infrastructure.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.taurusgroup.ch" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.taurusgroup.ch/products" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -382,7 +389,7 @@
 <td><a href="https://x.com/Taurus_HQ" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Unchained</strong><br><small>Custody</small></td>
+<td><strong>Unchained</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=unchained.md">Edit listing</a></td>
 <td>Bitcoin-native custody and financial services platform.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://unchained.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://unchained.com/services" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Bitcoin</span></td>
@@ -393,7 +400,7 @@
 <td><a href="https://x.com/unchainedcom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Utila</strong><br><small>Custody</small></td>
+<td><strong>Utila</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=utila.md">Edit listing</a></td>
 <td>Institutional digital asset operations and custody stack.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://utila.io" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Infrastructure</span></td>
@@ -404,7 +411,7 @@
 <td><a href="https://x.com/utila_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Zodia Custody</strong><br><small>Custody</small></td>
+<td><strong>Zodia Custody</strong><br><small>Custody</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=zodia-custody.md">Edit listing</a></td>
 <td>Institution-focused digital asset custody platform with regulatory alignment.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://zodia.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://zodia.io/custody" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Custody</span><span class="badge">Compliance</span></td>
@@ -417,6 +424,7 @@
 </table>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="../assets/directory-client.js"></script>
 </body>
 </html>

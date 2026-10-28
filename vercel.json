@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/api/directory/:path*",
+      "destination": "/api/directory"
+    },
+    {
+      "source": "/sign-in",
+      "destination": "/sign-in.html"
+    },
+    {
       "source": "/administration",
       "destination": "/api/project-admin"
     },

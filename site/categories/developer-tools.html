@@ -23,16 +23,23 @@
 </head>
 <body>
   <main>
-    <header>
-      <h1>Category: Developer Tools</h1>
+    <header class="directory-header">
+      <div><h1><img class="directory-icon" src="https://euc.li/cryptodirectory.eth" width="28" height="28" alt="">Category: Developer Tools</h1>
       <p>Sorted by lead category</p>
+      </div>
+      <div class="directory-account">
+        <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in">Sign in · Email / Ethereum</a>
+        <div data-signed-in hidden><span id="directory-identity"></span><small id="directory-role"></small><button type="button" id="directory-logout">Sign out</button></div>
+      </div>
     </header>
-    <nav class="site-nav">
+    <nav class="site-nav" data-staff hidden aria-label="Staff tools">
     <a href="../index.html">Directory</a>
     <a href="../review.html">Review Queue</a>
     <a href="../needs-update.html">Needs Update</a>
     <a href="../process-status.html">Process Status</a>
   </nav>
+    <nav class="submission-nav"><a data-can-submit hidden href="../submit.html">Submit a project</a></nav>
+    <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     <section class="card" style="margin:18px 0">26 entries in <strong>Developer Tools</strong>. <a href="../index.html">Back to index</a></section>
 <table>
   <thead>
@@ -41,7 +48,7 @@
     </tr>
   </thead>
   <tbody><tr>
-<td><strong>Arbiscan</strong><br><small>Developer Tools</small></td>
+<td><strong>Arbiscan</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=arbiscan.md">Edit listing</a></td>
 <td>Block explorer and APIs for Arbitrum chain activity.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://arbiscan.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.arbiscan.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Data &amp; Analytics</span></td>
@@ -52,7 +59,7 @@
 <td><a href="https://x.com/arbitrum" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Basescan</strong><br><small>Developer Tools</small></td>
+<td><strong>Basescan</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=basescan.md">Edit listing</a></td>
 <td>Block explorer and API platform for Base network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://basescan.org" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.basescan.org" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Data &amp; Analytics</span></td>
@@ -63,7 +70,7 @@
 <td><a href="https://x.com/base" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Blockscout</strong><br><small>Developer Tools</small></td>
+<td><strong>Blockscout</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=blockscout.md">Edit listing</a></td>
 <td>Open-source blockchain explorer stack for EVM chains.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.blockscout.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.blockscout.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Infrastructure</span></td>
@@ -74,9 +81,9 @@
 <td><a href="https://x.com/blockscoutcom" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Consensys</strong><br><small>Developer Tools</small></td>
+<td><strong>Consensys</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=consensys.md">Edit listing</a></td>
 <td>Ethereum-focused software company behind products including MetaMask and institutional tooling.</td>
-<td><div class="links-cell"><a class="link-pill" href="https://consensys.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://metamask.io" target="_blank" rel="noopener">Product</a></div></td>
+<td><div class="links-cell"><a class="link-pill" href="https://consensys.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://metamask.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Infrastructure</span><span class="badge">Wallets</span></td>
 <td><span class="badge">Ethereum</span></td>
 <td>2014</td>
@@ -85,7 +92,7 @@
 <td><a href="https://x.com/Consensys" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Crossmint</strong><br><small>Developer Tools</small></td>
+<td><strong>Crossmint</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=crossmint.md">Edit listing</a></td>
 <td>Developer APIs for wallet creation, minting, and fiat checkout.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.crossmint.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.crossmint.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Payments</span></td>
@@ -96,7 +103,7 @@
 <td><a href="https://x.com/crossmint" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Dynamic</strong><br><small>Developer Tools</small></td>
+<td><strong>Dynamic</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=dynamic.md">Edit listing</a></td>
 <td>Wallet-based authentication and user management for web3 apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.dynamic.xyz" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.dynamic.xyz" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Wallets</span></td>
@@ -107,7 +114,7 @@
 <td><a href="https://x.com/dynamic_xyz" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Etherscan</strong><br><small>Developer Tools</small></td>
+<td><strong>Etherscan</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=etherscan.md">Edit listing</a></td>
 <td>Block explorer and contract verification platform for Ethereum.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://etherscan.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.etherscan.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Data &amp; Analytics</span></td>
@@ -118,7 +125,7 @@
 <td><a href="https://x.com/etherscan" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Foundry</strong><br><small>Developer Tools</small></td>
+<td><strong>Foundry</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=foundry.md">Edit listing</a></td>
 <td>Rust-based smart contract development toolkit for testing, scripting, and deployment.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://getfoundry.sh" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://book.getfoundry.sh" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span></td>
@@ -129,7 +136,7 @@
 <td><a href="https://x.com/foundry_rs" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Gelato Web3 Functions</strong><br><small>Developer Tools</small></td>
+<td><strong>Gelato Web3 Functions</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=gelato-web3-functions.md">Edit listing</a></td>
 <td>Smart contract automation and execution tooling for developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.gelato.network/web3-functions" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.gelato.network/web3-services/web3-functions" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Automation</span></td>
@@ -140,7 +147,7 @@
 <td><a href="https://x.com/GelatoNetwork" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Moralis</strong><br><small>Developer Tools</small></td>
+<td><strong>Moralis</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=moralis.md">Edit listing</a></td>
 <td>Web3 APIs and backend services for building blockchain-enabled applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://moralis.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://moralis.com/product" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Infrastructure</span></td>
@@ -151,7 +158,7 @@
 <td><a href="https://x.com/MoralisWeb3" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Nomic Foundation</strong><br><small>Developer Tools</small></td>
+<td><strong>Nomic Foundation</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=nomic-foundation.md">Edit listing</a></td>
 <td>Nonprofit organization supporting Ethereum development tooling, including Hardhat.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://nomic.foundation" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://hardhat.org" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span></td>
@@ -162,7 +169,7 @@
 <td><a href="https://x.com/NomicFoundation" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Polygonscan</strong><br><small>Developer Tools</small></td>
+<td><strong>Polygonscan</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=polygonscan.md">Edit listing</a></td>
 <td>Block explorer and developer APIs for Polygon network.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://polygonscan.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.polygonscan.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Data &amp; Analytics</span></td>
@@ -173,7 +180,7 @@
 <td><a href="https://x.com/polygonscan" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Privy</strong><br><small>Developer Tools</small></td>
+<td><strong>Privy</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=privy.md">Edit listing</a></td>
 <td>Embedded wallet and auth infrastructure for web3 onboarding.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.privy.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.privy.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Wallets</span></td>
@@ -184,7 +191,7 @@
 <td><a href="https://x.com/privy_io" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>RainbowKit</strong><br><small>Developer Tools</small></td>
+<td><strong>RainbowKit</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=rainbowkit.md">Edit listing</a></td>
 <td>Wallet connection UI toolkit for EVM applications.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.rainbowkit.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://www.rainbowkit.com/docs/introduction" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Wallets</span></td>
@@ -195,7 +202,7 @@
 <td><a href="https://x.com/rainbowdotme" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Reown</strong><br><small>Developer Tools</small></td>
+<td><strong>Reown</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=reown.md">Edit listing</a></td>
 <td>Wallet connectivity and developer tooling, including WalletConnect stack.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://reown.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.reown.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Wallets</span></td>
@@ -206,7 +213,7 @@
 <td><a href="https://x.com/reown_" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Reservoir</strong><br><small>Developer Tools</small></td>
+<td><strong>Reservoir</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=reservoir.md">Edit listing</a></td>
 <td>Liquidity and marketplace infrastructure for NFT products.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://reservoir.tools" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.reservoir.tools" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">NFTs &amp; Creator Economy</span></td>
@@ -217,7 +224,7 @@
 <td><a href="https://x.com/reservoir0x" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Scaffold-ETH</strong><br><small>Developer Tools</small></td>
+<td><strong>Scaffold-ETH</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=scaffold-eth.md">Edit listing</a></td>
 <td>Open-source starter stack for Ethereum smart contract apps.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://scaffoldeth.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.scaffoldeth.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span></td>
@@ -228,7 +235,7 @@
 <td><a href="https://x.com/scaffoldeth" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Sequence</strong><br><small>Developer Tools</small></td>
+<td><strong>Sequence</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=sequence.md">Edit listing</a></td>
 <td>Developer stack for smart wallets, game infrastructure, and onchain user onboarding.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://sequence.xyz" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Gaming</span><span class="badge">Wallets</span></td>
@@ -239,7 +246,7 @@
 <td><a href="https://x.com/0xsequence" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>SimpleHash</strong><br><small>Developer Tools</small></td>
+<td><strong>SimpleHash</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=simplehash.md">Edit listing</a></td>
 <td>NFT and token data APIs for developers and marketplaces.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://simplehash.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://simplehash.readme.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Data &amp; Analytics</span></td>
@@ -250,7 +257,7 @@
 <td><a href="https://x.com/simplehash" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Solscan</strong><br><small>Developer Tools</small></td>
+<td><strong>Solscan</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=solscan.md">Edit listing</a></td>
 <td>Explorer and analytics interface for Solana activity.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://solscan.io" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://info.solscan.io" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Data &amp; Analytics</span></td>
@@ -261,7 +268,7 @@
 <td><a href="https://x.com/solscanofficial" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Tenderly</strong><br><small>Developer Tools</small></td>
+<td><strong>Tenderly</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=tenderly.md">Edit listing</a></td>
 <td>Developer platform for smart contract debugging, simulation, and observability.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://tenderly.co" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Infrastructure</span></td>
@@ -272,7 +279,7 @@
 <td><a href="https://x.com/TenderlyApp" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>thirdweb</strong><br><small>Developer Tools</small></td>
+<td><strong>thirdweb</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=thirdweb.md">Edit listing</a></td>
 <td>Full-stack web3 developer platform for contracts, wallets, and application backends.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://thirdweb.com" target="_blank" rel="noopener">Website</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Infrastructure</span></td>
@@ -283,7 +290,7 @@
 <td><a href="https://x.com/thirdweb" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Turnkey</strong><br><small>Developer Tools</small></td>
+<td><strong>Turnkey</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=turnkey.md">Edit listing</a></td>
 <td>Secure key management and signing infrastructure for developers.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://www.turnkey.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.turnkey.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Security</span></td>
@@ -294,7 +301,7 @@
 <td><a href="https://x.com/turnkeyhq" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Viem</strong><br><small>Developer Tools</small></td>
+<td><strong>Viem</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=viem.md">Edit listing</a></td>
 <td>TypeScript interface for EVM JSON-RPC and wallet interactions.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://viem.sh" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://viem.sh/docs/getting-started" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span></td>
@@ -305,7 +312,7 @@
 <td><a href="https://x.com/wagmi_sh" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>Wagmi</strong><br><small>Developer Tools</small></td>
+<td><strong>Wagmi</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=wagmi.md">Edit listing</a></td>
 <td>React hooks library for Ethereum app development.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://wagmi.sh" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://wagmi.sh/react/getting-started" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span></td>
@@ -316,7 +323,7 @@
 <td><a href="https://x.com/wagmi_sh" target="_blank" rel="noopener">X</a></td>
 </tr>
 <tr>
-<td><strong>WalletConnect Foundation</strong><br><small>Developer Tools</small></td>
+<td><strong>WalletConnect Foundation</strong><br><small>Developer Tools</small><br><a data-edit-entry data-can-edit hidden href="../edit.html?id=walletconnect-foundation.md">Edit listing</a></td>
 <td>Stewardship organization for WalletConnect protocol and ecosystem.</td>
 <td><div class="links-cell"><a class="link-pill" href="https://walletconnect.com" target="_blank" rel="noopener">Website</a><a class="link-pill" href="https://docs.walletconnect.com" target="_blank" rel="noopener">Product</a></div></td>
 <td><span class="badge">Developer Tools</span><span class="badge">Infrastructure</span></td>
@@ -329,6 +336,7 @@
 </table>
     <p class="footer">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
-  
+
+  <script type="module" src="../assets/directory-client.js"></script>
 </body>
 </html>

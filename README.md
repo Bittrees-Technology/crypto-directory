@@ -2,6 +2,9 @@
 
 Minimal static directory for active onchain companies and projects.
 
+Directory email/wallet sign-in, Editor/Reviewer permissions, submissions and
+required deployment/authority setup: [directory roles](docs/directory-roles.md).
+
 ## Current status (February 13, 2026)
 - Repository: https://github.com/Bittrees-Technology/crypto-directory
 - Default branch: `main` (protected)
