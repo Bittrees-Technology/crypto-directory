@@ -1,6 +1,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { loadProcessStatuses } from './lib/process-metrics.mjs';
+import { writeReleaseManifest } from './lib/release-manifest.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
@@ -592,6 +593,7 @@ async function main() {
   ];
   await fs.writeFile(path.join(siteDir, 'sitemap.xml'), sitemapXml(sitemapPaths));
   await fs.writeFile(path.join(siteDir, 'robots.txt'), robotsTxt());
+  await writeReleaseManifest(root, siteDir);
 
   const processSummary = processStatuses.length === 0
     ? 'No tracked processes.'
