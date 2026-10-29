@@ -54,6 +54,30 @@ Closing a request records its review outcome only; it neither edits a listing no
 claims a change was released. The existing editor creates a separate protected
 release proposal using the current listing SHA and preserving verification state.
 
+Submission, direct editing and edit requests use the same twelve listing controls:
+name, lead category, description, website, product URL, tags, networks, founding
+year, HQ/country, token, optional token information URL and X/social URL. Token
+links are editable metadata; an omitted optional field remains compatible with
+older clients, and an explicit empty or `n/a` value removes that optional link.
+Verification and approval fields are never offered as editable controls.
+
+Selecting a listing in the request form reads its current metadata and SHA.
+Structured requests retain the original field values and only the proposed field
+changes. Unchanged requests and stale SHAs are rejected. Editors see the field
+comparison and receive those changes in their draft only while the original SHA
+still matches; otherwise current listing values stay intact for manual review.
+The older free-text request format and existing journal records remain supported.
+
+“Request removal” switches the form from metadata fields to explicit reason
+checkboxes: shutdown, unavailable website/product, duplicate, merger/rebrand,
+out-of-scope, inaccurate/misleading listing, security/impersonation concern, or
+other. At least one reason and an explanation are required. The server rejects
+unknown reasons and mixed removal/edit payloads. Removal requests only record
+review evidence: they do not delete files, change verification, hide listings or
+create a release proposal. Editors/Admins can inspect the source and close the
+request with an outcome; an administrator must separately prepare the protected
+removal proposal. No new deletion capability or role grant is introduced.
+
 Submissions are separate from `content/projects` on the `directory-intake` branch.
 The form explicitly discloses public storage of submitted business details and
 review rationales. Sign-in emails and wallets are replaced with keyed opaque

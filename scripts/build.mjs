@@ -2,7 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { loadProcessStatuses } from './lib/process-metrics.mjs';
 import { writeReleaseManifest } from './lib/release-manifest.mjs';
-import {CATEGORIES} from '../lib/directory/model.mjs';
+import {CATEGORIES,LISTING_FIELDS,REMOVAL_REASONS} from '../lib/directory/model.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
@@ -407,10 +407,15 @@ function reviewPage(projects) {
   return pageShell({title:'Review Queue',subtitle:'Review new project, company and organization submissions',body:'<section data-can-review hidden id="directory-review" class="card">Loading submissions…</section><p data-review-unavailable hidden>A Reviewer, Admin or Superadmin role is required to review new submissions.</p><p data-signed-out>Sign in with a Reviewer, Admin or Superadmin role to review new submissions.</p>'});
 }
 
+function listingControls(){
+  return LISTING_FIELDS.map(([name,label,type,required])=>{
+    const attrs=`name="${name}" data-field-label="${escapeHtml(label)}" ${required?'required':''}`;
+    const control=type==='category'?`<select ${attrs}><option value="">Select a category</option>${CATEGORIES.map(c=>`<option>${escapeHtml(c)}</option>`).join('')}</select>`:type==='textarea'?`<textarea ${attrs} maxlength="500" minlength="20"></textarea>`:`<input ${attrs} type="${type}" maxlength="${['name','hq','token'].includes(name)?100:['tags','ecosystem'].includes(name)?900:name==='founded'?4:700}">`;
+    return `<label${type==='textarea'?' class="form-field-wide"':''}>${label}${control}</label>`;
+  }).join('');
+}
 function listingFormPage(edit) {
-  const fields=[['name','Name','text',true],['description','Description','textarea',true],['primary_url','Official website','url',true],['product_url','Product or app URL (or n/a)','text',true],['tags','Tags, separated by commas','text',true],['ecosystem','Networks / ecosystem, separated by commas','text',true],['founded','Founding year (or n/a)','text',false],['hq','Country (Metaverse if unknown)','text',false],['token','Token (or n/a)','text',false],['twitter','X / social URL (or n/a)','text',false]];
-  const categoryControl=`<label>Lead category<select name="lead_category" required><option value="">Select a category</option>${CATEGORIES.map(c=>`<option>${escapeHtml(c)}</option>`).join('')}</select></label>`;
-  const controls=fields.map(([name,label,type,required])=>`<label${type==='textarea'?' class="form-field-wide"':''}>${label}${type==='textarea'?`<textarea name="${name}" maxlength="500" minlength="20" required></textarea>`:`<input name="${name}" type="${type}" maxlength="700" ${required?'required':''}>`}</label>${name==='name'?categoryControl:''}`).join('');
+  const controls=listingControls();
   const body=`<section class="card listing-form-card" ${edit?'data-can-edit':'data-can-submit'} hidden>
   <h2>Listing details</h2>
   <form id="listing-form" method="post" data-mode="${edit?'edit':'submit'}">${controls}
@@ -424,14 +429,18 @@ function listingFormPage(edit) {
 
 function editRequestPage(projects){
   const options=projects.filter(p=>p.verification_status!=='rejected').map(p=>`<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)}</option>`).join('');
-  return pageShell({title:'Request an edit',subtitle:'Suggest a correction to an existing project, company or organization.',body:`
-  <section class="card listing-form-card" data-can-request-edit hidden><h2>What needs updating?</h2>
-  <form id="edit-request-form" method="post">
+  return pageShell({title:'Request an edit',subtitle:'Suggest corrections or request removal of an existing project, company or organization.',body:`
+  <section class="card listing-form-card" data-can-request-edit hidden><h2>Listing details</h2>
+  <form id="listing-request-form" method="post">
   <label class="form-field-wide">Existing listing<select name="id" required><option value="">Choose a listing</option>${options}</select></label>
-  <label class="form-field-wide">Requested changes<textarea name="changes" minlength="20" maxlength="2000" required></textarea></label>
+  <p id="request-loading" class="form-field-wide status" role="status">Choose a listing to load its current details.</p>
+  <label class="checkbox-label form-field-wide"><input id="request-removal" name="requestRemoval" type="checkbox" disabled>Request removal of this listing</label>
+  <fieldset id="request-listing-fields" class="listing-fields form-field-wide" disabled><legend>Proposed listing details</legend>${listingControls()}</fieldset>
+  <fieldset id="removal-reasons" class="removal-reasons form-field-wide" hidden disabled><legend>Why should this listing be removed?</legend>${REMOVAL_REASONS.map(([key,label])=>`<label class="checkbox-label"><input type="checkbox" name="removalReasons" value="${key}" data-reason-label="${label}">${label}</label>`).join('')}<p class="status">Choose all reasons that apply. The listing stays visible until a removal is reviewed and approved for release.</p></fieldset>
+  <label class="form-field-wide">Reason for this request<textarea name="changes" minlength="20" maxlength="2000" required></textarea></label>
   <label class="form-field-wide">Official sources or supporting links<textarea name="sources" maxlength="1500"></textarea></label>
   <p class="submission-disclosure form-field-wide">Requests and review notes are public on GitHub. Do not include private information. Your sign-in email stays private. An Editor or Admin reviews requests; this form does not change the listing.</p>
-  <button type="submit">Send edit request</button></form></section>
+  <button type="submit" disabled>Send edit request</button></form></section>
   <section class="card my-submissions" data-signed-in hidden><h2 id="edit-requests-heading">Your edit requests</h2><div id="edit-requests"></div></section>
   <section class="signed-out-notice" data-signed-out><p>Sign in with your Bittrees email or Ethereum wallet to request an edit.</p><p class="status">You can browse the directory without signing in.</p></section>
   <p data-request-unavailable hidden>Your Reviewer role covers new submissions. An Editor or Admin handles changes to existing listings.</p>`});

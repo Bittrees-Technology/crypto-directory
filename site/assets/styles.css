@@ -48,9 +48,19 @@ textarea {resize:vertical;min-height:100px;border:1px solid var(--border);border
 .review-card dd {margin:3px 0;overflow-wrap:anywhere;}
 .review-card button {margin:12px 10px 0 0;}
 .request-details {white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;}
+#request-loading {margin:0;line-height:1.5;font-size:14px;}
+.listing-fields {display:grid;grid-template-columns:1fr 1fr;gap:18px;border:0;padding:0;margin:0;min-width:0;}
+.listing-fields legend,.removal-reasons legend {font-weight:600;margin-bottom:18px;padding:0;}
+.removal-reasons {border:1px solid var(--border);border-radius:8px;padding:16px;min-width:0;margin:0;}
+.listing-form-card .checkbox-label {display:flex;flex-direction:row;align-items:flex-start;gap:10px;margin:8px 0;line-height:1.5;cursor:pointer;}
+.listing-form-card input[type=checkbox] {width:18px;height:18px;flex:none;margin:2px 0;accent-color:var(--accent);}
+.request-comparison {width:100%;font-size:14px;table-layout:fixed;}
+.request-comparison td,.request-comparison th {white-space:pre-wrap;overflow-wrap:anywhere;vertical-align:top;}
+.request-comparison th:first-child {width:25%;}
 @media(max-width:650px){.directory-header{gap:10px}.directory-brand{font-size:16px;gap:8px}.listing-form-card{padding:18px}.listing-form-card form{grid-template-columns:1fr}.account-details{max-width:68px;font-size:12px}#directory-identity{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.account-session{gap:8px}}
 @media(max-width:760px){.directory-brand{width:100%}.header-forms{margin-left:0;gap:12px;font-size:13px}.directory-account{margin-left:auto}.header-forms a{padding:8px 0}.directory-header{gap:10px 16px}}
 @media(max-width:480px){.header-forms{flex-direction:column;align-items:flex-start;gap:0}.header-forms a{padding:4px 0}}
+@media(max-width:650px){.listing-fields{grid-template-columns:1fr}.request-comparison{font-size:12px}}
 body {
   margin: 0;
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
