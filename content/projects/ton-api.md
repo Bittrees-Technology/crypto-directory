@@ -5,10 +5,10 @@ tags: ["Developer Tools"]
 ecosystem: ["TON"]
 description: "APIs and developer tools for TON applications and blockchain data."
 primary_url: "https://tonapi.io/"
-product_url: "https://docs.tonconsole.com/tonapi/streaming-api/"
+product_url: "https://docs.tonconsole.com/tonapi/rest-api"
 founded: "n/a"
 hq: "Metaverse"
 token: "n/a"
 twitter: "n/a"
-verification_status: "pending_audit"
+verification_status: "verified"
 ---
