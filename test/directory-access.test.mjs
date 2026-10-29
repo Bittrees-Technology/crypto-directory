@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHmac,generateKeyPairSync,sign,randomUUID} from 'node:crypto';
 import {createDirectoryService} from '../lib/directory/service.mjs';
-import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,documentBody,newProjectId,readState,signedState,fail,sameListing} from '../lib/directory/model.mjs';
+import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,documentBody,newProjectId,readState,signedState,fail,sameListing,editableFields} from '../lib/directory/model.mjs';
 import {seal} from '../shared/roles-administration/sso/client.mjs';
 import {ecosystemDecisionMessage,ecosystemRequestMessage,verifyEcosystemSignature} from '../shared/roles-administration/ecosystem-authority.mjs';
 
@@ -97,6 +97,39 @@ test('edit request queue limits and legacy journal compatibility preserve intake
   const old={version:1,revision:1,submissions:[],edits:[]};assert.deepEqual(readState(signedState(old,secret),secret),old);
   assert.throws(()=>readState(signedState({...old,editRequests:{}},secret),secret));
   assert.throws(()=>readState(signedState({...old,editRequests:Array(257).fill({})},secret),secret));
+});
+test('structured edit requests capture the actual changed fields without changing source or verification',async()=>{
+  const f=fixture([], 'person@example.org'),current=await (await f.call('project?id=existing.md')).json();assert.equal(current.sha,'a'.repeat(40));
+  const input={id:'existing.md',sha:current.sha,kind:'edit',entry:{...listing,description:'Official project details have been updated with a new token page.',token_url:'https://existing.example.org/token'},changes:'The official site has updated the project details.',sources:'https://existing.example.org/news',operationId:randomUUID()};
+  assert.equal((await f.call('request-edit',input)).status,201);assert.equal((await f.call('request-edit',input)).status,200);
+  const record=f.state.value.editRequests[0];assert.deepEqual(Object.keys(record.patch),['description','token_url']);assert.equal(record.original.description,listing.description);assert.equal(record.original.token_url,'n/a');assert.equal(record.kind,'edit');assert.equal(record.listingSha,current.sha);
+  assert.equal(f.state.writes,1);assert.equal(f.state.proposals.length,0);assert.equal(record.patch.verification_status,undefined);
+  assert.equal((await f.call('request-edit',{...input,entry:{...input.entry,name:'Changed again'}})).status,409);
+  assert.equal((await f.call('request-edit',{...input,operationId:randomUUID(),entry:{...input.entry,verification_status:'verified'}})).status,400);
+  assert.equal((await f.call('edit',{})).status,403);assert.equal((await fixture(['role.reviewer']).call('project?id=existing.md')).status,403);
+});
+test('structured requests hold stale snapshots and reject no-op edits before any journal write',async()=>{
+  const f=fixture(),input={id:'existing.md',sha:'b'.repeat(40),kind:'edit',entry:{...listing,name:'Corrected name'},changes:'Official sources now use this corrected project name.',sources:'',operationId:randomUUID()};
+  assert.equal((await f.call('request-edit',input)).status,409);
+  assert.equal((await f.call('request-edit',{...input,sha:'a'.repeat(40),entry:listing})).status,400);
+  assert.equal((await f.call('request-edit',{...input,sha:'a'.repeat(40),removalReasons:['shutdown']})).status,400);
+  assert.equal(f.state.writes,0);assert.equal(f.state.proposals.length,0);
+});
+test('removal requests retain explicit reasons, are idempotent, and cannot delete or propose source changes',async()=>{
+  const f=fixture(),input={id:'existing.md',sha:'a'.repeat(40),kind:'removal',removalReasons:['unavailable','shutdown'],changes:'The project announced a permanent shutdown and its app is offline.',sources:'https://existing.example.org/announcement',operationId:randomUUID()};
+  assert.equal((await f.call('request-edit',input)).status,201);assert.equal((await f.call('request-edit',{...input,removalReasons:['shutdown','unavailable']})).status,200);
+  const record=f.state.value.editRequests[0];assert.equal(record.kind,'removal');assert.deepEqual(record.removalReasons,['shutdown','unavailable']);assert.equal(record.patch,undefined);assert.equal(record.entry,undefined);assert.equal(record.status,'pending');assert.equal(f.state.writes,1);assert.equal(f.state.proposals.length,0);
+  for(const change of [{removalReasons:[]},{removalReasons:['invented']},{removalReasons:['shutdown','shutdown']},{entry:listing},{sha:'b'.repeat(40)}])assert([400,409].includes((await f.call('request-edit',{...input,...change,operationId:randomUUID()})).status));
+  assert.equal(f.state.writes,1);assert.equal(f.state.proposals.length,0);
+});
+test('token information URLs round-trip as editable metadata while omitted values preserve old records',()=>{
+  const before={...listing,verification_status:'verified',token_url:'https://existing.example.org/old-token'};
+  assert.equal(entry(listing,{existing:before}).token_url,before.token_url);
+  assert.equal(entry({...listing,token_url:'https://existing.example.org/token'},{existing:before}).token_url,'https://existing.example.org/token');
+  assert.equal('token_url' in entry({...listing,token_url:'n/a'},{existing:before}),false);
+  assert.equal(entry({...listing,token_url:'n/a'},{existing:before}).verification_status,'verified');
+  assert.throws(()=>entry({...listing,token_url:'javascript:alert(1)'},{existing:before}));
+  assert.equal(editableFields(before).verification_status,undefined);
 });
 test('anonymous, tampered, expired and cross-origin sessions cannot access intake',async()=>{
   const f=fixture(['project.admin']);

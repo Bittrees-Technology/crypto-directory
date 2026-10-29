@@ -11,8 +11,8 @@ function signInReturn(requested=location.pathname+location.search){
   const page=new URL(requested,canonical);if(page.pathname!=='/request-edit.html')return requested;
   const target=new URL('/submit.html',canonical);target.searchParams.set('form','request-edit');const id=page.searchParams.get('id');if(/^[-a-z0-9]{1,120}\.md$/.test(id||''))target.searchParams.set('id',id);return target.pathname+target.search;
 }
-async function api(route,body){
-  const response=await fetch('/api/directory/'+route,{credentials:'same-origin',cache:'no-store',...(body?{method:'POST',headers:{'Content-Type':'application/json','X-Directory-CSRF':session?.csrf||''},body:JSON.stringify(body)}:{})});
+async function api(route,body,{signal}={}){
+  const response=await fetch('/api/directory/'+route,{credentials:'same-origin',cache:'no-store',signal,...(body?{method:'POST',headers:{'Content-Type':'application/json','X-Directory-CSRF':session?.csrf||''},body:JSON.stringify(body)}:{})});
   const result=await response.json();if(!response.ok){if([401,403].includes(response.status))clear();throw Object.assign(Error(result.error||'Unable to complete the request.'),{status:response.status});}return result;
 }
 function clear(){session=null;show('[data-staff]',false);show('[data-can-edit]',false);show('[data-can-review]',false);show('[data-can-submit]',false);show('[data-can-request-edit]',false);show('[data-request-unavailable]',false);show('[data-signed-in]',false);show('[data-signed-out]',true);const identity=byId('directory-identity');if(identity){identity.textContent='';identity.removeAttribute('title');}}
@@ -37,8 +37,13 @@ async function refresh({resume=false}={}){
     message(error.status===401?'':error.message);
   }finally{loading=false;}
 }
-function readEntry(form){const data=new FormData(form),result={};for(const key of ['name','lead_category','description','primary_url','product_url','founded','hq','token','twitter'])result[key]=String(data.get(key)||'').trim()||(['product_url','founded','token','twitter'].includes(key)?'n/a':key==='hq'?'Metaverse':'');for(const key of ['tags','ecosystem'])result[key]=String(data.get(key)||'').split(',').map(v=>v.trim()).filter(Boolean);return result;}
-function fill(form,value){for(const [key,v] of Object.entries(value)){const control=form.elements.namedItem(key);if(control)control.value=Array.isArray(v)?v.join(', '):v;}}
+function readEntry(form){const data=new FormData(form),result={};for(const key of ['name','lead_category','description','primary_url','product_url','founded','hq','token','token_url','twitter'])result[key]=String(data.get(key)||'').trim()||(['product_url','founded','token','token_url','twitter'].includes(key)?'n/a':key==='hq'?'Metaverse':'');for(const key of ['tags','ecosystem'])result[key]=String(data.get(key)||'').split(',').map(v=>v.trim()).filter(Boolean);return result;}
+function fill(form,value){for(const [key,v] of Object.entries(value)){const control=form.elements.namedItem(key);if(control)control.value=key==='token_url'&&v==='n/a'?'':Array.isArray(v)?v.join(', '):v;}}
+function patchTable(record){
+  const table=document.createElement('table');table.className='request-comparison';const head=document.createElement('thead'),row=document.createElement('tr');
+  for(const text of ['Field','At time of request','Requested value']){const th=document.createElement('th');th.scope='col';th.textContent=text;row.append(th);}head.append(row);table.append(head);const body=document.createElement('tbody');
+  for(const [key,value] of Object.entries(record.patch||{})){const tr=document.createElement('tr'),label=document.querySelector('[data-field-label][name="'+CSS.escape(key)+'"]')?.dataset.fieldLabel||key.replaceAll('_',' ');for(const v of [label,record.original?.[key]??'n/a',value]){const td=document.createElement('td');td.textContent=Array.isArray(v)?v.join(', '):String(v);tr.append(td);}body.append(tr);}table.append(body);return table;
+}
 function proposalMessage(result){if(result.proposal){message('Saved for release review. The public listing changes after approval and the next synchronized release.');const link=byId('directory-result');if(link&&/^https:\/\/github\.com\/Bittrees-Technology\/crypto-directory\/pull\/\d+$/.test(result.proposal.url)){link.href=result.proposal.url;link.textContent='View release proposal';link.hidden=false;}}else message(result.status==='rejected'?'Submission rejected.':result.message||'Submission received. It is awaiting an independent reviewer.');}
 async function reviewQueue(){
   const root=byId('directory-review');if(!root||!session?.canReview)return;
@@ -58,29 +63,56 @@ async function reviewQueue(){
 async function ownSubmissions(){const root=byId('my-submissions');if(!root||!session?.canSubmit)return;const result=await api('submissions');root.replaceChildren();for(const record of result.submissions){const p=document.createElement('p');p.textContent=record.entry.name+' — '+(record.status==='accepted'?'accepted; see release proposal':record.status);if(record.proposal&&/^https:\/\/github\.com\/Bittrees-Technology\/crypto-directory\/pull\/\d+$/.test(record.proposal.url)){const link=document.createElement('a');link.href=record.proposal.url;link.textContent=' Release proposal';p.append(link);}root.append(p);}}
 async function editRequests(){
   const root=byId('edit-requests');if(!root||!session)return;
-  byId('edit-requests-heading').textContent=session.canEdit?'Edit requests':'Your edit requests';
+  byId('edit-requests-heading').textContent=session.canEdit?'Edit and removal requests':'Your change requests';
   const result=await api('edit-requests');root.replaceChildren();
   if(!result.requests.length){root.textContent='No edit requests yet.';return;}
   for(const record of result.requests){
     const card=document.createElement('article');card.className='review-card';
-    const title=document.createElement('h3');title.textContent=record.projectName+' — '+record.status;card.append(title);
+    const title=document.createElement('h3');title.textContent=record.projectName+' — '+(record.kind==='removal'?'removal requested · ':'')+record.status;card.append(title);
+    if(record.patch)card.append(patchTable(record));
+    if(record.kind==='removal'){const reasons=document.createElement('ul');for(const reason of record.removalReasons||[]){const li=document.createElement('li');li.textContent=document.querySelector('[data-reason-label][value="'+CSS.escape(reason)+'"]')?.dataset.reasonLabel||reason;reasons.append(li);}card.append(reasons);}
     for(const text of [record.changes,record.sources,record.outcome?.reason].filter(Boolean)){const p=document.createElement('p');p.className='request-details';p.textContent=text;card.append(p);}
     if(session.canEdit&&record.status==='pending'){
-      const link=document.createElement('a');link.href='edit.html?'+new URLSearchParams({id:record.projectId,request:record.id});link.textContent='Open listing editor';card.append(link);
+      const link=document.createElement('a');link.href=record.kind==='removal'?'https://github.com/Bittrees-Technology/crypto-directory/blob/main/content/projects/'+encodeURIComponent(record.projectId):'edit.html?'+new URLSearchParams({id:record.projectId,request:record.id});link.textContent=record.kind==='removal'?'View listing source for removal review':'Open listing editor';card.append(link);
       const label=document.createElement('label');label.textContent='Review outcome';const reason=document.createElement('textarea');reason.minLength=10;reason.maxLength=1000;reason.required=true;label.append(reason);card.append(label);
       const close=document.createElement('button');close.type='button';close.textContent='Close request';close.addEventListener('click',async()=>{if(!reason.reportValidity())return;close.disabled=true;try{await refresh();const response=await api('close-edit-request',{id:record.id,revision:record.revision,reason:reason.value});message(response.message);await editRequests();}catch(error){message(error.message);}finally{close.disabled=false;}});card.append(close);
-      const note=document.createElement('p');note.textContent='Closing a request does not change the listing. Propose changes in the editor for independent release approval.';card.append(note);
+      const note=document.createElement('p');note.textContent=record.kind==='removal'?'An administrator must prepare a separate removal proposal for independent release approval. Closing this request does not remove the listing.':'Closing a request does not change the listing. Propose changes in the editor for independent release approval.';card.append(note);
     }
     root.append(card);
   }
 }
 async function requestEditForm(){
-  const form=byId('edit-request-form');if(!form||!session?.canRequestEdit)return;
-  form.addEventListener('submit',event=>event.preventDefault());
+  const form=byId('listing-request-form');if(!form||!session?.canRequestEdit)return;
   if(!session.storageConfigured){message('The edit request connection is awaiting administrator setup.');form.querySelector('button[type=submit]').disabled=true;return;}
-  const selected=new URLSearchParams(location.search).get('id');if(selected)form.elements.namedItem('id').value=selected;
-  let operationId=crypto.randomUUID();
-  form.addEventListener('submit',async()=>{const button=form.querySelector('button[type=submit]');button.disabled=true;try{await refresh();const data=new FormData(form);await api('request-edit',{id:String(data.get('id')),changes:String(data.get('changes')),sources:String(data.get('sources')),operationId});message('Edit request received. An Editor or Admin will review it before any listing changes.');form.reset();operationId=crypto.randomUUID();await editRequests();}catch(error){message(error.message);}finally{button.disabled=false;}});
+  const select=form.elements.namedItem('id'),remove=byId('request-removal'),details=byId('request-listing-fields'),reasons=byId('removal-reasons'),button=form.querySelector('button[type=submit]'),status=byId('request-loading'),checks=[...form.querySelectorAll('[name=removalReasons]')];
+  let operationId=crypto.randomUUID(),current=null,serial=0,busy=false,controller;
+  function mode(){const ready=!!current&&!busy;details.hidden=remove.checked;details.disabled=!ready||remove.checked;reasons.hidden=!remove.checked;reasons.disabled=!ready||!remove.checked;remove.disabled=!ready;select.disabled=busy;button.disabled=!ready;button.textContent=remove.checked?'Send removal request':'Send edit request';form.elements.namedItem('changes').disabled=busy;form.elements.namedItem('sources').disabled=busy;checks[0].setCustomValidity(remove.checked&&!checks.some(c=>c.checked)?'Choose at least one removal reason.':'');}
+  async function load(){
+    const id=select.value,token=++serial,actor=session?.identity;controller?.abort();controller=new AbortController();current=null;form.reset();select.value=id;operationId=crypto.randomUUID();mode();status.textContent=id?'Loading current listing details…':'Choose a listing to load its current details.';if(!id)return;
+    try{const result=await api('project?id='+encodeURIComponent(id),null,{signal:controller.signal});if(token!==serial||session?.identity!==actor||!session?.canRequestEdit)return;if(result.id!==id||!/^[a-f0-9]{40}$/.test(result.sha))throw Error('The listing details could not be confirmed.');fill(form,result.entry);current={id,sha:result.sha};status.textContent='Current details loaded. Change the fields below, or request removal.';mode();}
+    catch(error){if(token===serial&&error.name!=='AbortError'){status.textContent=error.message;mode();}}
+  }
+  select.addEventListener('change',load);remove.addEventListener('change',mode);checks.forEach(c=>c.addEventListener('change',mode));
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();mode();if(busy||!current||!form.reportValidity())return;
+    const data=new FormData(form),actor=session?.identity,kind=remove.checked?'removal':'edit',input={id:current.id,sha:current.sha,kind,changes:String(data.get('changes')),sources:String(data.get('sources')),operationId,...(kind==='edit'?{entry:readEntry(form)}:{removalReasons:data.getAll('removalReasons')})};busy=true;mode();
+    try{await refresh();if(!session?.canRequestEdit||session.identity!==actor)throw Error('Your sign-in changed. Reload before sending this request.');const result=await api('request-edit',input);message(result.status==='closed'?'This request has already been reviewed.':kind==='removal'?'Removal request received. The listing stays visible until review and release approval.':'Edit request received. An Editor or Admin will review it before any listing changes.');current=null;form.reset();status.textContent='Choose a listing to load its current details.';operationId=crypto.randomUUID();await editRequests();}catch(error){message(error.message);}finally{busy=false;mode();}
+  });
+  const selected=new URLSearchParams(location.search).get('id');if(selected)select.value=selected;await load();
+}
+async function loadListingEditor(form,id){
+  const result=await api('project?id='+encodeURIComponent(id||''));fill(form,result.entry);
+  const requestId=new URLSearchParams(location.search).get('request');
+  if(requestId){
+    const requests=await api('edit-requests'),request=requests.requests.find(r=>r.id===requestId&&r.projectId===id);
+    if(request){
+      if(request.kind==='removal')throw Error('Removal requests require a separate administrator release proposal. This editor changes listing details only.');
+      const note=document.createElement('p');note.className='request-details';note.textContent='Requested correction: '+request.changes+(request.sources?' Sources: '+request.sources:'');
+      if(request.patch){if(request.listingSha===result.sha){fill(form,request.patch);note.textContent+=' Requested field changes are loaded into the draft below.';}else note.textContent+=' The listing changed since this request. Current values have been kept; compare the requested changes before editing.';form.before(patchTable(request));}
+      form.before(note);form.elements.namedItem('reason').value='Edit request '+request.id+': '+request.changes.slice(0,600)+(request.sources?' Sources: '+request.sources.slice(0,250):'');
+    }
+  }
+  return result.sha;
 }
 async function start(){
   clear();
@@ -103,7 +135,7 @@ async function start(){
       if(edit&&!session.canEdit){message('An Editor, Admin or Superadmin role is required to update listings.');return;}
       if(!edit&&!session.canSubmit){message('Your staff role does not include new submissions.');return;}
       if(!session.storageConfigured){message('The submission connection is awaiting administrator setup. Your sign-in and permissions are available.');form.querySelector('button[type=submit]').disabled=true;return;}
-      if(edit){try{const result=await api('project?id='+encodeURIComponent(id||''));sha=result.sha;fill(form,result.entry);const requestId=new URLSearchParams(location.search).get('request');if(requestId){const requests=await api('edit-requests'),request=requests.requests.find(r=>r.id===requestId&&r.projectId===id);if(request){const note=document.createElement('p');note.className='request-details';note.textContent='Requested correction: '+request.changes+(request.sources?' Sources: '+request.sources:'');form.before(note);form.elements.namedItem('reason').value='Edit request '+request.id+': '+request.changes.slice(0,850);}}}catch(error){form.querySelector('button[type=submit]').disabled=true;throw error;}}
+      if(edit){try{sha=await loadListingEditor(form,id);}catch(error){form.querySelector('button[type=submit]').disabled=true;throw error;}}
       let operationId=crypto.randomUUID();
       form.addEventListener('submit',async event=>{event.preventDefault();const button=form.querySelector('button[type=submit]');button.disabled=true;try{await refresh();const value=readEntry(form);const result=await api(edit?'edit':'submit',edit?{id,sha,entry:value,reason:String(new FormData(form).get('reason')||''),operationId}:{entry:value,operationId});proposalMessage(result);if(!edit){form.reset();operationId=crypto.randomUUID();await ownSubmissions();}else form.hidden=true;}catch(error){message(error.message);}finally{button.disabled=false;}});
     }
