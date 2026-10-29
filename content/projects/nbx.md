@@ -10,5 +10,5 @@ founded: "n/a"
 hq: "Norway"
 token: "n/a"
 twitter: "n/a"
-verification_status: "pending_audit"
+verification_status: "verified"
 ---
