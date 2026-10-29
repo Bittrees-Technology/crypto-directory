@@ -9,6 +9,10 @@ The Roles companion release must precede the directory release.
 The header places “Submit a project” and “Request an edit” immediately before
 the account control on every page, including while signed out. The forms still
 require sign-in and enforce their permissions on the server.
+Edit-request sign-in returns through the issuer's existing allowed `submit.html`
+route with a fixed `form=request-edit` marker. Once the server confirms a session,
+the app resumes `request-edit.html`, preserving only a validated listing filename.
+Caller-provided destinations and off-site redirects are never accepted.
 
 Wallet accounts display their ENS primary name when ENS's Universal Resolver
 successfully verifies its forward address. The full authenticated wallet remains

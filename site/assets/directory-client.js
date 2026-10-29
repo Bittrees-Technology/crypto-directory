@@ -5,6 +5,12 @@ let session=null,loading=false,initialized=false;
 const ensNames=new Map();
 const show=(selector,visible)=>document.querySelectorAll(selector).forEach(node=>{node.hidden=!visible;});
 function message(text){const node=byId('directory-message');if(node)node.textContent=text;}
+function requestDestination(){const params=new URLSearchParams(location.search),target=new URL('/request-edit.html',canonical),id=params.get('id');if(/^[-a-z0-9]{1,120}\.md$/.test(id||''))target.searchParams.set('id',id);return target.pathname+target.search;}
+function signInReturn(requested=location.pathname+location.search){
+  if(!requested.startsWith('/')||requested.startsWith('//')||/[\\\r\n]/.test(requested))return requested;
+  const page=new URL(requested,canonical);if(page.pathname!=='/request-edit.html')return requested;
+  const target=new URL('/submit.html',canonical);target.searchParams.set('form','request-edit');const id=page.searchParams.get('id');if(/^[-a-z0-9]{1,120}\.md$/.test(id||''))target.searchParams.set('id',id);return target.pathname+target.search;
+}
 async function api(route,body){
   const response=await fetch('/api/directory/'+route,{credentials:'same-origin',cache:'no-store',...(body?{method:'POST',headers:{'Content-Type':'application/json','X-Directory-CSRF':session?.csrf||''},body:JSON.stringify(body)}:{})});
   const result=await response.json();if(!response.ok){if([401,403].includes(response.status))clear();throw Object.assign(Error(result.error||'Unable to complete the request.'),{status:response.status});}return result;
@@ -78,13 +84,16 @@ async function requestEditForm(){
 }
 async function start(){
   clear();
-  document.querySelectorAll('[data-login-link]').forEach(link=>{link.href=canonical+'/sign-in?'+new URLSearchParams({return_to:location.pathname+location.search});});
+  document.querySelectorAll('[data-login-link]').forEach(link=>{link.href=canonical+'/sign-in?'+new URLSearchParams({return_to:signInReturn()});});
   if(!local)document.querySelectorAll('.header-forms a').forEach(link=>{link.href=new URL(link.getAttribute('href'),canonical+location.pathname).href;});
   if(!local)return;
   if(location.pathname==='/sign-in'||location.pathname==='/sign-in.html'){
-    const query=new URLSearchParams(location.search),target=new URL('https://roles.bittrees.org/sign-in');target.searchParams.set('app','crypto-directory');target.searchParams.set('return_to',query.get('return_to')||'/');location.replace(target.href);return;
+    const query=new URLSearchParams(location.search),target=new URL('https://roles.bittrees.org/sign-in');target.searchParams.set('app','crypto-directory');target.searchParams.set('return_to',signInReturn(query.get('return_to')||'/'));location.replace(target.href);return;
   }
   await refresh({resume:true});
+  // The shared issuer already permits submit.html. Resume this exact form
+  // inside the app after authentication, without accepting an arbitrary URL.
+  if(session&&location.pathname==='/submit.html'&&new URLSearchParams(location.search).get('form')==='request-edit'){location.replace(requestDestination());return;}
   if(session){
     if(session.canEdit)document.querySelectorAll('[data-edit-entry]').forEach(link=>{link.hidden=false;});
     const form=byId('listing-form');
