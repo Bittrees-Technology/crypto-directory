@@ -24,6 +24,7 @@ PRODUCTION = 'https://cd.bittrees.org'
 ENS = 'https://cryptodirectory.eth.limo'
 PROJECT = 'prj_VR4haeMLogio89OfwCsD1zBI4QxE'
 VERCEL = 'https://vercel.com/bittrees-tech/bittrees-cryptodirectory/'
+VERCEL_CONTEXT = 'Vercel – bittrees-cryptodirectory'
 MAX_FILE = 16*1024*1024
 MAX_TOTAL = 32*1024*1024
 MAX_MANIFEST = 128*1024
@@ -94,7 +95,11 @@ def approved(value):
     if not verified:
         raise ValueError('No successful CI for the exact main source tree')
     statuses=github('commits/'+source+'/status')['statuses']
-    status=next((s for s in statuses if s['context']=='Vercel'),None)
+    # Multiple Vercel projects qualify their status contexts. A sibling cannot
+    # approve this release; legacy success cannot override a qualified failure.
+    status=next((s for s in statuses if s['context']==VERCEL_CONTEXT),None)
+    if status is None:
+        status=next((s for s in statuses if s['context']=='Vercel'),None)
     if not status or status['state']!='success' or status['target_url']!=VERCEL+value['deploymentId'][4:]:
         raise ValueError('Exact Vercel deployment has not passed')
     return {'sourceCommit':source,'deploymentId':value['deploymentId'],'vercelStatusId':status['id'],'checkedAt':int(time.time()),**ci_proof}
