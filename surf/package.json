@@ -6,7 +6,10 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "node scripts/browser.mjs"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }
