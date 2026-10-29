@@ -92,6 +92,12 @@ try{
     assert.equal(await page.locator('#directory-message').isVisible(),false);assert(await page.getByRole('link',{name:'Back to directory',exact:true}).isVisible());
     assert.equal(new URL(await page.locator('[data-login-link]').getAttribute('href')).origin,'https://cd.bittrees.org');assert.equal(mirrorApiCalls,0);
     for(const link of await page.locator('.header-forms a').all())assert.equal(new URL(await link.getAttribute('href')).origin,'https://cd.bittrees.org');
+    await page.goto('https://cryptodirectory.eth.limo/request-edit.html?id=aave.md');
+    await page.waitForFunction(()=>document.querySelector('[data-login-link]').href.includes('?return_to='));
+    assert.equal(new URL(await page.locator('[data-login-link]').getAttribute('href')).searchParams.get('return_to'),'/submit.html?form=request-edit&id=aave.md');
+    await page.route('https://roles.bittrees.org/sign-in**',route=>route.fulfill({contentType:'text/html',body:'<p>Shared sign-in fixture</p>'}));
+    await page.goto(origin+'/sign-in.html?'+new URLSearchParams({return_to:'/request-edit.html?id=aave.md'}));await page.waitForURL('https://roles.bittrees.org/sign-in**');
+    assert.equal(new URL(page.url()).searchParams.get('return_to'),'/submit.html?form=request-edit&id=aave.md');
   });
   await scenario('submitter',async({page,writes})=>{
     await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});assert.equal(await page.locator('.site-nav').isVisible(),false);
@@ -102,12 +108,13 @@ try{
     await page.getByRole('button',{name:'Submit for review',exact:true}).click();await page.getByText('Submission received. It is awaiting an independent reviewer.',{exact:true}).waitFor();
     assert.equal(writes.length,1);assert.equal(writes[0].endpoint,'submit');assert.equal(writes[0].value.entry.name,base.name);
     await page.setViewportSize({width:390,height:844});const box=await page.locator('.listing-form-card').boundingBox();assert(box.x>=0&&box.x+box.width<=390);
-    await page.goto(origin+'/request-edit.html?id=aave.md');await page.locator('#edit-request-form').waitFor({state:'visible'});
+    await page.goto(origin+'/submit.html?form=request-edit&id=aave.md');await page.waitForURL('**/request-edit.html?id=aave.md');await page.locator('#edit-request-form').waitFor({state:'visible'});
     assert.equal(await page.locator('[name="id"]').inputValue(),'aave.md');
     await page.locator('[name="changes"]').fill('Please correct the official project details using this source.');await page.locator('[name="sources"]').fill('https://fixture.example.org/announcement');
     await page.getByRole('button',{name:'Send edit request',exact:true}).click();await page.getByText('Edit request received. An Editor or Admin will review it before any listing changes.',{exact:true}).waitFor();
     assert.equal(writes.at(-1).endpoint,'request-edit');assert.equal(writes.at(-1).value.id,'aave.md');assert.equal(await page.getByRole('link',{name:'Open listing editor',exact:true}).count(),0);
     await screenshot(page,'edit-request-mobile');await page.setViewportSize({width:1360,height:900});await screenshot(page,'edit-request-desktop');
+    await page.goto(origin+'/submit.html?form=request-edit&id='+encodeURIComponent('//attacker.example/'));await page.waitForURL(origin+'/request-edit.html');assert.equal(await page.locator('[name="id"]').inputValue(),'');
   });
   await scenario('editor',async({page,writes})=>{
     await page.goto(origin+'/request-edit.html');await page.getByRole('link',{name:'Open listing editor',exact:true}).waitFor();
