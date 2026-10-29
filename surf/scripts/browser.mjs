@@ -13,7 +13,7 @@ const base={id:'aave.md',name:'Fixture A',lead_category:'DeFi',verification_stat
 const second={...base,id:'second.md',name:'Fixture B',primary_url:'https://fixture.example.org/b',product_url:'https://fixture.example.org/b/product'};
 const browser=await chromium.launch({headless:true});const checks=[],errors=[];
 async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatus='embeddable',signedIn=false,nativeOrigin=false,resume=false,seedSaved=null,pendingSave=null,frameGate=null}={}){
-  const context=await browser.newContext({viewport:{width:1360,height:900}}),page=await context.newPage();let raw=initial;let remoteSaved=[];let sharedSignedIn=signedIn;let handoffs=0;const navigationOrigin=nativeOrigin?'https://surf.bittrees.org':origin;
+  const context=await browser.newContext({viewport:{width:1360,height:900}}),page=await context.newPage();let raw=initial;let remoteSaved=[];let sharedSignedIn=signedIn;let handoffs=0;const apiRequests=[];const navigationOrigin=nativeOrigin?'https://surf.bittrees.org':origin;
   if(oldSaves)await context.addInitScript(value=>{if(!localStorage.getItem('bittrees.surf.v1'))localStorage.setItem('bittrees.surf.v1',JSON.stringify({saved:value}));},oldSaves);
   if(seedSaved)await context.addInitScript(value=>{if(!localStorage.getItem('bittrees.surf.v2'))localStorage.setItem('bittrees.surf.v2',JSON.stringify({saved:value}));},seedSaved);
   if(pendingSave)await context.addInitScript(value=>{if(!sessionStorage.getItem('fixture.pending.seeded')){sessionStorage.setItem('surf.pending-save',JSON.stringify(value));sessionStorage.setItem('fixture.pending.seeded','1');}},pendingSave);
@@ -21,7 +21,7 @@ async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatu
   page.on('pageerror',error=>errors.push(name+': '+error.message));
   await context.route('https://fixture.example.org/**',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><head><title>Embedded fixture</title></head><body><h1>Actual embedded website</h1></body></html>'}));
   await page.route('**/catalog.json',route=>route.fulfill({json:{projects:normalizeCatalog(raw),status:'live',checkedAt:new Date().toISOString()}}));
-  await page.route('**/api/**',async route=>{const u=new URL(route.request().url());let data;
+  await page.route('**/api/**',async route=>{const u=new URL(route.request().url());apiRequests.push(route.request().method()+' '+u.pathname);let data;
     if(u.pathname==='/api/catalog')data={projects:normalizeCatalog(raw),status:'live',checkedAt:new Date().toISOString()};
     else if(u.pathname==='/api/frame'){if(frameGate)await frameGate;const p=normalizeCatalog(raw).find(p=>p.id===u.searchParams.get('project'));if(!p)return route.fulfill({status:404,json:{error:'Removed'}});data={status:frameStatus,url:p[u.searchParams.get('type')],reason:'embedding-blocked'};}
     else if(u.pathname==='/api/account/session')data={configured:true,signedIn:sharedSignedIn,...(sharedSignedIn?{identity:'fixture@example.org',csrf:'fixture-csrf'}:{})};
@@ -32,7 +32,7 @@ async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatu
     }else data={ok:true};await route.fulfill({json:data});
   });
   const refresh=async next=>{raw=next;const response=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/catalog');await page.evaluate(()=>window.dispatchEvent(new Event('focus')));await response;};
-  try{await page.goto(navigationOrigin+'/');await page.waitForFunction(()=>document.getElementById('welcome-meta').textContent.includes('verified projects'));await run({page,context,refresh,setRaw:next=>raw=next,handoffs:()=>handoffs});checks.push(name);}finally{await context.close();}
+  try{await page.goto(navigationOrigin+'/');await page.waitForFunction(()=>document.getElementById('welcome-meta').textContent.includes('verified projects'));await run({page,context,refresh,setRaw:next=>raw=next,handoffs:()=>handoffs});checks.push(name);}catch(error){let visible;try{visible=await page.evaluate(()=>({account:document.getElementById('nav-account')?.textContent,saved:document.getElementById('saved-count')?.textContent,pending:sessionStorage.getItem('surf.pending-save'),count:document.getElementById('welcome-meta')?.textContent}));}catch{}console.error(JSON.stringify({failedSyntheticScenario:name,url:page.url(),handoffs,sharedSignedIn,remoteSavedCount:remoteSaved.length,apiRequests,visible,pageErrors:errors}));throw error;}finally{await context.close();}
 }
 async function startProduct(page){await page.locator('#link-mode').selectOption('product');await page.locator('#start-surf').click();await page.frameLocator('#site-frame').getByRole('heading',{name:'Actual embedded website'}).waitFor();}
 try{
