@@ -2,6 +2,14 @@
 
 Use this folder to collect candidate listings before they become official project entries.
 
+## Research batches
+
+[500 additional sites, including crypto/Web3 AI agents (29 October 2026)](research/2026-10-29-500-sites.md)
+contains proposed listing fields, sources and bounded homepage checks. The batch
+is awaiting review and is not an accepted submission. Merging category or
+research changes does not approve its candidates. Research files are not
+imported automatically or included in the public project data.
+
 ## Flow
 1. Collect candidate data as JSON in `content/submissions/inbox/`.
 2. Review and move accepted files to `content/submissions/approved/`.
