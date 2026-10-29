@@ -223,6 +223,7 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
   <main>
     <header class="directory-header">
       <a class="directory-brand" href="${escapeHtml(navPrefix)}index.html" aria-label="CryptoDirectory home"><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
+      <nav class="header-forms" aria-label="Contribute to the directory"><a href="${escapeHtml(navPrefix)}submit.html">Submit a project</a><a href="${escapeHtml(navPrefix)}request-edit.html">Request an edit</a></nav>
       <div class="directory-account">
         <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in" title="Sign in with email or Ethereum">Sign in</a>
         <div data-signed-in hidden class="account-session"><span class="account-details"><span id="directory-identity"></span><small id="directory-role"></small></span><button type="button" id="directory-logout">Sign out</button></div>
@@ -230,7 +231,6 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
     </header>
     <div class="directory-navigation">
     ${siteNav(navPrefix)}
-    ${showSubmissionLink?`<nav class="submission-nav" data-can-submit hidden><a href="${escapeHtml(navPrefix)}submit.html">Submit a project</a></nav>`:''}
     </div>
     ${home?'':`<a class="directory-back" href="${escapeHtml(navPrefix)}index.html"><span aria-hidden="true">←</span>Back to directory</a>`}
     <section class="page-heading"><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(subtitle)}</p></section>
@@ -422,6 +422,21 @@ function listingFormPage(edit) {
   return pageShell({title:edit?'Update a listing':'Submit a listing',subtitle:edit?'Propose changes to an existing listing. Verification and approval stay unchanged.':'Suggest a project, company or organization for review.',showSubmissionLink:edit,body});
 }
 
+function editRequestPage(projects){
+  const options=projects.filter(p=>p.verification_status!=='rejected').map(p=>`<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)}</option>`).join('');
+  return pageShell({title:'Request an edit',subtitle:'Suggest a correction to an existing project, company or organization.',body:`
+  <section class="card listing-form-card" data-can-request-edit hidden><h2>What needs updating?</h2>
+  <form id="edit-request-form" method="post">
+  <label class="form-field-wide">Existing listing<select name="id" required><option value="">Choose a listing</option>${options}</select></label>
+  <label class="form-field-wide">Requested changes<textarea name="changes" minlength="20" maxlength="2000" required></textarea></label>
+  <label class="form-field-wide">Official sources or supporting links<textarea name="sources" maxlength="1500"></textarea></label>
+  <p class="submission-disclosure form-field-wide">Requests and review notes are public on GitHub. Do not include private information. Your sign-in email stays private. An Editor or Admin reviews requests; this form does not change the listing.</p>
+  <button type="submit">Send edit request</button></form></section>
+  <section class="card my-submissions" data-signed-in hidden><h2 id="edit-requests-heading">Your edit requests</h2><div id="edit-requests"></div></section>
+  <section class="signed-out-notice" data-signed-out><p>Sign in with your Bittrees email or Ethereum wallet to request an edit.</p><p class="status">You can browse the directory without signing in.</p></section>
+  <p data-request-unavailable hidden>Your Reviewer role covers new submissions. An Editor or Admin handles changes to existing listings.</p>`});
+}
+
 function needsUpdatePage(projects) {
   const flagged = projects.filter((p) => p.verification_status === 'needs_update');
   const body = `<section class=\"card\" style=\"margin:18px 0\">
@@ -576,6 +591,7 @@ async function main() {
   await fs.writeFile(path.join(siteDir, 'process-status.html'), processStatusPage(processStatuses));
   await fs.writeFile(path.join(siteDir,'submit.html'),listingFormPage(false));
   await fs.writeFile(path.join(siteDir,'edit.html'),listingFormPage(true));
+  await fs.writeFile(path.join(siteDir,'request-edit.html'),editRequestPage(projects));
   await fs.writeFile(path.join(siteDir,'sign-in.html'),pageShell({title:'CryptoDirectory',subtitle:'Sign in with email or Ethereum',body:'<section class="card"><p>Opening the shared Bittrees sign-in…</p><a href="https://roles.bittrees.org/sign-in?app=crypto-directory">Continue to sign-in</a></section>'}));
   await fs.copyFile(path.join(root,'web/directory-client.js'),path.join(siteDir,'assets/directory-client.js'));
 

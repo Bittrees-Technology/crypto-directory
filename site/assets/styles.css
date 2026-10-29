@@ -12,7 +12,9 @@
 .directory-header {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-bottom:18px;margin-bottom:24px;border-bottom:1px solid var(--border);}
 .directory-brand {display:inline-flex;align-items:center;gap:10px;color:var(--text);font:700 20px/1.3 "Space Grotesk","Segoe UI",sans-serif;}
 .directory-icon {object-fit:contain;flex:none;}
-.directory-account {margin-left:auto;text-align:right;max-width:340px;overflow-wrap:anywhere;}
+.directory-account {text-align:right;max-width:340px;overflow-wrap:anywhere;}
+.header-forms {display:flex;align-items:center;gap:16px;margin-left:auto;font-size:14px;font-weight:600;}
+.header-forms a {white-space:nowrap;}
 .account-session {display:flex;align-items:center;justify-content:flex-end;gap:14px;}
 .account-details {min-width:0;font-size:14px;}
 .directory-account small {display:block;margin-top:3px;color:var(--muted);}
@@ -21,7 +23,6 @@
 button:disabled {opacity:.55;cursor:not-allowed;}
 .directory-navigation {display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .directory-navigation > nav {margin:0 0 22px;}
-.submission-nav {font-size:14px;font-weight:600;}
 .directory-back {display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;font-size:14px;font-weight:600;}
 .page-heading {max-width:760px;margin-bottom:24px;}
 .page-heading h1 {margin:0;font:700 clamp(28px,3vw,36px)/1.2 "Space Grotesk","Segoe UI",sans-serif;letter-spacing:-.025em;}
@@ -46,7 +47,10 @@ textarea {resize:vertical;min-height:100px;border:1px solid var(--border);border
 .review-card dt {font-weight:600;margin-top:9px;}
 .review-card dd {margin:3px 0;overflow-wrap:anywhere;}
 .review-card button {margin:12px 10px 0 0;}
+.request-details {white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;}
 @media(max-width:650px){.directory-header{gap:10px}.directory-brand{font-size:16px;gap:8px}.listing-form-card{padding:18px}.listing-form-card form{grid-template-columns:1fr}.account-details{max-width:68px;font-size:12px}#directory-identity{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.account-session{gap:8px}}
+@media(max-width:760px){.directory-brand{width:100%}.header-forms{margin-left:0;gap:12px;font-size:13px}.directory-account{margin-left:auto}.header-forms a{padding:8px 0}.directory-header{gap:10px 16px}}
+@media(max-width:480px){.header-forms{flex-direction:column;align-items:flex-start;gap:0}.header-forms a{padding:4px 0}}
 body {
   margin: 0;
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;

@@ -50,7 +50,7 @@ function fixture(roles=[],identity=wallet){
     async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
     async reconcile(operation){return state.proposals.some(p=>p.operation===operation)?{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}:null;}
   });
-  const service=createDirectoryService({env,fetcher,storeFactory});
+  const service=createDirectoryService({env,fetcher,storeFactory,resolveName:async identity=>identity===wallet?'fixture.eth':null});
   const call=(path,body,extra={})=>service(new Request(ORIGIN+'/api/directory/'+path,{method:body?'POST':'GET',headers:{cookie,...(body?{origin:ORIGIN,'content-type':'application/json','x-directory-csrf':csrf}:{}) ,...extra},...(body?{body:JSON.stringify(body)}:{})}));
   const csrf=createHmac('sha256',secret).update('cryptodirectory.csrf.v1:'+cookie).digest('hex');
   return {state,service,call,cookie,csrf};
@@ -63,6 +63,40 @@ test('signed wallet and email role decisions expose only their exact scoped capa
       assert.deepEqual([value.canEdit,value.canReview,value.canSubmit],result);
     }
   }
+});
+test('ENS display metadata never replaces the authenticated address or grants a role',async()=>{
+  const f=fixture(),r=await (await f.call('identity')).json();assert.deepEqual(r,{identity:wallet,ensName:'fixture.eth'});
+  const session=await (await f.call('session')).json();assert.equal(session.identity,wallet);assert.equal(session.staff,false);
+  assert.deepEqual(await (await fixture([], 'person@example.org').call('identity')).json(),{identity:'person@example.org',ensName:null});
+  assert.equal((await f.call('identity',null,{cookie:''})).status,401);
+});
+test('edit requests are idempotent, scoped to existing entries, private by actor and never publish listings',async()=>{
+  const f=fixture([], 'person@example.org'),input={id:'existing.md',changes:'Please update the official product URL to its new location.',sources:'https://existing.example.org/announcement',operationId:randomUUID()};
+  assert.equal((await f.call('request-edit',input)).status,201);assert.equal((await f.call('request-edit',input)).status,200);assert.equal(f.state.writes,1);assert.equal(f.state.proposals.length,0);
+  assert.equal((await f.call('request-edit',{...input,changes:'Different correction with reused operation.'})).status,409);
+  assert.equal((await f.call('request-edit',{...input,id:'absent.md',operationId:randomUUID()})).status,404);
+  assert.equal((await f.call('request-edit',{...input,id:'../scripts/build.mjs',operationId:randomUUID()})).status,400);
+  assert.equal((await f.call('request-edit',{...input,entry:newEntry,operationId:randomUUID()})).status,400);
+  f.state.value.editRequests.push({...f.state.value.editRequests[0],id:randomUUID(),requester:'another-person'});
+  const rows=await (await f.call('edit-requests')).json();assert.equal(rows.requests.length,1);assert(!('requester' in rows.requests[0]));assert(!JSON.stringify(f.state.value).includes('person@example.org'));
+  assert.equal((await f.call('close-edit-request',{id:input.operationId,revision:1,reason:'Request reviewed and closed.'})).status,403);
+});
+test('only Editors/Admins handle edit requests; Reviewer permissions, CSRF and current authority remain enforced',async()=>{
+  const input={id:'existing.md',changes:'Correct these existing official project details.',sources:'',operationId:randomUUID()};
+  const reviewer=fixture(['role.reviewer']);assert.equal((await reviewer.call('request-edit',input)).status,403);assert.equal((await reviewer.call('close-edit-request',{})).status,403);
+  const editor=fixture(['role.editor']);assert.equal((await editor.call('request-edit',input)).status,201);
+  for(const extra of [{origin:'https://attacker.example'},{'x-directory-csrf':'bad'},{'sec-fetch-site':'cross-site'}])assert.equal((await editor.call('request-edit',{...input,operationId:randomUUID()},extra)).status,403);
+  const close={id:input.operationId,revision:1,reason:'Checked official sources; an update proposal is handled separately.'};
+  editor.state.revokeOnLoad=true;assert.equal((await editor.call('close-edit-request',close)).status,403);assert.equal(editor.state.writes,1);
+  editor.state.revokeOnLoad=false;editor.state.roles=['role.editor'];assert.equal((await editor.call('close-edit-request',close)).status,200);assert.equal(editor.state.proposals.length,0);
+  assert.equal((await editor.call('close-edit-request',close)).status,409);
+});
+test('edit request queue limits and legacy journal compatibility preserve intake',async()=>{
+  const f=fixture();for(let i=0;i<3;i++)assert.equal((await f.call('request-edit',{id:'existing.md',changes:'Official source indicates correction number '+i,sources:'',operationId:randomUUID()})).status,201);
+  assert.equal((await f.call('request-edit',{id:'existing.md',changes:'Another official correction for the listing.',sources:'',operationId:randomUUID()})).status,429);
+  const old={version:1,revision:1,submissions:[],edits:[]};assert.deepEqual(readState(signedState(old,secret),secret),old);
+  assert.throws(()=>readState(signedState({...old,editRequests:{}},secret),secret));
+  assert.throws(()=>readState(signedState({...old,editRequests:Array(257).fill({})},secret),secret));
 });
 test('anonymous, tampered, expired and cross-origin sessions cannot access intake',async()=>{
   const f=fixture(['project.admin']);
