@@ -17,6 +17,7 @@ async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatu
   if(oldSaves)await context.addInitScript(value=>{if(!localStorage.getItem('bittrees.surf.v1'))localStorage.setItem('bittrees.surf.v1',JSON.stringify({saved:value}));},oldSaves);
   if(seedSaved)await context.addInitScript(value=>{if(!localStorage.getItem('bittrees.surf.v2'))localStorage.setItem('bittrees.surf.v2',JSON.stringify({saved:value}));},seedSaved);
   if(pendingSave)await context.addInitScript(value=>{if(!sessionStorage.getItem('fixture.pending.seeded')){sessionStorage.setItem('surf.pending-save',JSON.stringify(value));sessionStorage.setItem('fixture.pending.seeded','1');}},pendingSave);
+  if(nativeOrigin)await context.setOffline(true);
   if(nativeOrigin)await context.route('https://surf.bittrees.org/**',async route=>{const u=new URL(route.request().url()),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root))throw Error();await route.fulfill({body:await readFile(file),contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html'});});
   page.on('pageerror',error=>errors.push(name+': '+error.message));
   await context.route('https://fixture.example.org/**',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><head><title>Embedded fixture</title></head><body><h1>Actual embedded website</h1></body></html>'}));
@@ -26,7 +27,8 @@ async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatu
     else if(u.pathname==='/api/frame'){if(frameGate)await frameGate;const p=normalizeCatalog(raw).find(p=>p.id===u.searchParams.get('project'));if(!p)return route.fulfill({status:404,json:{error:'Removed'}});data={status:frameStatus,url:p[u.searchParams.get('type')],reason:'embedding-blocked'};}
     else if(u.pathname==='/api/account/session')data={configured:true,signedIn:sharedSignedIn,...(sharedSignedIn?{identity:'fixture@example.org',csrf:'fixture-csrf'}:{})};
     else if(u.pathname==='/api/sso/status')data={configured:true,action:resume&&!sharedSignedIn?'resume':null};
-    else if(u.pathname==='/api/sso/start'){assert.equal(u.searchParams.get('mode'),'resume');sharedSignedIn=true;handoffs++;return route.fulfill({status:302,headers:{Location:navigationOrigin+(u.searchParams.get('return_to')||'/')}});}
+    else if(u.pathname==='/api/sso/start'){assert.equal(u.searchParams.get('mode'),'resume');sharedSignedIn=true;handoffs++;// Model the issuer return as a fresh navigation. Mocked HTTP redirects bypass subsequent Playwright routes.
+      return route.fulfill({contentType:'text/html',body:'<!doctype html><script>location.replace('+JSON.stringify(navigationOrigin+(u.searchParams.get('return_to')||'/'))+')</script>'});}
     else if(u.pathname==='/api/account/saved'){
       if(route.request().method()==='POST'){const b=route.request().postDataJSON();remoteSaved=remoteSaved.filter(s=>!(s.id===b.id&&s.type===b.type));if(b.action==='save'){const p=normalizeCatalog(raw).find(p=>p.id===b.id);remoteSaved.push({id:p.id,type:b.type,url:p[b.type],name:p.name,savedAt:new Date().toISOString()});}data={ok:true};}else data={saved:remoteSaved};
     }else data={ok:true};await route.fulfill({json:data});
