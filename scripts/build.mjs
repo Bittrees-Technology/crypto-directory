@@ -257,7 +257,6 @@ function indexPage(projects, categories) {
 </section>
 <section class=\"card\" style=\"margin-bottom:12px\">
   <div style=\"margin-top:8px\">Category pages: ${categories.map((c) => `<a href=\"categories/${slugify(c)}.html\">${escapeHtml(c)}</a>`).join(' | ')}</div>
-  <div style=\"margin-top:8px\">Contact <a href=\"https://raging.eth.limo\" target=\"_blank\" rel=\"noopener\">Jonathan</a> for any additions or updates.</div>
   <div style=\"margin-top:8px\">Disclosure: This directory is informational only and is not an endorsement or financial advice.</div>
 </section>
 <table>
