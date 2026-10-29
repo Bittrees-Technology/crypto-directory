@@ -1,172 +1,128 @@
-import { candidates, chooseProject, targetFor, safeUrl } from './core.js';
-const $ = id => document.getElementById(id);
-const STORAGE = 'bittrees.surf.v1';
-const state = { projects: [], current: null, category: 'All waves', mode: 'either', auto: false, saved: [], history: [], seen: [], waves: 0 };
-let toastTimer;
-let storageAvailable = true;
-try {
-  const stored = JSON.parse(localStorage.getItem(STORAGE) || '{}');
-  state.saved = Array.isArray(stored.saved) ? stored.saved.filter(x => typeof x === 'string').slice(0, 1000) : [];
-  state.history = Array.isArray(stored.history) ? stored.history.filter(h => h && safeUrl(h.url) && typeof h.name === 'string' && typeof h.id === 'string').slice(0, 300) : [];
-  if (['website','product','either'].includes(stored.mode)) state.mode = stored.mode;
-  state.auto = stored.auto === true;
-} catch { storageAvailable = false; }
-function persist() {
-  try { localStorage.setItem(STORAGE, JSON.stringify({ saved: state.saved, history: state.history, mode: state.mode, auto: state.auto })); }
-  catch { if (storageAvailable) toast('Browser storage is full or unavailable. This session still works.'); storageAvailable = false; }
-  counts();
+import {candidates,chooseProject,targetFor,resolveProject,currentSelection,safeUrl} from './core.js';
+import {bindVisitLink,clearViewer} from './viewer.js';
+const $=id=>document.getElementById(id);
+const STORAGE='bittrees.surf.v2';
+const state={projects:[],current:null,category:'All waves',mode:'either',seen:[],trail:[],position:-1,saved:[],visits:[],account:null,accountReady:false,accountConfigured:false,remoteSaved:[],busy:false};
+let navigation=0,toastTimer,frameTimer,refreshing=false;
+try{const s=JSON.parse(localStorage.getItem(STORAGE)||'{}');state.saved=Array.isArray(s.saved)?s.saved.filter(v=>v&&typeof v.id==='string'&&['website','product'].includes(v.type)).slice(0,500):[];state.visits=Array.isArray(s.visits)?s.visits.filter(v=>v&&safeUrl(v.url)).slice(0,300):[];if(['website','product','either'].includes(s.mode))state.mode=s.mode;}catch{}
+function persist(){try{localStorage.setItem(STORAGE,JSON.stringify({saved:state.saved,visits:state.visits,mode:state.mode}));}catch{toast('Browser storage is unavailable. Your current session still works.');}renderControls();}
+function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3600);}
+function node(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;}
+function collection(){return state.account?state.remoteSaved:state.saved;}
+function savedCurrent(){return state.current&&collection().some(s=>s.id===state.current.id&&s.type===state.current.type);}
+function renderControls(){
+  $('saved-count').textContent=collection().length;$('save-project').disabled=!state.current||state.busy;
+  $('save-project').setAttribute('aria-pressed',String(Boolean(savedCurrent())));$('save-project').setAttribute('aria-label',savedCurrent()?'Remove saved site':'Save this site');
+  $('previous').disabled=state.position<=0||state.busy;$('surf-next').disabled=state.busy;
+  $('nav-account').textContent=state.account?(state.account.identity.startsWith('0x')?state.account.identity.slice(0,6)+'…'+state.account.identity.slice(-4):state.account.identity):'Sign in';
 }
-function counts() { $('saved-count').textContent = state.saved.length; $('history-count').textContent = state.history.length; }
-function toast(message) { $('toast').textContent = message; $('toast').classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 3300); }
-function announce(message) { $('announcement').textContent = message; }
-function node(tag, className, text) { const n = document.createElement(tag); if (className) n.className = className; if (text != null) n.textContent = text; return n; }
-const symbols = { 'All waves':'∿', 'Gaming':'✳', 'DeFi':'◈', 'Wallets':'▱', 'NFTs & Creator Economy':'✦', 'Developer Tools':'⌘', 'Identity':'◎', 'Infrastructure':'⌁', 'Security':'◇' };
-const shortNames = { 'NFTs & Creator Economy':'Art & creators', 'Developer Tools':'Dev tools', 'DAOs & Governance':'DAOs', 'Real World Assets (RWA)':'Real world assets', 'Layer 1 / Layer 2':'Networks', 'Data & Analytics':'Data & analytics' };
-function renderCategories() {
-  const categories = [...new Set(state.projects.map(p => p.category))];
-  const first = ['Gaming','DeFi','Wallets','NFTs & Creator Economy','Developer Tools','Identity'];
-  categories.sort((a,b) => (first.includes(a) ? first.indexOf(a) : 100) - (first.includes(b) ? first.indexOf(b) : 100) || a.localeCompare(b));
-  if (!categories.includes(state.category)) state.category = 'All waves';
-  $('categories').replaceChildren(...['All waves', ...categories].map(category => {
-    const b = node('button', 'pill' + (state.category === category ? ' selected' : ''), `${symbols[category] || '·'} ${shortNames[category] || category}`);
-    b.dataset.category = category; b.setAttribute('aria-pressed', String(state.category === category));
-    b.addEventListener('click', () => { state.category = category; renderCategories(); surf(false); }); return b;
-  }));
+function recordVisit(selection){if(!selection)return;state.visits.unshift({id:selection.id,name:selection.project.name,url:selection.url,type:selection.type,at:new Date().toISOString()});state.visits=state.visits.slice(0,300);persist();}
+for(const id of ['open-site','fallback-open','help-open'])bindVisitLink($(id),()=>recordVisit(state.current));
+function migrateSaved(){
+  let changed=false;
+  state.saved=state.saved.map(s=>{const p=resolveProject(s.id,state.projects);if(!p)return s;if(s.id!==p.id)changed=true;return {...s,id:p.id,url:p[s.type]||s.url,name:p.name};});
+  try{const previous=JSON.parse(localStorage.getItem('bittrees.surf.v1')||'{}');if(Array.isArray(previous.saved)&&!previous.surfV2Migrated){
+    for(const id of previous.saved){const p=resolveProject(id,state.projects);if(p&&!state.saved.some(s=>s.id===p.id&&s.type==='website')){state.saved.push({id:p.id,type:p.website?'website':'product',url:p.website||p.product,name:p.name,savedAt:new Date().toISOString()});changed=true;}}
+    // A version marker prevents removed bookmarks being re-imported on reload.
+    previous.surfV2Migrated=true;localStorage.setItem('bittrees.surf.v1',JSON.stringify(previous));
+  }}catch{}
+  if(changed)persist();
 }
-function pool() { return candidates(state.projects, state.category, state.mode); }
-function recordVisit(p, type, url) {
-  state.history.unshift({ id:p.id, name:p.name, type, url, at:new Date().toISOString() });
-  state.history = state.history.slice(0, 300); persist();
+function renderCategories(){const value=state.category;const categories=[...new Set(state.projects.map(p=>p.category))].sort();$('category').replaceChildren(...['All waves',...categories].map(c=>{const o=node('option','',c==='All waves'?'All categories':c);o.value=c;return o;}));state.category=categories.includes(value)?value:'All waves';$('category').value=state.category;}
+function clearCurrent(message){navigation++;clearTimeout(frameTimer);state.current=null;state.busy=false;clearViewer();const u=new URL(location.href);u.searchParams.delete('project');u.searchParams.delete('type');history.replaceState(null,'',u.pathname+u.search);renderControls();if(message)toast(message);}
+function showFallback(selection,result){
+  $('site-frame').hidden=true;$('site-frame').removeAttribute('src');$('frame-loading').hidden=true;$('frame-help').hidden=true;$('frame-fallback').hidden=false;
+  $('fallback-category').textContent=selection.project.category;$('fallback-title').textContent=selection.project.name;$('fallback-description').textContent=selection.project.description;
+  $('fallback-reason').textContent=result?.reason==='https-required'?'This site opens in its own tab.':'This site doesn’t allow embedded browsing.';
+  $('fallback-detail').textContent='Open it separately, or continue surfing below.';
 }
-function visit(p, type, url) { recordVisit(p, type, url); }
-function renderProject(p, animate = true) {
-  state.current = p;
-  $('project-name').textContent = p.name; $('project-description').textContent = p.description;
-  $('project-category').textContent = p.category; $('visual-category').textContent = shortNames[p.category] || p.category;
-  $('project-initial').textContent = p.name.slice(0, 2); $('find-number').textContent = `WAVE ${String(state.waves || 1).padStart(2,'0')}`;
-  $('project-tags').replaceChildren(...[...new Set([...p.ecosystems, ...p.tags.filter(t => t !== p.category)])].slice(0, 4).map(t => node('span','',t)));
-  const tones = ['#e1e9cf','#e5dded','#e7e6c6','#d6e7e2','#f0dfcc'];
-  let hash = 0; for (const c of p.category) hash += c.charCodeAt(0);
-  // A class keeps the content security policy strict without inline styles.
-  $('project-visual').className = 'project-visual tone-' + hash % tones.length;
-  const links = [];
-  for (const [type,url] of [['website',p.website],['product',p.product]]) {
-    if (!url) continue;
-    const a = node('a','',`${type === 'website' ? 'Visit website' : 'Open product'} ↗`);
-    a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.addEventListener('click', () => visit(p,type,url)); links.push(a);
+function startFrame(selection,result,token){
+  if(token!==navigation)return;
+  $('welcome').hidden=true;$('browserbar').hidden=false;$('site-stage').hidden=false;$('site-name').textContent=selection.project.name;
+  $('site-domain').textContent=new URL(selection.url).hostname;$('site-icon').textContent=selection.project.name.slice(0,1);$('site-kind').textContent=selection.type;
+  for(const id of ['open-site','fallback-open','help-open'])$(id).href=selection.url;
+  $('site-frame').title=selection.project.name+' — '+selection.type;
+  $('frame-fallback').hidden=true;$('frame-help').hidden=true;
+  if(result.status==='external'){showFallback(selection,result);return;}
+  $('loading-name').textContent='Loading '+selection.project.name+'…';$('frame-loading').hidden=false;
+  $('site-frame').onload=()=>{if(token!==navigation)return;clearTimeout(frameTimer);$('frame-loading').hidden=true;$('frame-help').hidden=false;recordVisit(selection);};
+  $('site-frame').hidden=false;$('site-frame').src=result.url||selection.url;
+  clearTimeout(frameTimer);frameTimer=setTimeout(()=>{if(token===navigation){$('frame-loading').hidden=true;$('frame-help').hidden=false;}},10000);
+}
+async function inspect(selection){
+  try{const query=new URLSearchParams({project:selection.id,type:selection.type}),r=await fetch('/api/frame?'+query,{signal:AbortSignal.timeout(11000)});if(r.status===404)return {status:'removed'};if(!r.ok)throw Error();return await r.json();}catch{return {status:'unknown',url:selection.url};}
+}
+async function display(selection,{addTrail=true,inspection=null}={}){
+  // Re-resolve every entry point, including rows retained in an open dialog.
+  const latest=resolveProject(selection.id,state.projects);
+  if(!latest?.[selection.type]){clearCurrent('That destination is no longer available.');return;}
+  selection={id:latest.id,project:latest,type:selection.type,url:latest[selection.type]};
+  if(state.category!=='All waves'&&state.category!==latest.category){state.category='All waves';$('category').value=state.category;}
+  if(state.mode!=='either'&&state.mode!==selection.type){state.mode=selection.type;$('link-mode').value=state.mode;persist();}
+  const token=++navigation;clearTimeout(frameTimer);state.current=selection;state.busy=true;renderControls();
+  $('welcome').hidden=true;$('site-stage').hidden=false;$('browserbar').hidden=false;$('site-name').textContent=selection.project.name;$('site-domain').textContent=new URL(selection.url).hostname;$('site-kind').textContent=selection.type;$('site-icon').textContent=selection.project.name.slice(0,1);
+  $('site-frame').removeAttribute('src');$('site-frame').hidden=true;$('frame-fallback').hidden=true;$('frame-help').hidden=true;$('frame-loading').hidden=false;$('loading-name').textContent='Opening '+selection.project.name+'…';
+  for(const id of ['open-site','fallback-open','help-open'])$(id).href=selection.url;
+  const result=inspection||await inspect(selection);if(token!==navigation)return;
+  if(result.status==='removed'){clearCurrent('This destination is no longer listed. Choose another site.');refreshCatalog();return;}
+  if(addTrail){state.trail=state.trail.slice(0,state.position+1);state.trail.push({id:selection.id,type:selection.type});state.position=state.trail.length-1;}
+  state.busy=false;startFrame(selection,result,token);renderControls();$('announcement').textContent=selection.project.name+'. '+selection.project.description;
+  const u=new URL(location.href);u.searchParams.set('project',selection.id);u.searchParams.set('type',selection.type);history.replaceState(null,'',u.pathname+u.search);
+}
+async function surf(){
+  if(state.busy)return;const pool=candidates(state.projects,state.category,state.mode);
+  if(!pool.length){clearCurrent(state.projects.length?'No sites match these filters. Try another category or link type.':'The directory is still loading. Please try again.');return;}
+  if(pool.every(p=>state.seen.includes(p.id)))state.seen=[];
+  const p=chooseProject(pool,state.seen,state.current?.id);state.seen.push(p.id);const target=targetFor(p,state.mode);
+  await display({id:p.id,project:p,...target});
+}
+async function previous(){if(state.position<=0||state.busy)return;state.position--;const old=state.trail[state.position],p=resolveProject(old.id,state.projects);if(!p||!p[old.type]){clearCurrent('That destination is no longer available.');return;}await display({id:p.id,project:p,type:old.type,url:p[old.type]},{addTrail:false});}
+async function updateCatalog(data){
+  if(!Array.isArray(data.projects)||!data.projects.length)throw Error('Empty directory');state.projects=data.projects;renderCategories();migrateSaved();
+  $('welcome-meta').textContent=`${data.projects.length.toLocaleString()} verified projects · ${new Set(data.projects.map(p=>p.category)).size} categories`+(data.status==='live'?' · Live directory':` · Snapshot ${data.snapshotDate||''}`);
+  if(state.current){const refreshed=currentSelection(state.current,state.projects,state.category,state.mode);
+    if(!refreshed){const replacement=chooseProject(candidates(state.projects,state.category,state.mode),state.seen);if(replacement){const target=targetFor(replacement,state.mode);await display({id:replacement.id,project:replacement,...target});}else clearCurrent('That destination is no longer available in these filters.');}
+    else if(refreshed.url!==state.current.url){await display(refreshed,{addTrail:false});}
+    else{state.current=refreshed;$('site-name').textContent=refreshed.project.name;renderControls();}
   }
-  $('project-links').replaceChildren(...links); $('project-links').hidden = false;
-  $('save-project').hidden = false; $('share-project').hidden = false; renderSave();
-  $('next-wave').replaceChildren(document.createTextNode('Catch another wave '), node('span','','↗'));
-  if (animate) { $('surf-panel').classList.remove('pop'); void $('surf-panel').offsetWidth; $('surf-panel').classList.add('pop'); }
-  announce(`${p.name}. ${p.description}`);
+  const u=new URL(location.href),shared=u.searchParams.get('project');
+  if(!state.current&&shared&&!state.trail.length){const p=resolveProject(shared,state.projects),type=u.searchParams.get('type')==='product'?'product':'website';if(p&&p[type])await display({id:p.id,project:p,type,url:p[type]});else{u.searchParams.delete('project');u.searchParams.delete('type');history.replaceState(null,'',u.pathname+u.search);toast('That shared site is no longer available.');}}
 }
-function renderSave() {
-  const saved = state.current && state.saved.includes(state.current.id);
-  $('save-project').textContent = saved ? '♥' : '♡'; $('save-project').setAttribute('aria-pressed', String(Boolean(saved)));
-  $('save-project').setAttribute('aria-label', saved ? 'Remove this project from saved' : 'Save this project'); counts();
+async function refreshCatalog(){if(refreshing)return;refreshing=true;try{const r=await fetch('/api/catalog',{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error();await updateCatalog(await r.json());}catch{if(!state.projects.length)$('welcome-meta').textContent='Directory unavailable. Please try again shortly.';}finally{refreshing=false;}}
+async function accountApi(path,body){const r=await fetch('/api/account/'+path,{credentials:'same-origin',cache:'no-store',...(body?{method:'POST',headers:{'Content-Type':'application/json','X-Surf-CSRF':state.account?.csrf||''},body:JSON.stringify(body)}:{})});const result=await r.json();if(!r.ok)throw Object.assign(Error(result.error||'Unable to complete the request.'),{status:r.status});return result;}
+async function refreshAccount(){try{const s=await accountApi('session');state.accountConfigured=s.configured;state.account=s.signedIn?s:null;if(state.account)state.remoteSaved=(await accountApi('saved')).saved;else state.remoteSaved=[];}catch{state.account=null;}finally{state.accountReady=true;renderControls();}}
+function modal(title){$('modal-title').textContent=title;$('modal-body').replaceChildren();if(!$('modal').open)$('modal').showModal();}
+function closeModal(){$('modal').close();}
+function signin(pending=false){
+  modal('Save with your Bittrees account');$('modal-body').append(node('p','modal-copy','Sign in with the same email or Ethereum identity you use across Bittrees. Your saved websites and products will be available on any device.'));
+  const actions=node('div','modal-actions');
+  if(state.accountConfigured){const a=node('a','primary','Continue with Bittrees ↗');a.href='https://roles.bittrees.org/sign-in?'+new URLSearchParams({app:'surf',return_to:location.pathname+location.search});if(pending)a.addEventListener('click',()=>{try{sessionStorage.setItem('surf.pending-save',JSON.stringify({id:state.current.id,type:state.current.type}));}catch{}});actions.append(a);}
+  else $('modal-body').append(node('p','notice','Bittrees sign-in is temporarily unavailable. You can still save sites on this device.'));
+  if(pending){const local=node('button','secondary','Save on this device');local.addEventListener('click',()=>{saveLocal();closeModal();});actions.append(local);}
+  $('modal-body').append(actions);
 }
-function surf(scroll = true) {
-  const selection = pool();
-  if (selection.every(p => state.seen.includes(p.id))) state.seen = [];
-  const p = chooseProject(selection, state.seen, state.current?.id);
-  if (!p) { toast(state.projects.length ? 'No projects in this current. Try another category or link type.' : 'Loading the waves. Try again in a moment.'); return; }
-  state.seen.push(p.id); state.waves += 1; renderProject(p);
-  if (state.auto) { const target = targetFor(p,state.mode); recordVisit(p,target.type,target.url); window.open(target.url,'_blank','noopener,noreferrer'); }
-  if (scroll) $('discover').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',block:'start'});
+function saveLocal(){if(!state.current)return;const c=state.current,key=s=>s.id===c.id&&s.type===c.type;if(state.saved.some(key)){state.saved=state.saved.filter(s=>!key(s));toast('Removed from saved.');}else{state.saved.push({id:c.id,type:c.type,url:c.url,name:c.project.name,savedAt:new Date().toISOString()});toast('Saved on this device.');}persist();}
+async function saveCurrent(){if(!state.current)return;if(!state.account){if(savedCurrent())saveLocal();else signin(true);return;}const c=state.current;try{const removing=savedCurrent();await accountApi('saved',{action:removing?'remove':'save',id:c.id,type:c.type});await refreshAccount();toast(removing?'Removed from saved.':'Saved to your Bittrees collection.');}catch(e){toast(e.message);if(e.status===401)await refreshAccount();}}
+function showSaved(){
+  modal('Saved sites');const items=collection();$('modal-body').append(node('p','modal-copy',state.account?'Your Bittrees collection.':'Saved on this device. Sign in to keep a collection across devices.'));
+  if(!state.account){const b=node('button','secondary','Sign in with Bittrees');b.addEventListener('click',()=>signin());$('modal-body').append(b);}
+  if(state.account&&state.saved.length){const b=node('button','secondary',`Import ${state.saved.length} saved from this device`);b.addEventListener('click',async()=>{b.disabled=true;let imported=0;try{for(const item of state.saved){const p=resolveProject(item.id,state.projects);if(p?.[item.type]){await accountApi('saved',{action:'save',id:p.id,type:item.type});imported++;}}state.saved=[];persist();await refreshAccount();showSaved();toast(`${imported} saved sites imported.`);}catch(e){toast(e.message);b.disabled=false;}});$('modal-body').append(b);}
+  if(!items.length)$('modal-body').append(node('p','empty-state','No saved sites yet. Press the bookmark button while surfing.'));
+  for(const item of items){const p=resolveProject(item.id,state.projects),row=node('div','collection-item'),main=node('div','collection-main'),title=node('button','collection-title',p?.name||item.name||'Unavailable project');title.disabled=!p?.[item.type];title.addEventListener('click',()=>{closeModal();display({id:p.id,project:p,type:item.type,url:p[item.type]});});main.append(title,node('p','collection-meta',`${item.type==='product'?'Product':'Website'} · ${p?.[item.type]?new URL(p[item.type]).hostname:'No longer listed'}`));const remove=node('button','remove-save','Remove');remove.addEventListener('click',async()=>{try{if(state.account){await accountApi('saved',{action:'remove',id:item.id,type:item.type});await refreshAccount();}else{state.saved=state.saved.filter(s=>!(s.id===item.id&&s.type===item.type));persist();}showSaved();}catch(e){toast(e.message);}});row.append(main,remove);$('modal-body').append(row);}
 }
-function toggleSave() {
-  if (!state.current) return;
-  const id = state.current.id;
-  if (state.saved.includes(id)) { state.saved = state.saved.filter(x => x !== id); toast('Released back into the ocean.'); }
-  else { state.saved.push(id); toast('A keeper. Saved to your collection.'); }
-  persist(); renderSave();
-}
-function closeModal() { $('modal').close(); }
-function modal(title) { $('modal-title').textContent = title; $('modal-body').replaceChildren(); if (!$('modal').open) $('modal').showModal(); }
-function showCopy(title, paragraphs) {
-  modal(title); const body = node('div','modal-copy');
-  for (const [heading,copy] of paragraphs) { if(heading) body.append(node('h3','',heading)); body.append(node('p','',copy)); } $('modal-body').append(body);
-}
-function listProject(p) {
-  const row = node('div','list-item'); const main = node('div','list-item-main');
-  const name = node('button','',p.name); name.addEventListener('click', () => { closeModal(); state.waves++; renderProject(p); $('discover').scrollIntoView({behavior:'smooth'}); });
-  main.append(name,node('p','',`${shortNames[p.category] || p.category} · ${new URL(p.website || p.product).hostname}`));
-  const save = node('button','mini-action',state.saved.includes(p.id) ? '♥' : '♡'); save.setAttribute('aria-label',`Save or unsave ${p.name}`);
-  save.addEventListener('click',()=> { const id=p.id; state.saved=state.saved.includes(id)?state.saved.filter(x=>x!==id):[...state.saved,id]; persist(); renderSave(); save.textContent=state.saved.includes(id)?'♥':'♡'; });
-  row.append(main,save); return row;
-}
-function showSaved() {
-  modal('Your little collection.');
-  $('modal-body').append(node('p','modal-copy','The good finds you wanted to come back to. Saved on this device.'));
-  const saved = state.projects.filter(p => state.saved.includes(p.id));
-  if (!saved.length) $('modal-body').append(node('p','modal-empty','No keepers yet. Catch a wave and tap the heart to save a find.'));
-  else for (const p of saved) $('modal-body').append(listProject(p));
-  const unavailable = state.saved.length - saved.length;
-  if (unavailable > 0) $('modal-body').append(node('p','modal-copy',`${unavailable} saved find(s) are no longer in the current verified directory.`));
-}
-function showExplore() {
-  modal('An ocean of possibilities.');
-  const input = node('input','modal-search'); input.type='search'; input.placeholder='Search names, interests, ecosystems…'; input.setAttribute('aria-label','Search projects');
-  const status = node('div','modal-toolbar'); const list=node('div'); let limit=40;
-  function render() {
-    const filtered=candidates(state.projects,'All waves','either',input.value); status.textContent=`${filtered.length.toLocaleString()} projects · from CryptoDirectory`;
-    list.replaceChildren(...filtered.slice(0,limit).map(listProject));
-    if (!filtered.length) list.append(node('p','modal-empty','No finds in these waters. Try another search.'));
-    if(filtered.length>limit) { const more=node('button','more-button','Show more finds'); more.addEventListener('click',()=>{limit+=40;render();}); list.append(more); }
-  }
-  input.addEventListener('input',()=>{limit=40;render();}); $('modal-body').append(input,status,list);render();input.focus();
-}
-function showHistory() {
-  modal('Your surf trail.');
-  const toolbar=node('div','modal-toolbar');toolbar.append(node('span','',`${state.history.length} website & product visits · this device`));
-  const clear=node('button','danger-button','Clear trail');clear.addEventListener('click',()=>{state.history=[];persist();showHistory();toast('A fresh start. Your trail is cleared.');});toolbar.append(clear);$('modal-body').append(toolbar);
-  if(!state.history.length) $('modal-body').append(node('p','modal-empty','Your trail starts when you open a website or product. Let’s see where you end up.'));
-  for(const h of state.history) {
-    const row=node('div','list-item');const main=node('div','list-item-main');const a=node('a','',`${h.name} ↗`);a.href=h.url;a.target='_blank';a.rel='noopener noreferrer';
-    main.append(a,node('p','',`${h.type === 'product' ? 'Product' : 'Website'} · ${new URL(h.url).hostname} · ${new Date(h.at).toLocaleDateString()}`)); row.append(main);$('modal-body').append(row);
-  }
-}
-function updateCatalog(catalog) {
-  if (!Array.isArray(catalog.projects) || !catalog.projects.length) throw new Error('Empty catalog');
-  state.projects = catalog.projects; renderCategories();
-  const count=state.projects.length.toLocaleString();const categoryCount=new Set(state.projects.map(p=>p.category)).size;
-  const live=catalog.status==='live';$('sync-dot').classList.toggle('stale',!live);
-  const checked=catalog.checkedAt?new Date(catalog.checkedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):null;
-  $('sync-status').textContent=live?`${count} verified projects · ${categoryCount} currents · Synced with CryptoDirectory at ${checked}`:`${count} verified projects · ${categoryCount} currents · Directory snapshot ${catalog.snapshotDate || ''}. Live sync is reconnecting.`;
-  const shared=new URL(location.href).searchParams.get('project');
-  if(!state.current&&shared){const p=state.projects.find(p=>p.id===shared);if(p){state.waves=1;renderProject(p);}else toast('That find is no longer in the verified directory. Catch a fresh wave.');}
-  if(state.current){const updated=state.projects.find(p=>p.id===state.current.id);if(updated)renderProject(updated,false);else{state.current=null;surf(false);}}
-}
-async function refreshFeed(manual=false) {
-  $('refresh-feed').disabled=true;
-  try { const r=await fetch('/api/catalog'+(manual?'?refresh='+Date.now():''),{signal:AbortSignal.timeout(12000)}); if(!r.ok)throw new Error();updateCatalog(await r.json());if(manual)toast('Directory checked. You’re ready to ride.'); }
-  catch { if(!state.projects.length) {try{const r=await fetch('/catalog.json');if(!r.ok)throw new Error();updateCatalog(await r.json());}catch{$('sync-status').textContent='The tide is out. Check your connection and tap Refresh.';}} if(manual)toast('Live sync is unavailable. Your last directory snapshot is still ready.'); }
-  finally{$('refresh-feed').disabled=false;}
-}
-$('hero-surf').addEventListener('click',()=>surf());$('next-wave').addEventListener('click',()=>surf(false));$('manifesto-surf').addEventListener('click',()=>surf());
-$('nav-surf').addEventListener('click',()=>surf());$('save-project').addEventListener('click',toggleSave);
-$('nav-saved').addEventListener('click',showSaved);$('nav-explore').addEventListener('click',showExplore);$('nav-history').addEventListener('click',showHistory);
-$('nav-how').addEventListener('click',()=>showCopy('A little less feed. A little more freedom.',[
-  ['01 — Pick your current.','Go anywhere, or choose a category that catches your eye. Gaming, art, building, onchain tools — there’s a lot of web out there.'],
-  ['02 — Catch a wave.','Surf picks a random verified project from CryptoDirectory. Open its website or product, save the good ones, and catch another. You won’t get the same project twice until you’ve worked through your current pool.'],
-  ['03 — Make your own trail.','Turn on “Open each wave in a new tab” for one-click wandering. Your visits and saved finds stay on this device. No account needed.'],
-  ['One directory. Two ways to discover.','CryptoDirectory maintains the website and product links. Surf reads its public feed, cached for five minutes with background refresh. If the feed is unavailable, a dated snapshot keeps the waves rolling. Directory edits flow into Surf; personal bookmarks and visit history stay local.'],
-  ['', 'A listing is a starting point for your own research, not an endorsement.']
-]));
-$('nav-privacy').addEventListener('click',()=>{showCopy('Your curiosity is yours.',[
-  ['', 'Surf stores saved project IDs, website and product visit history, and your browsing settings in this browser’s local storage. There is no Surf account, advertising tracker, or central visit database.'],
-  ['', 'The server reads the public CryptoDirectory feed. Hosting providers may process standard request logs. When you open an external site, its own privacy policies apply.'],
-  ['', 'Clear your surf trail below, or remove all local Surf data to reset bookmarks, history, and preferences. Clearing browser data also removes this information.']
-  ]);const clear=node('button','more-button','Reset all local Surf data');clear.addEventListener('click',()=>{state.saved=[];state.history=[];state.mode='either';state.auto=false;persist();$('link-mode').value=state.mode;$('auto-open').checked=false;renderSave();closeModal();toast('All local Surf data has been reset.');});$('modal-body').append(clear);});
+function showAccount(){if(!state.account){signin();return;}modal('Your Bittrees account');$('modal-body').append(node('p','account-label',state.account.identity));const saved=node('button','primary','View saved sites');saved.addEventListener('click',showSaved);const logout=node('button','secondary','Sign out');logout.addEventListener('click',async()=>{try{await accountApi('logout',{});state.account=null;state.remoteSaved=[];renderControls();closeModal();}catch(e){toast(e.message);}});const actions=node('div','modal-actions');actions.append(saved,logout);$('modal-body').append(actions);}
+function showExplore(){modal('Explore the directory');const input=node('input','modal-search');input.type='search';input.placeholder='Search projects, categories, ecosystems';input.setAttribute('aria-label','Search the directory');const results=node('div');let limit=40;function render(){const matches=candidates(state.projects,'All waves','either',input.value);results.replaceChildren();if(!matches.length)results.append(node('p','empty-state','No projects found.'));for(const p of matches.slice(0,limit)){const row=node('div','collection-item'),main=node('div','collection-main'),title=node('button','collection-title',p.name);const stableId=p.id;title.addEventListener('click',()=>{closeModal();const latest=resolveProject(stableId,state.projects);if(!latest){clearCurrent('That project is no longer listed.');return;}const type=latest.website?'website':'product';display({id:stableId,type});});main.append(title,node('p','collection-meta',p.category));row.append(main);results.append(row);}if(matches.length>limit){const more=node('button','secondary','Show more');more.addEventListener('click',()=>{limit+=40;render();});results.append(more);}}input.addEventListener('input',()=>{limit=40;render();});$('modal-body').append(input,results);render();input.focus();}
+function showInfo(){if(!state.current)return;const p=state.current.project;modal(p.name);$('modal-body').append(node('p','modal-copy',p.description),node('p','collection-meta',`${p.category} · ${p.ecosystems.join(', ')}`));const actions=node('div','modal-actions');for(const [type,url] of [['website',p.website],['product',p.product]])if(url){const b=node('button','secondary',type==='website'?'View website':'View product');b.addEventListener('click',()=>{closeModal();display({id:p.id,project:p,type,url});});actions.append(b);}$('modal-body').append(actions);const source=node('a','modal-copy','View CryptoDirectory ↗');source.href='https://cd.bittrees.org';source.target='_blank';source.rel='noopener noreferrer';$('modal-body').append(source);}
+$('surf-next').addEventListener('click',surf);$('start-surf').addEventListener('click',surf);$('fallback-next').addEventListener('click',surf);$('previous').addEventListener('click',previous);$('save-project').addEventListener('click',saveCurrent);$('nav-saved').addEventListener('click',showSaved);$('nav-account').addEventListener('click',showAccount);$('site-info').addEventListener('click',showInfo);
+$('nav-explore').addEventListener('click',showExplore);
+$('category').addEventListener('change',e=>{state.category=e.target.value;if(state.current)surf();});$('link-mode').value=state.mode;$('link-mode').addEventListener('change',e=>{state.mode=e.target.value;persist();if(state.current)surf();});
+$('how-it-works').addEventListener('click',()=>{modal('How Surf works');for(const text of ['Choose a category and press Surf to discover a random website or product from CryptoDirectory. The site opens directly beneath the toolbar.','Some sites prevent embedding. Surf respects those settings and offers an external link instead.','Bookmark a website or product to save it. Sign in with your Bittrees account for a collection across devices, or keep saves on this device.','Directory edits appear automatically. Listings are informational and do not imply endorsement.'])$('modal-body').append(node('p','modal-copy',text));});
 $('close-modal').addEventListener('click',closeModal);$('modal').addEventListener('click',e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
-$('link-mode').value=state.mode;$('auto-open').checked=state.auto;
-$('link-mode').addEventListener('change',e=>{state.mode=e.target.value;persist();toast('Current set. Your next wave will use this link type.');});
-$('auto-open').addEventListener('change',e=>{state.auto=e.target.checked;persist();if(state.auto)toast('Next waves open in a new tab. Allow pop-ups if your browser asks.');});
-$('share-project').addEventListener('click',async()=>{if(!state.current)return;const u=new URL(location.origin);u.searchParams.set('project',state.current.id);try{if(navigator.share)await navigator.share({title:`${state.current.name} — Found on Surf`,url:u.href});else{await navigator.clipboard.writeText(u.href);toast('Link copied. Share a good wave.');}}catch(e){if(e.name!=='AbortError')toast('Copy the project link from your browser to share this wave.');}});
-$('refresh-feed').addEventListener('click',()=>refreshFeed(true));
-document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey||$('modal').open||['INPUT','SELECT','TEXTAREA','BUTTON','A'].includes(document.activeElement.tagName))return;if(e.key.toLowerCase()==='n')surf();if(e.key.toLowerCase()==='s'&&state.current)toggleSave();});
-counts();
-try{const r=await fetch('/catalog.json');if(r.ok)updateCatalog(await r.json());}catch{}
-refreshFeed();
-setInterval(()=>{if(document.visibilityState==='visible')refreshFeed();},300000);
+document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey||$('modal').open||['INPUT','SELECT','TEXTAREA','BUTTON','A','IFRAME'].includes(document.activeElement?.tagName))return;if(e.key.toLowerCase()==='n')surf();if(e.key.toLowerCase()==='s'&&state.current)saveCurrent();});
+renderControls();
+try{const r=await fetch('/catalog.json');if(r.ok)await updateCatalog(await r.json());}catch{}
+await refreshAccount();
+try{const pending=JSON.parse(sessionStorage.getItem('surf.pending-save')||'null');if(pending&&state.account){sessionStorage.removeItem('surf.pending-save');const p=resolveProject(pending.id,state.projects);if(p?.[pending.type]){await accountApi('saved',{action:'save',id:p.id,type:pending.type});await refreshAccount();toast('Saved to your Bittrees collection.');}}}catch{}
+refreshCatalog();setInterval(()=>{if(document.visibilityState==='visible')refreshCatalog();},300000);
+window.addEventListener('focus',()=>{refreshAccount();refreshCatalog();});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshCatalog();});

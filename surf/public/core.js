@@ -1,3 +1,4 @@
+import { legacyIds } from './legacy-ids.js';
 export function safeUrl(value) {
   try {
     const u = new URL(value);
@@ -16,16 +17,30 @@ export function normalizeCatalog(raw) {
     const website = safeUrl(p.primary_url);
     const product = safeUrl(p.product_url);
     if (!website && !product) continue;
-    const id = (website || product).replace(/\/$/, '').toLowerCase();
+    // Entry filenames are assigned by CryptoDirectory and survive URL/name edits.
+    const id = typeof p.id === 'string' && /^[a-z0-9][a-z0-9._-]{0,160}\.md$/i.test(p.id) ? p.id : null;
+    if (!id) continue;
     if (unique.has(id)) continue;
     unique.set(id, {
-      id, name: String(p.name).slice(0, 120), category: String(p.lead_category).slice(0, 100),
+      id, legacyIds: [...new Set([...(legacyIds[id] || []), (website || product).replace(/\/$/, '').toLowerCase()])], name: String(p.name).slice(0, 120), category: String(p.lead_category).slice(0, 100),
       description: String(p.description || '').slice(0, 600), website, product,
       tags: Array.isArray(p.tags) ? p.tags.map(String).slice(0, 12) : [],
       ecosystems: Array.isArray(p.ecosystem) ? p.ecosystem.map(String).slice(0, 12) : []
     });
   }
   return [...unique.values()];
+}
+
+export function resolveProject(value, projects) {
+  return projects.find(p => p.id === value || p.legacyIds?.includes(value)) || null;
+}
+
+export function currentSelection(current, projects, category='All waves', mode='either') {
+  if (!current) return null;
+  if (mode !== 'either' && current.type !== mode) return null;
+  const p = resolveProject(current.id, candidates(projects, category, mode));
+  if (!p || !p[current.type]) return null;
+  return { ...current, id: p.id, project: p, url: p[current.type] };
 }
 
 export function candidates(projects, category = 'All waves', mode = 'either', query = '') {

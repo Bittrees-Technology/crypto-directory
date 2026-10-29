@@ -50,5 +50,14 @@ jobs:
       - name: Verify role-based navigation and intake forms
         run: npm run test:directory-browser
 
+      - name: Build Surf discovery site
+        run: npm --prefix surf run build
+
+      - name: Verify Surf identity, refresh, account and embedding boundaries
+        run: npm --prefix surf test
+
+      - name: Verify Surf embedded discovery and refresh regressions in Chromium
+        run: npm --prefix surf run test:browser
+
       - name: Check links
         run: node scripts/check-links.mjs
