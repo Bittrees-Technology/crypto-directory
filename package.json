@@ -23,7 +23,8 @@
     "test:ens": "node --test scripts/ens-*.test.mjs"
   },
   "dependencies": {
-    "multiformats": "14.0.5"
+    "multiformats": "14.0.5",
+    "viem": "2.56.5"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0"
