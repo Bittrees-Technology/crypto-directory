@@ -15,10 +15,13 @@ required deployment/authority setup: [directory roles](docs/directory-roles.md).
 ## Scope (v1)
 - Active companies/projects with live products
 - Global coverage; all copy in English
-- Target cap: up to 1,000 entries
+- New research batches may extend coverage beyond the initial 1,000-entry target;
+  suggestions remain separate from accepted listings until reviewed.
 - Exclude obvious scams and dead projects
 - Mostly exclude memecoins (exception: cultural/community significance)
 - Multi-tag entries, sorted by lead category
+- AI Agents initially covers crypto and Web3 agents only; see
+  `content/categories.md` for its scope.
 
 ## Entry fields
 Each project entry is a Markdown file in `content/projects/` using front matter:
