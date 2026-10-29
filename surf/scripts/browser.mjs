@@ -12,22 +12,27 @@ const origin='http://127.0.0.1:'+server.address().port;
 const base={id:'aave.md',name:'Fixture A',lead_category:'DeFi',verification_status:'verified',description:'Synthetic browser acceptance project.',primary_url:'https://fixture.example.org/a',product_url:'https://fixture.example.org/a/product',tags:[],ecosystem:['Ethereum']};
 const second={...base,id:'second.md',name:'Fixture B',primary_url:'https://fixture.example.org/b',product_url:'https://fixture.example.org/b/product'};
 const browser=await chromium.launch({headless:true});const checks=[],errors=[];
-async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatus='embeddable',signedIn=false}={}){
-  const context=await browser.newContext({viewport:{width:1360,height:900}}),page=await context.newPage();let raw=initial;let remoteSaved=[];
+async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatus='embeddable',signedIn=false,nativeOrigin=false,resume=false,seedSaved=null,pendingSave=null,frameGate=null}={}){
+  const context=await browser.newContext({viewport:{width:1360,height:900}}),page=await context.newPage();let raw=initial;let remoteSaved=[];let sharedSignedIn=signedIn;let handoffs=0;const navigationOrigin=nativeOrigin?'https://surf.bittrees.org':origin;
   if(oldSaves)await context.addInitScript(value=>{if(!localStorage.getItem('bittrees.surf.v1'))localStorage.setItem('bittrees.surf.v1',JSON.stringify({saved:value}));},oldSaves);
+  if(seedSaved)await context.addInitScript(value=>{if(!localStorage.getItem('bittrees.surf.v2'))localStorage.setItem('bittrees.surf.v2',JSON.stringify({saved:value}));},seedSaved);
+  if(pendingSave)await context.addInitScript(value=>{if(!sessionStorage.getItem('fixture.pending.seeded')){sessionStorage.setItem('surf.pending-save',JSON.stringify(value));sessionStorage.setItem('fixture.pending.seeded','1');}},pendingSave);
+  if(nativeOrigin)await context.route('https://surf.bittrees.org/**',async route=>{const u=new URL(route.request().url()),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root))throw Error();await route.fulfill({body:await readFile(file),contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html'});});
   page.on('pageerror',error=>errors.push(name+': '+error.message));
   await context.route('https://fixture.example.org/**',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><head><title>Embedded fixture</title></head><body><h1>Actual embedded website</h1></body></html>'}));
   await page.route('**/catalog.json',route=>route.fulfill({json:{projects:normalizeCatalog(raw),status:'live',checkedAt:new Date().toISOString()}}));
   await page.route('**/api/**',async route=>{const u=new URL(route.request().url());let data;
     if(u.pathname==='/api/catalog')data={projects:normalizeCatalog(raw),status:'live',checkedAt:new Date().toISOString()};
-    else if(u.pathname==='/api/frame'){const p=normalizeCatalog(raw).find(p=>p.id===u.searchParams.get('project'));if(!p)return route.fulfill({status:404,json:{error:'Removed'}});data={status:frameStatus,url:p[u.searchParams.get('type')],reason:'embedding-blocked'};}
-    else if(u.pathname==='/api/account/session')data={configured:true,signedIn,...(signedIn?{identity:'fixture@example.org',csrf:'fixture-csrf'}:{})};
+    else if(u.pathname==='/api/frame'){if(frameGate)await frameGate;const p=normalizeCatalog(raw).find(p=>p.id===u.searchParams.get('project'));if(!p)return route.fulfill({status:404,json:{error:'Removed'}});data={status:frameStatus,url:p[u.searchParams.get('type')],reason:'embedding-blocked'};}
+    else if(u.pathname==='/api/account/session')data={configured:true,signedIn:sharedSignedIn,...(sharedSignedIn?{identity:'fixture@example.org',csrf:'fixture-csrf'}:{})};
+    else if(u.pathname==='/api/sso/status')data={configured:true,action:resume&&!sharedSignedIn?'resume':null};
+    else if(u.pathname==='/api/sso/start'){assert.equal(u.searchParams.get('mode'),'resume');sharedSignedIn=true;handoffs++;return route.fulfill({status:302,headers:{Location:navigationOrigin+(u.searchParams.get('return_to')||'/')}});}
     else if(u.pathname==='/api/account/saved'){
       if(route.request().method()==='POST'){const b=route.request().postDataJSON();remoteSaved=remoteSaved.filter(s=>!(s.id===b.id&&s.type===b.type));if(b.action==='save'){const p=normalizeCatalog(raw).find(p=>p.id===b.id);remoteSaved.push({id:p.id,type:b.type,url:p[b.type],name:p.name,savedAt:new Date().toISOString()});}data={ok:true};}else data={saved:remoteSaved};
     }else data={ok:true};await route.fulfill({json:data});
   });
   const refresh=async next=>{raw=next;const response=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/catalog');await page.evaluate(()=>window.dispatchEvent(new Event('focus')));await response;};
-  try{await page.goto(origin+'/');await page.waitForFunction(()=>document.getElementById('welcome-meta').textContent.includes('verified projects'));await run({page,context,refresh,setRaw:next=>raw=next});checks.push(name);}finally{await context.close();}
+  try{await page.goto(navigationOrigin+'/');await page.waitForFunction(()=>document.getElementById('welcome-meta').textContent.includes('verified projects'));await run({page,context,refresh,setRaw:next=>raw=next,handoffs:()=>handoffs});checks.push(name);}finally{await context.close();}
 }
 async function startProduct(page){await page.locator('#link-mode').selectOption('product');await page.locator('#start-surf').click();await page.frameLocator('#site-frame').getByRole('heading',{name:'Actual embedded website'}).waitFor();}
 try{
@@ -61,5 +66,15 @@ try{
   });
   await scenario('sites that block embedding get an honest external fallback',async({page})=>{await page.locator('#start-surf').click();await page.locator('#frame-fallback').waitFor({state:'visible'});assert.equal(await page.locator('#site-frame').getAttribute('src'),null);assert(await page.getByText('This site doesn’t allow embedded browsing.',{exact:true}).isVisible());assert((await page.locator('#fallback-open').getAttribute('href')).startsWith('https://fixture.example.org/'));},{frameStatus:'external'});
   await scenario('signed-in website and product saves use the account API',async({page})=>{await startProduct(page);await page.locator('#save-project').click();await page.waitForFunction(()=>document.getElementById('saved-count').textContent==='1');await page.locator('#nav-saved').click();assert(await page.getByText('Your Bittrees collection.',{exact:true}).isVisible());assert.equal(await page.locator('.collection-item').count(),1);},{signedIn:true});
+  let releaseFrame;const frameGate=new Promise(resolve=>releaseFrame=resolve);
+  await scenario('filters are disabled while destination compatibility is being checked',async({page})=>{
+    await page.locator('#start-surf').click();await page.waitForFunction(()=>document.getElementById('surf-next').disabled);assert.equal(await page.locator('#category').isEnabled(),false);assert.equal(await page.locator('#link-mode').isEnabled(),false);releaseFrame();await page.frameLocator('#site-frame').getByRole('heading',{name:'Actual embedded website'}).waitFor();assert.equal(await page.locator('#category').isEnabled(),true);assert.equal(await page.locator('#link-mode').isEnabled(),true);
+  },{frameGate});
+  await scenario('account import preserves unavailable device bookmarks',async({page})=>{
+    await page.locator('#nav-saved').click();await page.getByRole('button',{name:'Import 3 saved from this device',exact:true}).click();await page.getByRole('button',{name:'Import 2 saved from this device',exact:true}).waitFor();const remaining=await page.evaluate(()=>JSON.parse(localStorage.getItem('bittrees.surf.v2')).saved);assert.equal(remaining.length,2);assert(remaining.some(s=>s.id==='removed.md'));assert(remaining.some(s=>s.id==='aave.md'&&s.type==='product'));
+  },{initial:[{...base,product_url:'n/a'}],signedIn:true,seedSaved:[{id:'aave.md',type:'website'},{id:'removed.md',type:'website'},{id:'aave.md',type:'product'}]});
+  await scenario('native shared sign-in starts one resume handoff and preserves the pending bookmark',async({page,handoffs})=>{
+    await page.waitForFunction(()=>document.getElementById('saved-count').textContent==='1');assert.equal(handoffs(),1);assert.equal(await page.evaluate(()=>sessionStorage.getItem('surf.pending-save')),null);await page.locator('#nav-saved').click();assert.equal(await page.locator('.collection-item').count(),1);assert(await page.getByText('Your Bittrees collection.',{exact:true}).isVisible());
+  },{nativeOrigin:true,resume:true,initial:[base],pendingSave:{id:'aave.md',type:'product'}});
   assert.deepEqual(errors,[]);console.log(JSON.stringify({syntheticSurfBrowserChecks:checks,pageErrors:errors}));
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

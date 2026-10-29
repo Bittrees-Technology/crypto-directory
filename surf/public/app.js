@@ -1,10 +1,11 @@
 import {candidates,chooseProject,targetFor,resolveProject,currentSelection,safeUrl} from './core.js';
 import {bindVisitLink,clearViewer} from './viewer.js';
+import {restoreSaved,importSaved} from './collections.js';
 const $=id=>document.getElementById(id);
 const STORAGE='bittrees.surf.v2';
 const state={projects:[],current:null,category:'All waves',mode:'either',seen:[],trail:[],position:-1,saved:[],visits:[],account:null,accountReady:false,accountConfigured:false,remoteSaved:[],busy:false};
 let navigation=0,toastTimer,frameTimer,refreshing=false;
-try{const s=JSON.parse(localStorage.getItem(STORAGE)||'{}');state.saved=Array.isArray(s.saved)?s.saved.filter(v=>v&&typeof v.id==='string'&&['website','product'].includes(v.type)).slice(0,500):[];state.visits=Array.isArray(s.visits)?s.visits.filter(v=>v&&safeUrl(v.url)).slice(0,300):[];if(['website','product','either'].includes(s.mode))state.mode=s.mode;}catch{}
+try{const s=JSON.parse(localStorage.getItem(STORAGE)||'{}');state.saved=restoreSaved(s.saved);state.visits=Array.isArray(s.visits)?s.visits.filter(v=>v&&safeUrl(v.url)).slice(0,300):[];if(['website','product','either'].includes(s.mode))state.mode=s.mode;}catch{}
 function persist(){try{localStorage.setItem(STORAGE,JSON.stringify({saved:state.saved,visits:state.visits,mode:state.mode}));}catch{toast('Browser storage is unavailable. Your current session still works.');}renderControls();}
 function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3600);}
 function node(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;}
@@ -13,7 +14,7 @@ function savedCurrent(){return state.current&&collection().some(s=>s.id===state.
 function renderControls(){
   $('saved-count').textContent=collection().length;$('save-project').disabled=!state.current||state.busy;
   $('save-project').setAttribute('aria-pressed',String(Boolean(savedCurrent())));$('save-project').setAttribute('aria-label',savedCurrent()?'Remove saved site':'Save this site');
-  $('previous').disabled=state.position<=0||state.busy;$('surf-next').disabled=state.busy;
+  $('category').disabled=state.busy;$('link-mode').disabled=state.busy;$('previous').disabled=state.position<=0||state.busy;$('surf-next').disabled=state.busy;
   $('nav-account').textContent=state.account?(state.account.identity.startsWith('0x')?state.account.identity.slice(0,6)+'…'+state.account.identity.slice(-4):state.account.identity):'Sign in';
 }
 function recordVisit(selection){if(!selection)return;state.visits.unshift({id:selection.id,name:selection.project.name,url:selection.url,type:selection.type,at:new Date().toISOString()});state.visits=state.visits.slice(0,300);persist();}
@@ -90,7 +91,23 @@ async function updateCatalog(data){
 }
 async function refreshCatalog(){if(refreshing)return;refreshing=true;try{const r=await fetch('/api/catalog',{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error();await updateCatalog(await r.json());}catch{if(!state.projects.length)$('welcome-meta').textContent='Directory unavailable. Please try again shortly.';}finally{refreshing=false;}}
 async function accountApi(path,body){const r=await fetch('/api/account/'+path,{credentials:'same-origin',cache:'no-store',...(body?{method:'POST',headers:{'Content-Type':'application/json','X-Surf-CSRF':state.account?.csrf||''},body:JSON.stringify(body)}:{})});const result=await r.json();if(!r.ok)throw Object.assign(Error(result.error||'Unable to complete the request.'),{status:r.status});return result;}
-async function refreshAccount(){try{const s=await accountApi('session');state.accountConfigured=s.configured;state.account=s.signedIn?s:null;if(state.account)state.remoteSaved=(await accountApi('saved')).saved;else state.remoteSaved=[];}catch{state.account=null;}finally{state.accountReady=true;renderControls();}}
+async function refreshAccount({resume=false}={}){
+  try{
+    const s=await accountApi('session');state.accountConfigured=s.configured;state.account=s.signedIn?s:null;
+    if(state.account)state.remoteSaved=(await accountApi('saved')).saved;
+    else{
+      state.remoteSaved=[];
+      if(resume&&s.configured&&location.origin==='https://surf.bittrees.org'){
+        const r=await fetch('/api/sso/status',{credentials:'same-origin',cache:'no-store'}),status=await r.json();
+        if(r.ok&&status.configured&&status.action==='resume'){
+          location.replace('/api/sso/start?'+new URLSearchParams({mode:'resume',return_to:location.pathname+location.search}));return true;
+        }
+      }
+    }
+  }catch{state.account=null;}
+  finally{state.accountReady=true;renderControls();}
+  return false;
+}
 function modal(title){$('modal-title').textContent=title;$('modal-body').replaceChildren();if(!$('modal').open)$('modal').showModal();}
 function closeModal(){$('modal').close();}
 function signin(pending=false){
@@ -101,12 +118,12 @@ function signin(pending=false){
   if(pending){const local=node('button','secondary','Save on this device');local.addEventListener('click',()=>{saveLocal();closeModal();});actions.append(local);}
   $('modal-body').append(actions);
 }
-function saveLocal(){if(!state.current)return;const c=state.current,key=s=>s.id===c.id&&s.type===c.type;if(state.saved.some(key)){state.saved=state.saved.filter(s=>!key(s));toast('Removed from saved.');}else{state.saved.push({id:c.id,type:c.type,url:c.url,name:c.project.name,savedAt:new Date().toISOString()});toast('Saved on this device.');}persist();}
+function saveLocal(){if(!state.current)return;const c=state.current,key=s=>s.id===c.id&&s.type===c.type;if(state.saved.some(key)){state.saved=state.saved.filter(s=>!key(s));toast('Removed from saved.');}else{if(state.saved.length>=1000){toast('This device collection is full. Remove a site before saving another.');return;}state.saved.push({id:c.id,type:c.type,url:c.url,name:c.project.name,savedAt:new Date().toISOString()});toast('Saved on this device.');}persist();}
 async function saveCurrent(){if(!state.current)return;if(!state.account){if(savedCurrent())saveLocal();else signin(true);return;}const c=state.current;try{const removing=savedCurrent();await accountApi('saved',{action:removing?'remove':'save',id:c.id,type:c.type});await refreshAccount();toast(removing?'Removed from saved.':'Saved to your Bittrees collection.');}catch(e){toast(e.message);if(e.status===401)await refreshAccount();}}
 function showSaved(){
   modal('Saved sites');const items=collection();$('modal-body').append(node('p','modal-copy',state.account?'Your Bittrees collection.':'Saved on this device. Sign in to keep a collection across devices.'));
   if(!state.account){const b=node('button','secondary','Sign in with Bittrees');b.addEventListener('click',()=>signin());$('modal-body').append(b);}
-  if(state.account&&state.saved.length){const b=node('button','secondary',`Import ${state.saved.length} saved from this device`);b.addEventListener('click',async()=>{b.disabled=true;let imported=0;try{for(const item of state.saved){const p=resolveProject(item.id,state.projects);if(p?.[item.type]){await accountApi('saved',{action:'save',id:p.id,type:item.type});imported++;}}state.saved=[];persist();await refreshAccount();showSaved();toast(`${imported} saved sites imported.`);}catch(e){toast(e.message);b.disabled=false;}});$('modal-body').append(b);}
+  if(state.account&&state.saved.length){const b=node('button','secondary',`Import ${state.saved.length} saved from this device`);b.addEventListener('click',async()=>{b.disabled=true;const result=await importSaved(state.saved,state.projects,body=>accountApi('saved',body));state.saved=result.remaining;persist();await refreshAccount();showSaved();toast(result.error?`${result.imported} imported. Remaining sites kept on this device. ${result.error.message}`:`${result.imported} imported.${result.remaining.length?' Unavailable sites kept on this device.':''}`);});$('modal-body').append(b);}
   if(!items.length)$('modal-body').append(node('p','empty-state','No saved sites yet. Press the bookmark button while surfing.'));
   for(const item of items){const p=resolveProject(item.id,state.projects),row=node('div','collection-item'),main=node('div','collection-main'),title=node('button','collection-title',p?.name||item.name||'Unavailable project');title.disabled=!p?.[item.type];title.addEventListener('click',()=>{closeModal();display({id:p.id,project:p,type:item.type,url:p[item.type]});});main.append(title,node('p','collection-meta',`${item.type==='product'?'Product':'Website'} · ${p?.[item.type]?new URL(p[item.type]).hostname:'No longer listed'}`));const remove=node('button','remove-save','Remove');remove.addEventListener('click',async()=>{try{if(state.account){await accountApi('saved',{action:'remove',id:item.id,type:item.type});await refreshAccount();}else{state.saved=state.saved.filter(s=>!(s.id===item.id&&s.type===item.type));persist();}showSaved();}catch(e){toast(e.message);}});row.append(main,remove);$('modal-body').append(row);}
 }
@@ -121,8 +138,8 @@ $('close-modal').addEventListener('click',closeModal);$('modal').addEventListene
 document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey||$('modal').open||['INPUT','SELECT','TEXTAREA','BUTTON','A','IFRAME'].includes(document.activeElement?.tagName))return;if(e.key.toLowerCase()==='n')surf();if(e.key.toLowerCase()==='s'&&state.current)saveCurrent();});
 renderControls();
 try{const r=await fetch('/catalog.json');if(r.ok)await updateCatalog(await r.json());}catch{}
-await refreshAccount();
-try{const pending=JSON.parse(sessionStorage.getItem('surf.pending-save')||'null');if(pending&&state.account){sessionStorage.removeItem('surf.pending-save');const p=resolveProject(pending.id,state.projects);if(p?.[pending.type]){await accountApi('saved',{action:'save',id:p.id,type:pending.type});await refreshAccount();toast('Saved to your Bittrees collection.');}}}catch{}
+const resuming=await refreshAccount({resume:true});
+try{const pending=JSON.parse(sessionStorage.getItem('surf.pending-save')||'null');if(!resuming&&pending&&state.account){const p=resolveProject(pending.id,state.projects);if(p?.[pending.type]){await accountApi('saved',{action:'save',id:p.id,type:pending.type});sessionStorage.removeItem('surf.pending-save');await refreshAccount();toast('Saved to your Bittrees collection.');}}}catch{}
 refreshCatalog();setInterval(()=>{if(document.visibilityState==='visible')refreshCatalog();},300000);
 window.addEventListener('focus',()=>{refreshAccount();refreshCatalog();});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshCatalog();});

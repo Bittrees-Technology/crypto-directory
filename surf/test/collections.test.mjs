@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {restoreSaved,importSaved} from '../public/collections.js';
+const projects=[{id:'one.md',website:'https://one.example.org',product:null},{id:'two.md',website:'https://two.example.org',product:'https://two.example.org/app'}];
+test('restoring a legacy collection preserves more than 500 saved items',()=>{const saved=Array.from({length:1000},(_,i)=>({id:i+'.md',type:'website'}));assert.deepEqual(restoreSaved(saved),saved);assert.deepEqual(restoreSaved(restoreSaved(saved)),saved);});
+test('account import preserves removed projects and lost link types',async()=>{const items=[{id:'one.md',type:'website'},{id:'removed.md',type:'website'},{id:'one.md',type:'product'},{id:'two.md',type:'product'}],writes=[];const result=await importSaved(items,projects,async value=>writes.push(value));assert.equal(result.imported,2);assert.deepEqual(result.remaining,[items[1],items[2]]);assert.equal(writes.length,2);});
+test('partial import failures preserve failed and unprocessed bookmarks',async()=>{const items=[{id:'one.md',type:'website'},{id:'two.md',type:'product'},{id:'two.md',type:'website'}];let writes=0;const result=await importSaved(items,projects,async()=>{if(++writes===2)throw Error('Storage unavailable');});assert.equal(result.imported,1);assert.deepEqual(result.remaining,items.slice(1));assert.equal(result.error.message,'Storage unavailable');});
