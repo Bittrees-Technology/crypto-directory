@@ -6,6 +6,18 @@ at the Roles issuer and returns through the registered `crypto-directory-admin`
 client with PKCE and a host-only session. A sign-in proves identity, not a role.
 The Roles companion release must precede the directory release.
 
+The header places “Submit a project” and “Request an edit” immediately before
+the account control on every page, including while signed out. The forms still
+require sign-in and enforce their permissions on the server.
+
+Wallet accounts display their ENS primary name when ENS's Universal Resolver
+successfully verifies its forward address. The full authenticated wallet remains
+available as the identity label's tooltip. Names never replace wallet identity,
+roles or signing authority. Lookups use a bounded, cached, read-only request to
+PublicNode's public Ethereum endpoint and do not delay the sign-in session.
+Missing records, RPC failures, invalid normalization and CCIP-only records retain
+the shortened wallet address. Resolver-selected offchain URLs are not fetched.
+
 | Current project authority | Navigation | Existing listings | New submissions |
 | --- | --- | --- | --- |
 | Superadmin / Admin | All four staff links | Propose metadata updates | Submit; review another person's submission |
@@ -27,6 +39,16 @@ sign-in and staff operations open the canonical `cd.bittrees.org` origin; the
 IPFS mirror never receives session cookies, private app keys or signing authority.
 
 ## Review and release
+
+Signed-in nonstaff, Editors and Admins can request corrections to an existing,
+non-rejected listing. Reviewers retain their new-submission-only role. Requests
+are stored as `editRequests` in the existing signed intake journal; old journals
+without that field remain compatible. Requests are idempotent and limited to
+three pending per person and 256 total. Only Editors/Admins see other people's
+requests, open them in the existing editor, or close them with an outcome note.
+Closing a request records its review outcome only; it neither edits a listing nor
+claims a change was released. The existing editor creates a separate protected
+release proposal using the current listing SHA and preserving verification state.
 
 Submissions are separate from `content/projects` on the `directory-intake` branch.
 The form explicitly discloses public storage of submitted business details and
