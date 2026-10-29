@@ -20,8 +20,8 @@ def release():
 def ci(conclusion='success'):
     return {'workflow_runs':[{'id':123,'run_attempt':1,'head_sha':SOURCE,'event':'push','head_repository':{'full_name':sync.REPO},'conclusion':conclusion,'status':'completed'}]}
 
-def status(state='success',id=DEPLOYMENT):
-    return {'statuses':[{'context':'Vercel','state':state,'target_url':sync.VERCEL+id[4:],'id':7}]}
+def status(state='success',id=DEPLOYMENT,context='Vercel'):
+    return {'statuses':[{'context':context,'state':state,'target_url':sync.VERCEL+id[4:],'id':7}]}
 
 class BoundaryTests(unittest.TestCase):
     def test_manifest_cannot_select_other_sources_hosts_projects_or_paths(self):
@@ -44,6 +44,34 @@ class BoundaryTests(unittest.TestCase):
 
     def test_superseded_main_cannot_publish(self):
         with patch.object(sync,'github',return_value={'sha':'b'*40}),self.assertRaises(ValueError):sync.approved(release())
+
+    def test_qualified_directory_status_selects_its_own_receipt(self):
+        directory=status(context=sync.VERCEL_CONTEXT)['statuses'][0]
+        directory['id']=42
+        sibling=status(context='Vercel – bittrees-surf')['statuses'][0]
+        sibling['target_url']='https://vercel.com/bittrees-tech/bittrees-surf/1234567890abcdef'
+        stale=status(id='dpl_previousrelease')['statuses'][0]
+        for records in ([sibling,stale,directory],[directory,stale,sibling]):
+            with self.subTest(records=records),patch.object(sync,'github',side_effect=[{'sha':SOURCE},ci(),{'statuses':records}]):
+                self.assertEqual(sync.approved(release())['vercelStatusId'],42)
+
+    def test_other_project_context_cannot_authorize_even_with_directory_url(self):
+        for context in ('Vercel – bittrees-surf','Vercel – unknown-project'):
+            with self.subTest(context=context),patch.object(sync,'github',side_effect=[{'sha':SOURCE},ci(),status(context=context)]),self.assertRaises(ValueError):
+                sync.approved(release())
+
+    def test_qualified_failure_cannot_fall_back_to_legacy_success(self):
+        for rejected in (status('pending',context=sync.VERCEL_CONTEXT),status('error',context=sync.VERCEL_CONTEXT),status('failure',context=sync.VERCEL_CONTEXT),status(id='dpl_wrongdeployment',context=sync.VERCEL_CONTEXT)):
+            for records in (rejected['statuses']+status()['statuses'],status()['statuses']+rejected['statuses']):
+                with self.subTest(records=records),patch.object(sync,'github',side_effect=[{'sha':SOURCE},ci(),{'statuses':records}]),self.assertRaises(ValueError):
+                    sync.approved(release())
+
+    def test_qualified_status_must_match_fixed_team_project_and_deployment(self):
+        for target in ('https://vercel.com/other-team/bittrees-cryptodirectory/1234567890abcdef','https://vercel.com/bittrees-tech/bittrees-surf/1234567890abcdef',sync.VERCEL+'otherdeployment'):
+            record=status(context=sync.VERCEL_CONTEXT)
+            record['statuses'][0]['target_url']=target
+            with self.subTest(target=target),patch.object(sync,'github',side_effect=[{'sha':SOURCE},ci(),record]),self.assertRaises(ValueError):
+                sync.approved(release())
 
     def test_identical_merged_tree_is_required_when_push_ci_did_not_run(self):
         head='b'*40
