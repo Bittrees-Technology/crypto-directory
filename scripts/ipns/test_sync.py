@@ -284,7 +284,7 @@ class DiscoveryTests(unittest.TestCase):
             sync.announce(self.root,self.op,self.release)
         announcements=[(a,k) for a,k in calls if a[:2]==('routing','provide')]
         self.assertEqual(Counter(a[-1] for a,k in announcements),Counter([CID,self.child]))
-        self.assertTrue(all(1<=k['timeout']<=22 for a,k in announcements))
+        self.assertTrue(all(1<=k['timeout']<=42 for a,k in announcements))
         self.assertFalse(any(a[:2]==('name','publish') for a,k in calls))
 
     def test_partial_failure_preserves_progress_and_retries_only_missing_record(self):
@@ -299,6 +299,30 @@ class DiscoveryTests(unittest.TestCase):
             self.assertEqual(set(json.loads((self.op/'discovery.json').read_text())['provided']),{CID})
             sync.announce(self.root,self.op,self.release)
         self.assertEqual(calls,Counter({CID:1,self.child:2}))
+
+    def test_slow_valid_provider_announcement_can_complete(self):
+        clock=[100.0]
+        def ipfs(*args,**kwargs):
+            if args[0]=='refs':return ''
+            seconds=int(args[2].removeprefix('--timeout=').removesuffix('s'))
+            # A real valid announcement completed in 33 seconds, after repeated
+            # 20-second calls timed out. Simulate elapsed time without sleeping.
+            if seconds<33:raise subprocess.TimeoutExpired('provide',seconds)
+            clock[0]+=33
+            self.assertLessEqual(kwargs['timeout'],42)
+            return ''
+        with patch.object(sync,'ipfs',side_effect=ipfs),patch.object(sync,'guard',return_value=None),patch.object(sync.time,'monotonic',side_effect=lambda:clock[0]):
+            sync.announce(self.root,self.op,self.release)
+        self.assertEqual(set(json.loads((self.op/'discovery.json').read_text())['provided']),{CID})
+
+    def test_slow_provider_allowance_is_clipped_to_global_deadline(self):
+        calls=[]
+        def ipfs(*args,**kwargs):
+            if args[0]=='refs':return ''
+            calls.append((args,kwargs));return ''
+        with patch.object(sync,'ipfs',side_effect=ipfs),patch.object(sync,'guard',return_value=None),patch.object(sync.time,'monotonic',side_effect=[100,278]):
+            sync.announce(self.root,self.op,self.release)
+        self.assertEqual(calls,[(('routing','provide','--timeout=2s',CID),{'timeout':4})])
 
     def test_malformed_or_excessive_graph_is_rejected_before_announcements(self):
         for refs in ['--untrusted-option','\n'.join('bafy'+'a'*30+format(i,'b').replace('0','a').replace('1','b') for i in range(1,600))]:

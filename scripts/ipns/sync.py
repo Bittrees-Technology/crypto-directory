@@ -32,6 +32,7 @@ MAX_PREFLIGHT = 3
 MAX_VERIFY = 6
 MAX_DISCOVERY_BLOCKS = 512
 MAX_DISCOVERY_SECONDS = 180
+MAX_DISCOVERY_BLOCK_SECONDS = 40
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -149,7 +150,7 @@ def announce(root,op,release):
         remaining=int(deadline-time.monotonic())
         if remaining<1 or guard(root):
             raise ValueError('Discovery deadline or seed pause reached')
-        seconds=min(20,remaining)
+        seconds=min(MAX_DISCOVERY_BLOCK_SECONDS,remaining)
         # Kubo 0.43's "provide once" only queues work. This compatibility
         # command also completes a synchronous DHT announcement per given CID.
         ipfs('routing','provide',f'--timeout={seconds}s',node,timeout=seconds+2)
