@@ -46,7 +46,7 @@ function fixture(roles=[],identity=wallet){
     async load(){if(state.revokeOnLoad)state.roles=[];return {sha:String(state.value.revision),value:structuredClone(state.value)};},
     async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;return String(next.revision);},
     async duplicate(){return false;},
-    async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:'a'.repeat(40),raw:frontMatter({...listing,verification_status:'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
+    async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:'a'.repeat(40),raw:frontMatter({...listing,founded:state.numericFounded??listing.founded,verification_status:'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
     async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
     async reconcile(operation){return state.proposals.some(p=>p.operation===operation)?{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}:null;}
   });
@@ -114,6 +114,13 @@ test('structured requests hold stale snapshots and reject no-op edits before any
   assert.equal((await f.call('request-edit',{...input,sha:'a'.repeat(40),entry:listing})).status,400);
   assert.equal((await f.call('request-edit',{...input,sha:'a'.repeat(40),removalReasons:['shutdown']})).status,400);
   assert.equal(f.state.writes,0);assert.equal(f.state.proposals.length,0);
+});
+test('numeric founding years do not create phantom changes or bypass no-op request rejection',async()=>{
+  const f=fixture();f.state.numericFounded=2017;
+  const input={id:'existing.md',sha:'a'.repeat(40),kind:'edit',entry:{...listing,founded:'2017'},changes:'The current official listing details have been checked.',sources:'',operationId:randomUUID()};
+  assert.equal((await f.call('request-edit',input)).status,400);assert.equal(f.state.writes,0);
+  assert.equal((await f.call('request-edit',{...input,entry:{...input.entry,description:'A real requested correction to the existing project description.'}})).status,201);
+  assert.deepEqual(Object.keys(f.state.value.editRequests[0].patch),['description']);assert.equal(f.state.value.editRequests[0].original.founded,'2017');
 });
 test('removal requests retain explicit reasons, are idempotent, and cannot delete or propose source changes',async()=>{
   const f=fixture(),input={id:'existing.md',sha:'a'.repeat(40),kind:'removal',removalReasons:['unavailable','shutdown'],changes:'The project announced a permanent shutdown and its app is offline.',sources:'https://existing.example.org/announcement',operationId:randomUUID()};
