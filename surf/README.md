@@ -14,7 +14,7 @@ npm run dev
 
 ## Vercel
 
-Create a separate Vercel project from this repository with **Root Directory = surf**, **Framework = Other**, **Build Command = npm run build**, **Output Directory = public**. The API is a Node serverless function. Assign `surf.bittrees.org` to this project. Keep CryptoDirectory's existing project configuration intact.
+Create a separate Vercel project from this repository with **Root Directory = surf**, **Framework = Other**, **Build Command = npm run build**, **Output Directory = public**. The API is a Node serverless function. Assign `surf.bittrees.org` to this project. Track the dedicated `surf-production` branch in the Vercel Production environment. Keep CryptoDirectory's existing project configuration intact. The source is also proposed for main in PR #21, which remains subject to its normal review and merge rules.
 
 ## Synchronization contract
 
