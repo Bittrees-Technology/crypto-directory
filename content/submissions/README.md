@@ -12,14 +12,23 @@ imported automatically or included in the public project data.
 
 ## Publication review
 
-The [first publication review](reviews/2026-10-29-first-publication.md) selects
-100 candidates for actual `content/projects/` entries, including 13 crypto/Web3
-AI Agents. It records official project/product evidence and retains
-`pending_audit` status. The remaining 400 suggestions stay in research; known
-duplicates, rebrands and product-access problems are recorded separately.
-The historical research batch remains unchanged. Publication still requires an
-independent protected-branch approval, passing checks and the normal dual-host
-release; merging research by itself never publishes a listing.
+The [first publication review](reviews/2026-10-29-first-publication.md) selected
+100 actual project entries, including 13 crypto/Web3 AI Agents.
+The [completion review](reviews/2026-10-29-complete-500-additions.md) proposes
+400 further entries: 195 more from the historical research batch and 205
+supplementary projects. Together these reach 500 additions and 1,531 total
+entries after approval. Every new entry stays `pending_audit`.
+
+The historical research batch remains unchanged. The completion record gives
+each of its remaining candidates and each supplementary candidate a disposition;
+shutdowns, unresolved identities, duplicate aliases and unavailable interfaces
+are not automatically published. Public code libraries may use their canonical
+GitHub repository as their website. Independent repositories are distinct;
+branches, README routes and `.git` links do not create another project.
+
+Publication requires independent protected-branch approval, passing required
+checks and the normal dual-host release. An eligibility review is not a security
+audit, investment recommendation, executed product test or role grant.
 
 ## Flow
 1. Collect candidate data as JSON in `content/submissions/inbox/`.

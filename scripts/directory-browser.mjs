@@ -39,7 +39,10 @@ try{
     await page.getByRole('heading',{name:'Category: AI Agents',exact:true}).waitFor();
     assert(await page.getByText('Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.',{exact:true}).isVisible());
     const published=JSON.parse(await readFile(path.join(root,'data/projects.json'),'utf8'));
-    const publication=JSON.parse(await readFile('content/submissions/reviews/2026-10-29-first-publication.json','utf8'));
+    const first=JSON.parse(await readFile('content/submissions/reviews/2026-10-29-first-publication.json','utf8'));
+    const completion=JSON.parse(await readFile('content/submissions/reviews/2026-10-29-complete-500-additions.json','utf8'));
+    assert.equal(first.listings.length+completion.listings.length,500);
+    const publication={listings:[...first.listings,...completion.listings]};
     // A merged research package used to leave the public list unchanged. Check
     // actual source entries against built public data, then exercise the UI.
     for(const listing of publication.listings){
@@ -53,6 +56,10 @@ try{
     const newAgent=agents.find(project=>project.name==='Virtuals Protocol')||agents[0];
     await page.locator('#search').fill(newAgent.name);
     assert(await page.getByText(newAgent.name,{exact:true}).first().isVisible());
+    for(const name of ['Slither','DeDust','Monero']){
+      await page.locator('#search').fill(name);
+      assert(await page.getByText(name,{exact:true}).first().isVisible(),name+' missing from directory search');
+    }
     await page.locator('#search').fill('');
     await page.evaluate(()=>localStorage.setItem('role','superadmin'));await page.reload();await page.locator('[data-login-link]').waitFor();assert.equal(await page.locator('.site-nav').isVisible(),false);
     await page.goto(origin+'/submit.html');assert.equal(await page.locator('#listing-form').isVisible(),false);
