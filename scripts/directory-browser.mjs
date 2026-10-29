@@ -39,8 +39,21 @@ try{
     await page.getByRole('heading',{name:'Category: AI Agents',exact:true}).waitFor();
     assert(await page.getByText('Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.',{exact:true}).isVisible());
     const published=JSON.parse(await readFile(path.join(root,'data/projects.json'),'utf8'));
-    if(!published.some(project=>project.lead_category==='AI Agents'&&project.verification_status!=='rejected'))assert(await page.getByText('No listings have been added to this category yet. New suggestions go through review before appearing here.',{exact:true}).isVisible());
+    const publication=JSON.parse(await readFile('content/submissions/reviews/2026-10-29-first-publication.json','utf8'));
+    // A merged research package used to leave the public list unchanged. Check
+    // actual source entries against built public data, then exercise the UI.
+    for(const listing of publication.listings){
+      const id=path.basename(listing.project_file);
+      assert(published.some(project=>project.id===id),'Publication entry missing from public data: '+id);
+    }
+    const agents=published.filter(project=>project.lead_category==='AI Agents'&&project.verification_status!=='rejected');
+    assert(agents.length>0,'Reviewed AI Agents must reach the public category');
+    for(const agent of agents)assert(await page.getByText(agent.name,{exact:true}).first().isVisible(),agent.name);
     await page.getByRole('link',{name:'Back to directory',exact:true}).click();
+    const newAgent=agents.find(project=>project.name==='Virtuals Protocol')||agents[0];
+    await page.locator('#search').fill(newAgent.name);
+    assert(await page.getByText(newAgent.name,{exact:true}).first().isVisible());
+    await page.locator('#search').fill('');
     await page.evaluate(()=>localStorage.setItem('role','superadmin'));await page.reload();await page.locator('[data-login-link]').waitFor();assert.equal(await page.locator('.site-nav').isVisible(),false);
     await page.goto(origin+'/submit.html');assert.equal(await page.locator('#listing-form').isVisible(),false);
     assert.equal(await page.locator('h1').count(),1);assert.equal(await page.locator('[data-login-link]:visible').count(),1);
