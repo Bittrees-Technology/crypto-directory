@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
+from collections import Counter
 import sync
 
 SOURCE='a'*40
@@ -203,9 +204,25 @@ class OperationTests(unittest.TestCase):
         candidate=dict(self.candidate,artifactManifestSHA256=sync.sha(self.raw),deploymentId=DEPLOYMENT)
         sync.write(op/'candidate.json',candidate)
         proof={'sourceCommit':SOURCE,'ciRunId':123,'deploymentId':DEPLOYMENT}
-        with patch.object(sync,'approved',return_value=proof),patch.object(sync,'fetch',return_value=(self.raw,{})),patch.object(sync,'pin'),patch.object(sync,'file_check'):
+        with patch.object(sync,'approved',return_value=proof),patch.object(sync,'fetch',return_value=(self.raw,{})),patch.object(sync,'ipfs',return_value=''),patch.object(sync,'pin'),patch.object(sync,'file_check'):
             sync.prepare(self.root,op,self.raw,self.value,{'phase':'new'})
         self.assertEqual(json.loads((op/'approval.json').read_text()),proof)
+
+    def test_independent_manifest_failure_blocks_signing_even_when_homepage_passes(self):
+        def fetch(url,limit=sync.MAX_FILE):
+            if url.endswith('/release.json'):return self.raw,{}
+            return (b'policy' if url.endswith('/robots.txt') else PAGE),{}
+        def ipfs(*args,**kwargs):
+            if args[0]=='add':return CID
+            if args[:2]==('key','list'):return json.dumps({'Keys':[{'Name':sync.KEY,'Id':sync.NAME}]})
+            if args[:2]==('name','publish'):return json.dumps({'Name':sync.NAME,'Value':'/ipfs/'+CID})
+            return ''
+        def delivery(base,cid,path,digest):
+            if base=='https://ipfs.filebase.io' and path=='release.json':raise ValueError('New manifest not independently retrievable')
+        with patch.object(sync,'guard',return_value=None),patch.object(sync,'approved',return_value={}),patch.object(sync,'github',return_value={'sha':SOURCE}),patch.object(sync,'fetch',side_effect=fetch),patch.object(sync,'ipfs',side_effect=ipfs) as commands,patch.object(sync,'pin'),patch.object(sync,'file_check',side_effect=delivery),patch.object(sync,'verify_public',return_value={'contentFilesMatched':2,'verifiedAt':100}):
+            self.assertEqual(sync.run(self.root,True)['status'],'preflight-retry')
+            self.assertFalse(any(call.args[:2]==('name','publish') for call in commands.call_args_list))
+            self.assertFalse((self.root/'state.json').exists())
 
     def test_uncertain_previous_release_blocks_a_new_source(self):
         active='b'*40;op=self.root/'releases'/active;op.mkdir(parents=True)
@@ -248,6 +265,64 @@ class OperationTests(unittest.TestCase):
         with open(self.root/'lock','a') as lock,patch.object(sync,'fetch') as fetch:
             fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
             self.assertEqual(sync.run(self.root,True)['status'],'already-running');fetch.assert_not_called()
+
+class DiscoveryTests(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
+        self.op=self.root/'release';self.op.mkdir()
+        self.release={'cid':CID,'artifactManifestSHA256':'c'*64}
+        self.child='bafk'+'b'*50
+    def tearDown(self):self.temp.cleanup()
+
+    def test_direct_announcements_deduplicate_and_resume_fresh_receipts(self):
+        calls=[]
+        def ipfs(*args,**kwargs):
+            calls.append((args,kwargs))
+            return '\n'.join([self.child,self.child,CID]) if args[0]=='refs' else ''
+        with patch.object(sync,'ipfs',side_effect=ipfs),patch.object(sync,'guard',return_value=None):
+            sync.announce(self.root,self.op,self.release)
+            sync.announce(self.root,self.op,self.release)
+        announcements=[(a,k) for a,k in calls if a[:2]==('routing','provide')]
+        self.assertEqual(Counter(a[-1] for a,k in announcements),Counter([CID,self.child]))
+        self.assertTrue(all(1<=k['timeout']<=22 for a,k in announcements))
+        self.assertFalse(any(a[:2]==('name','publish') for a,k in calls))
+
+    def test_partial_failure_preserves_progress_and_retries_only_missing_record(self):
+        calls=Counter()
+        def ipfs(*args,**kwargs):
+            if args[0]=='refs':return self.child
+            node=args[-1];calls[node]+=1
+            if node==self.child and calls[node]==1:raise subprocess.TimeoutExpired('provide',20)
+            return ''
+        with patch.object(sync,'ipfs',side_effect=ipfs),patch.object(sync,'guard',return_value=None):
+            with self.assertRaises(ValueError):sync.announce(self.root,self.op,self.release)
+            self.assertEqual(set(json.loads((self.op/'discovery.json').read_text())['provided']),{CID})
+            sync.announce(self.root,self.op,self.release)
+        self.assertEqual(calls,Counter({CID:1,self.child:2}))
+
+    def test_malformed_or_excessive_graph_is_rejected_before_announcements(self):
+        for refs in ['--untrusted-option','\n'.join('bafy'+'a'*30+format(i,'b').replace('0','a').replace('1','b') for i in range(1,600))]:
+            with patch.object(sync,'ipfs',return_value=refs) as commands,self.assertRaises(ValueError):sync.announce(self.root,self.op,self.release)
+            self.assertEqual(commands.call_count,1)
+
+    def test_stale_receipts_refresh_but_changed_identity_cannot_skip_discovery(self):
+        receipt={'cid':CID,'manifestSHA256':'c'*64,'provided':{CID:1}}
+        sync.write(self.op/'discovery.json',receipt)
+        with patch.object(sync,'ipfs',return_value='') as commands,patch.object(sync,'guard',return_value=None):
+            sync.announce(self.root,self.op,self.release)
+            self.assertEqual(sum(call.args[:2]==('routing','provide') for call in commands.call_args_list),1)
+        receipt['cid']='bafy'+'d'*50;sync.write(self.op/'discovery.json',receipt)
+        with patch.object(sync,'ipfs',return_value='') as commands,self.assertRaises(ValueError):sync.announce(self.root,self.op,self.release)
+        self.assertEqual(commands.call_count,1)
+
+    def test_seed_pause_and_deadline_prevent_network_announcements(self):
+        for patches in [(patch.object(sync,'guard',return_value='ipfs-budget-paused'),),(patch.object(sync,'guard',return_value=None),patch.object(sync,'MAX_DISCOVERY_SECONDS',0))]:
+            from contextlib import ExitStack
+            with ExitStack() as stack:
+                for context in patches:stack.enter_context(context)
+                commands=stack.enter_context(patch.object(sync,'ipfs',return_value=''))
+                with self.assertRaises(ValueError):sync.announce(self.root,self.op,self.release)
+                self.assertEqual(commands.call_count,1)
 
 class BuildManifestTests(unittest.TestCase):
     def test_build_manifest_hashes_real_files_excludes_secrets_and_rejects_symlinks(self):

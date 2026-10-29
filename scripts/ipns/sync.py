@@ -30,6 +30,8 @@ MAX_TOTAL = 32*1024*1024
 MAX_MANIFEST = 128*1024
 MAX_PREFLIGHT = 3
 MAX_VERIFY = 6
+MAX_DISCOVERY_BLOCKS = 512
+MAX_DISCOVERY_SECONDS = 180
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -129,6 +131,40 @@ def same_production(raw):
     if fetch(PRODUCTION+'/release.json',MAX_MANIFEST)[0]!=raw:
         raise ValueError('Production changed during release; do not publish stale content')
 
+def announce(root,op,release):
+    """Announce this pinned DAG with bounded work, retaining partial progress."""
+    nodes=set(ipfs('refs','--recursive','--unique',release['cid']).splitlines())|{release['cid']}
+    if len(nodes)>MAX_DISCOVERY_BLOCKS or any(not re.fullmatch('[b][a-z2-7]{20,120}',node) for node in nodes):
+        raise ValueError('Invalid or excessive release discovery graph')
+    identity={'cid':release['cid'],'manifestSHA256':release['artifactManifestSHA256']}
+    path=op/'discovery.json'
+    receipt=json.loads(path.read_text()) if path.exists() else dict(identity,provided={})
+    if any(receipt.get(key)!=value for key,value in identity.items()) or not isinstance(receipt.get('provided'),dict) or not set(receipt['provided']).issubset(nodes):
+        raise ValueError('Release discovery receipt identity changed')
+    now=int(time.time())
+    receipt['provided']={node:at for node,at in receipt['provided'].items() if isinstance(at,int) and now-86400<=at<=now+60}
+    pending=sorted(nodes-set(receipt['provided']),key=lambda node:(not node.startswith('bafy'),node))
+    deadline=time.monotonic()+MAX_DISCOVERY_SECONDS
+    def provide(node):
+        remaining=int(deadline-time.monotonic())
+        if remaining<1 or guard(root):
+            raise ValueError('Discovery deadline or seed pause reached')
+        seconds=min(20,remaining)
+        # Kubo 0.43's "provide once" only queues work. This compatibility
+        # command also completes a synchronous DHT announcement per given CID.
+        ipfs('routing','provide',f'--timeout={seconds}s',node,timeout=seconds+2)
+        return int(time.time())
+    failed=[]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+        futures={pool.submit(provide,node):node for node in pending}
+        for future in concurrent.futures.as_completed(futures):
+            node=futures[future]
+            try:receipt['provided'][node]=future.result()
+            except Exception:failed.append(node)
+            write(path,receipt)
+    if failed:
+        raise ValueError('Release discovery incomplete; failed announcements remain retryable')
+
 def prepare(root,op,raw,value,journal):
     """Copy public production files checked against one approved manifest."""
     proof=approved(value)
@@ -165,18 +201,15 @@ def prepare(root,op,raw,value,journal):
                  'artifactManifestSHA256':sha(raw),'deploymentId':value['deploymentId']}
         validate(release)
         write(candidate,release) # Persist pin identity before any announcement/retrieval failure.
-        try:
-            ipfs('provide','once','--recursive',cid,timeout=40)
-        except subprocess.TimeoutExpired:
-            pass # Retrieval below must still succeed; never treat an announcement as delivery.
     validate(release)
     if release['files']!=dict(value['files'],**{'release.json':sha(raw)}) or release.get('deploymentId')!=value['deploymentId']:
         raise ValueError('Candidate files do not match the approved artifact')
     pin(release['cid'])
+    announce(root,op,release)
     for path,digest in release['files'].items():
         file_check('http://127.0.0.1:8080',release['cid'],path,digest)
         file_check('https://ipfs.nftfactory.org',release['cid'],path,digest)
-    file_check('https://ipfs.filebase.io',release['cid'],'index.html',release['files']['index.html'])
+        file_check('https://ipfs.filebase.io',release['cid'],path,digest)
     same_production(raw)
     journal.update(phase='verified',cid=release['cid'],verifiedAt=int(time.time()),preflightAttempts=0)
     write(op/'journal.json',journal)
