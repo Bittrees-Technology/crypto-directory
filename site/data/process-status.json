@@ -71,7 +71,7 @@
                 "min_count": 1,
                 "passed": true,
                 "progressPercent": 100,
-                "observed": 14,
+                "observed": 15,
                 "target": 1
               }
             ]
@@ -241,7 +241,7 @@
       "targetDate": "2026-04-15",
       "defaultVelocityPercentPerDay": 1.25,
       "observedVelocityPercentPerDay": 1.19,
-      "projectedCompletionDate": "2026-11-01",
+      "projectedCompletionDate": "2026-11-02",
       "daysRemaining": 3.8,
       "history": [
         {

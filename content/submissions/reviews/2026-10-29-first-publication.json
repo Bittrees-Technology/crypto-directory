@@ -1,0 +1,2953 @@
+{
+  "schema_version": 1,
+  "research_batch": "2026-10-29-500-sites",
+  "research_sha256": "53b15d4f06f4321226ae6665270db6808295aea9e8073804a70cc641a32972f4",
+  "reviewed_at": "2026-10-29T06:35:44.377Z",
+  "baseline_commit": "83883f2195a9031e646566eef2c2dbc11d487234",
+  "baseline_entries": 1031,
+  "proposed_count": 100,
+  "ai_agent_count": 13,
+  "release_status": "requires_independent_protected_pr_approval",
+  "scope": "Initial publication proposal selected from the 500-candidate research batch. This is listing eligibility review, not product execution or a security audit. No wallet, login, download, payment or transaction was used.",
+  "audit_status": "Every proposed listing is pending_audit. Unknown founding year, country, token and social details retain the existing n/a/Metaverse policy values.",
+  "remaining_candidates": {
+    "count": 400,
+    "status": "research_only",
+    "note": "Not included in this release proposal. Availability screening covered all 500; full individual content review is not complete for the remainder. Aliases, unclear product status, scope changes and access failures require follow-up."
+  },
+  "known_holds": {
+    "aero-slipstream": "Aerodrome/Aero project-family overlap; update or reconcile the existing entry before adding another.",
+    "autofinance": "Tokemak/Auto Finance rebrand overlaps an existing listing.",
+    "sparklend": "Spark already exists; this protocol-family alias should not create a duplicate.",
+    "superfluid": "Existing Superfluid Governance listing requires reconciliation before another project entry.",
+    "yearn-curating": "Yearn Finance already exists under a different domain.",
+    "cyber": "Official site announces wallet sunsetting; current live product scope needs fresh review.",
+    "xion-finance": "Research URL now redirects to Verona; identity and project continuity need review.",
+    "elsa": "Official app returned HTTP 403 to the read-only check; availability needs browser confirmation.",
+    "griffin-ai": "Official app returned HTTP 403; product availability needs browser confirmation.",
+    "pieverse": "Product page reports wallet services could not start; product acceptance remains held.",
+    "zama": "Official app returned HTTP 429; avoid repeated requests and review later.",
+    "openserv": "Current homepage emphasizes general AI infrastructure; verify a current explicit onchain product before classifying under crypto/Web3 AI Agents.",
+    "turbo-loop": "Fixed-duration yield and referral claims require exclusion-criteria review; no listing proposed.",
+    "hydration-lending": "Hydration is the current HydraDX project; reconcile the existing HydraDX listing rather than add a duplicate."
+  },
+  "categories": {
+    "AI Agents": 13,
+    "Custody": 1,
+    "DAOs & Governance": 1,
+    "Data & Analytics": 1,
+    "DeFi": 41,
+    "Developer Tools": 6,
+    "Gaming": 1,
+    "Identity": 1,
+    "Infrastructure": 6,
+    "Layer 1 / Layer 2": 4,
+    "NFTs & Creator Economy": 3,
+    "Payments": 4,
+    "Real World Assets (RWA)": 12,
+    "Security": 4,
+    "Wallets": 2
+  },
+  "listings": [
+    {
+      "candidate_id": "agenc",
+      "project_file": "content/projects/agenc.md",
+      "name": "AgenC",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "ecba919189802152c0e8dcf1d83d3177148cdd29127b44f980d2a80f9e0ca631",
+      "discovery_source": "https://satohub.ai/resources/agenc",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://agenc.tech",
+        "final_url": "https://agenc.ag/",
+        "checked_at": "2026-10-29T06:16:02.586326+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 44263,
+        "sample_sha256": "103fb60c450a6bc43b5d8f5293185d636411003e3053bd0f04a83176f203c527"
+      },
+      "product": {
+        "requested_url": "https://agenc.ag/browse",
+        "final_url": "https://agenc.ag/browse",
+        "checked_at": "2026-10-29T06:24:52.870399+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "b09402e6779ae802e0823edd7877ed803ce89d719c8773c22bf09a4d778c5799"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "almanak",
+      "project_file": "content/projects/almanak.md",
+      "name": "Almanak",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "e46ebca2eb58a9f7b6abbc4c006d1c4b0807097becc9dd5da1ecbebdc2316dcb",
+      "discovery_source": "https://satohub.ai/resources/almanak",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://almanak.co/",
+        "final_url": "https://almanak.co/",
+        "checked_at": "2026-10-29T06:16:02.586430+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 125646,
+        "sample_sha256": "d9388525a6fbc96b334a030ae5d37bee293652f38f4d3f7983cafc7b38c245bb"
+      },
+      "product": {
+        "requested_url": "https://app.almanak.co",
+        "final_url": "https://app.almanak.co",
+        "checked_at": "2026-10-29T06:16:04.168262+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 4816,
+        "sample_sha256": "a51b2af770f30c1b155c62074ed5aadfe00b453a28f1113f7a6450aa703a4e6b"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "cod3x",
+      "project_file": "content/projects/cod3x.md",
+      "name": "COD3X",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "408231ee38199ff58bbc79cd34b69726b153e945925d2ed07ff676e8f247a03f",
+      "discovery_source": "https://satohub.ai/resources/cod3x",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://www.cod3x.org/",
+        "final_url": "https://cod3x.org/",
+        "checked_at": "2026-10-29T06:16:02.586564+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 231727,
+        "sample_sha256": "0f6274987851052b1bca129d4f669496e4fe12380562f232273eb0b168deceb4"
+      },
+      "product": {
+        "requested_url": "https://cod3x.org/agents",
+        "final_url": "https://cod3x.org/auth/login?redirectTo=%2Fagents",
+        "checked_at": "2026-10-29T06:24:52.871151+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 86746,
+        "sample_sha256": "b8412da4d3ba3569dd74182e3ec0facb74e149f013a22b275e7b69bb62a94b21"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "daydreams",
+      "project_file": "content/projects/daydreams.md",
+      "name": "Daydreams",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "1d1c6d6e4aeb0aec3bf23d41fee932108e0a7cdf0191e9c5bed120224272c557",
+      "discovery_source": "https://www.daydreams.systems/",
+      "source_credit": "Official project website, checked 2026-10-29; description independently summarized.",
+      "official_site": {
+        "requested_url": "https://www.daydreams.systems/",
+        "final_url": "https://www.daydreams.systems/",
+        "checked_at": "2026-10-29T06:16:02.586742+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 201075,
+        "sample_sha256": "84dad609839b5bc041f38e5a1531ed1b8c723a0f38be0b8023a8a1e252f0d9fb"
+      },
+      "product": {
+        "requested_url": "https://docs.daydreams.systems",
+        "final_url": "https://docs.daydreams.systems",
+        "checked_at": "2026-10-29T06:16:03.849682+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 29070,
+        "sample_sha256": "91662700bd8cd58801f9b21354b6113edbc6527d180de3a4a5dc303298527429"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "elizaos",
+      "project_file": "content/projects/elizaos.md",
+      "name": "elizaOS",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "1d34429b37c35d25c3ea4fa10678b6542981a25b87ccfade21dbb328c32b88e3",
+      "discovery_source": "https://satohub.ai/resources/elizaos",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://elizaos.ai",
+        "final_url": "https://elizaresearch.ai/",
+        "checked_at": "2026-10-29T06:16:02.587731+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 24105,
+        "sample_sha256": "3fa94a5d917d3dc7fe76535deefbbea600ae4dd199eb03c5d87b26231efa15f1"
+      },
+      "product": {
+        "requested_url": "https://eliza.how",
+        "final_url": "https://docs.elizaos.ai/",
+        "checked_at": "2026-10-29T06:16:05.062737+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 164610,
+        "sample_sha256": "566367370aadab63077be65422529bacf4875df5dc8b5b65f9e5cb2e54eddafe"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "fetch-ai-uagents",
+      "project_file": "content/projects/fetch-ai-uagents.md",
+      "name": "Fetch.ai uAgents",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "634cf7fc6ea9c213da5343cd1c3c4682194a327de86079f52c7877abdb296947",
+      "discovery_source": "https://satohub.ai/resources/fetchai-uagents",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://fetch.ai",
+        "final_url": "https://www.fetch.ai/",
+        "checked_at": "2026-10-29T06:16:02.587941+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 103764,
+        "sample_sha256": "6cd7fbfc20c4d44087243df792d433399bddba7441b049ff6ed36d1c4728d1fe"
+      },
+      "product": {
+        "requested_url": "https://www.fetch.ai/docs",
+        "final_url": "https://www.fetch.ai/docs",
+        "checked_at": "2026-10-29T06:24:54.141738+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 99275,
+        "sample_sha256": "135325c7d5d9ee85a73c1c9a09383cc5f27f83e92be96a28c4b79ec962b98f81"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "giza-arma",
+      "project_file": "content/projects/giza-arma.md",
+      "name": "Giza",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "caf23d730bf7c53705b3efadc26cdfc3f9921295856d2c5fc4da421a226e8223",
+      "discovery_source": "https://satohub.ai/resources/giza-arma",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://www.gizatech.xyz/",
+        "final_url": "https://www.gizatech.xyz/",
+        "checked_at": "2026-10-29T06:16:05.337748+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "fd02900c8c72ca4b3012d69419185fc29d9c189f266e86b99f836f9f7fc97ae7"
+      },
+      "product": {
+        "requested_url": "https://agent.gizatech.xyz/",
+        "final_url": "https://world.gizatech.xyz/",
+        "checked_at": "2026-10-29T06:16:06.533273+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 3426,
+        "sample_sha256": "be69b9fe6c2cafa6b8f3aba7681d1396dd6fa5686727525db2955ccbc7e94b4f"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "olas-autonolas",
+      "project_file": "content/projects/olas-autonolas.md",
+      "name": "Olas",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "06c5dd72cafab565457abf1adfce30af181f1d04d0c8d2649cced6c25b380bcc",
+      "discovery_source": "https://satohub.ai/resources/olas",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://olas.network",
+        "final_url": "https://olas.network",
+        "checked_at": "2026-10-29T06:16:06.396466+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 228839,
+        "sample_sha256": "f77ce9209d0d998d045d61e36c96e66542ad1a92322e9ef845c59468b7dda676"
+      },
+      "product": {
+        "requested_url": "https://pearl.you",
+        "final_url": "https://pearl.you",
+        "checked_at": "2026-10-29T06:24:53.345857+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 109009,
+        "sample_sha256": "82d65407cd0995fbf03d1480a947fc747229549413a4de36410032e2396337cc"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "starknet-agentic",
+      "project_file": "content/projects/starknet-agentic.md",
+      "name": "Starknet Agentic",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "cab73786bcd96ea81ce79e9abcad91b7d637a6b987647a50831c018a6ffecd87",
+      "discovery_source": "https://satohub.ai/resources/starknet-agentic",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://starknet-agentic.vercel.app",
+        "final_url": "https://starknet-agentic.vercel.app",
+        "checked_at": "2026-10-29T06:16:07.271402+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 111867,
+        "sample_sha256": "68a843996b72410637f66292d2d5758ac463f6662888810dbe4b5ecc5050e478"
+      },
+      "product": {
+        "requested_url": "https://github.com/keep-starknet-strange/starknet-agentic",
+        "final_url": "https://github.com/keep-starknet-strange/starknet-agentic",
+        "checked_at": "2026-10-29T06:24:53.233445+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "baf9a544d0719ece0f12b31de3d13f5f35aaeb5dadc2028c1b8ae69fa031708b"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "virtuals-protocol",
+      "project_file": "content/projects/virtuals-protocol.md",
+      "name": "Virtuals Protocol",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "741aee7337e3f28193667dcbbe35af145255e6b75aa8d67a6b9c50b12e075f66",
+      "discovery_source": "https://satohub.ai/resources/virtuals-protocol",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://virtuals.io",
+        "final_url": "https://www.virtuals.io/",
+        "checked_at": "2026-10-29T06:16:09.109446+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "ca9b068d0db32401798da299c6bb9c05b1d36f553241829973504461faaabf9a"
+      },
+      "product": {
+        "requested_url": "https://app.virtuals.io",
+        "final_url": "https://app.virtuals.io",
+        "checked_at": "2026-10-29T06:16:12.473877+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 16945,
+        "sample_sha256": "c7f6be6a7cae279c84a68459ce8a9068118a7a1dfa8f4de29186dbca7247a17a"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "warden-protocol",
+      "project_file": "content/projects/warden-protocol.md",
+      "name": "Warden Protocol",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "e4392528fb7fa92460c51871c5b1e162cfe4b072734e0b1314a5bac7bd22fb3f",
+      "discovery_source": "https://satohub.ai/resources/warden-protocol",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://wardenprotocol.org",
+        "final_url": "https://wardenprotocol.org",
+        "checked_at": "2026-10-29T06:16:11.666683+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 126794,
+        "sample_sha256": "bbd414f7d1ab3709d3ff8c620315c14abf1b66b01715d22d006169c6e793f821"
+      },
+      "product": {
+        "requested_url": "https://tokens.wardenprotocol.org/",
+        "final_url": "https://tokens.wardenprotocol.org/",
+        "checked_at": "2026-10-29T06:24:53.973825+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 4864,
+        "sample_sha256": "652107df2396f9af7ad6dd134a11d3735d2f12e2559aa65e2e9c45184bad1c74"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "zyfai",
+      "project_file": "content/projects/zyfai.md",
+      "name": "Zyfai",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "d4ad51feec55d45a0b0c61dfdf7318bdf365cd73bda95532cee79895a26689b3",
+      "discovery_source": "https://defillama.com/protocol/zyfai",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://zyf.ai",
+        "final_url": "https://www.zyf.ai/",
+        "checked_at": "2026-10-29T06:17:07.488053+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 44441,
+        "sample_sha256": "d7a89e5625096272d500f78988038e34dab7acb7a51a4afd9e106087b8b9bf86"
+      },
+      "product": {
+        "requested_url": "https://www.zyf.ai/dashboard",
+        "final_url": "https://www.zyf.ai/dashboard",
+        "checked_at": "2026-10-29T06:24:54.374973+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 7833,
+        "sample_sha256": "1c825857c72a43b282b40581982414134b1d42b96bcaa336ea142ecf1d33a136"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "bankr",
+      "project_file": "content/projects/bankr.md",
+      "name": "Bankr",
+      "lead_category": "AI Agents",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "a9cd7b78d04d39338d65e2e8e366ae679d6761bb0798ba4f9c79161da59cbd24",
+      "discovery_source": "https://satohub.ai/resources/bankr",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://bankr.bot/",
+        "final_url": "https://bankr.bot/",
+        "checked_at": "2026-10-29T06:17:37.461016+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "sample_bytes": 8384,
+        "sample_sha256": "5f1732da4ef7a328d90740d066bd9456d97f6a29393676a1fa3f67250377dc1c"
+      },
+      "product": {
+        "requested_url": "https://docs.bankr.bot/",
+        "final_url": "https://docs.bankr.bot/",
+        "checked_at": "2026-10-29T06:17:37.863289+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "sample_bytes": 34223,
+        "sample_sha256": "4ef90100a1d282ed7e36dfd56cc26946ad3b8a05e9292925934e2507c9e3705d"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "nbx",
+      "project_file": "content/projects/nbx.md",
+      "name": "NBX",
+      "lead_category": "Custody",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "5380222ac52855ce03d71c378cb5849703845e368ec80cb78d2eb1e73e602593",
+      "discovery_source": "https://defillama.com/protocol/nbx",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://nbx.com",
+        "final_url": "https://nbx.com",
+        "checked_at": "2026-10-29T06:16:12.973178+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 47039,
+        "sample_sha256": "3187b013d13ab596d7be0cfe794a27205c8d9a16b9cce2e267273bd7ac4a6810"
+      },
+      "product": {
+        "requested_url": "https://app.nbx.com/markets",
+        "final_url": "https://app.nbx.com/markets",
+        "checked_at": "2026-10-29T06:16:13.173495+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 29057,
+        "sample_sha256": "1b7b3b7d125258fb8c8d1f1b8a9cf3fe4a330f31b882ad305f1aa262b143b310"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "gardens",
+      "project_file": "content/projects/gardens.md",
+      "name": "Gardens",
+      "lead_category": "DAOs & Governance",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "2c230487b24dd9ffc037c5f358cedbeb36c8e72f711ea07a1eb0079361377d82",
+      "discovery_source": "https://docs.gardens.fund/",
+      "source_credit": "Official documentation, checked 2026-10-29; description independently summarized.",
+      "official_site": {
+        "requested_url": "https://docs.gardens.fund/",
+        "final_url": "https://docs.gardens.fund/",
+        "checked_at": "2026-10-29T06:16:15.428672+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "a99165d7a3fbc021b19dae68582c876efd2f717be3480abdb190d39e0aec2128"
+      },
+      "product": {
+        "requested_url": "https://app.gardens.fund",
+        "final_url": "https://app.gardens.fund",
+        "checked_at": "2026-10-29T06:24:52.870699+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 12664,
+        "sample_sha256": "cceeebe3c4f7a15f49ed0aeba7cd72f62e38b482e10bf91bd3f69fe88f0ca0cd"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "madeonsol",
+      "project_file": "content/projects/madeonsol.md",
+      "name": "MadeOnSol",
+      "lead_category": "Data & Analytics",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "d1af4ae25aa8f1da2fd32186dd63010eca1bb53d4fd1a8e4030dc4b675166f2f",
+      "discovery_source": "https://satohub.ai/resources/madeonsol",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://madeonsol.com/robinhood",
+        "final_url": "https://madeonsol.com/robinhood",
+        "checked_at": "2026-10-29T06:16:16.095573+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 199779,
+        "sample_sha256": "345aa0cadc8c544cae3fc059457f626922ddd837ccc948652e8f08a212723dce"
+      },
+      "product": {
+        "requested_url": "https://madeonsol.com/api-docs",
+        "final_url": "https://madeonsol.com/api-docs",
+        "checked_at": "2026-10-29T06:16:16.684183+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "9a0e1d010b0db3efa317a4583354e4ff245c09d5603ee6fe27aa08cafcf36a07"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "boar-blockchain-mcp",
+      "project_file": "content/projects/boar-blockchain-mcp.md",
+      "name": "Boar Network",
+      "lead_category": "Developer Tools",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "0cf096e9ace11fa6a3aeeb3ecbab6284456fea0b607144a4f27f99df6bac3b03",
+      "discovery_source": "https://satohub.ai/resources/boar-blockchain-mcp",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://boar.network",
+        "final_url": "https://boar.network",
+        "checked_at": "2026-10-29T06:17:07.534807+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 258808,
+        "sample_sha256": "355d9c0fd8c5978063a832f6722c89306edadab1fa8b8a1a2f2eb3741972f4cc"
+      },
+      "product": {
+        "requested_url": "https://github.com/boar-network/blockchain-mcp",
+        "final_url": "https://github.com/boar-network/blockchain-mcp",
+        "checked_at": "2026-10-29T06:17:10.676106+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "141e6fc5162a770cf03db27397dc6d703836d52ec9d5b25e1ecf2cb29b7f6a30"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "clawrouter-blockrun",
+      "project_file": "content/projects/clawrouter-blockrun.md",
+      "name": "BlockRun",
+      "lead_category": "Developer Tools",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "7dfd8e8426f86387f7a6ce963fe86d451d9695eb1002e366fd40667749c6f6f3",
+      "discovery_source": "https://satohub.ai/resources/clawrouter",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://blockrun.ai",
+        "final_url": "https://blockrun.ai",
+        "checked_at": "2026-10-29T06:17:07.790690+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 205984,
+        "sample_sha256": "4dcd5f519160b7547332db55fdba309b36793224e1a70cfc75be58cb3542aa0b"
+      },
+      "product": {
+        "requested_url": "https://blockrun.ai/docs",
+        "final_url": "https://blockrun.ai/docs",
+        "checked_at": "2026-10-29T06:17:08.945724+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 241583,
+        "sample_sha256": "c2fa7ad6c77a5fcbc896a3eebc4604bf9a7c1ee8113b37315c609e28daaa24d5"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "dexpaprika-mcp-server",
+      "project_file": "content/projects/dexpaprika-mcp-server.md",
+      "name": "DexPaprika",
+      "lead_category": "Developer Tools",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "740ec16c8262ba50f91c050148d360d4259077c6f2ee8eb92c8e59e4e51b7c62",
+      "discovery_source": "https://satohub.ai/resources/dexpaprika-mcp",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://dexpaprika.com",
+        "final_url": "https://dexpaprika.com",
+        "checked_at": "2026-10-29T06:17:07.888018+00:00",
+        "status": 200,
+        "content_type": "text/html;charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "45b0d6569cd466483abfacf9a6ededbe1cadcbd754158db315cf130f11946563"
+      },
+      "product": {
+        "requested_url": "https://docs.dexpaprika.com/introduction",
+        "final_url": "https://docs.dexpaprika.com/introduction",
+        "checked_at": "2026-10-29T06:17:08.896739+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "f0ae4f6775bd55e30c0de3e7a2dcf71e2d46a6d0640a7bfcc0b2db7ac9c19c2c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "flaunch",
+      "project_file": "content/projects/flaunch.md",
+      "name": "Flaunch",
+      "lead_category": "Developer Tools",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "202aef688156327e012e45199b0cc82572e1ffb71acffb0e5bf5d63a2f79605e",
+      "discovery_source": "https://satohub.ai/resources/flaunch",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://docs.flaunch.gg/",
+        "final_url": "https://docs.flaunch.gg/",
+        "checked_at": "2026-10-29T06:17:09.612178+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "b06dfd8b144a933c4ada2aa2e43d25dd7cdc74d957c20cdf6e5f5da1f7b0d81a"
+      },
+      "product": {
+        "requested_url": "https://docs.flaunch.gg/ai/mcp",
+        "final_url": "https://docs.flaunch.gg/ai/mcp",
+        "checked_at": "2026-10-29T06:24:52.871439+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "249db826168f77f4fc10c809306a250898efda45f776b9e6ca47a0fb015e18e2"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "nodit-mcp-server",
+      "project_file": "content/projects/nodit-mcp-server.md",
+      "name": "Nodit",
+      "lead_category": "Developer Tools",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "a854a4caed2015599102f4f60ed008824265915e65d580243eee9ea644ed404d",
+      "discovery_source": "https://satohub.ai/resources/nodit-mcp",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://developer.nodit.io/",
+        "final_url": "https://developer.nodit.io/en/guides/",
+        "checked_at": "2026-10-29T06:17:09.680691+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 125435,
+        "sample_sha256": "920e3e2dde9a4eabe0f740b7b60dbee952e2ad18d261fd0ed98c6f27c6a14060"
+      },
+      "product": {
+        "requested_url": "https://developer.nodit.io/en/guides/quickstart-for-developers/",
+        "final_url": "https://developer.nodit.io/en/guides/quickstart-for-developers/",
+        "checked_at": "2026-10-29T06:17:13.381242+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 119427,
+        "sample_sha256": "c40c56d242b2142aeae18b3ec358dced94075d2714dc018b86def5a98417b212"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "sodax-builders-mcp",
+      "project_file": "content/projects/sodax-builders-mcp.md",
+      "name": "SODAX Builders MCP",
+      "lead_category": "Developer Tools",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "b7500f937c5634495f0e32eae8078ff6e9de9de14181e94ddfe98def89cea44b",
+      "discovery_source": "https://satohub.ai/resources/sodax-builders-mcp",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://builders.sodax.com",
+        "final_url": "https://builders.sodax.com",
+        "checked_at": "2026-10-29T06:17:10.445137+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 64646,
+        "sample_sha256": "11aa984fbbb03073c47114e8b10359624144a944cd3678eb2b087a85d853b57f"
+      },
+      "product": {
+        "requested_url": "https://docs.sodax.com/developers/packages/foundation/sdk/functional-modules/swaps",
+        "final_url": "https://docs.sodax.com/developers/packages/foundation/sdk/functional-modules/swaps",
+        "checked_at": "2026-10-29T06:17:11.909957+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "fe70eb95f107302232d0479cd1288303c5fa5af887bc54ff5467355d2db8884b"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "stockrip",
+      "project_file": "content/projects/stockrip.md",
+      "name": "Stockrip",
+      "lead_category": "Gaming",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "e7e6763581c2c72951235498ad26269c68a03c770d08650e81828fcc94b7ed06",
+      "discovery_source": "https://defillama.com/protocol/stockrip",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://stockrip.com/",
+        "final_url": "https://stockrip.com/",
+        "checked_at": "2026-10-29T06:17:12.432008+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 79627,
+        "sample_sha256": "4100f28d1bd5b89c8973434040d8146c1ae233df982171ebf00380ced48581d8"
+      },
+      "product": {
+        "requested_url": "https://stockrip.com/docs",
+        "final_url": "https://stockrip.com/docs",
+        "checked_at": "2026-10-29T06:17:12.883743+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 149642,
+        "sample_sha256": "0a922e169d124856a3a234d06fb75326446777b70aecec01f7ea78b6d6b2c49b"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "self-protocol",
+      "project_file": "content/projects/self-protocol.md",
+      "name": "Self",
+      "lead_category": "Identity",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "0aa2c1f090df4646ed7b6bc9c538bbe3e4f329e3a07d9194e7d0c89ad297c08c",
+      "discovery_source": "https://satohub.ai/resources/self-protocol",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://self.xyz",
+        "final_url": "https://self.xyz",
+        "checked_at": "2026-10-29T06:17:12.673849+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "24341170091bfd46f91bffdcbde1afa6ce4cc23df65aedfa639e1969a3a9e6ee"
+      },
+      "product": {
+        "requested_url": "https://docs.self.xyz/",
+        "final_url": "https://docs.self.xyz/",
+        "checked_at": "2026-10-29T06:17:13.516805+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 48214,
+        "sample_sha256": "7c1be28f44d0caddc6cca4040a58474c0907975b7165890c09caaed7fe502619"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "megaeth-bridge",
+      "project_file": "content/projects/megaeth-bridge.md",
+      "name": "MegaETH",
+      "lead_category": "Layer 1 / Layer 2",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "071bbe09693fe1cccd4039f8fce3d07eec639cf704b22f3bf90d9fbb248dc145",
+      "discovery_source": "https://defillama.com/protocol/megaeth-bridge",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.megaeth.com/",
+        "final_url": "https://www.megaeth.com/",
+        "checked_at": "2026-10-29T06:17:16.716599+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 61182,
+        "sample_sha256": "e2763120575dfa1501ad18dd1045fdac4d92597f02e4484c8a0174b0ca1f7a18"
+      },
+      "product": {
+        "requested_url": "https://docs.megaeth.com",
+        "final_url": "https://docs.megaeth.com",
+        "checked_at": "2026-10-29T06:17:17.036196+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "ed2244c87af3f1661d8b35167ef24cca9345542ee16b9708eeae2d7dbe1a5c70"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending. Network category and ecosystem labels follow the current official network pages rather than the discovery registry bridge record."
+    },
+    {
+      "candidate_id": "rise-bridge",
+      "project_file": "content/projects/rise-bridge.md",
+      "name": "RISE",
+      "lead_category": "Layer 1 / Layer 2",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "60e69115f5a4b3036c90c748213350fa618b4a945687ea0bfb95988e75f8f61b",
+      "discovery_source": "https://defillama.com/protocol/rise-bridge",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://risechain.com/",
+        "final_url": "https://risechain.com/",
+        "checked_at": "2026-10-29T06:17:19.383896+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 89810,
+        "sample_sha256": "e37cbf8b62994763f8aa51f07f4bcc84e28186c8c4b037c91ae4c3760251f93a"
+      },
+      "product": {
+        "requested_url": "https://docs.risechain.com/",
+        "final_url": "https://docs.risechain.com/",
+        "checked_at": "2026-10-29T06:17:20.384304+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 38040,
+        "sample_sha256": "ff27d13a44b2ee03d7b8eb847195581a0ebb130178b189fe81a457d26c85793c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending. Network category and ecosystem labels follow the current official network pages rather than the discovery registry bridge record."
+    },
+    {
+      "candidate_id": "txflow-bridge",
+      "project_file": "content/projects/txflow-bridge.md",
+      "name": "TxFlow",
+      "lead_category": "Layer 1 / Layer 2",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "996f1eaf6913efc5322bef920aecf76cae8048c321d8246dfd172c3b1f59f372",
+      "discovery_source": "https://defillama.com/protocol/txflow-bridge",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://txflow.com/",
+        "final_url": "https://txflow.com/",
+        "checked_at": "2026-10-29T06:17:21.445415+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 103255,
+        "sample_sha256": "9b9fe43544806f1a50724161cf81bcd3a74a181b05cee6a470301abb59032313"
+      },
+      "product": {
+        "requested_url": "https://app.txflow.com",
+        "final_url": "https://app.txflow.com",
+        "checked_at": "2026-10-29T06:17:22.800105+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 9122,
+        "sample_sha256": "3dcd206cac3ae2d89a400380b4e89fa169da900e124126bcd396bb76c747ac5c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending. Network category and ecosystem labels follow the current official network pages rather than the discovery registry bridge record."
+    },
+    {
+      "candidate_id": "strato-bridge",
+      "project_file": "content/projects/strato-bridge.md",
+      "name": "STRATO",
+      "lead_category": "Layer 1 / Layer 2",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "529fbb04eac6889362b388a33e04709895b233d1f6a9cad180228be5c1f2b176",
+      "discovery_source": "https://defillama.com/protocol/strato-bridge",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://strato.nexus/",
+        "final_url": "https://strato.nexus/",
+        "checked_at": "2026-10-29T06:17:20.457578+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 141977,
+        "sample_sha256": "45c7516e19a4e6101875acf936f4f60a25ad0229aa896cca98cdb7234c668eeb"
+      },
+      "product": {
+        "requested_url": "https://app.strato.nexus/",
+        "final_url": "https://app.strato.nexus/dashboard/",
+        "checked_at": "2026-10-29T06:34:42.407992+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 2572,
+        "sample_sha256": "57b2ec356baed6f83b7936fb08d502896c1dfeb1f61d2b64651d7b990dcc8a82"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending. Network category and ecosystem labels follow the current official network pages rather than the discovery registry bridge record. The live STRATO app is linked directly; coming-soon bridge products are not described as live."
+    },
+    {
+      "candidate_id": "gondi-v3",
+      "project_file": "content/projects/gondi-v3.md",
+      "name": "GONDI",
+      "lead_category": "NFTs & Creator Economy",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "29c7a9a64b237ca1ddcd371948e5ce5cd2cae1a006fe7e2f2b496fd42600c4f7",
+      "discovery_source": "https://defillama.com/protocol/gondi-v3",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.gondi.xyz",
+        "final_url": "https://www.gondi.xyz",
+        "checked_at": "2026-10-29T06:17:23.845866+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 114865,
+        "sample_sha256": "a03aed752176a61afaf40f59328246aa92badc6ca4f4373e3d8ab52eb7604727"
+      },
+      "product": {
+        "requested_url": "https://docs.gondi.xyz",
+        "final_url": "https://docs.gondi.xyz",
+        "checked_at": "2026-10-29T06:17:24.494560+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 46696,
+        "sample_sha256": "cf855359c42f29dc19a5ed535b4061969c7594623118a075e4e15991f81e110d"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "nftx",
+      "project_file": "content/projects/nftx.md",
+      "name": "NFTX",
+      "lead_category": "NFTs & Creator Economy",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "21cd56e9e3cc82289c7208701aa098201514489ae01658de82a1029560df18a7",
+      "discovery_source": "https://defillama.com/protocol/nftx",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://nftx.io",
+        "final_url": "https://nftx.io",
+        "checked_at": "2026-10-29T06:17:23.943088+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "1cb8236bb8f5e922c7be4b07641929e4e182d1e9ec44570cbaa0e9ba8d785b85"
+      },
+      "product": {
+        "requested_url": "https://docs-v4.nftx.io",
+        "final_url": "https://docs.nftx.io/",
+        "checked_at": "2026-10-29T06:17:24.637657+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "60106f1e932a1e536cf79926dcc65b621a855a17a0084419664ebc4ee7212339"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "rare-protocol",
+      "project_file": "content/projects/rare-protocol.md",
+      "name": "Rare Protocol",
+      "lead_category": "NFTs & Creator Economy",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "7421f0e575aedaa1ce862efcafbc7e6494e4d8b363b08c3daf8bb7f032fde05e",
+      "discovery_source": "https://satohub.ai/resources/rare-protocol",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://rare.xyz",
+        "final_url": "https://rare.xyz",
+        "checked_at": "2026-10-29T06:17:24.134785+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 23997,
+        "sample_sha256": "9cccfbf0775c99d102ad7601e453a6c924ec8f969be15bea8052cfd9993209d3"
+      },
+      "product": {
+        "requested_url": "https://rare.xyz/docs",
+        "final_url": "https://rare.xyz/docs",
+        "checked_at": "2026-10-29T06:17:24.586111+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 72040,
+        "sample_sha256": "72406a746fc47009d93789264c7b831eccef898d92a520921a8b5681b29f0589"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "blindpay",
+      "project_file": "content/projects/blindpay.md",
+      "name": "BlindPay",
+      "lead_category": "Payments",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "ee9b9e031e977192a4924f80cea9bc7f1fee3e274c7e10a4f10517eca906eeef",
+      "discovery_source": "https://satohub.ai/resources/blindpay",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://blindpay.com",
+        "final_url": "https://blindpay.com",
+        "checked_at": "2026-10-29T06:17:24.863194+00:00",
+        "status": 200,
+        "content_type": "text/html;charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "905db63485704c8355a8fc965360ea4c91afb7562ce1b3ea6cd4f2b5b6408fbc"
+      },
+      "product": {
+        "requested_url": "https://app.blindpay.com/",
+        "final_url": "https://app.blindpay.com/",
+        "checked_at": "2026-10-29T06:17:25.998497+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 3343,
+        "sample_sha256": "a365aa862544edf3fe05eb38efdf8a184ea072e4e44ef44c9972a0a7a372a82c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "llamapay",
+      "project_file": "content/projects/llamapay.md",
+      "name": "LlamaPay",
+      "lead_category": "Payments",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "718e33ccb74640aaea48a54c62295ffe475d4a2cb3a3666a4433d43b4ecfb01f",
+      "discovery_source": "https://defillama.com/protocol/llamapay",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://llamapay.io",
+        "final_url": "https://llamapay.io",
+        "checked_at": "2026-10-29T06:17:24.868574+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 28262,
+        "sample_sha256": "7060f92b05cbafca138c1683b02f7f7bd9b983e41991dbb066de14673e90650f"
+      },
+      "product": {
+        "requested_url": "https://llamapay.io/dashboard",
+        "final_url": "https://llamapay.io/dashboard",
+        "checked_at": "2026-10-29T06:17:25.188572+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 11971,
+        "sample_sha256": "19f10d5f048c921104a7d0c774e5ec342746b4cfabe8941618e549ae528f549f"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "streamflow",
+      "project_file": "content/projects/streamflow.md",
+      "name": "Streamflow",
+      "lead_category": "Payments",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "3c3ebbd1dcf3d0a5d15e070c92764907359462dd2836f9a1bbbfc7637bf3c0ac",
+      "discovery_source": "https://defillama.com/protocol/streamflow",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://streamflow.finance",
+        "final_url": "https://streamflow.finance",
+        "checked_at": "2026-10-29T06:17:24.937784+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "094b15bdc38d589e5ba72fe4c096fb787f0602eb02af2d382588411fefc888fa"
+      },
+      "product": {
+        "requested_url": "https://streamflow.finance/token-dashboard",
+        "final_url": "https://streamflow.finance/token-dashboard",
+        "checked_at": "2026-10-29T06:17:25.389950+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "660066d08661e565a35d6b96880744a94d2dad0c978373fac44d0f004373903c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "stripe-machine-payments",
+      "project_file": "content/projects/stripe-machine-payments.md",
+      "name": "Stripe Machine Payments",
+      "lead_category": "Payments",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "c0e8279e950ec05232010b351f621a8c10eb607a24360764ca4c0a72cc5920ba",
+      "discovery_source": "https://satohub.ai/resources/stripe-machine-payments",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://docs.stripe.com/payments/machine",
+        "final_url": "https://docs.stripe.com/payments/machine",
+        "checked_at": "2026-10-29T06:17:25.053400+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "14576cabc083278e64c066c2654a82448bbe8dbbc991cd087d64d6030ce3f63c"
+      },
+      "product": {
+        "requested_url": "https://docs.stripe.com/payments/machine/x402",
+        "final_url": "https://docs.stripe.com/payments/machine/x402",
+        "checked_at": "2026-10-29T06:24:53.173361+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "4c6220bad2e22bd153eadafec9e124994d31b2890479a8b7f3c0292b53e7d536"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "binaryx-platform",
+      "project_file": "content/projects/binaryx-platform.md",
+      "name": "Binaryx",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "935db3249ae39901318afc9b73169b1d8f6018ebf94f2caef897a264c39fbc80",
+      "discovery_source": "https://defillama.com/protocol/binaryx-platform",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.binaryx.com",
+        "final_url": "https://binaryx.com/",
+        "checked_at": "2026-10-29T06:17:26.527613+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "45492482b42d2057ca4c90078fa78509e9c2743611b190ad54f17dbc12477153"
+      },
+      "product": {
+        "requested_url": "https://app.binaryx.com/p2p-market",
+        "final_url": "https://app.binaryx.com/spot",
+        "checked_at": "2026-10-29T06:17:27.499408+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "f5d68e4a3270cafd0c3f43adba57db81f086ec58ccf524db43d044cb564583b0"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "boson-protocol",
+      "project_file": "content/projects/boson-protocol.md",
+      "name": "Boson Protocol",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "05657cc0f76ab6eed88a59a783934da555778442a59167ebbe90a3ff219449d0",
+      "discovery_source": "https://defillama.com/protocol/boson-protocol",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.bosonprotocol.io",
+        "final_url": "https://www.bosonprotocol.io",
+        "checked_at": "2026-10-29T06:17:26.604032+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "270e81962e1a09b32fc63d99fb9050cec1fc324d7dd9392ff5a82cce47cb2655"
+      },
+      "product": {
+        "requested_url": "https://www.bosonprotocol.io/docs/",
+        "final_url": "https://www.bosonprotocol.io/docs/",
+        "checked_at": "2026-10-29T06:17:27.364853+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 223906,
+        "sample_sha256": "dfc39494e9de75ce8ebf77c31f60339441351d7426cb337f267211c36a89b632"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "brickken",
+      "project_file": "content/projects/brickken.md",
+      "name": "Brickken",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "574c4155a19fabc88745d0d1910b42ad99d3994092e4a89e06db050bb82e239f",
+      "discovery_source": "https://defillama.com/protocol/brickken",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.brickken.com",
+        "final_url": "https://www.brickken.com",
+        "checked_at": "2026-10-29T06:17:26.630345+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 224899,
+        "sample_sha256": "82310076b70d20c03979cee9f7cf87191da341c11ec8248339414dcdf8d4ff38"
+      },
+      "product": {
+        "requested_url": "https://docs.brickken.com/",
+        "final_url": "https://docs.brickken.com/",
+        "checked_at": "2026-10-29T06:17:28.523829+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 151040,
+        "sample_sha256": "a8e23acac82dfc6d84e4712898383750679ee80f9ecc78fcedbbb9844827a256"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "hiyield",
+      "project_file": "content/projects/hiyield.md",
+      "name": "HiYield",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "610937fbaf9384496790b5ab05c458f7dc0f728c72f34ea1e23c7f104f668b59",
+      "discovery_source": "https://defillama.com/protocol/hiyield",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.hiyield.xyz",
+        "final_url": "https://www.hiyield.xyz",
+        "checked_at": "2026-10-29T06:17:29.031924+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 17611,
+        "sample_sha256": "fec7be24fe22214739e3a2229fd61ca7770a7c4eedcefb6dad9df522e60e7292"
+      },
+      "product": {
+        "requested_url": "https://docs.hiyield.xyz",
+        "final_url": "https://docs.hiyield.xyz",
+        "checked_at": "2026-10-29T06:17:29.407627+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "a182625427bd23628e1e499a6721ca3b8af203800656c35415a293590dc5e3e5"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "narausd",
+      "project_file": "content/projects/narausd.md",
+      "name": "Nara",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "8503ddb228ba1c4172bbedf677546310fdabcf12a5eb34155d2206fcad1c3ea1",
+      "discovery_source": "https://defillama.com/protocol/narausd",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.nara.io",
+        "final_url": "https://www.nara.io",
+        "checked_at": "2026-10-29T06:17:29.765494+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 28822,
+        "sample_sha256": "49355eb2459b271403a43a9802114f4e95435c2f38c4799334006d8f7bc28814"
+      },
+      "product": {
+        "requested_url": "https://app.nara.io",
+        "final_url": "https://app.nara.io/swap",
+        "checked_at": "2026-10-29T06:17:30.222900+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 96957,
+        "sample_sha256": "b13df6ae4c9467055b9bf8440099a37c9167d64922b2d20d10f853840dcb7676"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "oro-finance",
+      "project_file": "content/projects/oro-finance.md",
+      "name": "Oro Finance",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "ea71a9889b2a92aea72a336cd62a6f5d83ee8892c2c4d22ac7c2a34f1363e690",
+      "discovery_source": "https://defillama.com/protocol/oro-finance",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.oro.finance/",
+        "final_url": "https://app.oro.finance/",
+        "checked_at": "2026-10-29T06:17:30.543433+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 96511,
+        "sample_sha256": "8459693c06ce7975de4b2ec0df121d90da258b53c06896d6bbb063a00ba2a55c"
+      },
+      "product": {
+        "requested_url": "https://app.oro.finance/stake",
+        "final_url": "https://app.oro.finance/stake",
+        "checked_at": "2026-10-29T06:17:31.131241+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 107934,
+        "sample_sha256": "b9f7151c669c8257760edfa453376186d61cb8557ba80f69f02c2c93487cafe3"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "paimon",
+      "project_file": "content/projects/paimon.md",
+      "name": "Paimon Finance",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "34785692616fd39fea3952e8096a8299abc43e5253383c1b00251c80571a50d3",
+      "discovery_source": "https://defillama.com/protocol/paimon",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://paimon.finance/",
+        "final_url": "https://www.paimon.finance/",
+        "checked_at": "2026-10-29T06:17:30.623737+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 45747,
+        "sample_sha256": "d0f5b2a0a3dd5660da53b42eec8b55e3d878991c43d26c6849a0e932ec751986"
+      },
+      "product": {
+        "requested_url": "https://app.paimon.finance/",
+        "final_url": "https://app.paimon.finance/",
+        "checked_at": "2026-10-29T06:17:31.889405+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 40782,
+        "sample_sha256": "b6d4118741d25604a40825134ed868913b8e9f6d0031aeec39bdea1ff432a514"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "plume-vaults",
+      "project_file": "content/projects/plume-vaults.md",
+      "name": "Plume Vaults",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "a5531c1b20cc37d0abd564d6f84883c59e26e84267703092b039763d88a234a8",
+      "discovery_source": "https://defillama.com/protocol/plume-vaults",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.plume.org/vaults",
+        "final_url": "https://app.plume.org/vaults",
+        "checked_at": "2026-10-29T06:17:30.730219+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "d3c30db74e5fe93144b0ec6aedbb5b5ed87a08013683f9c8094fdac559161781"
+      },
+      "product": {
+        "requested_url": "https://app.plume.org/vaults",
+        "final_url": "https://app.plume.org/vaults",
+        "checked_at": "2026-10-29T06:17:30.730219+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "d3c30db74e5fe93144b0ec6aedbb5b5ed87a08013683f9c8094fdac559161781"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "re",
+      "project_file": "content/projects/re.md",
+      "name": "Re",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "df078a7341b07a781ddd509e13f8b7aa914a842ad0b134143d1e71d213f13cbe",
+      "discovery_source": "https://defillama.com/protocol/re",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.re.xyz",
+        "final_url": "https://app.re.xyz",
+        "checked_at": "2026-10-29T06:17:30.868416+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 138503,
+        "sample_sha256": "c90854a61b88f159dea17c1e534e895d7bf853d46ae934ca7d4182f35bc26706"
+      },
+      "product": {
+        "requested_url": "https://app.re.xyz/",
+        "final_url": "https://app.re.xyz/",
+        "checked_at": "2026-10-29T06:17:31.350611+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 138503,
+        "sample_sha256": "c90854a61b88f159dea17c1e534e895d7bf853d46ae934ca7d4182f35bc26706"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "usd-ai",
+      "project_file": "content/projects/usd-ai.md",
+      "name": "USD.AI",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "011fc6c4cb84a568177c9741bcf2f60fc6ab837d00fc1a8cc7296bfa9b3acb35",
+      "discovery_source": "https://defillama.com/protocol/usd-ai",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://usd.ai/",
+        "final_url": "https://usd.ai/",
+        "checked_at": "2026-10-29T06:17:32.343801+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "db6e62c0e539c62a23d7555fb0a43e2a814749c5cbe3d7ae21abb4f0499bf953"
+      },
+      "product": {
+        "requested_url": "https://app.usd.ai/stake",
+        "final_url": "https://app.usd.ai/stake",
+        "checked_at": "2026-10-29T06:17:33.760722+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 64582,
+        "sample_sha256": "8348049a6daa2ef8c0f58e554f50dada40f4e179bc3cdaf3b9dea96508836b30"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "theoriq",
+      "project_file": "content/projects/theoriq.md",
+      "name": "Theoriq",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "b96eb6de80cf785866d105db82997dc86cad02d06cd581fc538c8f82e11f8c3d",
+      "discovery_source": "https://www.theoriq.ai/",
+      "source_credit": "Official project website, checked 2026-10-29; description independently summarized.",
+      "official_site": {
+        "requested_url": "https://www.theoriq.ai/",
+        "final_url": "https://www.theoriq.ai/",
+        "checked_at": "2026-10-29T06:17:32.017143+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 38609,
+        "sample_sha256": "423ef67a42c3230de6327233d84f8c700ace5084996d3134d742acb70b164bd8"
+      },
+      "product": {
+        "requested_url": "https://www.theoriq.ai/products",
+        "final_url": "https://www.theoriq.ai/products",
+        "checked_at": "2026-10-29T06:17:32.732128+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 57595,
+        "sample_sha256": "f61e218f2970c4d11f61f47a7a766fa32352e12bfb8d969177888d74fb4f49d5"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "r25",
+      "project_file": "content/projects/r25.md",
+      "name": "R25",
+      "lead_category": "Real World Assets (RWA)",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "8caae38d374838a1cc17c6bf05ab9945aaf7f29d9ebfeff3cae49017af2711e7",
+      "discovery_source": "https://defillama.com/protocol/r25",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.r25.xyz/",
+        "final_url": "https://www.r25.xyz/",
+        "checked_at": "2026-10-29T06:17:30.858988+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 142478,
+        "sample_sha256": "c8fcf8922db212d0a82bfd505aba4aeb830b3141e7253a048b28531b96a26f35"
+      },
+      "product": {
+        "requested_url": "https://app.r25.xyz/",
+        "final_url": "https://app.r25.xyz/",
+        "checked_at": "2026-10-29T06:17:32.046403+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 797,
+        "sample_sha256": "da0259d2e01dd4a0e8839832c4302009962414dae75345c28225f6b70c81278d"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "ensuro",
+      "project_file": "content/projects/ensuro.md",
+      "name": "Ensuro",
+      "lead_category": "Security",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "32ebb4db01250aab14133f0f11b68d7c8b0a6aee08fc2bce6caeeec8edc6c531",
+      "discovery_source": "https://defillama.com/protocol/ensuro",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://ensuro.co",
+        "final_url": "https://ensuro.co",
+        "checked_at": "2026-10-29T06:17:34.976682+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "3d8e5d887a452d0894679bda4ab269a6b08d11f51e91c81af92ad809f4329cfa"
+      },
+      "product": {
+        "requested_url": "https://app.ensuro.co/",
+        "final_url": "https://app.ensuro.co/",
+        "checked_at": "2026-10-29T06:17:36.172373+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 1905,
+        "sample_sha256": "617dd1635ec6dac0f8f1677ed14ad09957f656c94ecd2fc398eefa98de5ae05d"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "misttrack-mcp",
+      "project_file": "content/projects/misttrack-mcp.md",
+      "name": "MistTrack",
+      "lead_category": "Security",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "4c530fd46c7c474d7efb4d9886c1c44fae2dd083c257423fd54029da2a6c469b",
+      "discovery_source": "https://satohub.ai/resources/misttrack-mcp",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://misttrack.io",
+        "final_url": "https://misttrack.io",
+        "checked_at": "2026-10-29T06:17:35.685762+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 53347,
+        "sample_sha256": "73066e9345b08c50ae7686eab16fd898181a809dc80f1d1d2195022d41932a54"
+      },
+      "product": {
+        "requested_url": "https://dashboard.misttrack.io/",
+        "final_url": "https://dashboard.misttrack.io/",
+        "checked_at": "2026-10-29T06:17:36.605535+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 16976,
+        "sample_sha256": "aeda13a07668e95d16e8e87ecca9526a609a30f2d14a641f2c5c262187bf27fc"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "nexus-mutual-insurance",
+      "project_file": "content/projects/nexus-mutual-insurance.md",
+      "name": "Nexus Mutual",
+      "lead_category": "Security",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "9770c178cb24787ec236b23f8ea26700482b975f809f6fac16b3be13a801bddb",
+      "discovery_source": "https://defillama.com/protocol/nexus-mutual-insurance",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://nexusmutual.io/",
+        "final_url": "https://nexusmutual.io/",
+        "checked_at": "2026-10-29T06:17:36.053275+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "5d561cdff1688db03bbeb201df7002c25ec3d4cbfc8c76d3c432f34a02c20515"
+      },
+      "product": {
+        "requested_url": "https://app.nexusmutual.io/",
+        "final_url": "https://app.nexusmutual.io/",
+        "checked_at": "2026-10-29T06:17:36.942907+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 36356,
+        "sample_sha256": "3eadfec2079ef01eb78ddc99e7b9d5fe38487768a769925e318f213c0a9479ba"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "the-interfold",
+      "project_file": "content/projects/the-interfold.md",
+      "name": "The Interfold",
+      "lead_category": "Security",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "b195d17af1e168db844316eb03f4cf2cd552d3b8d8e6d74b185a7989d9bb4268",
+      "discovery_source": "https://defillama.com/protocol/the-interfold",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.theinterfold.com/",
+        "final_url": "https://www.theinterfold.com/",
+        "checked_at": "2026-10-29T06:17:37.237911+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 217229,
+        "sample_sha256": "b7f662347bb1c80e7e6966c108c3f3b1a963cc0bff0ef320271c3d4995e51cab"
+      },
+      "product": {
+        "requested_url": "https://dashboard.theinterfold.com/",
+        "final_url": "https://dashboard.theinterfold.com/",
+        "checked_at": "2026-10-29T06:17:37.817383+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 709,
+        "sample_sha256": "72c66c3c9850364741e60877fa0358930430aab0bbf684bf8946a9a200cb9b59"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "vesper",
+      "project_file": "content/projects/vesper.md",
+      "name": "Vesper Finance",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "864c58d3171797160c88916b7290409f695a71ed257205f3749d55584691c3e9",
+      "discovery_source": "https://defillama.com/protocol/vesper",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://vesper.finance/",
+        "final_url": "https://vesper.finance/",
+        "checked_at": "2026-10-29T06:17:02.373644+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "sample_bytes": 81312,
+        "sample_sha256": "e7522cb90e8eb656d6f9d1802570afd36c8b8498357cbd1e84455e43e36db249"
+      },
+      "product": {
+        "requested_url": "https://app.vesper.finance",
+        "final_url": "https://app.vesper.finance",
+        "checked_at": "2026-10-29T06:17:03.182524+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "0240475c95d3e081d80be795f85a3f3044e5bb83b314e13e4626acef659f5a52"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "open-wallet-standard-ows",
+      "project_file": "content/projects/open-wallet-standard-ows.md",
+      "name": "Open Wallet Standard",
+      "lead_category": "Wallets",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "dafe56650550602cd3e042b8eaf84ee6dfa6214f084a4dcccb47d513962d8183",
+      "discovery_source": "https://satohub.ai/resources/open-wallet-standard",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://openwallet.sh",
+        "final_url": "https://openwallet.sh",
+        "checked_at": "2026-10-29T06:17:37.541736+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 144926,
+        "sample_sha256": "1411f0f0e0cb746cc6549a6780d263757a63fba0607c45f9d06b2a39e93780d7"
+      },
+      "product": {
+        "requested_url": "https://docs.openwallet.sh/",
+        "final_url": "https://docs.openwallet.sh/",
+        "checked_at": "2026-10-29T06:17:38.042937+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 9111,
+        "sample_sha256": "82bd00daf352e48a0702d2d29fb0c361648fc3c8860d3e5192300018fe533c7e"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "vultisig",
+      "project_file": "content/projects/vultisig.md",
+      "name": "Vultisig",
+      "lead_category": "Wallets",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "f9faa9ee5659f0c7689cacb62f5db4c330035577424f367e933211d3b8d5e432",
+      "discovery_source": "https://satohub.ai/resources/vultisig",
+      "source_credit": "Sato Hub Onchain Agents Index, CC-BY-4.0; accessed 2026-10-29. Description and classification adapted; no scores or endorsements carried over.",
+      "official_site": {
+        "requested_url": "https://vultisig.com/",
+        "final_url": "https://vultisig.com/",
+        "checked_at": "2026-10-29T06:17:37.720003+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "dc88cd7d6ae0568a82c46894966726d3d5b457a4e679adc1477e6187d0199ce6"
+      },
+      "product": {
+        "requested_url": "https://vultisig.com/downloads",
+        "final_url": "https://vultisig.com/downloads",
+        "checked_at": "2026-10-29T06:24:54.006914+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 96154,
+        "sample_sha256": "f8717e65d0f8b43eb0357fde71e0a65422a545209b86ea9bed22bfc3c32097b3"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "chainport",
+      "project_file": "content/projects/chainport.md",
+      "name": "ChainPort",
+      "lead_category": "Infrastructure",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "cd4e35f0ddf589f56694701cfb29404a5ada3c62fc9aef99452e889151ab8a24",
+      "discovery_source": "https://defillama.com/protocol/chainport",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.chainport.io",
+        "final_url": "https://app.chainport.io",
+        "checked_at": "2026-10-29T06:17:13.729380+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 133902,
+        "sample_sha256": "0c951a3f8e7cc92000ccd1f671a6204f55ef0ffc1ce411d0ca80321ab6fb349f"
+      },
+      "product": {
+        "requested_url": "https://app.chainport.io/",
+        "final_url": "https://app.chainport.io/",
+        "checked_at": "2026-10-29T06:17:16.031883+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 133902,
+        "sample_sha256": "03d59e011958e56f82a049a7b3cd5b9303e88001b1a447b0ac970100e861485d"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "lucid-labs",
+      "project_file": "content/projects/lucid-labs.md",
+      "name": "Lucid Labs",
+      "lead_category": "Infrastructure",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "d8f353c705f5d7b37d120eff9b0ecc368427fd4ace1b63dece5c35410f7a145c",
+      "discovery_source": "https://defillama.com/protocol/lucid-labs",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.lucidlabs.fi",
+        "final_url": "https://www.lucidlabs.fi",
+        "checked_at": "2026-10-29T06:17:16.437598+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "32bf109f013a38a8671a706e4257e90d097db46ae67aeb2bdf6313832dd9df2d"
+      },
+      "product": {
+        "requested_url": "https://bridge.lucidlabs.fi",
+        "final_url": "https://bridge.lucidlabs.fi",
+        "checked_at": "2026-10-29T06:17:17.135902+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 74485,
+        "sample_sha256": "1e1125ad1c39a13c6cbfc00210cb6fa5a5ae2c2617c5e1152687ed393024fedc"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "mayan-bridge",
+      "project_file": "content/projects/mayan-bridge.md",
+      "name": "Mayan",
+      "lead_category": "Infrastructure",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "5d79cdb2bf04ea71b9fb41fadc807eb3494c619f7f31a818180b4302b3be5a83",
+      "discovery_source": "https://defillama.com/protocol/mayan-bridge",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://mayan.finance/",
+        "final_url": "https://mayan.finance/",
+        "checked_at": "2026-10-29T06:17:16.517392+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 88964,
+        "sample_sha256": "0e96764c71bfd91c38ee560a4fb4954df776029f1712993509e05cba580f32d9"
+      },
+      "product": {
+        "requested_url": "https://swap.mayan.finance/",
+        "final_url": "https://swap.mayan.finance/",
+        "checked_at": "2026-10-29T06:24:53.774138+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 4986,
+        "sample_sha256": "45925b89fba03d00633a9193ca23029263c37d9c5a7f633c3e62fb86a7d0f176"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "orderly-bridge",
+      "project_file": "content/projects/orderly-bridge.md",
+      "name": "Orderly Network",
+      "lead_category": "Infrastructure",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "063c364a40eef33eff3d3e497abb71f7ce1ec41ed318b4401a5b722a98885688",
+      "discovery_source": "https://defillama.com/protocol/orderly-bridge",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://orderly.network",
+        "final_url": "https://orderly.network",
+        "checked_at": "2026-10-29T06:17:17.480459+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 121468,
+        "sample_sha256": "01bd37e9623a75764c5aa1994af265fc0a3a95e45a5b9534551ed3b05882faf1"
+      },
+      "product": {
+        "requested_url": "https://dex.orderly.network/",
+        "final_url": "https://dex.orderly.network/",
+        "checked_at": "2026-10-29T06:17:18.422550+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 8743,
+        "sample_sha256": "1c49280fe9e07c5186d31b4c95cca3a2c60f60ac8d6eb67b5c7995d7e104b8e5"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "rosen-bridge",
+      "project_file": "content/projects/rosen-bridge.md",
+      "name": "Rosen Bridge",
+      "lead_category": "Infrastructure",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "09a475fddce90bcc9e7ff352d8d783076b23a3da0b21d99d7b465ae41dc013a9",
+      "discovery_source": "https://defillama.com/protocol/rosen-bridge",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://rosen.tech",
+        "final_url": "https://rosen.tech",
+        "checked_at": "2026-10-29T06:17:19.461209+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 108913,
+        "sample_sha256": "94015cfcb4f61cef5a548ec69ef7d135d33c9a2f5fdb66f3748e764641bee286"
+      },
+      "product": {
+        "requested_url": "https://app.rosen.tech",
+        "final_url": "https://app.rosen.tech",
+        "checked_at": "2026-10-29T06:17:20.041810+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 12510,
+        "sample_sha256": "b5334d86c799e99dc0f255cf5b7932532705c586325f7d574eb7d07aab22d799"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "unit",
+      "project_file": "content/projects/unit.md",
+      "name": "Unit",
+      "lead_category": "Infrastructure",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "b0ef0ffa8b4faec9ec55442acda436c6d1fd17581798e0eaa0ee91e4a35940ac",
+      "discovery_source": "https://defillama.com/protocol/unit",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://hyperunit.xyz/deposit",
+        "final_url": "https://hyperunit.xyz/",
+        "checked_at": "2026-10-29T06:17:21.735085+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 58960,
+        "sample_sha256": "96380ae399671fa7312a1ae46c4fa0feadff4f09441d925237e7d5d894e59795"
+      },
+      "product": {
+        "requested_url": "https://app.hyperunit.xyz",
+        "final_url": "https://app.hyperunit.xyz",
+        "checked_at": "2026-10-29T06:17:22.442062+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 4834,
+        "sample_sha256": "e28326565baf905da1aab9311ca2bcc5a869f3bd80d62329401e0b15daa5b38f"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "3jane-lending",
+      "project_file": "content/projects/3jane-lending.md",
+      "name": "3Jane",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "a24e001c87615670e12491dc0e5e05d94b9fb8ced7c508cc5f1bb488709fb23d",
+      "discovery_source": "https://defillama.com/protocol/3jane-lending",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.3jane.xyz/",
+        "final_url": "https://www.3jane.xyz/",
+        "checked_at": "2026-10-29T06:16:16.462601+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 77158,
+        "sample_sha256": "c0d5f29621eb2f4b5d75a209ade3083fa5406be3e18d5ec9c6d98474b02f3ada"
+      },
+      "product": {
+        "requested_url": "https://app.3jane.xyz",
+        "final_url": "https://app.3jane.xyz/supply",
+        "checked_at": "2026-10-29T06:16:17.807181+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "ece09e4abafd511133204bc45b8f7a60e7745e7b5ed083a156d6a0904b6bfceb"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "722-capital",
+      "project_file": "content/projects/722-capital.md",
+      "name": "722 Capital",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "65329c1ecd3295734e841b3fd3da0edf72a7d787d2ffb308069f44c58cc25ca1",
+      "discovery_source": "https://defillama.com/protocol/722-capital",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://722.capital/",
+        "final_url": "https://722.capital/",
+        "checked_at": "2026-10-29T06:16:16.480658+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 78038,
+        "sample_sha256": "36ad5ed1c12ece8907fb21fd99b799c210c2c0069da007458b8cb760849434ca"
+      },
+      "product": {
+        "requested_url": "https://app.722.capital/vaults",
+        "final_url": "https://app.722.capital/vaults",
+        "checked_at": "2026-10-29T06:16:17.155841+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 29224,
+        "sample_sha256": "6a03ef723efae933ea4cf257791b038d6d5c88d112dad53ae71eb8978312208c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "9summits",
+      "project_file": "content/projects/9summits.md",
+      "name": "9Summits",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "0c11028089533cd7a61eac5d16aa4487f85fd1d81bfe0d9e80d7973018d160f2",
+      "discovery_source": "https://defillama.com/protocol/9summits",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://9summits.io",
+        "final_url": "https://9summits.io",
+        "checked_at": "2026-10-29T06:16:16.696974+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 203980,
+        "sample_sha256": "42afa585e87c93b769eef430836edf2454b9403b99c4a368e314c641d0677eab"
+      },
+      "product": {
+        "requested_url": "https://app.lagoon.finance/?curator=curator%3A9summits&pageSize=25",
+        "final_url": "https://app.lagoon.finance/?curator=curator%3A9summits&pageSize=25",
+        "checked_at": "2026-10-29T06:16:17.703507+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "cd6b51687932ed3d8101c9817231c8f141b2ca0aedab95d59f51895ed3f2fc46"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "angstrom",
+      "project_file": "content/projects/angstrom.md",
+      "name": "Angstrom",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "5b18d857f8604a21b46b2f64fba5e06e08e58836e824565a993086547794ae86",
+      "discovery_source": "https://defillama.com/protocol/angstrom",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://angstrom.xyz/",
+        "final_url": "https://angstrom.xyz/",
+        "checked_at": "2026-10-29T06:16:18.463630+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "3da06bd807d929d4fa3b9befe015bccf8474e0b993b719189f0891b8dd0d8659"
+      },
+      "product": {
+        "requested_url": "https://app.angstrom.xyz/",
+        "final_url": "https://app.angstrom.xyz/",
+        "checked_at": "2026-10-29T06:16:18.972258+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 105637,
+        "sample_sha256": "b98aa24934439b5eaabec11280320e8915b66611272e930485462038c02e46ef"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "anvil",
+      "project_file": "content/projects/anvil.md",
+      "name": "Anvil",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "458168bd380473d781e2483ccdbc8f77197a0d362de116b4dc06e5e164d2dbe5",
+      "discovery_source": "https://defillama.com/protocol/anvil",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://anvil.xyz/",
+        "final_url": "https://anvil.xyz/",
+        "checked_at": "2026-10-29T06:16:18.844282+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 189046,
+        "sample_sha256": "5ae0ee86cbef39d2b7b177d2bfd72fc922838968ca5c7e3c558ac90057ec5b27"
+      },
+      "product": {
+        "requested_url": "https://app.anvil.xyz",
+        "final_url": "https://app.anvil.xyz",
+        "checked_at": "2026-10-29T06:16:19.321266+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 16409,
+        "sample_sha256": "aa29343b5ab5949ed1eb5dce561f151e1bf4a232f9dc68655f2c1f636fd118fb"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "blend-pools-v2",
+      "project_file": "content/projects/blend-pools-v2.md",
+      "name": "Blend",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "0cf8e27e027f9a108b0689e263d08ecbab5c47f54aeb1a228ad9579c685e3734",
+      "discovery_source": "https://defillama.com/protocol/blend-pools-v2",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.blend.capital",
+        "final_url": "https://www.blend.capital",
+        "checked_at": "2026-10-29T06:16:22.063432+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 9606,
+        "sample_sha256": "1140cb7632ed4f6bfa362740802c6d136f054c0d8136ae69072ce081390f9c5a"
+      },
+      "product": {
+        "requested_url": "https://mainnet.blend.capital/",
+        "final_url": "https://mainnet.blend.capital/",
+        "checked_at": "2026-10-29T06:16:22.377249+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 1767,
+        "sample_sha256": "2fb22a0b0e6330367c7614adce6b15fdcaff143c107029cd56e55862307fee7a"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "blazestake",
+      "project_file": "content/projects/blazestake.md",
+      "name": "BlazeStake",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "15e47b77a75cc74da442f4627f7964ec1dfaf4a2b0f6775fa542cbd486ef9a07",
+      "discovery_source": "https://defillama.com/protocol/blazestake",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://stake.solblaze.org/",
+        "final_url": "https://stake.solblaze.org/",
+        "checked_at": "2026-10-29T06:16:21.971993+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "sample_bytes": 7544,
+        "sample_sha256": "4877ccc89c3e0d687c45b189454810b638d7fb407523d2193799332166a1a490"
+      },
+      "product": {
+        "requested_url": "https://stake.solblaze.org/app/",
+        "final_url": "https://stake.solblaze.org/app/",
+        "checked_at": "2026-10-29T06:16:22.695654+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "sample_bytes": 52898,
+        "sample_sha256": "4c4baa963c63d4ed5268d1e1d54c70aa5154a8172d980cd560d3a52403496abe"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "blueshift",
+      "project_file": "content/projects/blueshift.md",
+      "name": "Blueshift",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "d1592fcf56df4017f406f4e78462639bc91071c0224326c1100001d5e9e0737f",
+      "discovery_source": "https://defillama.com/protocol/blueshift",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://blueshift.fi/",
+        "final_url": "https://blueshift.fi/",
+        "checked_at": "2026-10-29T06:16:22.176691+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "sample_bytes": 108923,
+        "sample_sha256": "8ff25eb6327b7ea05e1f163432fd246507aa3674f94b1bf0456086d199fe8bc7"
+      },
+      "product": {
+        "requested_url": "https://app.blueshift.fi/",
+        "final_url": "https://app.blueshift.fi/",
+        "checked_at": "2026-10-29T06:16:22.984875+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 28866,
+        "sample_sha256": "8873f8b58947c4252aae035d5d2ecc0724075376e722f8d513a648d5310b86e3"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "bonzo-lend",
+      "project_file": "content/projects/bonzo-lend.md",
+      "name": "Bonzo Finance",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "e92266068bad51444f2043e8b3fd46cd7a95816321831f8d42876bf8d8d69199",
+      "discovery_source": "https://defillama.com/protocol/bonzo-lend",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://bonzo.finance/",
+        "final_url": "https://bonzo.finance/",
+        "checked_at": "2026-10-29T06:16:22.538625+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 127207,
+        "sample_sha256": "3fe68980b53c8f8bff3cc19d843cf225137b657593aec5a3cb856435fde983aa"
+      },
+      "product": {
+        "requested_url": "https://docs.bonzo.finance/",
+        "final_url": "https://docs.bonzo.finance/hub",
+        "checked_at": "2026-10-29T06:24:52.871300+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "7d69aef57d7d1df1862f3a4399120f5f2262d3d0fa63abef6720cbac744ce222"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "concrete",
+      "project_file": "content/projects/concrete.md",
+      "name": "Concrete",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "9c8baeea947961f63c39489a0c1cc24b40ad778857853dbfe056adad3525ca09",
+      "discovery_source": "https://defillama.com/protocol/concrete",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.concrete.xyz",
+        "final_url": "https://app.concrete.xyz/earn",
+        "checked_at": "2026-10-29T06:16:25.481921+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "83ef918e33007be6070a04c4f0d795012e26f038c9fbd1fb242b87b77b75550b"
+      },
+      "product": {
+        "requested_url": "https://app.concrete.xyz",
+        "final_url": "https://app.concrete.xyz/earn",
+        "checked_at": "2026-10-29T06:16:25.481921+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "83ef918e33007be6070a04c4f0d795012e26f038c9fbd1fb242b87b77b75550b"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "contango-v2",
+      "project_file": "content/projects/contango-v2.md",
+      "name": "Contango",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "fa5dfd455914c04cb2cd04e1fc27f50f3a9334d88363585e232cfd2a2bf6b3b0",
+      "discovery_source": "https://defillama.com/protocol/contango-v2",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://contango.xyz",
+        "final_url": "https://contango.xyz",
+        "checked_at": "2026-10-29T06:16:25.672711+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 27428,
+        "sample_sha256": "75e03caf5952f83ce16ddae8d16d1e05ec61d1dbae6dc461f8332703584af9a0"
+      },
+      "product": {
+        "requested_url": "https://app.contango.xyz",
+        "final_url": "https://app.contango.xyz",
+        "checked_at": "2026-10-29T06:16:26.107253+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 1878,
+        "sample_sha256": "7c829f5f5d59b569369ab2e1157158182fe5f51b04805400e1d250ad4199a68c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "deepbook-v3",
+      "project_file": "content/projects/deepbook-v3.md",
+      "name": "DeepBook",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "a4d7d3c698a9ecfc60cacf505c7ab4436a27cb60633aa874411089d14f5ea1d1",
+      "discovery_source": "https://defillama.com/protocol/deepbook-v3",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://deepbook.tech",
+        "final_url": "https://deepbook.xyz/",
+        "checked_at": "2026-10-29T06:16:27.110920+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 61449,
+        "sample_sha256": "d669832e5db583a6b4665df059ea04dad86ba4ed9df36343d7a9e4bd38e177f8"
+      },
+      "product": {
+        "requested_url": "https://app.deepbook.xyz",
+        "final_url": "https://app.deepbook.xyz",
+        "checked_at": "2026-10-29T06:16:27.616367+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 1387,
+        "sample_sha256": "51dde10084c9a607cfe9922763c8be8a7ef7d9cf4a36b425862859bed6ef316e"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "decibel",
+      "project_file": "content/projects/decibel.md",
+      "name": "Decibel",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "eeb9eac539865035c35c9232a5641bfd6a16850933d4a024ddec78a06fa3932d",
+      "discovery_source": "https://defillama.com/protocol/decibel",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.decibel.trade/trade",
+        "final_url": "https://app.decibel.trade/trade",
+        "checked_at": "2026-10-29T06:16:26.793699+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "f2455b801d453b8b961eda8b889f2952c7c81f11099045567aee0bd894c703e2"
+      },
+      "product": {
+        "requested_url": "https://app.decibel.trade/markets",
+        "final_url": "https://app.decibel.trade/markets",
+        "checked_at": "2026-10-29T06:16:28.380062+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "fe35326a4eb5be30364bc8c6ba1cdfc1f6fcba9b63409b830dcd8c7b712af624"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "exponent-yield-exchange",
+      "project_file": "content/projects/exponent-yield-exchange.md",
+      "name": "Exponent",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "bb96cd115a3dde11b1fab5a84b5276f6700697811f81da662e86e0630e778af1",
+      "discovery_source": "https://defillama.com/protocol/exponent-yield-exchange",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.exponent.finance/",
+        "final_url": "https://www.exponent.finance/",
+        "checked_at": "2026-10-29T06:16:28.960190+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "65649b7d9edd801d63327827efe5cf07bd1bad1fd73016e1fc3a055b05d7c469"
+      },
+      "product": {
+        "requested_url": "https://app.exponent.finance/",
+        "final_url": "https://app.exponent.finance/en",
+        "checked_at": "2026-10-29T06:16:29.574018+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 184486,
+        "sample_sha256": "353696b34867cda389fd6f5667e282fc3e7e7125491eba71c20dcc981a4a4cb4"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "fira",
+      "project_file": "content/projects/fira.md",
+      "name": "Fira",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "78ee942760e4fbd99007168df77ccb962d94245b19b18b14800baa2c84ee6920",
+      "discovery_source": "https://defillama.com/protocol/fira",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.fira.money/",
+        "final_url": "https://www.fira.money/",
+        "checked_at": "2026-10-29T06:16:29.248588+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "27e77754a07edf30eeb2ea64f5cc2b3af8737481f39487418dd153f7fda76a20"
+      },
+      "product": {
+        "requested_url": "https://app.fira.money",
+        "final_url": "https://app.fira.money",
+        "checked_at": "2026-10-29T06:16:29.922417+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 76796,
+        "sample_sha256": "21205383d5840dd917e0c45a2313e6e6a1fe847ff0fb0d0db5367c2ac5ccdf9b"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "frankencoin",
+      "project_file": "content/projects/frankencoin.md",
+      "name": "Frankencoin",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "74d7841c72fdcea45b9692f1a8e5d1d519d5b059a2e766fd3a3e3bbf2835f07b",
+      "discovery_source": "https://defillama.com/protocol/frankencoin",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://frankencoin.com",
+        "final_url": "https://frankencoin.com",
+        "checked_at": "2026-10-29T06:16:30.736586+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 177631,
+        "sample_sha256": "7dfa8c01cdd9544139442fabf7f46eb40771853bcfb560cfe5db37a918527805"
+      },
+      "product": {
+        "requested_url": "https://app.frankencoin.com/",
+        "final_url": "https://app.frankencoin.com/",
+        "checked_at": "2026-10-29T06:16:41.980029+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 6076,
+        "sample_sha256": "2d085b3ede1ab0797eeacd13f3d932329ffd6169346563cd94d6587e0567d8bd"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "fulcrom-perps",
+      "project_file": "content/projects/fulcrom-perps.md",
+      "name": "Fulcrom Finance",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "2c129c0dbf67960f7d393e15c64ef44e0a5a9dff442a6759d3e16f38a874610e",
+      "discovery_source": "https://defillama.com/protocol/fulcrom-perps",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://fulcrom.finance",
+        "final_url": "https://fulcrom.finance",
+        "checked_at": "2026-10-29T06:16:30.765609+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 261824,
+        "sample_sha256": "aeafcbea66ec9a9129e42b617cae58a111e67867d04cee46c7e32b50772b3399"
+      },
+      "product": {
+        "requested_url": "https://fulcrom.finance/dashboard/",
+        "final_url": "https://fulcrom.finance/dashboard/",
+        "checked_at": "2026-10-29T06:16:31.140078+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 214653,
+        "sample_sha256": "ea64b321f106f99890b39fcd10f385a793b3704817826cc8fc5f89700d9947d3"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "fx-protocol",
+      "project_file": "content/projects/fx-protocol.md",
+      "name": "f(x) Protocol",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "f94c2c854f5edb17cfcc8b3c0e156470d53d231d22d6f398f99c9c70e9b7fefb",
+      "discovery_source": "https://defillama.com/protocol/fx-protocol",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://fx.aladdin.club",
+        "final_url": "https://fx.aladdin.club",
+        "checked_at": "2026-10-29T06:16:30.853321+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 26862,
+        "sample_sha256": "23c212bc1d16d21dfbb219ee84b89dd0a60778b2eae541924c1c91b65ec24749"
+      },
+      "product": {
+        "requested_url": "https://fx.aladdin.club/v2/trade",
+        "final_url": "https://fx.aladdin.club/v2/trade",
+        "checked_at": "2026-10-29T06:16:31.272214+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 25444,
+        "sample_sha256": "10c71d638ff5a3f03441eda1f941edd4f7d9e4ab0ccaf49f65227b3f271eb4ba"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "gauntlet",
+      "project_file": "content/projects/gauntlet.md",
+      "name": "Gauntlet",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "bf3df6d6d4b70fe8c572e3faaedb281c3059b489ac655359dc40b681946713f7",
+      "discovery_source": "https://defillama.com/protocol/gauntlet",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.gauntlet.xyz",
+        "final_url": "https://www.gauntlet.xyz",
+        "checked_at": "2026-10-29T06:16:31.363619+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 138771,
+        "sample_sha256": "ed443ca9138a3cbfea8303fb0b905165e12b4c186139ce71735374c0b6743c7d"
+      },
+      "product": {
+        "requested_url": "https://app.gauntlet.xyz/",
+        "final_url": "https://app.gauntlet.xyz/",
+        "checked_at": "2026-10-29T06:24:52.870855+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 130405,
+        "sample_sha256": "444c43fae32cf9b4457ff1096c5f58bdd57993a7c0ea3e63483ca14a110895e4"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "grove-finance",
+      "project_file": "content/projects/grove-finance.md",
+      "name": "Grove",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "3cc1a77ad3bbc12981b8a1e16a092efd558ef9b2a6e5d479ec4cbd9ff3396e9f",
+      "discovery_source": "https://defillama.com/protocol/grove-finance",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://data.grove.finance/",
+        "final_url": "https://data.grove.finance/",
+        "checked_at": "2026-10-29T06:16:31.785328+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 78751,
+        "sample_sha256": "fad120ebae7f7496b47c632967fc16751636ba837b2320f78436789afe607328"
+      },
+      "product": {
+        "requested_url": "https://app.grove.finance",
+        "final_url": "https://app.grove.finance/dashboard",
+        "checked_at": "2026-10-29T06:16:32.171838+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 113785,
+        "sample_sha256": "26fc9de0f434a9b646d8ec7c4a39eb79827143c9141daeaa327dc5e2aba63c63"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "tectonic",
+      "project_file": "content/projects/tectonic.md",
+      "name": "Tectonic",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "ff629fe42195c00cacc8472c1dcae353bc7f57a21cf55545d53aaed78317c57e",
+      "discovery_source": "https://defillama.com/protocol/tectonic",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://tectonic.finance/",
+        "final_url": "https://tectonic.finance/",
+        "checked_at": "2026-10-29T06:16:57.297848+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 13920,
+        "sample_sha256": "776a158623a819fe4757d2f6e9d55f42c53463520280893d4d815025e558fa5e"
+      },
+      "product": {
+        "requested_url": "https://tectonic.finance/dashboard/",
+        "final_url": "https://tectonic.finance/dashboard/",
+        "checked_at": "2026-10-29T06:16:58.161650+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 14067,
+        "sample_sha256": "133aff96c13a7417afef1a6deea6a49a8454a5003c3818f4f009072f7c0c89ea"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "hypurrfi-pooled",
+      "project_file": "content/projects/hypurrfi-pooled.md",
+      "name": "HypurrFi",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "75324beb78e5d899b02dd201964dfc5b0be2871b50bc4d4d8c90f7dc15af6c2f",
+      "discovery_source": "https://defillama.com/protocol/hypurrfi-pooled",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://hypurrfi.com/",
+        "final_url": "https://hypurrfi.com/",
+        "checked_at": "2026-10-29T06:16:33.473062+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "62f8e81801d4cfdb85673cc0212346ab8d80945afd1ae1a0939e68f276842534"
+      },
+      "product": {
+        "requested_url": "https://app.hypurrfi.com/borrow",
+        "final_url": "https://app.hypurrfi.com/borrow",
+        "checked_at": "2026-10-29T06:34:40.943656+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 69755,
+        "sample_sha256": "d448befcea5cf30174e112250c9d779290208b7b4b8c2267aec29cbfec59446c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending. The old pooled market is being retired; the proposed listing uses the current Borrow interface and HyperEVM ecosystem, without advertising the retired pool."
+    },
+    {
+      "candidate_id": "index-coop",
+      "project_file": "content/projects/index-coop.md",
+      "name": "Index Coop",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "c21d66aadffb2c41c800e203515b5272aba9ae3d99f1e3f0c2667cebbc203572",
+      "discovery_source": "https://defillama.com/protocol/index-coop",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.indexcoop.com/",
+        "final_url": "https://www.indexcoop.com/",
+        "checked_at": "2026-10-29T06:16:33.523294+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 71793,
+        "sample_sha256": "801958e431597921e3e822f53dac26b591c1f013757fc2fc9ec3821c9a922e93"
+      },
+      "product": {
+        "requested_url": "https://app.indexcoop.com/trade",
+        "final_url": "https://app.indexcoop.com/trade",
+        "checked_at": "2026-10-29T06:24:52.870946+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 65125,
+        "sample_sha256": "b8fd91357b82fca69d3d999944d8dcdef490bcdce3d839cf2692c6f65d33fa83"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "jpool",
+      "project_file": "content/projects/jpool.md",
+      "name": "JPool",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "5aeeac9bf2d5429ca9da0e600f11e5d850cc38bc57c33c753af941b4ae475bf6",
+      "discovery_source": "https://defillama.com/protocol/jpool",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.jpool.one",
+        "final_url": "https://app.jpool.one/staking",
+        "checked_at": "2026-10-29T06:16:34.381702+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 104753,
+        "sample_sha256": "3c23468a6a14d7e33cc033838d51045478c3f8bfb3a0881cdfb8e787f5f2b7c0"
+      },
+      "product": {
+        "requested_url": "https://app.jpool.one/strategies",
+        "final_url": "https://app.jpool.one/strategies",
+        "checked_at": "2026-10-29T06:16:35.028386+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 129049,
+        "sample_sha256": "b9c96e9465835f0dfce11dce824ae8a5a4e4dbb1f54097317c5f57092569a5f3"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "liquidium",
+      "project_file": "content/projects/liquidium.md",
+      "name": "Liquidium",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "db0b40b4142727b933c77d21c4c6f91d86d1fff5596e7ce1e373aa6f51468167",
+      "discovery_source": "https://defillama.com/protocol/liquidium",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://liquidium.fi/",
+        "final_url": "https://liquidium.fi/",
+        "checked_at": "2026-10-29T06:16:36.544021+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "18d5fe422ff536ace1ffd1af03a427c531661273cbb51ca4b5da68b89ceb7c2e"
+      },
+      "product": {
+        "requested_url": "https://app.liquidium.fi",
+        "final_url": "https://app.liquidium.fi",
+        "checked_at": "2026-10-29T06:16:40.599553+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 67203,
+        "sample_sha256": "1d0e71c587a86af7885841c23e5efc817f510a18fd65d756e6e090a2a7aa5507"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "m0",
+      "project_file": "content/projects/m0.md",
+      "name": "M0",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "9eb3befc12b87eba219f5a0d2060d17304349b116da51c133122177c26cba223",
+      "discovery_source": "https://defillama.com/protocol/m0",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.m0.org/",
+        "final_url": "https://www.m0.org/",
+        "checked_at": "2026-10-29T06:16:37.135285+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 74536,
+        "sample_sha256": "cfc440d78c26c5fcafeb92cc53571284705804a493302744f50ce66de76b8005"
+      },
+      "product": {
+        "requested_url": "https://dashboard.m0.org",
+        "final_url": "https://dashboard.m0.org",
+        "checked_at": "2026-10-29T06:16:37.498883+00:00",
+        "status": 200,
+        "content_type": "text/html;charset=utf-8",
+        "sample_bytes": 3917,
+        "sample_sha256": "c5f1b18370932dde0e317f8f78901aa42f959242e38e2ae06cb13c5902cd3229"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "mystic-finance-lending",
+      "project_file": "content/projects/mystic-finance-lending.md",
+      "name": "Mystic Finance",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "c1ba43a5a5a592d2bbe544a02bd7d2aa1d85644bdd1000ec656e31ba2520b1b8",
+      "discovery_source": "https://defillama.com/protocol/mystic-finance-lending",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.mysticfinance.xyz/",
+        "final_url": "https://www.mysticfinance.xyz/",
+        "checked_at": "2026-10-29T06:16:40.001608+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 38105,
+        "sample_sha256": "2597c2bf4efc2401df7157dea336b6115f450390e031de93cb31979dbc52f61c"
+      },
+      "product": {
+        "requested_url": "https://app.mysticfinance.xyz",
+        "final_url": "https://app.mysticfinance.xyz",
+        "checked_at": "2026-10-29T06:16:40.698726+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 2709,
+        "sample_sha256": "acfbaecd7a19a9893f7dcfabc4233bf666fffff86332b505728ae9dcd9b2ff36"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "native-credit-pool",
+      "project_file": "content/projects/native-credit-pool.md",
+      "name": "Native",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "7dcdffcd739885e9451dbd8c55d63e8d4dd61dada5b4ec475d2dd6875774e63c",
+      "discovery_source": "https://defillama.com/protocol/native-credit-pool",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://native.org",
+        "final_url": "https://native.org",
+        "checked_at": "2026-10-29T06:16:40.224866+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 214391,
+        "sample_sha256": "a42396e83de9986afc0a97c1abcdbb4ff709807bbc8690d9c5c32be5616f6b69"
+      },
+      "product": {
+        "requested_url": "https://app.native.org",
+        "final_url": "https://app.native.org/native-pool",
+        "checked_at": "2026-10-29T06:16:42.486565+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 27420,
+        "sample_sha256": "0cc23c6091a07e965c051f6db9e19c1208b4052d49b5dd02256b175d361aff9c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "neptune-finance",
+      "project_file": "content/projects/neptune-finance.md",
+      "name": "Neptune Finance",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "c6188de5f1d2e63380ab154b4727e8c74612a136037d2a5c837e62501cd31dea",
+      "discovery_source": "https://defillama.com/protocol/neptune-finance",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://nept.finance/",
+        "final_url": "https://nept.finance/",
+        "checked_at": "2026-10-29T06:16:40.758909+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 119612,
+        "sample_sha256": "4f44f873cf907a0e96106ddbc4d5bf8e2e058ce3dce8a0c9c8ff6ab51540f394"
+      },
+      "product": {
+        "requested_url": "https://app.nept.finance/",
+        "final_url": "https://app.nept.finance/",
+        "checked_at": "2026-10-29T06:16:41.259979+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 39721,
+        "sample_sha256": "51105d11d64450489b290a6df9b68fb1609d53ddf187f2a11354dcb80876f83c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "ostium",
+      "project_file": "content/projects/ostium.md",
+      "name": "Ostium",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "35d878da6e9ff94d0d94c40a9e1abf3b725db22578c6049d4058c9ff5cd5f673",
+      "discovery_source": "https://defillama.com/protocol/ostium",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.ostium.io/",
+        "final_url": "https://www.ostium.com/",
+        "checked_at": "2026-10-29T06:16:42.991834+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "6926eb00e80dfa29a53b986f0b9fb3528bfc6a2bd1062a9b9e2c062b09e97856"
+      },
+      "product": {
+        "requested_url": "https://app.ostium.com",
+        "final_url": "https://app.ostium.com/trade",
+        "checked_at": "2026-10-29T06:16:43.878836+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 74511,
+        "sample_sha256": "405016d0e68ca9b2d57c6ba3ac9181e6d6c06248bf23e809e150a68ea0d353e2"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "pooltogether-v3",
+      "project_file": "content/projects/pooltogether-v3.md",
+      "name": "PoolTogether",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "8983113988b4da8ec91e26b5f8213905d870163d27f8e0ff9038d0ddae6321db",
+      "discovery_source": "https://defillama.com/protocol/pooltogether-v3",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://pooltogether.com/",
+        "final_url": "https://pooltogether.com/",
+        "checked_at": "2026-10-29T06:16:44.705894+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 53883,
+        "sample_sha256": "ff34888ec4518f6771fb06aa69c04c26e117e8a113b409851544ed5edfb58064"
+      },
+      "product": {
+        "requested_url": "https://pooltogether.com/interfaces",
+        "final_url": "https://pooltogether.com/interfaces",
+        "checked_at": "2026-10-29T06:24:53.585278+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 22011,
+        "sample_sha256": "1c21b8ec18c4f3cc4337975ba416f968210b221244d950f681908e806c6e3eb0"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "reserve-protocol",
+      "project_file": "content/projects/reserve-protocol.md",
+      "name": "Reserve",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "236ebed90da82aef6739e54b85473b0b77433cba4c7381119b092ded5d7169e3",
+      "discovery_source": "https://defillama.com/protocol/reserve-protocol",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://reserve.org",
+        "final_url": "https://reserve.org",
+        "checked_at": "2026-10-29T06:16:47.040761+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 170116,
+        "sample_sha256": "5bd2631c311892e00905ee8e29ed2f1cf22e9ec5547202b0abd5ea9493000034"
+      },
+      "product": {
+        "requested_url": "https://app.reserve.org/",
+        "final_url": "https://app.reserve.org/",
+        "checked_at": "2026-10-29T06:16:47.534373+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 7622,
+        "sample_sha256": "7f5bf5203d2205a31360d346e3b906fe41342bbeb40a6703f94945a0f8b003f8"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "resupply",
+      "project_file": "content/projects/resupply.md",
+      "name": "Resupply",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "bc7cfb557931a7cd7b8363829d1cfea30c22158d58825590da1a245292b23617",
+      "discovery_source": "https://defillama.com/protocol/resupply",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://resupply.fi/",
+        "final_url": "https://resupply.finance/",
+        "checked_at": "2026-10-29T06:16:47.426337+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 89833,
+        "sample_sha256": "79d80471c33402b465ddd6ec94c81011070ced18b4d24e8a518b99b096fc81fd"
+      },
+      "product": {
+        "requested_url": "https://docs.resupply.finance",
+        "final_url": "https://docs.resupply.finance",
+        "checked_at": "2026-10-29T06:16:48.965571+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "81f05e888dd3856a01993ae741a2d3165cbce409d529095610b50e9e0801d882"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "rysk-v12",
+      "project_file": "content/projects/rysk-v12.md",
+      "name": "Rysk",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "ac8c086f585bbf9f8cbefbdd5219e89113912b17fd79f1d47cd055ca99501606",
+      "discovery_source": "https://defillama.com/protocol/rysk-v12",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.rysk.finance",
+        "final_url": "https://app.rysk.finance",
+        "checked_at": "2026-10-29T06:16:48.402260+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 262144,
+        "sample_sha256": "6645502b9f9be507a5c05e9c141e9e01fa71a8e0ea198ae6ed5f5ec4f89e7fff"
+      },
+      "product": {
+        "requested_url": "https://app.rysk.finance/dashboard/",
+        "final_url": "https://app.rysk.finance/dashboard/",
+        "checked_at": "2026-10-29T06:16:49.792333+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 58387,
+        "sample_sha256": "13562a0cfc7169e0b0f75cbe194bf7c47bb14401625ddcf0dd070c175ddbc625"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "saucerswap-v2",
+      "project_file": "content/projects/saucerswap-v2.md",
+      "name": "SaucerSwap",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "7a9d89dff269156ab462dd2b732cfafec28f2a21f34b5b468bdab23b11f32ae5",
+      "discovery_source": "https://defillama.com/protocol/saucerswap-v2",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.saucerswap.finance",
+        "final_url": "https://www.saucerswap.finance",
+        "checked_at": "2026-10-29T06:16:48.952523+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 107383,
+        "sample_sha256": "41e539b6c60abf4fe593f9a0cca0de58572e12b52fb2d4aae4bffe55a1a29ec1"
+      },
+      "product": {
+        "requested_url": "https://www.saucerswap.finance/portfolio",
+        "final_url": "https://www.saucerswap.finance/portfolio",
+        "checked_at": "2026-10-29T06:16:49.584706+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 31383,
+        "sample_sha256": "1598ee07912ed74dc942ec6b5749767693d647a41b01989e859b43cec8a88b42"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "spectra-v2",
+      "project_file": "content/projects/spectra-v2.md",
+      "name": "Spectra",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "065c87c4cab551e833778dfaffd562455160a52bf29d8fd208f83d2203089dbf",
+      "discovery_source": "https://defillama.com/protocol/spectra-v2",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.spectra.finance/fixed-rate",
+        "final_url": "https://app.spectra.finance/fixed-rate",
+        "checked_at": "2026-10-29T06:16:52.263794+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 171601,
+        "sample_sha256": "178e3b7d234f92eca6914b7b2bacc9e8b38192dce684737a21accded0d8c1d1d"
+      },
+      "product": {
+        "requested_url": "https://app.spectra.finance/fixed-rate",
+        "final_url": "https://app.spectra.finance/fixed-rate",
+        "checked_at": "2026-10-29T06:16:52.263794+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 171601,
+        "sample_sha256": "178e3b7d234f92eca6914b7b2bacc9e8b38192dce684737a21accded0d8c1d1d"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "ssv-network",
+      "project_file": "content/projects/ssv-network.md",
+      "name": "SSV Network",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "1ec70f97ca4d36f274ff44edcfb633c3229bb690569046eeacbf2db8af0db0d9",
+      "discovery_source": "https://defillama.com/protocol/ssv-network",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://ssv.network/",
+        "final_url": "https://ssv.network/",
+        "checked_at": "2026-10-29T06:16:52.612034+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 262144,
+        "sample_sha256": "a26f619447c496684be2c3faf2400766a3dd18f84a670d84c67cdb62258b6a2e"
+      },
+      "product": {
+        "requested_url": "https://app.ssv.network",
+        "final_url": "https://app.ssv.network",
+        "checked_at": "2026-10-29T06:16:53.267741+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 1868,
+        "sample_sha256": "39b7e461bc62ed36d9003879d410694def4cd6cdab9a02a06c0ca657174d5538"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "stafi",
+      "project_file": "content/projects/stafi.md",
+      "name": "StaFi",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "fd540d72b0f0f82804383a7820eed3e7e19e825d73e2e777c15463e2c6769634",
+      "discovery_source": "https://defillama.com/protocol/stafi",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://www.stafi.io/",
+        "final_url": "https://www.stafi.io/",
+        "checked_at": "2026-10-29T06:16:52.987791+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 30342,
+        "sample_sha256": "c02f0849ab2e435169de4c757ac56be276b8bbd0df095e889fc58a337cdc071e"
+      },
+      "product": {
+        "requested_url": "https://app.stafi.io/",
+        "final_url": "https://app.stafi.io/",
+        "checked_at": "2026-10-29T06:16:53.538721+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 18217,
+        "sample_sha256": "afe892b2d07c388676d590827882a487951eaddd8aa78e23f411f336af14d48c"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "ston-fi",
+      "project_file": "content/projects/ston-fi.md",
+      "name": "STON.fi",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "c14bae2cbdb3c72e09ad9a4eebdfd94f30d80ab68a7ca5b10f2a700654c84392",
+      "discovery_source": "https://defillama.com/protocol/ston.fi",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://app.ston.fi/",
+        "final_url": "https://app.ston.fi/swap",
+        "checked_at": "2026-10-29T06:16:55.503134+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 72355,
+        "sample_sha256": "05887f92c9fa34a526541b8f699a377a5883cd238da9b27b68ed63d75b532a81"
+      },
+      "product": {
+        "requested_url": "https://app.ston.fi/",
+        "final_url": "https://app.ston.fi/swap",
+        "checked_at": "2026-10-29T06:16:55.503134+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 72355,
+        "sample_sha256": "05887f92c9fa34a526541b8f699a377a5883cd238da9b27b68ed63d75b532a81"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    },
+    {
+      "candidate_id": "tinyman",
+      "project_file": "content/projects/tinyman.md",
+      "name": "Tinyman",
+      "lead_category": "DeFi",
+      "proposed_status": "pending_audit",
+      "proposed_content_sha256": "633212ad9e0d25b656b20caa8e1aba11a3c40846c478d9505afbea49b3f0f434",
+      "discovery_source": "https://defillama.com/protocol/tinyman",
+      "source_credit": "DefiLlama protocol registry, accessed 2026-10-29. Name, URL, category and chain facts used for discovery; TVL is only a discovery filter and is not an endorsement.",
+      "official_site": {
+        "requested_url": "https://tinyman.org",
+        "final_url": "https://tinyman.org",
+        "checked_at": "2026-10-29T06:16:58.387133+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "sample_bytes": 72050,
+        "sample_sha256": "dce641458c4f78c2982bf8b2bf074a50d568052a3bdc94a183253daa59d0b54b"
+      },
+      "product": {
+        "requested_url": "https://app.tinyman.org/",
+        "final_url": "https://app.tinyman.org/",
+        "checked_at": "2026-10-29T06:16:58.770342+00:00",
+        "status": 200,
+        "content_type": "text/html",
+        "sample_bytes": 3807,
+        "sample_sha256": "086b987bd0499e42eee1763ca0c97248e035e848c229c00e44140060808b945d"
+      },
+      "rationale": "Official project identity, category and current product/developer interface reviewed against these primary pages; checked for existing names, domains and known rebrands. Included for protected release review, with protocol/security audit still pending."
+    }
+  ]
+}

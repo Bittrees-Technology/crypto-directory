@@ -10,6 +10,17 @@ is awaiting review and is not an accepted submission. Merging category or
 research changes does not approve its candidates. Research files are not
 imported automatically or included in the public project data.
 
+## Publication review
+
+The [first publication review](reviews/2026-10-29-first-publication.md) selects
+100 candidates for actual `content/projects/` entries, including 13 crypto/Web3
+AI Agents. It records official project/product evidence and retains
+`pending_audit` status. The remaining 400 suggestions stay in research; known
+duplicates, rebrands and product-access problems are recorded separately.
+The historical research batch remains unchanged. Publication still requires an
+independent protected-branch approval, passing checks and the normal dual-host
+release; merging research by itself never publishes a listing.
+
 ## Flow
 1. Collect candidate data as JSON in `content/submissions/inbox/`.
 2. Review and move accepted files to `content/submissions/approved/`.

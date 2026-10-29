@@ -62,6 +62,70 @@
     "id": "oneinch.md"
   },
   {
+    "name": "3Jane",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Uncollateralized Lending"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "A credit platform issuing onchain products backed by lending facilities and credit arrangements.",
+    "primary_url": "https://www.3jane.xyz/",
+    "product_url": "https://app.3jane.xyz/supply",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "3jane-lending.md"
+  },
+  {
+    "name": "722 Capital",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Risk Curators"
+    ],
+    "ecosystem": [
+      "Base",
+      "Hyperliquid L1"
+    ],
+    "description": "An onchain strategy curator with vault interfaces for digital asset allocation.",
+    "primary_url": "https://722.capital/",
+    "product_url": "https://app.722.capital/vaults",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "722-capital.md"
+  },
+  {
+    "name": "9Summits",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Risk Curators"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Avalanche",
+      "Base",
+      "Unichain"
+    ],
+    "description": "A curator operating onchain vault strategies through the Lagoon platform.",
+    "primary_url": "https://9summits.io/",
+    "product_url": "https://app.lagoon.finance/?curator=curator%3A9summits&pageSize=25",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "9summits.md"
+  },
+  {
     "name": "Aave",
     "lead_category": "DeFi",
     "tags": [
@@ -292,6 +356,26 @@
     "twitter": "https://x.com/aftermathfi",
     "verification_status": "verified",
     "id": "aftermath-finance.md"
+  },
+  {
+    "name": "AgenC",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Solana onchain agent marketplace"
+    ],
+    "ecosystem": [
+      "Solana"
+    ],
+    "description": "A Solana marketplace where autonomous agents take tasks and receive onchain payments.",
+    "primary_url": "https://agenc.ag/",
+    "product_url": "https://agenc.ag/browse",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "agenc.md"
   },
   {
     "name": "Agora Governance",
@@ -586,6 +670,36 @@
     "id": "allnodes.md"
   },
   {
+    "name": "Almanak",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "DeFi quant strategy infrastructure"
+    ],
+    "ecosystem": [
+      "Multichain",
+      "Ethereum",
+      "Arbitrum",
+      "Optimism",
+      "Base",
+      "Avalanche",
+      "Polygon",
+      "BNB Chain",
+      "Monad",
+      "Solana",
+      "Berachain"
+    ],
+    "description": "Tools for building, simulating and deploying agents that manage onchain financial strategies.",
+    "primary_url": "https://almanak.co/",
+    "product_url": "https://app.almanak.co/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "almanak.md"
+  },
+  {
     "name": "AltLayer",
     "lead_category": "Infrastructure",
     "tags": [
@@ -733,6 +847,26 @@
     "id": "angle-protocol.md"
   },
   {
+    "name": "Angstrom",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Dexs"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "A decentralized exchange that incorporates transaction sequencing into its trading and liquidity design.",
+    "primary_url": "https://angstrom.xyz/",
+    "product_url": "https://app.angstrom.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "angstrom.md"
+  },
+  {
     "name": "Animoca Brands",
     "lead_category": "Gaming",
     "tags": [
@@ -815,6 +949,26 @@
     "twitter": "https://x.com/anoma",
     "verification_status": "verified",
     "id": "anoma.md"
+  },
+  {
+    "name": "Anvil",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Collateral Management"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "Onchain collateral infrastructure for credit arrangements, payments and financial guarantees.",
+    "primary_url": "https://anvil.xyz/",
+    "product_url": "https://app.anvil.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "anvil.md"
   },
   {
     "name": "Anzen",
@@ -1747,6 +1901,35 @@
     "id": "banklessdao.md"
   },
   {
+    "name": "Bankr",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Crypto execution layer + cross-chain wallet for agents"
+    ],
+    "ecosystem": [
+      "Base",
+      "Ethereum",
+      "Polygon",
+      "Arbitrum",
+      "Solana",
+      "Bitcoin",
+      "BNB Chain",
+      "Multichain",
+      "Hyperliquid",
+      "Robinhood Chain"
+    ],
+    "description": "A conversational crypto agent for token swaps, transfers and trading instructions.",
+    "primary_url": "https://bankr.bot/",
+    "product_url": "https://docs.bankr.bot/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "bankr.md"
+  },
+  {
     "name": "Banxa",
     "lead_category": "Payments",
     "tags": [
@@ -2033,6 +2216,26 @@
     "twitter": "https://x.com/binance",
     "verification_status": "verified",
     "id": "binance-wallet.md"
+  },
+  {
+    "name": "Binaryx",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Polygon"
+    ],
+    "description": "A platform for accessing tokenized real estate interests and property investment products.",
+    "primary_url": "https://binaryx.com/",
+    "product_url": "https://app.binaryx.com/spot",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "binaryx-platform.md"
   },
   {
     "name": "BingX",
@@ -2634,6 +2837,66 @@
     "id": "blast-api.md"
   },
   {
+    "name": "BlazeStake",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Liquid Staking"
+    ],
+    "ecosystem": [
+      "Solana"
+    ],
+    "description": "A Solana liquid staking protocol connecting staked assets with tokens usable in decentralized finance.",
+    "primary_url": "https://stake.solblaze.org/",
+    "product_url": "https://stake.solblaze.org/app/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "blazestake.md"
+  },
+  {
+    "name": "Blend",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Stellar"
+    ],
+    "description": "A lending protocol for creating and using pooled liquidity markets on Stellar.",
+    "primary_url": "https://www.blend.capital/",
+    "product_url": "https://mainnet.blend.capital/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "blend-pools-v2.md"
+  },
+  {
+    "name": "BlindPay",
+    "lead_category": "Payments",
+    "tags": [
+      "Payments",
+      "Payment Rail"
+    ],
+    "ecosystem": [
+      "Multichain"
+    ],
+    "description": "Stablecoin payment infrastructure connecting APIs, business accounts and local payment networks.",
+    "primary_url": "https://blindpay.com/",
+    "product_url": "https://app.blindpay.com/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "blindpay.md"
+  },
+  {
     "name": "Block Lottos",
     "lead_category": "Gaming",
     "tags": [
@@ -2783,6 +3046,27 @@
     "twitter": "https://x.com/RealBlockPI",
     "verification_status": "verified",
     "id": "blockpi.md"
+  },
+  {
+    "name": "BlockRun",
+    "lead_category": "Developer Tools",
+    "tags": [
+      "Developer Tools",
+      "Developer Tool"
+    ],
+    "ecosystem": [
+      "Base",
+      "Solana"
+    ],
+    "description": "Developer infrastructure for agent tool access and usage-based payments with onchain settlement.",
+    "primary_url": "https://blockrun.ai/",
+    "product_url": "https://blockrun.ai/docs",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "clawrouter-blockrun.md"
   },
   {
     "name": "Blockscout",
@@ -2974,6 +3258,30 @@
     "id": "bluefin.md"
   },
   {
+    "name": "Blueshift",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Dexs"
+    ],
+    "ecosystem": [
+      "BOB",
+      "Kava",
+      "Polygon",
+      "Milkomeda",
+      "Milkomeda A1"
+    ],
+    "description": "A decentralized exchange using portfolio-based liquidity pools and cross-chain trading interfaces.",
+    "primary_url": "https://blueshift.fi/",
+    "product_url": "https://app.blueshift.fi/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "blueshift.md"
+  },
+  {
     "name": "BlueWallet",
     "lead_category": "Wallets",
     "tags": [
@@ -3012,6 +3320,26 @@
     "twitter": "https://x.com/blur_io",
     "verification_status": "verified",
     "id": "blur.md"
+  },
+  {
+    "name": "Boar Network",
+    "lead_category": "Developer Tools",
+    "tags": [
+      "Developer Tools",
+      "MCP"
+    ],
+    "ecosystem": [
+      "Multichain"
+    ],
+    "description": "Blockchain infrastructure and an MCP server for accessing onchain data from developer and agent tools.",
+    "primary_url": "https://boar.network/",
+    "product_url": "https://github.com/boar-network/blockchain-mcp",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "boar-blockchain-mcp.md"
   },
   {
     "name": "Boardroom",
@@ -3096,6 +3424,50 @@
     "twitter": "https://x.com/bonfire_xyz",
     "verification_status": "verified",
     "id": "bonfire.md"
+  },
+  {
+    "name": "Bonzo Finance",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Hedera"
+    ],
+    "description": "Lending, borrowing and staking infrastructure within the Hedera ecosystem.",
+    "primary_url": "https://bonzo.finance/",
+    "product_url": "https://docs.bonzo.finance/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "bonzo-lend.md"
+  },
+  {
+    "name": "Boson Protocol",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Polygon",
+      "Ethereum",
+      "Base",
+      "Optimism",
+      "Arbitrum"
+    ],
+    "description": "Onchain commerce infrastructure for exchanging digital and physical assets through programmable commitments.",
+    "primary_url": "https://www.bosonprotocol.io/",
+    "product_url": "https://www.bosonprotocol.io/docs/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "boson-protocol.md"
   },
   {
     "name": "Botanix",
@@ -3217,6 +3589,30 @@
     "twitter": "https://x.com/Breez_Tech",
     "verification_status": "verified",
     "id": "breez.md"
+  },
+  {
+    "name": "Brickken",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Binance",
+      "Ethereum",
+      "Base",
+      "Avalanche",
+      "Polygon"
+    ],
+    "description": "Tools for issuing and managing tokenized assets, including investor onboarding and asset administration.",
+    "primary_url": "https://www.brickken.com/",
+    "product_url": "https://docs.brickken.com/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "brickken.md"
   },
   {
     "name": "Bridge",
@@ -4122,6 +4518,30 @@
     "id": "chainpatrol.md"
   },
   {
+    "name": "ChainPort",
+    "lead_category": "Infrastructure",
+    "tags": [
+      "Infrastructure",
+      "Bridge"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Cardano",
+      "Binance",
+      "Polygon",
+      "Fantom"
+    ],
+    "description": "A cross-chain bridge for moving supported tokens between blockchain networks.",
+    "primary_url": "https://app.chainport.io/",
+    "product_url": "https://app.chainport.io/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "chainport.md"
+  },
+  {
     "name": "ChainSafe",
     "lead_category": "Infrastructure",
     "tags": [
@@ -4442,6 +4862,28 @@
     "twitter": "https://x.com/Cobo_Global",
     "verification_status": "verified",
     "id": "cobo.md"
+  },
+  {
+    "name": "COD3X",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "DeFAI agent creation + DeFi protocols"
+    ],
+    "ecosystem": [
+      "Multichain",
+      "Hyperliquid",
+      "Arbitrum"
+    ],
+    "description": "A platform for creating crypto trading agents from natural-language strategy instructions.",
+    "primary_url": "https://cod3x.org/",
+    "product_url": "https://cod3x.org/agents",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "cod3x.md"
   },
   {
     "name": "Code4rena",
@@ -5257,6 +5699,30 @@
     "id": "compound.md"
   },
   {
+    "name": "Concrete",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Onchain Capital Allocator"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Stable",
+      "Arbitrum",
+      "Berachain",
+      "Katana"
+    ],
+    "description": "Vault interfaces for accessing curated decentralized finance strategies across supported networks.",
+    "primary_url": "https://app.concrete.xyz/earn",
+    "product_url": "https://app.concrete.xyz/earn",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "concrete.md"
+  },
+  {
     "name": "Conduit",
     "lead_category": "Infrastructure",
     "tags": [
@@ -5357,6 +5823,35 @@
     "twitter": "https://x.com/Consensys",
     "verification_status": "verified",
     "id": "consensys.md"
+  },
+  {
+    "name": "Contango",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Derivatives"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base",
+      "Arbitrum",
+      "Optimism",
+      "Avalanche",
+      "xDai",
+      "Polygon",
+      "Binance",
+      "Scroll",
+      "Linea"
+    ],
+    "description": "A decentralized finance interface for creating and managing leveraged positions through lending markets.",
+    "primary_url": "https://contango.xyz/",
+    "product_url": "https://app.contango.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "contango-v2.md"
   },
   {
     "name": "Convex Finance",
@@ -6144,6 +6639,28 @@
     "id": "dappradar.md"
   },
   {
+    "name": "Daydreams",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Web3 agent platform"
+    ],
+    "ecosystem": [
+      "Base",
+      "Solana",
+      "Starknet"
+    ],
+    "description": "Agent frameworks and commerce infrastructure for coordinating work and settling payments onchain.",
+    "primary_url": "https://www.daydreams.systems/",
+    "product_url": "https://docs.daydreams.systems/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "daydreams.md"
+  },
+  {
     "name": "DeBank",
     "lead_category": "Data & Analytics",
     "tags": [
@@ -6208,6 +6725,26 @@
     "id": "decentraland-foundation.md"
   },
   {
+    "name": "Decibel",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Derivatives"
+    ],
+    "ecosystem": [
+      "Aptos"
+    ],
+    "description": "An onchain trading platform with market and portfolio interfaces.",
+    "primary_url": "https://app.decibel.trade/trade",
+    "product_url": "https://app.decibel.trade/markets",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "decibel.md"
+  },
+  {
     "name": "Dedaub",
     "lead_category": "Security",
     "tags": [
@@ -6227,6 +6764,26 @@
     "twitter": "https://x.com/dedaub",
     "verification_status": "verified",
     "id": "dedaub.md"
+  },
+  {
+    "name": "DeepBook",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Dexs"
+    ],
+    "ecosystem": [
+      "Sui"
+    ],
+    "description": "Trading and liquidity infrastructure on Sui, with interfaces for onchain markets.",
+    "primary_url": "https://deepbook.xyz/",
+    "product_url": "https://app.deepbook.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "deepbook-v3.md"
   },
   {
     "name": "DeFi Kingdoms",
@@ -6393,6 +6950,26 @@
     "twitter": "https://x.com/developer_dao",
     "verification_status": "verified",
     "id": "developer-dao.md"
+  },
+  {
+    "name": "DexPaprika",
+    "lead_category": "Developer Tools",
+    "tags": [
+      "Developer Tools",
+      "MCP"
+    ],
+    "ecosystem": [
+      "Multichain"
+    ],
+    "description": "Market data APIs and developer tools for decentralized exchange pools, tokens and trading activity.",
+    "primary_url": "https://dexpaprika.com/",
+    "product_url": "https://docs.dexpaprika.com/introduction",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "dexpaprika-mcp-server.md"
   },
   {
     "name": "DexScreener",
@@ -6934,6 +7511,29 @@
     "id": "electrum.md"
   },
   {
+    "name": "elizaOS",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Agent Framework"
+    ],
+    "ecosystem": [
+      "Solana",
+      "Ethereum",
+      "Base",
+      "Multichain"
+    ],
+    "description": "An open-source agent framework with plugins for Ethereum, Solana and other onchain interactions.",
+    "primary_url": "https://elizaresearch.ai/",
+    "product_url": "https://docs.elizaos.ai/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "elizaos.md"
+  },
+  {
     "name": "ELLIPAL",
     "lead_category": "Wallets",
     "tags": [
@@ -7037,6 +7637,27 @@
     "twitter": "https://x.com/ensdomains",
     "verification_status": "verified",
     "id": "ens-labs.md"
+  },
+  {
+    "name": "Ensuro",
+    "lead_category": "Security",
+    "tags": [
+      "Security",
+      "Insurance"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Polygon"
+    ],
+    "description": "Blockchain-based insurance infrastructure connecting policy risk and onchain capital pools.",
+    "primary_url": "https://ensuro.co/",
+    "product_url": "https://app.ensuro.co/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "ensuro.md"
   },
   {
     "name": "Envio",
@@ -7344,6 +7965,26 @@
     "id": "exodus.md"
   },
   {
+    "name": "Exponent",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Yield"
+    ],
+    "ecosystem": [
+      "Solana"
+    ],
+    "description": "A decentralized finance platform for trading yield exposure and using automated vault strategies.",
+    "primary_url": "https://www.exponent.finance/",
+    "product_url": "https://app.exponent.finance/en",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "exponent-yield-exchange.md"
+  },
+  {
     "name": "Extra Finance",
     "lead_category": "DeFi",
     "tags": [
@@ -7363,6 +8004,26 @@
     "twitter": "https://x.com/extrafi_io",
     "verification_status": "verified",
     "id": "extra-finance.md"
+  },
+  {
+    "name": "f(x) Protocol",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Dual-Token Stablecoin"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "An Ethereum protocol connecting crypto collateral with stablecoin and leveraged asset products.",
+    "primary_url": "https://fx.aladdin.club/",
+    "product_url": "https://fx.aladdin.club/v2/trade",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "fx-protocol.md"
   },
   {
     "name": "FalconX",
@@ -7466,6 +8127,27 @@
     "twitter": "https://x.com/fedimint",
     "verification_status": "verified",
     "id": "fedimint.md"
+  },
+  {
+    "name": "Fetch.ai uAgents",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Agent Framework"
+    ],
+    "ecosystem": [
+      "Cosmos",
+      "Ethereum"
+    ],
+    "description": "Agent development tools connecting autonomous services, wallet integrations and blockchain-based payments.",
+    "primary_url": "https://www.fetch.ai/",
+    "product_url": "https://www.fetch.ai/docs",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "fetch-ai-uagents.md"
   },
   {
     "name": "Fidelity Digital Assets",
@@ -7573,6 +8255,26 @@
     "id": "finoa.md"
   },
   {
+    "name": "Fira",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "An onchain lending protocol with markets for fixed-rate borrowing and yield exposure.",
+    "primary_url": "https://www.fira.money/",
+    "product_url": "https://app.fira.money/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "fira.md"
+  },
+  {
     "name": "Fireblocks",
     "lead_category": "Custody",
     "tags": [
@@ -7632,6 +8334,26 @@
     "twitter": "https://x.com/flashbots",
     "verification_status": "verified",
     "id": "flashbots.md"
+  },
+  {
+    "name": "Flaunch",
+    "lead_category": "Developer Tools",
+    "tags": [
+      "Developer Tools",
+      "API / SDK"
+    ],
+    "ecosystem": [
+      "Base"
+    ],
+    "description": "Token launch infrastructure with SDKs and agent integrations for creating and managing onchain tokens.",
+    "primary_url": "https://docs.flaunch.gg/",
+    "product_url": "https://docs.flaunch.gg/ai/mcp",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "flaunch.md"
   },
   {
     "name": "Fleek",
@@ -7922,6 +8644,26 @@
     "id": "frame.md"
   },
   {
+    "name": "Frankencoin",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "CDP"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "A decentralized Swiss franc stablecoin protocol with interfaces for minting and collateral management.",
+    "primary_url": "https://frankencoin.com/",
+    "product_url": "https://app.frankencoin.com/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "frankencoin.md"
+  },
+  {
     "name": "Frax Finance",
     "lead_category": "DeFi",
     "tags": [
@@ -8023,6 +8765,28 @@
     "twitter": "https://x.com/fuel_network",
     "verification_status": "verified",
     "id": "fuel-labs.md"
+  },
+  {
+    "name": "Fulcrom Finance",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Derivatives"
+    ],
+    "ecosystem": [
+      "Cronos",
+      "zkSync Era",
+      "Cronos zkEVM"
+    ],
+    "description": "A decentralized perpetual trading platform in the Cronos ecosystem.",
+    "primary_url": "https://fulcrom.finance/",
+    "product_url": "https://fulcrom.finance/dashboard/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "fulcrom-perps.md"
   },
   {
     "name": "Fuzzland",
@@ -8192,6 +8956,26 @@
     "id": "gamma-strategies.md"
   },
   {
+    "name": "Gardens",
+    "lead_category": "DAOs & Governance",
+    "tags": [
+      "DAOs & Governance",
+      "Community governance"
+    ],
+    "ecosystem": [
+      "EVM"
+    ],
+    "description": "Community governance and funding tools using conviction voting and shared proposal pools.",
+    "primary_url": "https://docs.gardens.fund/",
+    "product_url": "https://app.gardens.fund/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "gardens.md"
+  },
+  {
     "name": "Gate.io",
     "lead_category": "Payments",
     "tags": [
@@ -8212,6 +8996,37 @@
     "twitter": "https://x.com/gate_io",
     "verification_status": "verified",
     "id": "gate-io.md"
+  },
+  {
+    "name": "Gauntlet",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Risk Curators"
+    ],
+    "ecosystem": [
+      "Binance",
+      "Base",
+      "Ethereum",
+      "Arbitrum",
+      "Morph",
+      "Stable",
+      "Solana",
+      "Hyperliquid L1",
+      "Polygon",
+      "Optimism",
+      "Unichain",
+      "Katana"
+    ],
+    "description": "Risk management and vault curation services for onchain lending and capital allocation.",
+    "primary_url": "https://www.gauntlet.xyz/",
+    "product_url": "https://app.gauntlet.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "gauntlet.md"
   },
   {
     "name": "Gearbox",
@@ -8386,6 +9201,26 @@
     "id": "gitcoin-passport.md"
   },
   {
+    "name": "Giza",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Autonomous stablecoin yield agent"
+    ],
+    "ecosystem": [
+      "Base"
+    ],
+    "description": "Infrastructure for agents that monitor markets and execute decentralized finance strategies.",
+    "primary_url": "https://www.gizatech.xyz/",
+    "product_url": "https://world.gizatech.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "giza-arma.md"
+  },
+  {
     "name": "GK8",
     "lead_category": "Custody",
     "tags": [
@@ -8551,6 +9386,28 @@
     "id": "goldsky.md"
   },
   {
+    "name": "GONDI",
+    "lead_category": "NFTs & Creator Economy",
+    "tags": [
+      "NFTs & Creator Economy",
+      "NFT Lending"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Hyperliquid L1",
+      "Robinhood Chain"
+    ],
+    "description": "An NFT marketplace and lending protocol for trading collectibles and borrowing against NFT collateral.",
+    "primary_url": "https://www.gondi.xyz/",
+    "product_url": "https://docs.gondi.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "gondi-v3.md"
+  },
+  {
     "name": "GoPlus Security",
     "lead_category": "Security",
     "tags": [
@@ -8611,6 +9468,30 @@
     "twitter": "https://x.com/GravityChain",
     "verification_status": "verified",
     "id": "gravity.md"
+  },
+  {
+    "name": "Grove",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Onchain Capital Allocator"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base",
+      "Avalanche",
+      "Plume Mainnet",
+      "Robinhood Chain"
+    ],
+    "description": "An onchain capital allocation platform with public strategy and performance dashboards.",
+    "primary_url": "https://data.grove.finance/",
+    "product_url": "https://app.grove.finance/dashboard",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "grove-finance.md"
   },
   {
     "name": "Growthepie",
@@ -9305,6 +10186,27 @@
     "id": "hivemapper.md"
   },
   {
+    "name": "HiYield",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Avalanche",
+      "Canto"
+    ],
+    "description": "An onchain platform for accessing tokenized assets and related lending markets.",
+    "primary_url": "https://www.hiyield.xyz/",
+    "product_url": "https://docs.hiyield.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "hiyield.md"
+  },
+  {
     "name": "HMX",
     "lead_category": "DeFi",
     "tags": [
@@ -9572,6 +10474,26 @@
     "id": "hypersdk.md"
   },
   {
+    "name": "HypurrFi",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "HyperEVM"
+    ],
+    "description": "A lending and borrowing platform within the Hyperliquid ecosystem.",
+    "primary_url": "https://hypurrfi.com/",
+    "product_url": "https://app.hypurrfi.com/borrow",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "hypurrfi-pooled.md"
+  },
+  {
     "name": "ICON",
     "lead_category": "Layer 1 / Layer 2",
     "tags": [
@@ -9779,6 +10701,28 @@
     "twitter": "https://x.com/indepreserve",
     "verification_status": "verified",
     "id": "independent-reserve.md"
+  },
+  {
+    "name": "Index Coop",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Indexes"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Arbitrum",
+      "Base"
+    ],
+    "description": "A platform for tokenized decentralized finance strategies and structured exposure products.",
+    "primary_url": "https://www.indexcoop.com/",
+    "product_url": "https://app.indexcoop.com/trade",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "index-coop.md"
   },
   {
     "name": "Indigo Protocol",
@@ -10204,6 +11148,26 @@
     "twitter": "https://x.com/JonesDAO_io",
     "verification_status": "verified",
     "id": "jones-dao.md"
+  },
+  {
+    "name": "JPool",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Liquid Staking"
+    ],
+    "ecosystem": [
+      "Solana"
+    ],
+    "description": "A Solana liquid staking platform with validator allocation and strategy interfaces.",
+    "primary_url": "https://app.jpool.one/staking",
+    "product_url": "https://app.jpool.one/strategies",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "jpool.md"
   },
   {
     "name": "Juicebox",
@@ -11247,6 +12211,26 @@
     "id": "linea.md"
   },
   {
+    "name": "Liquidium",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "ICP"
+    ],
+    "description": "A Bitcoin-focused lending platform with interfaces for collateralized borrowing.",
+    "primary_url": "https://liquidium.fi/",
+    "product_url": "https://app.liquidium.fi/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "liquidium.md"
+  },
+  {
     "name": "Liquity",
     "lead_category": "DeFi",
     "tags": [
@@ -11349,6 +12333,36 @@
     "id": "litentry.md"
   },
   {
+    "name": "LlamaPay",
+    "lead_category": "Payments",
+    "tags": [
+      "Payments"
+    ],
+    "ecosystem": [
+      "Binance",
+      "Arbitrum",
+      "Ethereum",
+      "Optimism",
+      "xDai",
+      "Base",
+      "Sonic",
+      "Polygon",
+      "Avalanche",
+      "Fantom",
+      "Metis",
+      "Scroll"
+    ],
+    "description": "A protocol for scheduling payments and streaming token balances to recipients over time.",
+    "primary_url": "https://llamapay.io/",
+    "product_url": "https://llamapay.io/dashboard",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "llamapay.md"
+  },
+  {
     "name": "Lofty",
     "lead_category": "Real World Assets (RWA)",
     "tags": [
@@ -11429,6 +12443,31 @@
     "twitter": "https://x.com/LooksRare",
     "verification_status": "verified",
     "id": "looksrare.md"
+  },
+  {
+    "name": "Lucid Labs",
+    "lead_category": "Infrastructure",
+    "tags": [
+      "Infrastructure",
+      "Bridge"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Arbitrum",
+      "Optimism",
+      "Avalanche",
+      "Base",
+      "Celo"
+    ],
+    "description": "Cross-chain routing infrastructure combining bridge routes with liquidity services.",
+    "primary_url": "https://www.lucidlabs.fi/",
+    "product_url": "https://bridge.lucidlabs.fi/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "lucid-labs.md"
   },
   {
     "name": "LunarCrush",
@@ -11534,6 +12573,47 @@
     "twitter": "https://x.com/lyrafinance",
     "verification_status": "verified",
     "id": "lyra.md"
+  },
+  {
+    "name": "M0",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Stablecoin Issuer"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "Infrastructure for creating and distributing onchain digital dollar products.",
+    "primary_url": "https://www.m0.org/",
+    "product_url": "https://dashboard.m0.org/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "m0.md"
+  },
+  {
+    "name": "MadeOnSol",
+    "lead_category": "Data & Analytics",
+    "tags": [
+      "Data & Analytics",
+      "Data Tool"
+    ],
+    "ecosystem": [
+      "Robinhood Chain",
+      "Solana"
+    ],
+    "description": "Blockchain data interfaces for wallet activity, token markets and trading analytics on Solana and Robinhood Chain.",
+    "primary_url": "https://madeonsol.com/robinhood",
+    "product_url": "https://madeonsol.com/api-docs",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "madeonsol.md"
   },
   {
     "name": "Magic",
@@ -12012,6 +13092,54 @@
     "twitter": "https://x.com/Maya_Protocol",
     "verification_status": "verified",
     "id": "maya-protocol.md"
+  },
+  {
+    "name": "Mayan",
+    "lead_category": "Infrastructure",
+    "tags": [
+      "Infrastructure",
+      "Bridge"
+    ],
+    "ecosystem": [
+      "Base",
+      "Arbitrum",
+      "Ethereum",
+      "Binance",
+      "Optimism",
+      "Polygon",
+      "Avalanche",
+      "Hyperliquid L1",
+      "Unichain"
+    ],
+    "description": "Cross-chain swap and settlement infrastructure with interfaces for users and application developers.",
+    "primary_url": "https://mayan.finance/",
+    "product_url": "https://swap.mayan.finance/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "mayan-bridge.md"
+  },
+  {
+    "name": "MegaETH",
+    "lead_category": "Layer 1 / Layer 2",
+    "tags": [
+      "Layer 1 / Layer 2"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "MegaETH"
+    ],
+    "description": "An Ethereum Layer 2 network with developer infrastructure for low-latency onchain applications.",
+    "primary_url": "https://www.megaeth.com/",
+    "product_url": "https://docs.megaeth.com/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "megaeth-bridge.md"
   },
   {
     "name": "Mellow Protocol",
@@ -12643,6 +13771,30 @@
     "id": "mirror.md"
   },
   {
+    "name": "MistTrack",
+    "lead_category": "Security",
+    "tags": [
+      "Security",
+      "Security Tool"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Bitcoin",
+      "Polygon",
+      "Solana",
+      "Multichain"
+    ],
+    "description": "Blockchain tracing and wallet-risk analysis tools from SlowMist, with APIs for compliance workflows.",
+    "primary_url": "https://misttrack.io/",
+    "product_url": "https://dashboard.misttrack.io/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "misttrack-mcp.md"
+  },
+  {
     "name": "Mocana Gaming",
     "lead_category": "Gaming",
     "tags": [
@@ -13031,6 +14183,28 @@
     "id": "mysterium.md"
   },
   {
+    "name": "Mystic Finance",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Flare",
+      "Citrea",
+      "Plume Mainnet"
+    ],
+    "description": "Lending markets for supported crypto and tokenized assets, with supply and borrowing interfaces.",
+    "primary_url": "https://www.mysticfinance.xyz/",
+    "product_url": "https://app.mysticfinance.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "mystic-finance-lending.md"
+  },
+  {
     "name": "mySwap",
     "lead_category": "DeFi",
     "tags": [
@@ -13204,6 +14378,52 @@
     "id": "nansen-query.md"
   },
   {
+    "name": "Nara",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "A digital asset platform connecting payment-flow credit products with onchain token interfaces.",
+    "primary_url": "https://www.nara.io/",
+    "product_url": "https://app.nara.io/swap",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "narausd.md"
+  },
+  {
+    "name": "Native",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Morph",
+      "Ethereum",
+      "Binance",
+      "Base",
+      "Arbitrum",
+      "Robinhood Chain",
+      "X Layer"
+    ],
+    "description": "Onchain trading infrastructure connecting liquidity providers with decentralized execution.",
+    "primary_url": "https://native.org/",
+    "product_url": "https://app.native.org/native-pool",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "native-credit-pool.md"
+  },
+  {
     "name": "NAVI Protocol",
     "lead_category": "DeFi",
     "tags": [
@@ -13222,6 +14442,28 @@
     "twitter": "https://x.com/navi_protocol",
     "verification_status": "verified",
     "id": "navi-protocol.md"
+  },
+  {
+    "name": "NBX",
+    "lead_category": "Custody",
+    "tags": [
+      "Custody",
+      "CEX"
+    ],
+    "ecosystem": [
+      "Bitcoin",
+      "Ethereum",
+      "Cardano"
+    ],
+    "description": "A Norwegian digital asset exchange with crypto trading and custody services.",
+    "primary_url": "https://nbx.com/",
+    "product_url": "https://app.nbx.com/markets",
+    "founded": "n/a",
+    "hq": "Norway",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "nbx.md"
   },
   {
     "name": "NDAX",
@@ -13304,6 +14546,26 @@
     "twitter": "https://x.com/Neo_Blockchain",
     "verification_status": "verified",
     "id": "neo.md"
+  },
+  {
+    "name": "Neptune Finance",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Injective"
+    ],
+    "description": "A decentralized finance platform with lending, borrowing and asset management interfaces.",
+    "primary_url": "https://nept.finance/",
+    "product_url": "https://app.nept.finance/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "neptune-finance.md"
   },
   {
     "name": "Nervos",
@@ -13430,6 +14692,26 @@
     "id": "nexo-card.md"
   },
   {
+    "name": "Nexus Mutual",
+    "lead_category": "Security",
+    "tags": [
+      "Security",
+      "Insurance"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "A member-based protocol offering cover products for specified crypto and decentralized finance risks.",
+    "primary_url": "https://nexusmutual.io/",
+    "product_url": "https://app.nexusmutual.io/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "nexus-mutual-insurance.md"
+  },
+  {
     "name": "nft.storage",
     "lead_category": "Infrastructure",
     "tags": [
@@ -13449,6 +14731,27 @@
     "twitter": "https://x.com/nft_storage",
     "verification_status": "verified",
     "id": "nft-storage.md"
+  },
+  {
+    "name": "NFTX",
+    "lead_category": "NFTs & Creator Economy",
+    "tags": [
+      "NFTs & Creator Economy",
+      "NFT Marketplace"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Arbitrum"
+    ],
+    "description": "A protocol that connects NFT collections with fungible vault tokens and liquidity markets.",
+    "primary_url": "https://nftx.io/",
+    "product_url": "https://docs.nftx.io/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "nftx.md"
   },
   {
     "name": "NGRAVE",
@@ -13613,6 +14916,26 @@
     "twitter": "https://x.com/Nodereal_io",
     "verification_status": "verified",
     "id": "nodereal.md"
+  },
+  {
+    "name": "Nodit",
+    "lead_category": "Developer Tools",
+    "tags": [
+      "Developer Tools",
+      "MCP"
+    ],
+    "ecosystem": [
+      "Multichain"
+    ],
+    "description": "RPC services and blockchain data APIs for building applications and agent integrations.",
+    "primary_url": "https://developer.nodit.io/en/guides/",
+    "product_url": "https://developer.nodit.io/en/guides/quickstart-for-developers/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "nodit-mcp-server.md"
   },
   {
     "name": "Nodle",
@@ -14088,6 +15411,29 @@
     "id": "okx-wallet.md"
   },
   {
+    "name": "Olas",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Agent Framework"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Gnosis",
+      "Base",
+      "Multichain"
+    ],
+    "description": "An ecosystem for owning and operating onchain agents, including the Pearl agent app and agent service marketplaces.",
+    "primary_url": "https://olas.network/",
+    "product_url": "https://pearl.you/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "olas-autonolas.md"
+  },
+  {
     "name": "OnCyber",
     "lead_category": "NFTs & Creator Economy",
     "tags": [
@@ -14230,6 +15576,31 @@
     "twitter": "https://x.com/OpenLoot",
     "verification_status": "verified",
     "id": "open-loot.md"
+  },
+  {
+    "name": "Open Wallet Standard",
+    "lead_category": "Wallets",
+    "tags": [
+      "Wallets",
+      "Wallet Infrastructure"
+    ],
+    "ecosystem": [
+      "Bitcoin",
+      "Ethereum",
+      "Solana",
+      "Cosmos",
+      "Tron",
+      "TON"
+    ],
+    "description": "An open specification for local wallet storage, signing policies and controlled agent access.",
+    "primary_url": "https://openwallet.sh/",
+    "product_url": "https://docs.openwallet.sh/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "open-wallet-standard-ows.md"
   },
   {
     "name": "OpenAudit",
@@ -14498,6 +15869,37 @@
     "id": "orca.md"
   },
   {
+    "name": "Orderly Network",
+    "lead_category": "Infrastructure",
+    "tags": [
+      "Infrastructure",
+      "Bridge"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Solana",
+      "Binance",
+      "Berachain",
+      "Arbitrum",
+      "Near",
+      "Optimism",
+      "Avalanche",
+      "Base",
+      "X Layer",
+      "Sei",
+      "Polygon"
+    ],
+    "description": "Shared liquidity and developer infrastructure for building and operating perpetual trading applications.",
+    "primary_url": "https://orderly.network/",
+    "product_url": "https://dex.orderly.network/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "orderly-bridge.md"
+  },
+  {
     "name": "Origin Dollar",
     "lead_category": "DeFi",
     "tags": [
@@ -14518,6 +15920,26 @@
     "id": "origin-dollar.md"
   },
   {
+    "name": "Oro Finance",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Solana"
+    ],
+    "description": "An onchain interface for trading and managing tokenized gold products.",
+    "primary_url": "https://app.oro.finance/",
+    "product_url": "https://app.oro.finance/stake",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "oro-finance.md"
+  },
+  {
     "name": "Osmosis",
     "lead_category": "DeFi",
     "tags": [
@@ -14536,6 +15958,26 @@
     "twitter": "https://x.com/osmosiszone",
     "verification_status": "verified",
     "id": "osmosis.md"
+  },
+  {
+    "name": "Ostium",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Derivatives"
+    ],
+    "ecosystem": [
+      "Arbitrum"
+    ],
+    "description": "An onchain perpetual trading platform for crypto and reference markets such as commodities and currencies.",
+    "primary_url": "https://www.ostium.com/",
+    "product_url": "https://app.ostium.com/trade",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "ostium.md"
   },
   {
     "name": "OtterSec",
@@ -14600,6 +16042,26 @@
     "twitter": "https://x.com/p2pvalidator",
     "verification_status": "verified",
     "id": "p2p-org.md"
+  },
+  {
+    "name": "Paimon Finance",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Binance"
+    ],
+    "description": "A platform for tokenized private credit and private-market investment products on BNB Chain.",
+    "primary_url": "https://www.paimon.finance/",
+    "product_url": "https://app.paimon.finance/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "paimon.md"
   },
   {
     "name": "Paladin Blockchain Security",
@@ -15283,6 +16745,30 @@
     "id": "pleasrdao.md"
   },
   {
+    "name": "Plume Vaults",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Plume Mainnet",
+      "Solana",
+      "Binance",
+      "Avalanche"
+    ],
+    "description": "Vault interfaces for accessing tokenized real-world assets within the Plume ecosystem.",
+    "primary_url": "https://app.plume.org/vaults",
+    "product_url": "https://app.plume.org/vaults",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "plume-vaults.md"
+  },
+  {
     "name": "Pocket Network",
     "lead_category": "Infrastructure",
     "tags": [
@@ -15443,6 +16929,29 @@
     "twitter": "https://x.com/PontemNetwork",
     "verification_status": "verified",
     "id": "pontem-wallet.md"
+  },
+  {
+    "name": "PoolTogether",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Yield Lottery"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Polygon",
+      "Celo",
+      "Binance"
+    ],
+    "description": "A prize savings protocol with community interfaces for depositing assets into onchain pools.",
+    "primary_url": "https://pooltogether.com/",
+    "product_url": "https://pooltogether.com/interfaces",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "pooltogether-v3.md"
   },
   {
     "name": "Portal Bridge",
@@ -15972,6 +17481,27 @@
     "id": "quillshield.md"
   },
   {
+    "name": "R25",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Pharos",
+      "Sui"
+    ],
+    "description": "Vault infrastructure combining tokenized credit and decentralized finance strategies.",
+    "primary_url": "https://www.r25.xyz/",
+    "product_url": "https://app.r25.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "r25.md"
+  },
+  {
     "name": "Rabby Wallet",
     "lead_category": "Wallets",
     "tags": [
@@ -16136,6 +17666,27 @@
     "id": "ramp-network.md"
   },
   {
+    "name": "Rare Protocol",
+    "lead_category": "NFTs & Creator Economy",
+    "tags": [
+      "NFTs & Creator Economy",
+      "Developer Tool"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base"
+    ],
+    "description": "Developer tools for deploying NFT collections, minting tokens and running onchain auctions.",
+    "primary_url": "https://rare.xyz/",
+    "product_url": "https://rare.xyz/docs",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "rare-protocol.md"
+  },
+  {
     "name": "RARI Chain",
     "lead_category": "Layer 1 / Layer 2",
     "tags": [
@@ -16216,6 +17767,29 @@
     "twitter": "https://x.com/RaydiumProtocol",
     "verification_status": "verified",
     "id": "raydium.md"
+  },
+  {
+    "name": "Re",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base",
+      "Arbitrum",
+      "Avalanche"
+    ],
+    "description": "An onchain interface for stablecoin products connected to insurance and reinsurance capital.",
+    "primary_url": "https://app.re.xyz/",
+    "product_url": "https://app.re.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "re.md"
   },
   {
     "name": "RealT",
@@ -16363,6 +17937,29 @@
     "id": "reown.md"
   },
   {
+    "name": "Reserve",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Indexes"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base",
+      "Binance",
+      "Arbitrum"
+    ],
+    "description": "Tools for creating and trading tokenized portfolios through decentralized token folios.",
+    "primary_url": "https://reserve.org/",
+    "product_url": "https://app.reserve.org/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "reserve-protocol.md"
+  },
+  {
     "name": "Reservoir",
     "lead_category": "Developer Tools",
     "tags": [
@@ -16403,6 +18000,26 @@
     "twitter": "https://x.com/resolvxyz",
     "verification_status": "verified",
     "id": "resolv.md"
+  },
+  {
+    "name": "Resupply",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "A decentralized stablecoin protocol using collateral connected to lending markets.",
+    "primary_url": "https://resupply.finance/",
+    "product_url": "https://docs.resupply.finance/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "resupply.md"
   },
   {
     "name": "Ribbon Finance",
@@ -16463,6 +18080,26 @@
     "twitter": "https://x.com/risczero",
     "verification_status": "verified",
     "id": "risc-zero.md"
+  },
+  {
+    "name": "RISE",
+    "lead_category": "Layer 1 / Layer 2",
+    "tags": [
+      "Layer 1 / Layer 2"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "RISE"
+    ],
+    "description": "An Ethereum Layer 2 network designed for onchain trading and financial applications.",
+    "primary_url": "https://risechain.com/",
+    "product_url": "https://docs.risechain.com/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "rise-bridge.md"
   },
   {
     "name": "River",
@@ -16588,6 +18225,31 @@
     "id": "rootstock.md"
   },
   {
+    "name": "Rosen Bridge",
+    "lead_category": "Infrastructure",
+    "tags": [
+      "Infrastructure",
+      "Bridge"
+    ],
+    "ecosystem": [
+      "Ergo",
+      "Cardano",
+      "Bitcoin",
+      "Ethereum",
+      "Binance",
+      "Doge"
+    ],
+    "description": "An open-source bridge protocol for transferring supported assets between blockchains.",
+    "primary_url": "https://rosen.tech/",
+    "product_url": "https://app.rosen.tech/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "rosen-bridge.md"
+  },
+  {
     "name": "Router Protocol",
     "lead_category": "Infrastructure",
     "tags": [
@@ -16672,6 +18334,27 @@
     "twitter": "https://x.com/rv_inc",
     "verification_status": "verified",
     "id": "runtime-verification.md"
+  },
+  {
+    "name": "Rysk",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Options Vault"
+    ],
+    "ecosystem": [
+      "Hyperliquid L1",
+      "Ethereum"
+    ],
+    "description": "An onchain platform for creating and managing option-based yield positions.",
+    "primary_url": "https://app.rysk.finance/",
+    "product_url": "https://app.rysk.finance/dashboard/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "rysk-v12.md"
   },
   {
     "name": "Saakuru",
@@ -16885,6 +18568,26 @@
     "id": "sardine.md"
   },
   {
+    "name": "SaucerSwap",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Dexs"
+    ],
+    "ecosystem": [
+      "Hedera"
+    ],
+    "description": "A Hedera-based decentralized exchange with swap, liquidity and portfolio interfaces.",
+    "primary_url": "https://www.saucerswap.finance/",
+    "product_url": "https://www.saucerswap.finance/portfolio",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "saucerswap-v2.md"
+  },
+  {
     "name": "Scaffold-ETH",
     "lead_category": "Developer Tools",
     "tags": [
@@ -17089,6 +18792,26 @@
     "twitter": "https://x.com/SeiNetwork",
     "verification_status": "verified",
     "id": "sei-foundation.md"
+  },
+  {
+    "name": "Self",
+    "lead_category": "Identity",
+    "tags": [
+      "Identity",
+      "Security Tool"
+    ],
+    "ecosystem": [
+      "Multichain"
+    ],
+    "description": "Identity verification tools using zero-knowledge proofs, with interfaces for human and agent credentials.",
+    "primary_url": "https://self.xyz/",
+    "product_url": "https://docs.self.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "self-protocol.md"
   },
   {
     "name": "SelfKey",
@@ -17530,6 +19253,30 @@
     "id": "socket.md"
   },
   {
+    "name": "SODAX Builders MCP",
+    "lead_category": "Developer Tools",
+    "tags": [
+      "Developer Tools",
+      "MCP"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base",
+      "Arbitrum",
+      "Optimism",
+      "Polygon"
+    ],
+    "description": "An MCP interface and SDK documentation for cross-network swaps, lending and onchain activity.",
+    "primary_url": "https://builders.sodax.com/",
+    "product_url": "https://docs.sodax.com/developers/packages/foundation/sdk/functional-modules/swaps",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "sodax-builders-mcp.md"
+  },
+  {
     "name": "Solana Foundation",
     "lead_category": "Layer 1 / Layer 2",
     "tags": [
@@ -17857,6 +19604,37 @@
     "id": "spearbit-cantina.md"
   },
   {
+    "name": "Spectra",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Yield"
+    ],
+    "ecosystem": [
+      "Flare",
+      "Stellar",
+      "Ethereum",
+      "Base",
+      "Katana",
+      "Sonic",
+      "Avalanche",
+      "Binance",
+      "Hyperliquid L1",
+      "Hemi",
+      "Optimism",
+      "Arbitrum"
+    ],
+    "description": "A decentralized finance protocol for separating and trading yield exposure and accessing fixed-rate products.",
+    "primary_url": "https://app.spectra.finance/fixed-rate",
+    "product_url": "https://app.spectra.finance/fixed-rate",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "spectra-v2.md"
+  },
+  {
     "name": "Sperax",
     "lead_category": "DeFi",
     "tags": [
@@ -17940,6 +19718,26 @@
     "id": "spruceid.md"
   },
   {
+    "name": "SSV Network",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Staking Pool"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "Distributed validator infrastructure for operating Ethereum staking validators across multiple operators.",
+    "primary_url": "https://ssv.network/",
+    "product_url": "https://app.ssv.network/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "ssv-network.md"
+  },
+  {
     "name": "Stackup",
     "lead_category": "Infrastructure",
     "tags": [
@@ -17959,6 +19757,30 @@
     "twitter": "https://x.com/stackupdotsh",
     "verification_status": "verified",
     "id": "stackup.md"
+  },
+  {
+    "name": "StaFi",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Liquid Staking"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Solana",
+      "Binance",
+      "Cosmos",
+      "Stafi"
+    ],
+    "description": "A liquid staking protocol with interfaces for staking assets and using their derivative tokens.",
+    "primary_url": "https://www.stafi.io/",
+    "product_url": "https://app.stafi.io/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "stafi.md"
   },
   {
     "name": "StakeWise",
@@ -18044,6 +19866,26 @@
     "id": "stargate.md"
   },
   {
+    "name": "Starknet Agentic",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Agent Framework"
+    ],
+    "ecosystem": [
+      "Starknet"
+    ],
+    "description": "Open-source contracts and developer tools for agents with wallets and transaction capabilities on Starknet.",
+    "primary_url": "https://starknet-agentic.vercel.app/",
+    "product_url": "https://github.com/keep-starknet-strange/starknet-agentic",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "starknet-agentic.md"
+  },
+  {
     "name": "StarkWare",
     "lead_category": "Layer 1 / Layer 2",
     "tags": [
@@ -18086,6 +19928,46 @@
     "id": "stella.md"
   },
   {
+    "name": "Stockrip",
+    "lead_category": "Gaming",
+    "tags": [
+      "Gaming",
+      "Gamified Mining"
+    ],
+    "ecosystem": [
+      "Robinhood Chain"
+    ],
+    "description": "An onchain game built around pools of tokenized stock positions and depositor-set valuations.",
+    "primary_url": "https://stockrip.com/",
+    "product_url": "https://stockrip.com/docs",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "stockrip.md"
+  },
+  {
+    "name": "STON.fi",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Dexs"
+    ],
+    "ecosystem": [
+      "TON"
+    ],
+    "description": "A decentralized exchange for token swaps and liquidity provision on TON.",
+    "primary_url": "https://app.ston.fi/swap",
+    "product_url": "https://app.ston.fi/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "ston-fi.md"
+  },
+  {
     "name": "Storj",
     "lead_category": "Infrastructure",
     "tags": [
@@ -18126,6 +20008,49 @@
     "id": "story-protocol.md"
   },
   {
+    "name": "STRATO",
+    "lead_category": "Layer 1 / Layer 2",
+    "tags": [
+      "Layer 1 / Layer 2"
+    ],
+    "ecosystem": [
+      "STRATO"
+    ],
+    "description": "A blockchain platform with native assets and applications for finance, games and prediction markets.",
+    "primary_url": "https://strato.nexus/",
+    "product_url": "https://app.strato.nexus/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "strato-bridge.md"
+  },
+  {
+    "name": "Streamflow",
+    "lead_category": "Payments",
+    "tags": [
+      "Payments"
+    ],
+    "ecosystem": [
+      "Solana",
+      "Aptos",
+      "Binance",
+      "Polygon",
+      "Ethereum",
+      "Sui"
+    ],
+    "description": "Token distribution tools for vesting, airdrops, staking and scheduled onchain payments.",
+    "primary_url": "https://streamflow.finance/",
+    "product_url": "https://streamflow.finance/token-dashboard",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "streamflow.md"
+  },
+  {
     "name": "Stride",
     "lead_category": "DeFi",
     "tags": [
@@ -18164,6 +20089,28 @@
     "twitter": "https://x.com/Strike",
     "verification_status": "verified",
     "id": "strike.md"
+  },
+  {
+    "name": "Stripe Machine Payments",
+    "lead_category": "Payments",
+    "tags": [
+      "Payments",
+      "Payment Rail"
+    ],
+    "ecosystem": [
+      "Base",
+      "Solana",
+      "Multichain"
+    ],
+    "description": "Developer interfaces for agent payments, including x402-based stablecoin settlement.",
+    "primary_url": "https://docs.stripe.com/payments/machine",
+    "product_url": "https://docs.stripe.com/payments/machine/x402",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "stripe-machine-payments.md"
   },
   {
     "name": "SubQuery",
@@ -18917,6 +20864,26 @@
     "id": "taurus.md"
   },
   {
+    "name": "Tectonic",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Lending"
+    ],
+    "ecosystem": [
+      "Cronos"
+    ],
+    "description": "A Cronos lending market with interfaces for supplying assets and borrowing against collateral.",
+    "primary_url": "https://tectonic.finance/",
+    "product_url": "https://tectonic.finance/dashboard/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "tectonic.md"
+  },
+  {
     "name": "Tellor",
     "lead_category": "Infrastructure",
     "tags": [
@@ -19147,6 +21114,26 @@
     "id": "the-graph.md"
   },
   {
+    "name": "The Interfold",
+    "lead_category": "Security",
+    "tags": [
+      "Security",
+      "Privacy"
+    ],
+    "ecosystem": [
+      "Ethereum"
+    ],
+    "description": "Infrastructure for shared computation over private inputs, with public network participation tools.",
+    "primary_url": "https://www.theinterfold.com/",
+    "product_url": "https://dashboard.theinterfold.com/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "the-interfold.md"
+  },
+  {
     "name": "The Sandbox",
     "lead_category": "Gaming",
     "tags": [
@@ -19187,6 +21174,27 @@
     "twitter": "https://x.com/TheTIEIO",
     "verification_status": "verified",
     "id": "the-tie.md"
+  },
+  {
+    "name": "Theoriq",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "Web3 agent platform"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base"
+    ],
+    "description": "A strategy curation platform using autonomous AI capabilities with tokenized assets and onchain vaults.",
+    "primary_url": "https://www.theoriq.ai/",
+    "product_url": "https://www.theoriq.ai/products",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "theoriq.md"
   },
   {
     "name": "thirdweb",
@@ -19273,6 +21281,26 @@
     "twitter": "https://x.com/thrusterfinance",
     "verification_status": "verified",
     "id": "thruster.md"
+  },
+  {
+    "name": "Tinyman",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Dexs"
+    ],
+    "ecosystem": [
+      "Algorand"
+    ],
+    "description": "An Algorand decentralized exchange with token swaps, liquidity pools and related trading tools.",
+    "primary_url": "https://tinyman.org/",
+    "product_url": "https://app.tinyman.org/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "tinyman.md"
   },
   {
     "name": "Tokemak",
@@ -19780,6 +21808,25 @@
     "id": "turnkey.md"
   },
   {
+    "name": "TxFlow",
+    "lead_category": "Layer 1 / Layer 2",
+    "tags": [
+      "Layer 1 / Layer 2"
+    ],
+    "ecosystem": [
+      "TxFlow"
+    ],
+    "description": "A Layer 1 network with onchain spot trading, derivatives and prediction market applications.",
+    "primary_url": "https://txflow.com/",
+    "product_url": "https://app.txflow.com/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "txflow-bridge.md"
+  },
+  {
     "name": "Ultra",
     "lead_category": "Gaming",
     "tags": [
@@ -19900,6 +21947,33 @@
     "id": "uniswap-labs.md"
   },
   {
+    "name": "Unit",
+    "lead_category": "Infrastructure",
+    "tags": [
+      "Infrastructure",
+      "Bridge"
+    ],
+    "ecosystem": [
+      "Bitcoin",
+      "Zcash",
+      "Ethereum",
+      "Solana",
+      "Plasma",
+      "Monad",
+      "Base",
+      "Avalanche"
+    ],
+    "description": "Asset tokenization and transfer infrastructure connecting supported assets with Hyperliquid.",
+    "primary_url": "https://hyperunit.xyz/",
+    "product_url": "https://app.hyperunit.xyz/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "unit.md"
+  },
+  {
     "name": "Unlock Protocol",
     "lead_category": "NFTs & Creator Economy",
     "tags": [
@@ -19984,6 +22058,26 @@
     "twitter": "https://x.com/UpholdInc",
     "verification_status": "verified",
     "id": "uphold.md"
+  },
+  {
+    "name": "USD.AI",
+    "lead_category": "Real World Assets (RWA)",
+    "tags": [
+      "Real World Assets (RWA)",
+      "RWA"
+    ],
+    "ecosystem": [
+      "Arbitrum"
+    ],
+    "description": "A credit protocol connecting GPU infrastructure financing with onchain stablecoin products.",
+    "primary_url": "https://usd.ai/",
+    "product_url": "https://app.usd.ai/stake",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "usd-ai.md"
   },
   {
     "name": "Usual",
@@ -20274,6 +22368,30 @@
     "id": "vertex-protocol.md"
   },
   {
+    "name": "Vesper Finance",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Yield Aggregator"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Base",
+      "Optimism",
+      "Polygon",
+      "Avalanche"
+    ],
+    "description": "Vault interfaces for depositing supported crypto assets into decentralized finance strategies.",
+    "primary_url": "https://vesper.finance/",
+    "product_url": "https://app.vesper.finance/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "vesper.md"
+  },
+  {
     "name": "Vesu",
     "lead_category": "DeFi",
     "tags": [
@@ -20333,6 +22451,28 @@
     "id": "viem.md"
   },
   {
+    "name": "Virtuals Protocol",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Agent Launchpad"
+    ],
+    "ecosystem": [
+      "Base",
+      "Solana",
+      "Robinhood Chain"
+    ],
+    "description": "Infrastructure and marketplaces for agents with wallets, tokenized ownership and onchain commerce.",
+    "primary_url": "https://www.virtuals.io/",
+    "product_url": "https://app.virtuals.io/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "virtuals-protocol.md"
+  },
+  {
     "name": "Voltage",
     "lead_category": "Infrastructure",
     "tags": [
@@ -20351,6 +22491,37 @@
     "twitter": "https://x.com/voltage_cloud",
     "verification_status": "verified",
     "id": "voltage.md"
+  },
+  {
+    "name": "Vultisig",
+    "lead_category": "Wallets",
+    "tags": [
+      "Wallets",
+      "Wallet Infrastructure"
+    ],
+    "ecosystem": [
+      "Bitcoin",
+      "Ethereum",
+      "Solana",
+      "Base",
+      "Arbitrum",
+      "Optimism",
+      "Polygon",
+      "BNB Chain",
+      "Avalanche",
+      "Cosmos",
+      "Sui",
+      "TON"
+    ],
+    "description": "A multichain wallet using distributed signing, with applications and developer tools for managing crypto assets.",
+    "primary_url": "https://vultisig.com/",
+    "product_url": "https://vultisig.com/downloads",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "vultisig.md"
   },
   {
     "name": "Wagmi",
@@ -20411,6 +22582,30 @@
     "twitter": "https://x.com/WalletConnect",
     "verification_status": "verified",
     "id": "walletconnect-foundation.md"
+  },
+  {
+    "name": "Warden Protocol",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents",
+      "Modular L1 settlement layer for agents"
+    ],
+    "ecosystem": [
+      "Cosmos",
+      "Ethereum",
+      "Base",
+      "Solana",
+      "BNB Chain"
+    ],
+    "description": "A Web3 agent ecosystem combining crypto trading interfaces, agent services and blockchain infrastructure.",
+    "primary_url": "https://wardenprotocol.org/",
+    "product_url": "https://tokens.wardenprotocol.org/",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "warden-protocol.md"
   },
   {
     "name": "Wasabi Wallet",
@@ -21467,5 +23662,28 @@
     "twitter": "https://x.com/zora",
     "verification_status": "verified",
     "id": "zora.md"
+  },
+  {
+    "name": "Zyfai",
+    "lead_category": "AI Agents",
+    "tags": [
+      "AI Agents"
+    ],
+    "ecosystem": [
+      "Base",
+      "Arbitrum",
+      "Ethereum",
+      "Sonic",
+      "Plasma"
+    ],
+    "description": "Tools for deploying agents that allocate and rebalance assets across decentralized finance strategies.",
+    "primary_url": "https://www.zyf.ai/",
+    "product_url": "https://www.zyf.ai/dashboard",
+    "founded": "n/a",
+    "hq": "Metaverse",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "pending_audit",
+    "id": "zyfai.md"
   }
 ]

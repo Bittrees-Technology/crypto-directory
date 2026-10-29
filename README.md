@@ -5,11 +5,13 @@ Minimal static directory for active onchain companies and projects.
 Directory email/wallet sign-in, Editor/Reviewer permissions, submissions and
 required deployment/authority setup: [directory roles](docs/directory-roles.md).
 
-## Current status (February 13, 2026)
+## Source status (October 29, 2026)
 - Repository: https://github.com/Bittrees-Technology/crypto-directory
 - Default branch: `main` (protected)
 - Required status check on `main`: `build-and-check`
-- Latest verified build output: `Built 1030 projects across 14 categories.`
+- Directory source: 1,131 listings across 15 categories, including 13 crypto/Web3 AI Agents.
+- The first 100 additions from the 500-site research batch have a [publication review](content/submissions/reviews/2026-10-29-first-publication.md). The other 400 remain research candidates.
+- Source proposals reach both public addresses only after the protected release is approved, deployed and synchronized.
 - Security policy: `SECURITY.md`
 
 ## Scope (v1)
