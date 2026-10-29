@@ -368,7 +368,9 @@ categoryEl.addEventListener('change', render);
 function categoryPage(category, projects) {
   const visible = projects.filter((p) => p.verification_status !== 'rejected');
   const slug = slugify(category);
-  const body = `<section class=\"card\" style=\"margin:18px 0\">${visible.length} entries in <strong>${escapeHtml(category)}</strong>. <a href=\"../index.html\">Back to index</a></section>
+  const scope = category === 'AI Agents' ? '<p>Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.</p>' : '';
+  const empty = visible.length ? '' : '<p>No listings have been added to this category yet. New suggestions go through review before appearing here.</p>';
+  const body = `<section class=\"card\" style=\"margin:18px 0\">${visible.length} entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href=\"../index.html\">Back to index</a></section>
 <table>
   <thead>
     <tr>
@@ -564,7 +566,7 @@ async function main() {
   }
 
   projects.sort((a, b) => a.name.localeCompare(b.name));
-  const categories = [...new Set(projects.map((p) => p.lead_category))].sort();
+  const categories = [...new Set([...CATEGORIES, ...projects.map((p) => p.lead_category)])].sort();
   const processStatuses = await loadProcessStatuses(root);
 
   await fs.writeFile(path.join(dataDir, 'projects.json'), JSON.stringify(projects, null, 2) + '\n');

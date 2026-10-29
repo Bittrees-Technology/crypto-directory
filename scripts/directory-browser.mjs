@@ -34,6 +34,13 @@ try{
   await scenario('anonymous',async({page})=>{
     await page.goto(origin+'/');await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
     assert.equal(await page.locator('.site-nav').isVisible(),false);assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);assert(await page.locator('table').isVisible());
+    assert.equal(await page.locator('#category option[value="AI Agents"]').count(),1);
+    await page.goto(origin+'/categories/ai-agents.html');
+    await page.getByRole('heading',{name:'Category: AI Agents',exact:true}).waitFor();
+    assert(await page.getByText('Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.',{exact:true}).isVisible());
+    const published=JSON.parse(await readFile(path.join(root,'data/projects.json'),'utf8'));
+    if(!published.some(project=>project.lead_category==='AI Agents'&&project.verification_status!=='rejected'))assert(await page.getByText('No listings have been added to this category yet. New suggestions go through review before appearing here.',{exact:true}).isVisible());
+    await page.getByRole('link',{name:'Back to directory',exact:true}).click();
     await page.evaluate(()=>localStorage.setItem('role','superadmin'));await page.reload();await page.locator('[data-login-link]').waitFor();assert.equal(await page.locator('.site-nav').isVisible(),false);
     await page.goto(origin+'/submit.html');assert.equal(await page.locator('#listing-form').isVisible(),false);
     assert.equal(await page.locator('h1').count(),1);assert.equal(await page.locator('[data-login-link]:visible').count(),1);
@@ -60,6 +67,7 @@ try{
   });
   await scenario('submitter',async({page,writes})=>{
     await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});assert.equal(await page.locator('.site-nav').isVisible(),false);
+    assert.equal(await page.locator('[name="lead_category"] option').filter({hasText:'AI Agents'}).count(),1);
     assert(await page.getByRole('link',{name:'Back to directory',exact:true}).isVisible());await screenshot(page,'submission-desktop');
     await page.setViewportSize({width:390,height:844});await screenshot(page,'submission-mobile');await page.setViewportSize({width:1360,height:900});
     for(const [key,value] of Object.entries(base)){const field=page.locator('[name="'+key+'"]');if(key==='lead_category')await field.selectOption(value);else await field.fill(Array.isArray(value)?value.join(', '):value);}

@@ -2,6 +2,9 @@
 
 ## Inclusion
 - Must be active and onchain-focused (company or project).
+- AI Agents is initially limited to crypto/Web3 agents, agent frameworks, and
+  marketplaces with an explicit onchain use case. General AI tools are excluded
+  from this category until a separate scope change is approved.
 - Must have a live website and at least one live product/app page.
 - Global coverage is allowed from any country/language.
 - Directory text is written in English.
@@ -37,4 +40,14 @@
 - `verified`: manually reviewed and accepted.
 - `needs_update`: listing exists but data is stale or uncertain.
 - `rejected`: did not meet criteria (do not publish in main listing).
+
+## Research intake
+
+Research batches under `content/submissions/research/` are candidate suggestions,
+not approved listings. A reachable homepage and a third-party registry record
+are discovery evidence, not a security audit or proof that a product works.
+Reviewers must confirm official ownership, the live product, category fit,
+duplicates, activity and exclusion criteria before accepting an entry through
+the existing approval process. Unknown founding year, country, token and social
+accounts must not be inferred. Research intake is never imported automatically.
 
