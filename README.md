@@ -10,7 +10,7 @@ required deployment/authority setup: [directory roles](docs/directory-roles.md).
 - Default branch: `main` (protected)
 - Required status check on `main`: `build-and-check`
 - Directory source: 1,131 listings across 15 categories, including 13 crypto/Web3 AI Agents.
-- The first 100 additions from the 500-site research batch have a [publication review](content/submissions/reviews/2026-10-29-first-publication.md). The other 400 remain research candidates.
+- The 500-listing expansion has two publication reviews: [the first 100 additions](content/submissions/reviews/2026-10-29-first-publication.md) and [400 completion additions](content/submissions/reviews/2026-10-29-complete-500-additions.md). The latter replaces unsuitable research candidates with additional primary-site projects; research alone never approves a listing.
 - Source proposals reach both public addresses only after the protected release is approved, deployed and synchronized.
 - Security policy: `SECURITY.md`
 

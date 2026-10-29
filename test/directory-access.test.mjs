@@ -2,13 +2,32 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHmac,generateKeyPairSync,sign,randomUUID} from 'node:crypto';
 import {createDirectoryService} from '../lib/directory/service.mjs';
-import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,documentBody,newProjectId,readState,signedState,fail} from '../lib/directory/model.mjs';
+import {ORIGIN,permissions,entry,frontMatter,parseFrontMatter,documentBody,newProjectId,readState,signedState,fail,sameListing} from '../lib/directory/model.mjs';
 import {seal} from '../shared/roles-administration/sso/client.mjs';
 import {ecosystemDecisionMessage,ecosystemRequestMessage,verifyEcosystemSignature} from '../shared/roles-administration/ecosystem-authority.mjs';
 
 const wallet='0x'+'1'.repeat(40),other='0x'+'2'.repeat(40),secret='directory-test-secret-'.repeat(3);
 const listing={name:'Existing Project',lead_category:'Infrastructure',tags:['Infrastructure'],ecosystem:['Ethereum'],description:'An existing onchain infrastructure project.',primary_url:'https://existing.example.org/',product_url:'https://existing.example.org/app',founded:'2020',hq:'Metaverse',token:'n/a',twitter:'n/a'};
 const newEntry={...listing,name:'New Project',primary_url:'https://new.example.org/',product_url:'https://new.example.org/app'};
+test('independent GitHub repositories are distinct; repository aliases and ordinary same-host sites remain duplicates',()=>{
+  const project={name:'Slither',primary_url:'https://github.com/crytic/slither'};
+  assert.equal(sameListing(project,{name:'Echidna',primary_url:'https://github.com/crytic/echidna'}),false);
+  assert.equal(sameListing(project,{name:'Other Slither',primary_url:'https://github.com/other/slither'}),false);
+  for(const url of ['https://www.github.com/CRYTIC/SLITHER.git','https://github.com/crytic/slither/tree/master','https://github.com/%63rytic/slither/blob/main/README.md','https://github.com/crytic%2Fslither/issues?state=open']){
+    assert.equal(sameListing(project,{name:'Renamed Project',primary_url:url}),true,url);
+  }
+  assert.equal(sameListing(project,{name:'Slither',primary_url:'https://other.example.org'}),true);
+  assert.equal(sameListing({name:'One',primary_url:'https://example.org/app'},{name:'Two',primary_url:'https://www.example.org./docs'}),true);
+});
+test('intake allows independent repository projects but blocks another name for a queued repository',async()=>{
+  const f=fixture([], 'person@example.org');
+  for(const [name,url] of [['Slither','https://github.com/crytic/slither'],['Echidna','https://github.com/crytic/echidna']]){
+    assert.equal((await f.call('submit',{entry:{...newEntry,name,primary_url:url},operationId:randomUUID()})).status,201);
+  }
+  const alias={...newEntry,name:'Renamed Slither',primary_url:'https://github.com/CRYTIC/slither.git/tree/master'};
+  assert.equal((await f.call('submit',{entry:alias,operationId:randomUUID()})).status,409);
+  assert.equal(f.state.value.submissions.length,2);
+});
 function fixture(roles=[],identity=wallet){
   const requestKeys=generateKeyPairSync('ed25519'),decisionKeys=generateKeyPairSync('ed25519');
   const env={BITTREES_ADMIN_SSO_CLIENT_SECRET:secret,ROLES_ECOSYSTEM_REQUEST_PRIVATE_KEY:requestKeys.privateKey.export({format:'pem',type:'pkcs8'}),ROLES_ECOSYSTEM_DECISION_PUBLIC_KEY:decisionKeys.publicKey.export({format:'pem',type:'spki'})};
