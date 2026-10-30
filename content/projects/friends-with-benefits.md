@@ -10,5 +10,5 @@ founded: 2020
 hq: United States
 token: FWB
 twitter: https://x.com/fwbDAO
-verification_status: verified
+verification_status: "needs_update"
 ---

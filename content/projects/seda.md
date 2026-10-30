@@ -5,7 +5,7 @@ tags: [Infrastructure, Oracles]
 ecosystem: [Cosmos, Ethereum]
 description: Programmable oracle and data query network.
 primary_url: https://www.seda.xyz
-product_url: https://www.seda.xyz/docs
+product_url: "https://docs.seda.xyz/developer"
 founded: 2023
 hq: Metaverse
 token: SEDA

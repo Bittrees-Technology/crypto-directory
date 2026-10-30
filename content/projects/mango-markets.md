@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: MNGO
 twitter: https://x.com/mangomarkets
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2018
 hq: Singapore
 token: ASD
 twitter: https://x.com/_AscendEX
-verification_status: verified
+verification_status: "rejected"
 ---

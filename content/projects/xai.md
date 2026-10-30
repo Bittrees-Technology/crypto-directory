@@ -10,5 +10,5 @@ founded: 2023
 hq: United States
 token: XAI
 twitter: https://x.com/XAI_GAMES
-verification_status: verified
+verification_status: "needs_update"
 ---

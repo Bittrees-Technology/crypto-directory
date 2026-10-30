@@ -10,5 +10,5 @@ founded: "n/a"
 hq: "Metaverse"
 token: "n/a"
 twitter: "n/a"
-verification_status: "verified"
+verification_status: "needs_update"
 ---

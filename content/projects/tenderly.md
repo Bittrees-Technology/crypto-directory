@@ -5,7 +5,7 @@ tags: [Developer Tools, Infrastructure]
 ecosystem: [Ethereum, Base, Arbitrum]
 description: Developer platform for smart contract debugging, simulation, and observability.
 primary_url: https://tenderly.co
-product_url: https://tenderly.co
+product_url: "https://dashboard.tenderly.co/explorer"
 founded: 2018
 hq: Serbia
 token: n/a

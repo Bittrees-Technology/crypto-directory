@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: n/a
 twitter: https://x.com/harpieio
-verification_status: verified
+verification_status: "rejected"
 ---

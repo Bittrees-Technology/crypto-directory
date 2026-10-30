@@ -10,5 +10,5 @@ founded: 2020
 hq: United States
 token: NOTE
 twitter: https://x.com/notionalfinance
-verification_status: verified
+verification_status: "needs_update"
 ---

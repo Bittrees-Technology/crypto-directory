@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, DAOs & Governance]
 ecosystem: [Gnosis]
 description: Ecosystem organization behind Gnosis Chain and governance tooling.
 primary_url: https://gnosis.io
-product_url: https://gnosis.io/products
+product_url: "https://bridge.gnosischain.com/"
 founded: 2017
 hq: Germany
 token: GNO

@@ -10,5 +10,5 @@ founded: 2021
 hq: United States
 token: EIGEN
 twitter: https://x.com/eigenlayer
-verification_status: verified
+verification_status: "needs_update"
 ---

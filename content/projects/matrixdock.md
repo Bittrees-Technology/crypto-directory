@@ -5,7 +5,7 @@ tags: [Real World Assets (RWA)]
 ecosystem: [Ethereum]
 description: Tokenized treasury and RWA product issuer.
 primary_url: https://www.matrixdock.com
-product_url: https://www.matrixdock.com/products
+product_url: "https://app.matrixdock.com/?language=en"
 founded: 2023
 hq: Singapore
 token: n/a

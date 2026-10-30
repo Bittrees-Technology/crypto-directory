@@ -10,5 +10,5 @@ founded: 2022
 hq: Metaverse
 token: n/a
 twitter: https://x.com/watchpugsec
-verification_status: verified
+verification_status: "needs_update"
 ---

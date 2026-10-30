@@ -10,5 +10,5 @@ founded: 2021
 hq: United States
 token: n/a
 twitter: https://x.com/exchgART
-verification_status: verified
+verification_status: "rejected"
 ---

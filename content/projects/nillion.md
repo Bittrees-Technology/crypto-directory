@@ -5,7 +5,7 @@ tags: [Infrastructure, Privacy]
 ecosystem: [Nillion]
 description: Decentralized privacy-preserving computation network.
 primary_url: https://nillion.com
-product_url: https://nillion.com/developers
+product_url: "https://docs.nillion.com/"
 founded: 2022
 hq: Metaverse
 token: n/a

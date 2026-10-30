@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: PTP
 twitter: https://x.com/Platypusdefi
-verification_status: verified
+verification_status: "needs_update"
 ---

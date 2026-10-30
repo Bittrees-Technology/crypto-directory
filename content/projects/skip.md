@@ -1,11 +1,11 @@
 ---
-name: Skip
+name: "Skip:Go"
 lead_category: Infrastructure
 tags: [Infrastructure, Developer Tools]
 ecosystem: [Cosmos]
-description: Infrastructure team focused on transaction flow and MEV tooling in Cosmos.
-primary_url: https://skip.money
-product_url: https://skip.money/products
+description: "Cross-chain routing API and developer tools for connecting applications and blockchain ecosystems."
+primary_url: "https://go.skip.build/"
+product_url: "https://docs.skip.build/go"
 founded: 2022
 hq: United States
 token: n/a

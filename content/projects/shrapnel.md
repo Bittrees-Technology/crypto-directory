@@ -10,5 +10,5 @@ founded: 2023
 hq: United States
 token: SHRAP
 twitter: https://x.com/playSHRAPNEL
-verification_status: verified
+verification_status: "needs_update"
 ---

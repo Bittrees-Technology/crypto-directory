@@ -5,7 +5,7 @@ tags: [Data & Analytics, Market Data]
 ecosystem: [Ethereum, Bitcoin, Multiple]
 description: Unified API for crypto market and exchange data.
 primary_url: https://www.coinapi.io
-product_url: https://www.coinapi.io/products
+product_url: "https://docs.coinapi.io/"
 founded: 2014
 hq: Poland
 token: n/a

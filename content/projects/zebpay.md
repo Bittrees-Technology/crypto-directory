@@ -10,5 +10,5 @@ founded: 2014
 hq: India
 token: n/a
 twitter: https://x.com/zebpay
-verification_status: verified
+verification_status: "needs_update"
 ---

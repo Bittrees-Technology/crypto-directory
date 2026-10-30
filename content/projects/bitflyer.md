@@ -10,5 +10,5 @@ founded: 2014
 hq: Japan
 token: n/a
 twitter: https://x.com/bitFlyer
-verification_status: verified
+verification_status: "needs_update"
 ---

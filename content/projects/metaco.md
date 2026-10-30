@@ -10,5 +10,5 @@ founded: 2015
 hq: Switzerland
 token: n/a
 twitter: https://x.com/MetacoSA
-verification_status: verified
+verification_status: "needs_update"
 ---

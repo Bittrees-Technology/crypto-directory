@@ -5,7 +5,7 @@ tags: [Payments, Infrastructure]
 ecosystem: [Ethereum, Solana, Multiple]
 description: Global fiat-to-crypto payment infrastructure with compliance-first onboarding.
 primary_url: https://banxa.com
-product_url: https://banxa.com/solutions
+product_url: "https://docs.banxa.com"
 founded: 2014
 hq: Australia
 token: n/a

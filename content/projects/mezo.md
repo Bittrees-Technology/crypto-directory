@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Bitcoin]
 ecosystem: [Bitcoin]
 description: Bitcoin economy-focused L2 ecosystem.
 primary_url: https://mezo.org
-product_url: https://mezo.org/learn
+product_url: "https://mezo.org/explore"
 founded: 2024
 hq: Metaverse
 token: n/a

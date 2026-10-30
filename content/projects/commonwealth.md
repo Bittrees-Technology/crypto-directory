@@ -10,5 +10,5 @@ founded: 2019
 hq: United States
 token: n/a
 twitter: https://x.com/hicommonwealth
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2023
 hq: Bermuda
 token: USDM
 twitter: https://x.com/MountainUSDM
-verification_status: verified
+verification_status: "rejected"
 ---

@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Bitcoin]
 ecosystem: [BounceBit]
 description: Bitcoin-oriented L1 with CeDeFi primitives.
 primary_url: https://bouncebit.io
-product_url: https://bouncebit.io/ecosystem
+product_url: "https://docs.bouncebit.io"
 founded: 2024
 hq: Singapore
 token: BB

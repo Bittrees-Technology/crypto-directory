@@ -10,5 +10,5 @@ founded: 2017
 hq: Switzerland
 token: n/a
 twitter: https://x.com/Chain_Security
-verification_status: verified
+verification_status: "needs_update"
 ---

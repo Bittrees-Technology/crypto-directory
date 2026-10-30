@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: VELA
 twitter: https://x.com/VelaExchange
-verification_status: verified
+verification_status: "needs_update"
 ---

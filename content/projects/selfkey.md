@@ -10,5 +10,5 @@ founded: 2017
 hq: Mauritius
 token: KEY
 twitter: https://x.com/selfkey
-verification_status: verified
+verification_status: "rejected"
 ---

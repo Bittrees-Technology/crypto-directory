@@ -5,7 +5,7 @@ tags: [Infrastructure, Storage]
 ecosystem: [IPFS]
 description: IPFS media and file infrastructure for web3 builders.
 primary_url: https://www.pinata.cloud
-product_url: https://www.pinata.cloud/products
+product_url: "https://docs.pinata.cloud/quickstart"
 founded: 2018
 hq: United States
 token: n/a

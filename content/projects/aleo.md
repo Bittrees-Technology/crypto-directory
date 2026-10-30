@@ -10,5 +10,5 @@ founded: 2024
 hq: United States
 token: ALEO
 twitter: https://x.com/AleoHQ
-verification_status: verified
+verification_status: "needs_update"
 ---

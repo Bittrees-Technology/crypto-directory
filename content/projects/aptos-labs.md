@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Infrastructure]
 ecosystem: [Aptos]
 description: Team building core infrastructure and developer tooling for the Aptos network.
 primary_url: https://aptoslabs.com
-product_url: https://aptosfoundation.org
+product_url: "https://aptoslabs.com/products"
 founded: 2021
 hq: United States
 token: APT

@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: J
 twitter: https://x.com/JamboTechnology
-verification_status: verified
+verification_status: "needs_update"
 ---

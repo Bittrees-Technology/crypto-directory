@@ -10,5 +10,5 @@ founded: 2021
 hq: India
 token: SPON
 twitter: https://x.com/SpheronFDN
-verification_status: verified
+verification_status: "needs_update"
 ---

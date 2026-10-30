@@ -5,7 +5,7 @@ tags: [Payments, Exchange]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Canadian crypto app and exchange services.
 primary_url: https://www.newton.co
-product_url: https://www.newton.co/trade
+product_url: "https://www.newton.co/get-started"
 founded: 2018
 hq: Canada
 token: n/a

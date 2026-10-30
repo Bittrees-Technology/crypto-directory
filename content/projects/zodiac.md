@@ -5,7 +5,7 @@ tags: [DAOs & Governance, Developer Tools]
 ecosystem: [Ethereum]
 description: Composable DAO tooling framework built for Safe-based organizations.
 primary_url: https://www.zodiac.wiki
-product_url: https://www.zodiac.wiki/documentation
+product_url: "https://docs.zodiac.eco"
 founded: 2021
 hq: Germany
 token: n/a

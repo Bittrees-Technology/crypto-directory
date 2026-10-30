@@ -10,5 +10,5 @@ founded: 2017
 hq: Singapore
 token: VET
 twitter: https://x.com/vechainofficial
-verification_status: verified
+verification_status: "needs_update"
 ---

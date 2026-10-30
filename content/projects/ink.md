@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2]
 ecosystem: [Ethereum]
 description: L2 ecosystem initiative associated with Kraken stack.
 primary_url: https://inkonchain.com
-product_url: https://inkonchain.com/build
+product_url: "https://inkonchain.com/bridge"
 founded: 2024
 hq: United States
 token: n/a

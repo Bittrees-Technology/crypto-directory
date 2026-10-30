@@ -5,7 +5,7 @@ tags: [Real World Assets (RWA)]
 ecosystem: [Ethereum, Solana]
 description: Asset management firm building tokenized regulated investment products.
 primary_url: https://superstate.co
-product_url: https://superstate.co/products
+product_url: "https://docs.superstate.com"
 founded: 2023
 hq: United States
 token: n/a

@@ -10,5 +10,5 @@ founded: 2021
 hq: Singapore
 token: PARA
 twitter: https://x.com/ParallelFi
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -57,7 +57,7 @@ try{
       const id=path.basename(listing.project_file);
       assert(published.some(project=>project.id===id),'Publication entry missing from public data: '+id);
     }
-    const agents=published.filter(project=>project.lead_category==='AI Agents'&&project.verification_status!=='rejected');
+    const agents=published.filter(project=>project.lead_category==='AI Agents'&&project.verification_status==='verified');
     assert(agents.length>0,'Reviewed AI Agents must reach the public category');
     for(const agent of agents)assert(await page.getByText(agent.name,{exact:true}).first().isVisible(),agent.name);
     await page.getByRole('link',{name:'Back to directory',exact:true}).click();
@@ -68,6 +68,28 @@ try{
       await page.locator('#search').fill(name);
       assert(await page.getByText(name,{exact:true}).first().isVisible(),name+' missing from directory search');
     }
+    await page.locator('#search').fill('');
+    // Public discovery must agree with Surf's verified-only catalogue. Exercise
+    // both server-rendered category pages and client-rendered search results.
+    const visible=published.filter(project=>project.verification_status==='verified');
+    const rowIds=selector=>page.locator(selector+' [data-edit-entry]').evaluateAll(links=>links.map(link=>new URL(link.href).searchParams.get('id')).sort());
+    assert.deepEqual(await rowIds('#rows'),visible.map(project=>project.id).sort());
+    for(const status of ['needs_update','rejected','pending_audit']){
+      const excluded=published.find(project=>project.verification_status===status);
+      if(!excluded)continue;
+      await page.locator('#search').fill(excluded.name);
+      assert(!(await rowIds('#rows')).includes(excluded.id),'Excluded listing returned through search: '+excluded.id);
+    }
+    const staticContext=await browser.newContext({javaScriptEnabled:false});
+    try{
+      const staticPage=await staticContext.newPage();
+      for(const category of ['Wallets','DeFi','AI Agents']){
+        const slug=category.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+        await staticPage.goto(origin+'/categories/'+slug+'.html');
+        const ids=await staticPage.locator('tbody [data-edit-entry]').evaluateAll(links=>links.map(link=>new URL(link.href).searchParams.get('id')).sort());
+        assert.deepEqual(ids,visible.filter(project=>project.lead_category===category).map(project=>project.id).sort());
+      }
+    }finally{await staticContext.close();}
     await page.locator('#search').fill('');
     await page.evaluate(()=>localStorage.setItem('role','superadmin'));await page.reload();await page.locator('[data-login-link]').waitFor();assert.equal(await page.locator('.site-nav').isVisible(),false);
     await page.goto(origin+'/submit.html');assert.equal(await page.locator('#listing-form').isVisible(),false);

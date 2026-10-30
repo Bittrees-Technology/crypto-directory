@@ -5,7 +5,7 @@ tags: [Infrastructure, Staking]
 ecosystem: [Solana]
 description: Solana infrastructure team building validator, MEV, and staking products.
 primary_url: https://www.jito.network
-product_url: https://www.jito.network/stake
+product_url: "https://www.jito.network/staking/"
 founded: 2021
 hq: United States
 token: JTO

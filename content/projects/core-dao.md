@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Infrastructure]
 ecosystem: [Core]
 description: Ecosystem and governance organization for Core blockchain.
 primary_url: https://coredao.org
-product_url: https://coredao.org/ecosystem
+product_url: "https://coredao.org/explore/ecosystem"
 founded: 2023
 hq: Metaverse
 token: CORE

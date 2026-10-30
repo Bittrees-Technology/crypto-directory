@@ -10,5 +10,5 @@ founded: 2020
 hq: Germany
 token: GEL
 twitter: https://x.com/GelatoNetwork
-verification_status: verified
+verification_status: "needs_update"
 ---

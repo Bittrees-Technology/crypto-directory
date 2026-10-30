@@ -10,5 +10,5 @@ founded: 2021
 hq: Austria
 token: n/a
 twitter: https://x.com/Bitpanda_global
-verification_status: verified
+verification_status: "needs_update"
 ---

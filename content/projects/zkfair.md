@@ -10,5 +10,5 @@ founded: 2024
 hq: Metaverse
 token: ZKF
 twitter: https://x.com/ZKFCommunity
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2023
 hq: Singapore
 token: n/a
 twitter: https://x.com/nodgames_io
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -5,7 +5,7 @@ tags: [Real World Assets (RWA), Payments]
 ecosystem: [Ethereum]
 description: Blockchain-based financial marketplace for tokenized products.
 primary_url: https://www.figuremarkets.com
-product_url: https://www.figuremarkets.com/products
+product_url: "https://www.figuremarkets.com/exchange/trade/"
 founded: 2024
 hq: United States
 token: n/a

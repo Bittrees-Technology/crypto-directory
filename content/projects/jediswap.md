@@ -10,5 +10,5 @@ founded: 2022
 hq: Metaverse
 token: JEDI
 twitter: https://x.com/JediSwap
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -5,7 +5,7 @@ tags: [Security, Developer Tools]
 ecosystem: [Ethereum]
 description: Smart contract security training, tooling, and audit services.
 primary_url: https://www.cyfrin.io
-product_url: https://www.cyfrin.io/audits
+product_url: "https://www.cyfrin.io/services/audits"
 founded: 2023
 hq: United States
 token: n/a

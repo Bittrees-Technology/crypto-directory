@@ -10,5 +10,5 @@ founded: 2024
 hq: Seychelles
 token: n/a
 twitter: https://x.com/BitMEX
-verification_status: verified
+verification_status: "rejected"
 ---

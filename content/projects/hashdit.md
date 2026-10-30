@@ -10,5 +10,5 @@ founded: 2022
 hq: Hong Kong
 token: n/a
 twitter: https://x.com/hashdit
-verification_status: verified
+verification_status: "needs_update"
 ---

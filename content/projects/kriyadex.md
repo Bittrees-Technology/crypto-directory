@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: KDX
 twitter: https://x.com/KriyaDEX
-verification_status: verified
+verification_status: "needs_update"
 ---

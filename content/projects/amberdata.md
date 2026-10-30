@@ -10,5 +10,5 @@ founded: 2017
 hq: United States
 token: n/a
 twitter: https://x.com/Amberdataio
-verification_status: verified
+verification_status: "needs_update"
 ---

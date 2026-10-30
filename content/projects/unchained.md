@@ -10,5 +10,5 @@ founded: 2016
 hq: United States
 token: n/a
 twitter: https://x.com/unchainedcom
-verification_status: verified
+verification_status: "needs_update"
 ---

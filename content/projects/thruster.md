@@ -10,5 +10,5 @@ founded: 2024
 hq: Metaverse
 token: THRUST
 twitter: https://x.com/thrusterfinance
-verification_status: verified
+verification_status: "needs_update"
 ---

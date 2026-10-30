@@ -39,6 +39,7 @@
 - `pending_audit`: added, awaiting manual review.
 - `verified`: manually reviewed and accepted.
 - `needs_update`: listing exists but data is stale or uncertain.
+- Public index, search, categories and Surf show only `verified` listings. Other statuses remain in source and the full data feed for review and history; moving a listing to `needs_update` temporarily removes it from public discovery.
 - `rejected`: did not meet criteria (do not publish in main listing).
 
 ## Research intake

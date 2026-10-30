@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: n/a
 twitter: https://x.com/skynet_security
-verification_status: verified
+verification_status: "needs_update"
 ---

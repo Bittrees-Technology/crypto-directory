@@ -5,7 +5,7 @@ tags: [Payments, Infrastructure]
 ecosystem: [Ethereum, Bitcoin, Multiple]
 description: Stablecoin payments and business treasury infrastructure.
 primary_url: https://www.bvnk.com
-product_url: https://www.bvnk.com/products
+product_url: "https://docs.bvnk.com/bvnk/get-started/get-started-w-bvnk/"
 founded: 2021
 hq: United Kingdom
 token: n/a

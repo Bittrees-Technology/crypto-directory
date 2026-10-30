@@ -10,5 +10,5 @@ founded: 2021
 hq: United States
 token: MINA
 twitter: https://x.com/minaprotocol
-verification_status: verified
+verification_status: "needs_update"
 ---

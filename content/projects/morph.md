@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2]
 ecosystem: [Morph, Ethereum]
 description: Ethereum rollup ecosystem optimized for consumer applications.
 primary_url: https://www.morphl2.io
-product_url: https://www.morphl2.io/ecosystem
+product_url: "https://docs.morph.network/docs/about-morph/user-navigation-page"
 founded: 2024
 hq: Singapore
 token: n/a

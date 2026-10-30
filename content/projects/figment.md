@@ -10,5 +10,5 @@ founded: 2018
 hq: Canada
 token: n/a
 twitter: https://x.com/Figment_io
-verification_status: verified
+verification_status: "needs_update"
 ---

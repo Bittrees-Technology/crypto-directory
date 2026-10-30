@@ -5,7 +5,7 @@ tags: [Identity]
 ecosystem: [Ethereum, BNB Chain]
 description: Multi-chain name service and identity protocol.
 primary_url: https://space.id
-product_url: https://space.id/name
+product_url: "https://docs.space.id/developer-guide/web3-name-sdk"
 founded: 2022
 hq: Singapore
 token: ID

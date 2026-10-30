@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Bitcoin]
 ecosystem: [Bitcoin]
 description: ZK rollup project for Bitcoin-native scaling.
 primary_url: https://citrea.xyz
-product_url: https://citrea.xyz/docs
+product_url: "https://app.citrea.xyz/bridge"
 founded: 2024
 hq: Metaverse
 token: n/a

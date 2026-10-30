@@ -5,7 +5,7 @@ tags: [DeFi, Stablecoin]
 ecosystem: [Celo]
 description: Stable asset protocol and exchange infrastructure on Celo.
 primary_url: https://mento.org
-product_url: https://mento.org/products
+product_url: "https://app.mento.org/"
 founded: 2021
 hq: Germany
 token: MENTO

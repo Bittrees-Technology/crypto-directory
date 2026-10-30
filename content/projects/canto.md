@@ -10,5 +10,5 @@ founded: 2022
 hq: Metaverse
 token: CANTO
 twitter: https://x.com/CantoPublic
-verification_status: verified
+verification_status: "needs_update"
 ---

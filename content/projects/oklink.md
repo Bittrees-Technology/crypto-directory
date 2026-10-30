@@ -10,5 +10,5 @@ founded: 2019
 hq: Seychelles
 token: n/a
 twitter: https://x.com/OKLink
-verification_status: verified
+verification_status: "needs_update"
 ---

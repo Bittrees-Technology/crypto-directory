@@ -5,7 +5,7 @@ tags: [Payments, Liquidity]
 ecosystem: [Ethereum, Multiple]
 description: Global digital asset market maker and liquidity provider.
 primary_url: https://www.wintermute.com
-product_url: https://www.wintermute.com/services
+product_url: "https://www.wintermute.com/otc"
 founded: 2017
 hq: United Kingdom
 token: n/a

@@ -1,14 +1,14 @@
 ---
-name: Lyra
+name: "Derive"
 lead_category: DeFi
 tags: [DeFi, Derivatives]
 ecosystem: [Optimism, Base]
-description: Decentralized options protocol and liquidity layer.
-primary_url: https://www.lyra.finance
-product_url: https://app.lyra.finance
+description: "Onchain options and perpetual futures trading protocol, formerly Lyra."
+primary_url: "https://www.derive.xyz/"
+product_url: "https://app.derive.xyz/"
 founded: 2021
 hq: Metaverse
-token: LYRA
-twitter: https://x.com/lyrafinance
+token: "DRV"
+twitter: "https://x.com/derivexyz"
 verification_status: verified
 ---

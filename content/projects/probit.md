@@ -10,5 +10,5 @@ founded: 2018
 hq: Seychelles
 token: n/a
 twitter: https://x.com/ProBit_Exchange
-verification_status: verified
+verification_status: "rejected"
 ---

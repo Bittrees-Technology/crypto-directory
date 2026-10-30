@@ -5,7 +5,7 @@ tags: [DAOs & Governance, Identity]
 ecosystem: [Ethereum, Multiple]
 description: Token-gated community and role management tooling.
 primary_url: https://www.collab.land
-product_url: https://www.collab.land/product
+product_url: "https://docs.collab.land/help-docs/intro"
 founded: 2020
 hq: United States
 token: COLLAB

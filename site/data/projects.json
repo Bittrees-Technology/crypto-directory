@@ -36,7 +36,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/10KSwap",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "10kswap.md"
   },
   {
@@ -261,7 +261,7 @@
     "hq": "Metaverse",
     "token": "SPELL",
     "twitter": "https://x.com/MIM_Spell",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "abracadabra.md"
   },
   {
@@ -276,7 +276,7 @@
     ],
     "description": "Consumer app-focused L2 ecosystem.",
     "primary_url": "https://www.abs.xyz",
-    "product_url": "https://www.abs.xyz/ecosystem",
+    "product_url": "https://docs.abs.xyz/",
     "founded": "2024",
     "hq": "United States",
     "token": "n/a",
@@ -442,7 +442,7 @@
     ],
     "description": "Decentralized cloud GPU infrastructure and streaming stack.",
     "primary_url": "https://aethir.com",
-    "product_url": "https://aethir.com/products",
+    "product_url": "https://dashboard.aethir.com/protocol/overview",
     "founded": "2023",
     "hq": "Singapore",
     "token": "ATH",
@@ -751,7 +751,7 @@
     "hq": "United States",
     "token": "ALEO",
     "twitter": "https://x.com/AleoHQ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "aleo.md"
   },
   {
@@ -770,7 +770,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/AleoHQ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "aleo-wallet.md"
   },
   {
@@ -1005,7 +1005,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/Amberdataio",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "amberdata.md"
   },
   {
@@ -1126,7 +1126,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/ancilia_inc",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "ancilia.md"
   },
   {
@@ -1250,7 +1250,7 @@
     "hq": "United States",
     "token": "ANKR",
     "twitter": "https://x.com/ankr",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "ankr-appchain.md"
   },
   {
@@ -1265,7 +1265,7 @@
     ],
     "description": "Intent-centric architecture for decentralized applications.",
     "primary_url": "https://anoma.net",
-    "product_url": "https://anoma.net/research",
+    "product_url": "https://docs.anoma.net",
     "founded": "2020",
     "hq": "Switzerland",
     "token": "n/a",
@@ -1348,7 +1348,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/anzenfinance",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "anzen.md"
   },
   {
@@ -1411,18 +1411,18 @@
     "id": "aperture-finance.md"
   },
   {
-    "name": "ApeX Pro",
-    "lead_category": "Data & Analytics",
+    "name": "ApeX Protocol",
+    "lead_category": "DeFi",
     "tags": [
-      "Data & Analytics",
+      "DeFi",
       "Derivatives"
     ],
     "ecosystem": [
       "Arbitrum"
     ],
-    "description": "Data-rich derivatives trading platform with onchain settlement.",
-    "primary_url": "https://pro.apex.exchange",
-    "product_url": "https://pro.apex.exchange/trade",
+    "description": "Decentralized perpetual futures exchange with self-custody and onchain settlement.",
+    "primary_url": "https://www.apex.exchange/",
+    "product_url": "https://omni.apex.exchange/",
     "founded": "2022",
     "hq": "Metaverse",
     "token": "APEX",
@@ -1482,7 +1482,7 @@
     ],
     "description": "Team building core infrastructure and developer tooling for the Aptos network.",
     "primary_url": "https://aptoslabs.com",
-    "product_url": "https://aptosfoundation.org",
+    "product_url": "https://aptoslabs.com/products",
     "founded": "2021",
     "hq": "United States",
     "token": "APT",
@@ -1506,7 +1506,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/Aptos",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "aptos-wallet.md"
   },
   {
@@ -1666,7 +1666,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/argentHQ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "argent.md"
   },
   {
@@ -1687,7 +1687,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/arguslabs",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "argus.md"
   },
   {
@@ -1707,7 +1707,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/AriesMarkets",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "aries-markets.md"
   },
   {
@@ -1793,7 +1793,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/artblocks_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "art-blocks.md"
   },
   {
@@ -1810,7 +1810,7 @@
     ],
     "description": "Crypto analytics platform focused on ecosystem and application-level performance metrics.",
     "primary_url": "https://www.artemis.xyz",
-    "product_url": "https://www.artemis.xyz/data",
+    "product_url": "https://www.artemis.ai/dashboards",
     "founded": "2023",
     "hq": "United States",
     "token": "n/a",
@@ -1880,7 +1880,7 @@
     "hq": "Singapore",
     "token": "ASD",
     "twitter": "https://x.com/_AscendEX",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "ascendex.md"
   },
   {
@@ -1921,7 +1921,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/AstariaXYZ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "astaria.md"
   },
   {
@@ -1960,7 +1960,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/AsyncArt",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "async-art.md"
   },
   {
@@ -2133,7 +2133,7 @@
     ],
     "description": "Data availability and modular blockchain infrastructure stack.",
     "primary_url": "https://www.availproject.org",
-    "product_url": "https://www.availproject.org/products",
+    "product_url": "https://fastbridge.availproject.org/",
     "founded": "2023",
     "hq": "India",
     "token": "n/a",
@@ -2174,7 +2174,7 @@
     ],
     "description": "Interchain network and tooling for cross-chain messaging and connectivity.",
     "primary_url": "https://axelar.network",
-    "product_url": "https://axelar.network/products",
+    "product_url": "https://docs.axelar.dev/",
     "founded": "2020",
     "hq": "Canada",
     "token": "AXL",
@@ -2218,7 +2218,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/Azuki",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "azuki.md"
   },
   {
@@ -2401,7 +2401,7 @@
     "hq": "Metaverse",
     "token": "BADGER",
     "twitter": "https://x.com/badgerdao",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "badger.md"
   },
   {
@@ -2441,7 +2441,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/Bakkt",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "bakkt.md"
   },
   {
@@ -2463,7 +2463,7 @@
     "hq": "Metaverse",
     "token": "BAL",
     "twitter": "https://x.com/Balancer",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "balancer.md"
   },
   {
@@ -2524,7 +2524,7 @@
     "hq": "Metaverse",
     "token": "BANK",
     "twitter": "https://x.com/banklessDAO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "banklessdao.md"
   },
   {
@@ -2570,7 +2570,7 @@
     ],
     "description": "Global fiat-to-crypto payment infrastructure with compliance-first onboarding.",
     "primary_url": "https://banxa.com",
-    "product_url": "https://banxa.com/solutions",
+    "product_url": "https://docs.banxa.com",
     "founded": "2014",
     "hq": "Australia",
     "token": "n/a",
@@ -2595,7 +2595,7 @@
     "hq": "United States",
     "token": "BOND",
     "twitter": "https://x.com/Barn_Bridge",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "barnbridge.md"
   },
   {
@@ -2770,7 +2770,7 @@
     ],
     "description": "Ecosystem steward for Berachain network development.",
     "primary_url": "https://www.berachain.com",
-    "product_url": "https://www.berachain.com/ecosystem",
+    "product_url": "https://explore.berachain.com/",
     "founded": "2024",
     "hq": "Cayman Islands",
     "token": "BERA",
@@ -2832,7 +2832,7 @@
     ],
     "description": "Action RPG ecosystem with web3 item ownership.",
     "primary_url": "https://bigtime.gg",
-    "product_url": "https://bigtime.gg/play",
+    "product_url": "https://www.bigtime.gg/download",
     "founded": "2022",
     "hq": "United States",
     "token": "BIGTIME",
@@ -2873,7 +2873,7 @@
     ],
     "description": "Global crypto platform with exchange, custody, and payments products.",
     "primary_url": "https://www.binance.com",
-    "product_url": "https://www.binance.com/en/pay",
+    "product_url": "https://pay.binance.com/en",
     "founded": "2017",
     "hq": "United Arab Emirates",
     "token": "BNB",
@@ -2935,7 +2935,7 @@
     ],
     "description": "Crypto exchange focused on derivatives and copy trading.",
     "primary_url": "https://bingx.com",
-    "product_url": "https://bingx.com/en-us/trade",
+    "product_url": "https://bingx.com/en/spot/BTCUSDT",
     "founded": "2018",
     "hq": "Singapore",
     "token": "n/a",
@@ -3144,7 +3144,7 @@
     "hq": "Japan",
     "token": "n/a",
     "twitter": "https://x.com/bitFlyer",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "bitflyer.md"
   },
   {
@@ -3183,7 +3183,7 @@
     ],
     "description": "Institutional custody and wallet infrastructure provider for digital assets.",
     "primary_url": "https://www.bitgo.com",
-    "product_url": "https://www.bitgo.com/products",
+    "product_url": "https://www.bitgo.com/products/custody-wallets/",
     "founded": "2013",
     "hq": "United States",
     "token": "n/a",
@@ -3336,7 +3336,7 @@
     "hq": "Seychelles",
     "token": "BMEX",
     "twitter": "https://x.com/BitMEX",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "bitmex.md"
   },
   {
@@ -3357,7 +3357,7 @@
     "hq": "Seychelles",
     "token": "n/a",
     "twitter": "https://x.com/BitMEX",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "bitmex-custody.md"
   },
   {
@@ -3401,7 +3401,7 @@
     "hq": "Austria",
     "token": "n/a",
     "twitter": "https://x.com/Bitpanda_global",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "bitpanda-custody.md"
   },
   {
@@ -3666,7 +3666,7 @@
     "hq": "Metaverse",
     "token": "BLAST",
     "twitter": "https://x.com/Blast_L2",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "blast.md"
   },
   {
@@ -3688,7 +3688,7 @@
     "hq": "Romania",
     "token": "n/a",
     "twitter": "https://x.com/blastapi",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "blast-api.md"
   },
   {
@@ -3811,7 +3811,7 @@
     ],
     "description": "Security audit and smart contract review provider.",
     "primary_url": "https://blockapex.io",
-    "product_url": "https://blockapex.io/services",
+    "product_url": "https://blockapex.io/crypto-wallet-audit-services/",
     "founded": "2020",
     "hq": "Pakistan",
     "token": "n/a",
@@ -3857,7 +3857,7 @@
     "hq": "United Kingdom",
     "token": "LRDS",
     "twitter": "https://x.com/blocklords",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "blocklords.md"
   },
   {
@@ -3877,7 +3877,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/blocknative",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "blocknative.md"
   },
   {
@@ -4000,7 +4000,7 @@
     ],
     "description": "Infrastructure company focused on Bitcoin scaling, custody, and sidechain technologies.",
     "primary_url": "https://blockstream.com",
-    "product_url": "https://blockstream.com/products",
+    "product_url": "https://blockstream.com/app/",
     "founded": "2014",
     "hq": "Canada",
     "token": "n/a",
@@ -4059,8 +4059,8 @@
       "Multiple"
     ],
     "description": "Institutional-grade research and analytics platform.",
-    "primary_url": "https://blockworks.co/research",
-    "product_url": "n/a",
+    "primary_url": "https://blockworks.com/products/intel?from=bwr",
+    "product_url": "https://app.blockworks.com/",
     "founded": "2020",
     "hq": "United States",
     "token": "n/a",
@@ -4086,7 +4086,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/blowfishxyz",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "blowfish.md"
   },
   {
@@ -4103,7 +4103,7 @@
     ],
     "description": "High-performance blockchain connectivity and transaction propagation network.",
     "primary_url": "https://bloxroute.com",
-    "product_url": "https://bloxroute.com",
+    "product_url": "https://docs.bloxroute.com/",
     "founded": "2018",
     "hq": "United States",
     "token": "n/a",
@@ -4296,7 +4296,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/bonfire_xyz",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "bonfire.md"
   },
   {
@@ -4360,7 +4360,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/botanixlabs",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "botanix.md"
   },
   {
@@ -4375,7 +4375,7 @@
     ],
     "description": "Bitcoin-oriented L1 with CeDeFi primitives.",
     "primary_url": "https://bouncebit.io",
-    "product_url": "https://bouncebit.io/ecosystem",
+    "product_url": "https://docs.bouncebit.io",
     "founded": "2024",
     "hq": "Singapore",
     "token": "BB",
@@ -4460,7 +4460,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/breadcrumbsapp",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "breadcrumbs.md"
   },
   {
@@ -4646,7 +4646,7 @@
       "Multiple"
     ],
     "description": "Visualization platform for token holder and wallet relationship analysis.",
-    "primary_url": "https://www.bubblemaps.io",
+    "primary_url": "https://bubblemaps.io/",
     "product_url": "https://app.bubblemaps.io",
     "founded": "2021",
     "hq": "France",
@@ -4767,7 +4767,7 @@
     ],
     "description": "Institutional-focused digital asset exchange platform.",
     "primary_url": "https://bullish.com",
-    "product_url": "https://bullish.com/exchange",
+    "product_url": "https://www.bullish.com/eu/markets",
     "founded": "2021",
     "hq": "Cayman Islands",
     "token": "n/a",
@@ -4808,7 +4808,7 @@
     ],
     "description": "Stablecoin payments and business treasury infrastructure.",
     "primary_url": "https://www.bvnk.com",
-    "product_url": "https://www.bvnk.com/products",
+    "product_url": "https://docs.bvnk.com/bvnk/get-started/get-started-w-bvnk/",
     "founded": "2021",
     "hq": "United Kingdom",
     "token": "n/a",
@@ -4854,7 +4854,7 @@
     "hq": "Romania",
     "token": "INFRA",
     "twitter": "https://x.com/BwareLabs",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "bware-labs.md"
   },
   {
@@ -4897,7 +4897,7 @@
     "hq": "Singapore",
     "token": "n/a",
     "twitter": "https://x.com/BYDFi_Official",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "bydfi.md"
   },
   {
@@ -4955,7 +4955,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/CabinDAO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "cabin.md"
   },
   {
@@ -4971,8 +4971,8 @@
       "Multiple"
     ],
     "description": "Institutional digital asset custody and staking services.",
-    "primary_url": "https://www.cactuscustody.com",
-    "product_url": "https://www.cactuscustody.com/solutions",
+    "primary_url": "https://www.mycactus.com/",
+    "product_url": "https://www.mycactus.com/",
     "founded": "2019",
     "hq": "Hong Kong",
     "token": "n/a",
@@ -5030,7 +5030,7 @@
     ],
     "description": "Rollup platform for launching app-specific chains.",
     "primary_url": "https://www.caldera.xyz",
-    "product_url": "https://www.caldera.xyz/product",
+    "product_url": "https://docs.caldera.xyz/",
     "founded": "2022",
     "hq": "United States",
     "token": "n/a",
@@ -5091,7 +5091,7 @@
     ],
     "description": "Identity-first blockchain ecosystem for communities and apps.",
     "primary_url": "https://campnetwork.xyz",
-    "product_url": "https://campnetwork.xyz/docs",
+    "product_url": "https://portal.campnetwork.xyz/",
     "founded": "2024",
     "hq": "Metaverse",
     "token": "n/a",
@@ -5137,7 +5137,7 @@
     "hq": "Metaverse",
     "token": "CANTO",
     "twitter": "https://x.com/CantoPublic",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "canto.md"
   },
   {
@@ -5152,7 +5152,7 @@
     ],
     "description": "Institutional blockchain network for tokenized financial markets.",
     "primary_url": "https://canton.network",
-    "product_url": "https://canton.network/learn",
+    "product_url": "https://www.canton.network/ecosystem",
     "founded": "2023",
     "hq": "United States",
     "token": "n/a",
@@ -5273,7 +5273,7 @@
     ],
     "description": "Inter-chain messaging and bridging infrastructure.",
     "primary_url": "https://www.celer.network",
-    "product_url": "https://www.celer.network/products",
+    "product_url": "https://cbridge.celer.network/#/transfer",
     "founded": "2018",
     "hq": "United States",
     "token": "CELR",
@@ -5340,7 +5340,7 @@
     "hq": "Metaverse",
     "token": "CELL",
     "twitter": "https://x.com/CellanaFinance",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "cellana-finance.md"
   },
   {
@@ -5381,7 +5381,7 @@
     "hq": "Germany",
     "token": "CFG",
     "twitter": "https://x.com/centrifuge",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "centrifuge.md"
   },
   {
@@ -5401,7 +5401,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/ceramicnetwork",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "ceramic.md"
   },
   {
@@ -5418,7 +5418,7 @@
     ],
     "description": "Smart contract auditing and blockchain security monitoring platform.",
     "primary_url": "https://www.certik.com",
-    "product_url": "https://www.certik.com/products",
+    "product_url": "https://www.certik.com/products/dlt-security-solutions",
     "founded": "2018",
     "hq": "United States",
     "token": "CTK",
@@ -5462,7 +5462,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "n/a",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "cess.md"
   },
   {
@@ -5673,7 +5673,7 @@
     "hq": "Canada",
     "token": "n/a",
     "twitter": "https://x.com/chain_patrol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "chainpatrol.md"
   },
   {
@@ -5740,7 +5740,7 @@
     "hq": "Switzerland",
     "token": "n/a",
     "twitter": "https://x.com/Chain_Security",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "chainsecurity.md"
   },
   {
@@ -5824,7 +5824,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/charmverse",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "charmverse.md"
   },
   {
@@ -6004,7 +6004,7 @@
     ],
     "description": "ZK rollup project for Bitcoin-native scaling.",
     "primary_url": "https://citrea.xyz",
-    "product_url": "https://citrea.xyz/docs",
+    "product_url": "https://app.citrea.xyz/bridge",
     "founded": "2024",
     "hq": "Metaverse",
     "token": "n/a",
@@ -6030,7 +6030,7 @@
     "hq": "United States",
     "token": "CVC",
     "twitter": "https://x.com/civickey",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "civic.md"
   },
   {
@@ -6051,7 +6051,7 @@
     "hq": "United States",
     "token": "CVC",
     "twitter": "https://x.com/civickey",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "civic-pass.md"
   },
   {
@@ -6068,7 +6068,7 @@
     ],
     "description": "Institutional credit marketplace connecting DeFi capital and borrowers.",
     "primary_url": "https://clearpool.finance",
-    "product_url": "https://app.clearpool.finance",
+    "product_url": "https://clearpool.finance/lending",
     "founded": "2022",
     "hq": "Singapore",
     "token": "CPOOL",
@@ -6176,7 +6176,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/code4rena",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "code4rena.md"
   },
   {
@@ -6236,7 +6236,7 @@
     ],
     "description": "Unified API for crypto market and exchange data.",
     "primary_url": "https://www.coinapi.io",
-    "product_url": "https://www.coinapi.io/products",
+    "product_url": "https://docs.coinapi.io/",
     "founded": "2014",
     "hq": "Poland",
     "token": "n/a",
@@ -6279,8 +6279,8 @@
       "Multiple"
     ],
     "description": "Consumer self-custody wallet for multi-chain assets and apps.",
-    "primary_url": "https://www.coinbase.com/wallet",
-    "product_url": "https://www.coinbase.com/wallet/downloads",
+    "primary_url": "https://wallet.coinbase.com/",
+    "product_url": "https://wallet.coinbase.com/",
     "founded": "2018",
     "hq": "United States",
     "token": "n/a",
@@ -6435,7 +6435,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/coinfirm_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "coinfirm.md"
   },
   {
@@ -6626,7 +6626,7 @@
     ],
     "description": "MENA-focused licensed digital asset exchange.",
     "primary_url": "https://coinmena.com",
-    "product_url": "https://coinmena.com/trade",
+    "product_url": "https://www.coinmena.com/en/prices",
     "founded": "2021",
     "hq": "Bahrain",
     "token": "n/a",
@@ -6753,7 +6753,7 @@
     ],
     "description": "Consumer wallet and payments platform in Southeast Asia.",
     "primary_url": "https://coins.ph",
-    "product_url": "https://coins.ph/app",
+    "product_url": "https://www.coins.ph/en-ph/trade/BTC/PHP",
     "founded": "2014",
     "hq": "Philippines",
     "token": "n/a",
@@ -6883,7 +6883,7 @@
     ],
     "description": "Token-gated community and role management tooling.",
     "primary_url": "https://www.collab.land",
-    "product_url": "https://www.collab.land/product",
+    "product_url": "https://docs.collab.land/help-docs/intro",
     "founded": "2020",
     "hq": "United States",
     "token": "COLLAB",
@@ -6965,7 +6965,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/hicommonwealth",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "commonwealth.md"
   },
   {
@@ -7004,7 +7004,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/ceramicnetwork",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "composedb.md"
   },
   {
@@ -7064,7 +7064,7 @@
     ],
     "description": "Developer platform for deploying and managing rollups.",
     "primary_url": "https://conduit.xyz",
-    "product_url": "https://conduit.xyz/product",
+    "product_url": "https://app.conduit.xyz/",
     "founded": "2023",
     "hq": "United States",
     "token": "n/a",
@@ -7109,7 +7109,7 @@
     "hq": "Metaverse",
     "token": "CNC",
     "twitter": "https://x.com/ConicFinance",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "conic-finance.md"
   },
   {
@@ -7241,7 +7241,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/coordinape",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "coordinape.md"
   },
   {
@@ -7258,7 +7258,7 @@
     ],
     "description": "Institutional custody and collateral management platform for digital assets.",
     "primary_url": "https://www.copper.co",
-    "product_url": "https://www.copper.co/solutions",
+    "product_url": "https://copper.co/en-ch/solutions/hold/custody",
     "founded": "2018",
     "hq": "United Kingdom",
     "token": "n/a",
@@ -7278,7 +7278,7 @@
     ],
     "description": "Ecosystem and governance organization for Core blockchain.",
     "primary_url": "https://coredao.org",
-    "product_url": "https://coredao.org/ecosystem",
+    "product_url": "https://coredao.org/explore/ecosystem",
     "founded": "2023",
     "hq": "Metaverse",
     "token": "CORE",
@@ -7324,7 +7324,7 @@
     "hq": "Switzerland",
     "token": "COREUM",
     "twitter": "https://x.com/CoreumOfficial",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "coreum.md"
   },
   {
@@ -7344,7 +7344,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/use_corn",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "corn.md"
   },
   {
@@ -7609,7 +7609,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/CryptoCompare",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "cryptocompare.md"
   },
   {
@@ -7668,7 +7668,7 @@
     ],
     "description": "Onchain and exchange flow analytics platform.",
     "primary_url": "https://cryptoquant.com",
-    "product_url": "https://cryptoquant.com/asset",
+    "product_url": "https://cryptoquant.com/asset/btc/summary",
     "founded": "2019",
     "hq": "South Korea",
     "token": "n/a",
@@ -7817,7 +7817,7 @@
     ],
     "description": "Institutional OTC liquidity provider for digital assets.",
     "primary_url": "https://cumberland.io",
-    "product_url": "https://cumberland.io/services",
+    "product_url": "https://www.cumberland.io/products-we-trade",
     "founded": "2014",
     "hq": "United States",
     "token": "n/a",
@@ -7944,7 +7944,7 @@
     ],
     "description": "Smart contract security training, tooling, and audit services.",
     "primary_url": "https://www.cyfrin.io",
-    "product_url": "https://www.cyfrin.io/audits",
+    "product_url": "https://www.cyfrin.io/services/audits",
     "founded": "2023",
     "hq": "United States",
     "token": "n/a",
@@ -7991,7 +7991,7 @@
     "hq": "United Arab Emirates",
     "token": "n/a",
     "twitter": "https://x.com/cyphercapitals",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "cypher-capital-markets.md"
   },
   {
@@ -8585,6 +8585,27 @@
     "id": "deribit.md"
   },
   {
+    "name": "Derive",
+    "lead_category": "DeFi",
+    "tags": [
+      "DeFi",
+      "Derivatives"
+    ],
+    "ecosystem": [
+      "Optimism",
+      "Base"
+    ],
+    "description": "Onchain options and perpetual futures trading protocol, formerly Lyra.",
+    "primary_url": "https://www.derive.xyz/",
+    "product_url": "https://app.derive.xyz/",
+    "founded": "2021",
+    "hq": "Metaverse",
+    "token": "DRV",
+    "twitter": "https://x.com/derivexyz",
+    "verification_status": "verified",
+    "id": "lyra.md"
+  },
+  {
     "name": "Developer DAO",
     "lead_category": "DAOs & Governance",
     "tags": [
@@ -8723,7 +8744,7 @@
     ],
     "description": "Open-source oracle and data provider for web3 applications.",
     "primary_url": "https://www.diadata.org",
-    "product_url": "https://www.diadata.org/products",
+    "product_url": "https://www.diadata.org/app",
     "founded": "2018",
     "hq": "Switzerland",
     "token": "DIA",
@@ -8748,7 +8769,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/dotdid",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "did-id.md"
   },
   {
@@ -8808,7 +8829,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/discoxyz",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "disco.md"
   },
   {
@@ -8888,7 +8909,7 @@
     "hq": "Metaverse",
     "token": "DOJO",
     "twitter": "https://x.com/Dojo_Swap",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "dojoswap.md"
   },
   {
@@ -9133,7 +9154,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/dyordotcom",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "dyor.md"
   },
   {
@@ -9230,7 +9251,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/EconiaLabs",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "econia.md"
   },
   {
@@ -9291,7 +9312,7 @@
     "hq": "United States",
     "token": "EIGEN",
     "twitter": "https://x.com/eigenlayer",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "eigenlayer.md"
   },
   {
@@ -9311,7 +9332,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/EkuboProtocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "ekubo.md"
   },
   {
@@ -9790,7 +9811,7 @@
     ],
     "description": "EVM-compatible L2 ecosystem in Tezos stack.",
     "primary_url": "https://etherlink.com",
-    "product_url": "https://etherlink.com/build",
+    "product_url": "https://docs.etherlink.com",
     "founded": "2024",
     "hq": "Switzerland",
     "token": "n/a",
@@ -10049,7 +10070,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/exchgART",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "exchange-art.md"
   },
   {
@@ -10065,7 +10086,7 @@
     ],
     "description": "Consumer wallet suite for desktop and mobile with multi-asset support.",
     "primary_url": "https://www.exodus.com",
-    "product_url": "https://www.exodus.com/wallet",
+    "product_url": "https://www.exodus.com/download",
     "founded": "2015",
     "hq": "United States",
     "token": "n/a",
@@ -10266,7 +10287,7 @@
     ],
     "description": "Federated Bitcoin app and custody stack for communities.",
     "primary_url": "https://fedi.xyz",
-    "product_url": "https://fedi.xyz/products",
+    "product_url": "https://www.fedi.xyz/get-the-app",
     "founded": "2023",
     "hq": "United States",
     "token": "n/a",
@@ -10286,7 +10307,7 @@
     ],
     "description": "Open-source federated custody and payments protocol.",
     "primary_url": "https://fedimint.org",
-    "product_url": "https://fedimint.org/docs",
+    "product_url": "https://fedimint.org/wallets",
     "founded": "2022",
     "hq": "Metaverse",
     "token": "n/a",
@@ -10355,7 +10376,7 @@
     "hq": "Canada",
     "token": "n/a",
     "twitter": "https://x.com/Figment_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "figment.md"
   },
   {
@@ -10370,7 +10391,7 @@
     ],
     "description": "Blockchain-based financial marketplace for tokenized products.",
     "primary_url": "https://www.figuremarkets.com",
-    "product_url": "https://www.figuremarkets.com/products",
+    "product_url": "https://www.figuremarkets.com/exchange/trade/",
     "founded": "2024",
     "hq": "United States",
     "token": "n/a",
@@ -10390,7 +10411,7 @@
     ],
     "description": "Foundation supporting Filecoin and decentralized storage adoption.",
     "primary_url": "https://fil.org",
-    "product_url": "https://fil.org/ecosystem",
+    "product_url": "https://docs.filecoin.io/",
     "founded": "2020",
     "hq": "United States",
     "token": "FIL",
@@ -10417,7 +10438,7 @@
     "hq": "Germany",
     "token": "n/a",
     "twitter": "https://x.com/Finoa_IO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "finoa.md"
   },
   {
@@ -10595,7 +10616,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/Fleek",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "fleek.md"
   },
   {
@@ -10636,7 +10657,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/flipsidecrypto",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "flipside.md"
   },
   {
@@ -10719,7 +10740,7 @@
     "hq": "United States",
     "token": "FLT",
     "twitter": "https://x.com/fluence_project",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "fluence.md"
   },
   {
@@ -10832,7 +10853,7 @@
     ],
     "description": "Web3 analytics platform for dashboards and protocol insights.",
     "primary_url": "https://www.footprint.network",
-    "product_url": "https://www.footprint.network/dashboard",
+    "product_url": "https://www.footprint.network/research/gamefi/game-rankings/top-games",
     "founded": "2021",
     "hq": "Singapore",
     "token": "n/a",
@@ -10938,7 +10959,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/foundation",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "foundation.md"
   },
   {
@@ -10977,7 +10998,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/Fractal_ID",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "fractal-id.md"
   },
   {
@@ -11096,7 +11117,7 @@
     "hq": "United States",
     "token": "FWB",
     "twitter": "https://x.com/fwbDAO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "friends-with-benefits.md"
   },
   {
@@ -11252,7 +11273,7 @@
     ],
     "description": "Smart contract fuzzing and security services provider.",
     "primary_url": "https://fuzz.land",
-    "product_url": "https://fuzz.land/services",
+    "product_url": "https://docs.ityfuzz.rs/",
     "founded": "2022",
     "hq": "Singapore",
     "token": "n/a",
@@ -11277,7 +11298,7 @@
     "hq": "France",
     "token": "n/a",
     "twitter": "https://x.com/fx_hash_",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "fxhash.md"
   },
   {
@@ -11561,7 +11582,7 @@
     "hq": "Germany",
     "token": "GEL",
     "twitter": "https://x.com/GelatoNetwork",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "gelato.md"
   },
   {
@@ -11583,7 +11604,7 @@
     "hq": "Germany",
     "token": "n/a",
     "twitter": "https://x.com/GelatoNetwork",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "gelato-web3-functions.md"
   },
   {
@@ -11660,34 +11681,13 @@
     ],
     "description": "Public goods funding and grants ecosystem for web3 builders.",
     "primary_url": "https://www.gitcoin.co",
-    "product_url": "https://www.gitcoin.co/grants",
+    "product_url": "https://gitcoin.co/apps",
     "founded": "2017",
     "hq": "United States",
     "token": "GTC",
     "twitter": "https://x.com/gitcoin",
     "verification_status": "verified",
     "id": "gitcoin.md"
-  },
-  {
-    "name": "Gitcoin Passport",
-    "lead_category": "Identity",
-    "tags": [
-      "Identity",
-      "DAOs & Governance"
-    ],
-    "ecosystem": [
-      "Ethereum",
-      "Multiple"
-    ],
-    "description": "Reputation and identity credential system for sybil resistance.",
-    "primary_url": "https://passport.gitcoin.co",
-    "product_url": "https://support.passport.xyz",
-    "founded": "2022",
-    "hq": "United States",
-    "token": "n/a",
-    "twitter": "https://x.com/gitcoinpassport",
-    "verification_status": "verified",
-    "id": "gitcoin-passport.md"
   },
   {
     "name": "Giveth",
@@ -11842,7 +11842,7 @@
     ],
     "description": "Ecosystem organization behind Gnosis Chain and governance tooling.",
     "primary_url": "https://gnosis.io",
-    "product_url": "https://gnosis.io/products",
+    "product_url": "https://bridge.gnosischain.com/",
     "founded": "2017",
     "hq": "Germany",
     "token": "GNO",
@@ -11992,7 +11992,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/govrnHQ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "govrn.md"
   },
   {
@@ -12172,7 +12172,7 @@
     ],
     "description": "Smart contract audit and security review provider.",
     "primary_url": "https://guardianaudits.com",
-    "product_url": "https://guardianaudits.com/services",
+    "product_url": "https://guardian.security/vanguard/",
     "founded": "2022",
     "hq": "United States",
     "token": "n/a",
@@ -12302,7 +12302,7 @@
     "hq": "Estonia",
     "token": "HAI",
     "twitter": "https://x.com/hackenclub",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "hacken.md"
   },
   {
@@ -12441,7 +12441,7 @@
     "hq": "United States",
     "token": "ONE",
     "twitter": "https://x.com/harmonyprotocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "harmony.md"
   },
   {
@@ -12461,7 +12461,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/harpieio",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "harpie.md"
   },
   {
@@ -12501,7 +12501,7 @@
     "hq": "Hong Kong",
     "token": "n/a",
     "twitter": "https://x.com/hashdit",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "hashdit.md"
   },
   {
@@ -12667,7 +12667,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/HelikaIO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "helika.md"
   },
   {
@@ -12803,7 +12803,7 @@
     ],
     "description": "Institutional custody platform for digital assets.",
     "primary_url": "https://hextrust.com",
-    "product_url": "https://hextrust.com/solutions",
+    "product_url": "https://www.hextrust.com/services/custody",
     "founded": "2018",
     "hq": "Hong Kong",
     "token": "n/a",
@@ -12896,7 +12896,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/heymintxyz",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "heymint.md"
   },
   {
@@ -12912,7 +12912,7 @@
     ],
     "description": "Creator platform for tokenized communities and experiences.",
     "primary_url": "https://highlight.xyz",
-    "product_url": "https://highlight.xyz/create",
+    "product_url": "https://docs.highlight.xyz",
     "founded": "2021",
     "hq": "United States",
     "token": "n/a",
@@ -12997,7 +12997,7 @@
     "hq": "Metaverse",
     "token": "HMX",
     "twitter": "https://x.com/HMXorg",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "hmx.md"
   },
   {
@@ -13039,7 +13039,7 @@
     "hq": "Metaverse",
     "token": "HOP",
     "twitter": "https://x.com/HopProtocol",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "hop-protocol.md"
   },
   {
@@ -13142,6 +13142,27 @@
     "id": "huma.md"
   },
   {
+    "name": "Human Passport",
+    "lead_category": "Identity",
+    "tags": [
+      "Identity",
+      "DAOs & Governance"
+    ],
+    "ecosystem": [
+      "Ethereum",
+      "Multiple"
+    ],
+    "description": "Reputation and identity credential system for sybil resistance.",
+    "primary_url": "https://passport.human.tech/",
+    "product_url": "https://app.passport.xyz/",
+    "founded": "2022",
+    "hq": "United States",
+    "token": "n/a",
+    "twitter": "https://x.com/gitcoinpassport",
+    "verification_status": "verified",
+    "id": "gitcoin-passport.md"
+  },
+  {
     "name": "Humanity Protocol",
     "lead_category": "Identity",
     "tags": [
@@ -13153,7 +13174,7 @@
     ],
     "description": "Human identity verification network for sybil resistance.",
     "primary_url": "https://humanity.org",
-    "product_url": "https://humanity.org/technology",
+    "product_url": "https://app.humanity.org/login",
     "founded": "2024",
     "hq": "Metaverse",
     "token": "n/a",
@@ -13182,7 +13203,7 @@
     "id": "humanode.md"
   },
   {
-    "name": "HydraDX",
+    "name": "Hydration",
     "lead_category": "DeFi",
     "tags": [
       "DeFi",
@@ -13192,8 +13213,8 @@
       "Polkadot"
     ],
     "description": "Omnipool-based liquidity protocol for Polkadot assets.",
-    "primary_url": "https://hydradx.io",
-    "product_url": "https://app.hydradx.io",
+    "primary_url": "https://hydration.net/",
+    "product_url": "https://app.hydration.net/",
     "founded": "2021",
     "hq": "Metaverse",
     "token": "HDX",
@@ -13333,8 +13354,8 @@
       "Avalanche"
     ],
     "description": "Framework and ecosystem for custom high-performance chains.",
-    "primary_url": "https://docs.avax.network",
-    "product_url": "https://docs.avax.network",
+    "primary_url": "https://github.com/ava-labs/hypersdk",
+    "product_url": "https://github.com/ava-labs/hypersdk/tree/main/docs",
     "founded": "2024",
     "hq": "United States",
     "token": "n/a",
@@ -13417,7 +13438,7 @@
     "hq": "South Korea",
     "token": "ICX",
     "twitter": "https://x.com/helloiconworld",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "icon.md"
   },
   {
@@ -13491,7 +13512,7 @@
     ],
     "description": "Web3 game ecosystem with interoperable assets and token economy.",
     "primary_url": "https://illuvium.io",
-    "product_url": "https://illuvium.io/game",
+    "product_url": "https://arena.illuvium.io/",
     "founded": "2021",
     "hq": "Australia",
     "token": "ILV",
@@ -13513,7 +13534,7 @@
     ],
     "description": "Smart contract audit and blockchain security provider.",
     "primary_url": "https://immunebytes.com",
-    "product_url": "https://immunebytes.com/services",
+    "product_url": "https://www.immunebytes.com/smart-contract-audit",
     "founded": "2020",
     "hq": "India",
     "token": "n/a",
@@ -13639,7 +13660,7 @@
     ],
     "description": "Institutional and retail crypto exchange in APAC.",
     "primary_url": "https://www.independentreserve.com",
-    "product_url": "https://www.independentreserve.com/au/trade",
+    "product_url": "https://www.independentreserve.com/features/wallet",
     "founded": "2013",
     "hq": "Australia",
     "token": "n/a",
@@ -13681,7 +13702,7 @@
     ],
     "description": "Synthetic assets and collateral protocol for Cardano.",
     "primary_url": "https://indigoprotocol.io",
-    "product_url": "https://app.indigoprotocol.io",
+    "product_url": "https://docs.indigoprotocol.io",
     "founded": "2022",
     "hq": "Metaverse",
     "token": "INDY",
@@ -13838,7 +13859,7 @@
     ],
     "description": "L2 ecosystem initiative associated with Kraken stack.",
     "primary_url": "https://inkonchain.com",
-    "product_url": "https://inkonchain.com/build",
+    "product_url": "https://inkonchain.com/bridge",
     "founded": "2024",
     "hq": "United States",
     "token": "n/a",
@@ -13904,7 +13925,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/intotheblock",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "intotheblock.md"
   },
   {
@@ -13965,7 +13986,7 @@
     "hq": "Metaverse",
     "token": "ION",
     "twitter": "https://x.com/Ionicmoney",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "ionic.md"
   },
   {
@@ -14065,7 +14086,7 @@
     "hq": "United Arab Emirates",
     "token": "n/a",
     "twitter": "https://x.com/IvendPay",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "ivendpay.md"
   },
   {
@@ -14105,7 +14126,7 @@
     "hq": "United States",
     "token": "J",
     "twitter": "https://x.com/JamboTechnology",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "jambo.md"
   },
   {
@@ -14125,7 +14146,7 @@
     "hq": "Metaverse",
     "token": "JEDI",
     "twitter": "https://x.com/JediSwap",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "jediswap.md"
   },
   {
@@ -14145,7 +14166,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/jex_trade",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "jex.md"
   },
   {
@@ -14160,7 +14181,7 @@
     ],
     "description": "Solana infrastructure team building validator, MEV, and staking products.",
     "primary_url": "https://www.jito.network",
-    "product_url": "https://www.jito.network/stake",
+    "product_url": "https://www.jito.network/staking/",
     "founded": "2021",
     "hq": "United States",
     "token": "JTO",
@@ -14185,7 +14206,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/jokerace_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "jokerace.md"
   },
   {
@@ -14323,7 +14344,7 @@
     "hq": "United States",
     "token": "KDA",
     "twitter": "https://x.com/kadena_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "kadena.md"
   },
   {
@@ -14404,7 +14425,7 @@
     "hq": "United States",
     "token": "KAITO",
     "twitter": "https://x.com/KaitoAI",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "kaito.md"
   },
   {
@@ -14541,7 +14562,7 @@
     ],
     "description": "Hardware wallet and companion app ecosystem.",
     "primary_url": "https://keyst.one",
-    "product_url": "https://keyst.one/download",
+    "product_url": "https://keyst.one/get-started",
     "founded": "2018",
     "hq": "Hong Kong",
     "token": "n/a",
@@ -14608,7 +14629,7 @@
     "hq": "Germany",
     "token": "KILT",
     "twitter": "https://x.com/Kiltprotocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "kilt-protocol.md"
   },
   {
@@ -14648,7 +14669,7 @@
     "hq": "Metaverse",
     "token": "K",
     "twitter": "https://x.com/KintoXYZ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "kinto.md"
   },
   {
@@ -14668,7 +14689,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/KnownOrigin_io",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "knownorigin.md"
   },
   {
@@ -14853,7 +14874,7 @@
     "hq": "Metaverse",
     "token": "KDX",
     "twitter": "https://x.com/KriyaDEX",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "kriyadex.md"
   },
   {
@@ -14973,7 +14994,7 @@
     "hq": "Metaverse",
     "token": "KWENTA",
     "twitter": "https://x.com/Kwenta_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "kwenta.md"
   },
   {
@@ -15069,7 +15090,7 @@
     ],
     "description": "Derivatives analytics and options data platform.",
     "primary_url": "https://laevitas.ch",
-    "product_url": "https://laevitas.ch/dashboard",
+    "product_url": "https://app.laevitas.ch/assets/home",
     "founded": "2019",
     "hq": "Switzerland",
     "token": "n/a",
@@ -15115,7 +15136,7 @@
     "hq": "Cayman Islands",
     "token": "LA",
     "twitter": "https://x.com/latokens",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "latoken.md"
   },
   {
@@ -15241,7 +15262,7 @@
     "hq": "India",
     "token": "n/a",
     "twitter": "https://x.com/leap_wallet",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "leap-wallet.md"
   },
   {
@@ -15260,7 +15281,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/leapfrogwallet",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "leapfrog-wallet.md"
   },
   {
@@ -15401,7 +15422,7 @@
     ],
     "description": "Perpetual trading protocol focused on Cosmos ecosystems.",
     "primary_url": "https://levana.finance",
-    "product_url": "https://app.levana.finance",
+    "product_url": "https://docs.levana.finance/",
     "founded": "2022",
     "hq": "Metaverse",
     "token": "LVN",
@@ -15427,7 +15448,7 @@
     "hq": "Germany",
     "token": "n/a",
     "twitter": "https://x.com/lifiprotocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "li-fi.md"
   },
   {
@@ -15643,7 +15664,7 @@
     ],
     "description": "Borrowing protocol for collateralized stablecoin issuance.",
     "primary_url": "https://www.liquity.org",
-    "product_url": "https://app.liquity.org",
+    "product_url": "https://www.liquity.org/earn",
     "founded": "2021",
     "hq": "Metaverse",
     "token": "LQTY",
@@ -15688,7 +15709,7 @@
     "hq": "Switzerland",
     "token": "LSK",
     "twitter": "https://x.com/LiskHQ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "lisk.md"
   },
   {
@@ -15895,7 +15916,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/LogX_trade",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "logx.md"
   },
   {
@@ -16016,7 +16037,7 @@
     ],
     "description": "Social and market intelligence analytics for crypto assets.",
     "primary_url": "https://lunarcrush.com",
-    "product_url": "https://lunarcrush.com/discover",
+    "product_url": "https://lunarcrush.com/en/login",
     "founded": "2018",
     "hq": "United States",
     "token": "LUNR",
@@ -16062,7 +16083,7 @@
     "hq": "Metaverse",
     "token": "LBR",
     "twitter": "https://x.com/LybraFinanceLSD",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "lybra-finance.md"
   },
   {
@@ -16084,29 +16105,8 @@
     "hq": "Switzerland",
     "token": "LKK",
     "twitter": "https://x.com/Lykke",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "lykke.md"
-  },
-  {
-    "name": "Lyra",
-    "lead_category": "DeFi",
-    "tags": [
-      "DeFi",
-      "Derivatives"
-    ],
-    "ecosystem": [
-      "Optimism",
-      "Base"
-    ],
-    "description": "Decentralized options protocol and liquidity layer.",
-    "primary_url": "https://www.lyra.finance",
-    "product_url": "https://app.lyra.finance",
-    "founded": "2021",
-    "hq": "Metaverse",
-    "token": "LYRA",
-    "twitter": "https://x.com/lyrafinance",
-    "verification_status": "verified",
-    "id": "lyra.md"
   },
   {
     "name": "M0",
@@ -16209,7 +16209,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/MagicEden",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "magic-eden.md"
   },
   {
@@ -16231,7 +16231,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/MagicEden",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "magic-eden-creator-hub.md"
   },
   {
@@ -16291,7 +16291,7 @@
     "hq": "Metaverse",
     "token": "MNGO",
     "twitter": "https://x.com/mangomarkets",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mango-markets.md"
   },
   {
@@ -16391,7 +16391,7 @@
     ],
     "description": "Institutional lending and credit infrastructure bridging onchain capital with offchain borrowers.",
     "primary_url": "https://maple.finance",
-    "product_url": "https://app.maple.finance",
+    "product_url": "https://maple.finance/app",
     "founded": "2021",
     "hq": "Australia",
     "token": "SYRUP",
@@ -16457,7 +16457,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/marginfi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "marginfi.md"
   },
   {
@@ -16516,7 +16516,7 @@
     "hq": "Metaverse",
     "token": "MARS",
     "twitter": "https://x.com/mars_protocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mars-protocol.md"
   },
   {
@@ -16536,7 +16536,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/martian_wallet",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "martian-wallet.md"
   },
   {
@@ -16557,7 +16557,7 @@
     "hq": "United States",
     "token": "MASA",
     "twitter": "https://x.com/getmasafi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "masa.md"
   },
   {
@@ -16597,7 +16597,7 @@
     "hq": "Singapore",
     "token": "MAX",
     "twitter": "https://x.com/Matr1xOfficial",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "matr1x.md"
   },
   {
@@ -16611,7 +16611,7 @@
     ],
     "description": "Tokenized treasury and RWA product issuer.",
     "primary_url": "https://www.matrixdock.com",
-    "product_url": "https://www.matrixdock.com/products",
+    "product_url": "https://app.matrixdock.com/?language=en",
     "founded": "2023",
     "hq": "Singapore",
     "token": "n/a",
@@ -16826,7 +16826,7 @@
     "hq": "Metaverse",
     "token": "MENDI",
     "twitter": "https://x.com/MendiFinance",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mendi-finance.md"
   },
   {
@@ -16841,7 +16841,7 @@
     ],
     "description": "Stable asset protocol and exchange infrastructure on Celo.",
     "primary_url": "https://mento.org",
-    "product_url": "https://mento.org/products",
+    "product_url": "https://app.mento.org/",
     "founded": "2021",
     "hq": "Germany",
     "token": "MENTO",
@@ -16868,7 +16868,7 @@
     "hq": "Brazil",
     "token": "n/a",
     "twitter": "https://x.com/MercadoBitcoin",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mercado-bitcoin.md"
   },
   {
@@ -16904,7 +16904,7 @@
     ],
     "description": "Payments and on-ramp infrastructure provider for web3 platforms.",
     "primary_url": "https://mercuryo.io",
-    "product_url": "https://mercuryo.io/for-business",
+    "product_url": "https://mercuryo.io/on-ramp",
     "founded": "2018",
     "hq": "Estonia",
     "token": "n/a",
@@ -16931,7 +16931,7 @@
     "hq": "Singapore",
     "token": "n/a",
     "twitter": "https://x.com/merkle_science",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "merkle-science.md"
   },
   {
@@ -16968,7 +16968,7 @@
     ],
     "description": "Connected finance infrastructure for linking exchanges, wallets, and payment flows.",
     "primary_url": "https://www.meshconnect.com",
-    "product_url": "https://www.meshconnect.com/product",
+    "product_url": "https://docs.meshconnect.com/overview",
     "founded": "2020",
     "hq": "United States",
     "token": "n/a",
@@ -17130,7 +17130,7 @@
     "hq": "Switzerland",
     "token": "n/a",
     "twitter": "https://x.com/MetacoSA",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "metaco.md"
   },
   {
@@ -17171,7 +17171,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/metalabel_",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "metalabel.md"
   },
   {
@@ -17190,7 +17190,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/playmetalcore",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "metalcore.md"
   },
   {
@@ -17368,7 +17368,7 @@
     ],
     "description": "Bitcoin economy-focused L2 ecosystem.",
     "primary_url": "https://mezo.org",
-    "product_url": "https://mezo.org/learn",
+    "product_url": "https://mezo.org/explore",
     "founded": "2024",
     "hq": "Metaverse",
     "token": "n/a",
@@ -17393,7 +17393,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/MidasRWA",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "midas.md"
   },
   {
@@ -17432,7 +17432,7 @@
     "hq": "United States",
     "token": "MINA",
     "twitter": "https://x.com/minaprotocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mina-foundation.md"
   },
   {
@@ -17472,7 +17472,7 @@
     "hq": "Portugal",
     "token": "MINT",
     "twitter": "https://x.com/mintbase",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mintbase.md"
   },
   {
@@ -17492,7 +17492,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/mirrorxyz",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mirror.md"
   },
   {
@@ -17536,7 +17536,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/mocanagaming",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mocana-gaming.md"
   },
   {
@@ -17556,7 +17556,7 @@
     "hq": "Hong Kong",
     "token": "MOCA",
     "twitter": "https://x.com/Moca_Network",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "mocaverse.md"
   },
   {
@@ -17694,7 +17694,7 @@
     "hq": "United States",
     "token": "GLMR",
     "twitter": "https://x.com/MoonbeamNetwork",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "moonbeam.md"
   },
   {
@@ -17755,7 +17755,7 @@
     "hq": "United States",
     "token": "MOVR",
     "twitter": "https://x.com/MoonbeamNetwork",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "moonriver.md"
   },
   {
@@ -17776,7 +17776,7 @@
     "hq": "United States",
     "token": "WELL",
     "twitter": "https://x.com/MoonwellDeFi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "moonwell.md"
   },
   {
@@ -17793,7 +17793,7 @@
     ],
     "description": "Web3 APIs and backend services for building blockchain-enabled applications.",
     "primary_url": "https://moralis.com",
-    "product_url": "https://moralis.com/product",
+    "product_url": "https://docs.moralis.com/data-feeds/overview",
     "founded": "2020",
     "hq": "Sweden",
     "token": "n/a",
@@ -17832,7 +17832,7 @@
     ],
     "description": "Ethereum rollup ecosystem optimized for consumer applications.",
     "primary_url": "https://www.morphl2.io",
-    "product_url": "https://www.morphl2.io/ecosystem",
+    "product_url": "https://docs.morph.network/docs/about-morph/user-navigation-page",
     "founded": "2024",
     "hq": "Singapore",
     "token": "n/a",
@@ -17897,7 +17897,7 @@
     "hq": "Bermuda",
     "token": "USDM",
     "twitter": "https://x.com/MountainUSDM",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "mountain-protocol.md"
   },
   {
@@ -17916,7 +17916,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "n/a",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "movebit.md"
   },
   {
@@ -17937,7 +17937,7 @@
     "hq": "United States",
     "token": "MOVE",
     "twitter": "https://x.com/movementlabsxyz",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "movement-labs.md"
   },
   {
@@ -18139,7 +18139,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/myswapxyz",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "myswap.md"
   },
   {
@@ -18456,7 +18456,7 @@
     ],
     "description": "Public blockchain ecosystem focused on enterprise use cases.",
     "primary_url": "https://www.nem.io",
-    "product_url": "https://www.nem.io/ecosystem",
+    "product_url": "https://docs.nem.io/pages/Guides/nanowallet/docs.en.html",
     "founded": "2015",
     "hq": "Japan",
     "token": "XEM",
@@ -18516,7 +18516,7 @@
     ],
     "description": "Layered blockchain architecture for decentralized applications.",
     "primary_url": "https://www.nervos.org",
-    "product_url": "https://www.nervos.org/ecosystem",
+    "product_url": "https://docs.nervos.org/",
     "founded": "2019",
     "hq": "China",
     "token": "CKB",
@@ -18599,7 +18599,7 @@
     "hq": "Metaverse",
     "token": "NTRN",
     "twitter": "https://x.com/Neutron_org",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "neutron.md"
   },
   {
@@ -18635,7 +18635,7 @@
     ],
     "description": "Canadian crypto app and exchange services.",
     "primary_url": "https://www.newton.co",
-    "product_url": "https://www.newton.co/trade",
+    "product_url": "https://www.newton.co/get-started",
     "founded": "2018",
     "hq": "Canada",
     "token": "n/a",
@@ -18780,7 +18780,7 @@
     ],
     "description": "High-security hardware wallet and custody stack.",
     "primary_url": "https://www.ngrave.io",
-    "product_url": "https://www.ngrave.io/products",
+    "product_url": "https://www.ngrave.io/en/zero",
     "founded": "2018",
     "hq": "Belgium",
     "token": "n/a",
@@ -18825,7 +18825,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/niftygateway",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "nifty-gateway.md"
   },
   {
@@ -18846,7 +18846,7 @@
     "hq": "Canada",
     "token": "n/a",
     "twitter": "https://x.com/niftykitapp",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "niftykit.md"
   },
   {
@@ -18882,7 +18882,7 @@
     ],
     "description": "Decentralized privacy-preserving computation network.",
     "primary_url": "https://nillion.com",
-    "product_url": "https://nillion.com/developers",
+    "product_url": "https://docs.nillion.com/",
     "founded": "2022",
     "hq": "Metaverse",
     "token": "n/a",
@@ -18901,7 +18901,7 @@
     ],
     "description": "Ethereum consensus client software and related node tools.",
     "primary_url": "https://nimbus.team/",
-    "product_url": "https://github.com/status-im",
+    "product_url": "https://nimbus.guide/",
     "founded": "n/a",
     "hq": "Metaverse",
     "token": "n/a",
@@ -18944,7 +18944,7 @@
     "hq": "Singapore",
     "token": "n/a",
     "twitter": "https://x.com/nodgames_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "nod-games.md"
   },
   {
@@ -19136,7 +19136,7 @@
     ],
     "description": "Travel Rule and identity compliance infrastructure for VASPs.",
     "primary_url": "https://www.notabene.id",
-    "product_url": "https://www.notabene.id/platform",
+    "product_url": "https://devx.notabene.id/",
     "founded": "2020",
     "hq": "United States",
     "token": "n/a",
@@ -19184,7 +19184,7 @@
     "hq": "United States",
     "token": "NOTE",
     "twitter": "https://x.com/notionalfinance",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "notional-finance.md"
   },
   {
@@ -19403,7 +19403,7 @@
     "hq": "United States",
     "token": "NYAN",
     "twitter": "https://x.com/nyanheroes",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "nyan-heroes.md"
   },
   {
@@ -19423,7 +19423,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/NYDIG_BTC",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "nydig.md"
   },
   {
@@ -19478,7 +19478,7 @@
     ],
     "description": "NFT marketplace and creator ecosystem for Tezos assets.",
     "primary_url": "https://objkt.com",
-    "product_url": "https://objkt.com/marketplace",
+    "product_url": "https://docs.objkt.com/",
     "founded": "2021",
     "hq": "Metaverse",
     "token": "n/a",
@@ -19538,7 +19538,7 @@
     ],
     "description": "Development company focused on Arbitrum scaling technology and ecosystem tooling.",
     "primary_url": "https://offchainlabs.com",
-    "product_url": "https://arbitrum.io",
+    "product_url": "https://docs.arbitrum.io/build-decentralized-apps/quickstart-solidity-remix",
     "founded": "2018",
     "hq": "United States",
     "token": "ARB",
@@ -19586,7 +19586,7 @@
     "hq": "Seychelles",
     "token": "n/a",
     "twitter": "https://x.com/OKLink",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "oklink.md"
   },
   {
@@ -19672,7 +19672,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/oncyber",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "oncyber.md"
   },
   {
@@ -19750,7 +19750,7 @@
     ],
     "description": "Aggregated fiat on-ramp infrastructure for wallets and dapps.",
     "primary_url": "https://onramper.com",
-    "product_url": "https://onramper.com/products",
+    "product_url": "https://docs.onramper.com/docs/getting-started",
     "founded": "2020",
     "hq": "Netherlands",
     "token": "n/a",
@@ -19879,7 +19879,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/openauditorg",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "openaudit.md"
   },
   {
@@ -19919,7 +19919,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/openlawofficial",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "openlaw.md"
   },
   {
@@ -20014,7 +20014,7 @@
     ],
     "description": "Institutional-grade onchain fixed-income infrastructure.",
     "primary_url": "https://opentrade.io",
-    "product_url": "https://opentrade.io/products",
+    "product_url": "https://www.opentrade.io/earn",
     "founded": "2023",
     "hq": "United Kingdom",
     "token": "n/a",
@@ -20061,7 +20061,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/OpenZeppelin",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "openzeppelin-defender.md"
   },
   {
@@ -20102,7 +20102,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/opyn_",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "opyn.md"
   },
   {
@@ -20574,7 +20574,7 @@
     "hq": "Singapore",
     "token": "PARA",
     "twitter": "https://x.com/ParallelFi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "parallel-finance.md"
   },
   {
@@ -20717,7 +20717,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/paxful",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "paxful.md"
   },
   {
@@ -20857,7 +20857,7 @@
     ],
     "description": "Network focused on bridging traditional finance rails with DeFi.",
     "primary_url": "https://pendulumchain.org",
-    "product_url": "https://pendulumchain.org/ecosystem",
+    "product_url": "https://docs.pendulumchain.org/",
     "founded": "2021",
     "hq": "Germany",
     "token": "PEN",
@@ -20882,7 +20882,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/penumbrazone",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "penumbra.md"
   },
   {
@@ -20922,7 +20922,7 @@
     "hq": "Metaverse",
     "token": "XPRT",
     "twitter": "n/a",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "persistence.md"
   },
   {
@@ -20938,7 +20938,7 @@
     ],
     "description": "Identity verification and KYB/KYC platform for web3 apps.",
     "primary_url": "https://withpersona.com",
-    "product_url": "https://withpersona.com/products",
+    "product_url": "https://withpersona.com/platform",
     "founded": "2018",
     "hq": "United States",
     "token": "n/a",
@@ -21124,7 +21124,7 @@
     ],
     "description": "IPFS media and file infrastructure for web3 builders.",
     "primary_url": "https://www.pinata.cloud",
-    "product_url": "https://www.pinata.cloud/products",
+    "product_url": "https://docs.pinata.cloud/quickstart",
     "founded": "2018",
     "hq": "United States",
     "token": "n/a",
@@ -21189,7 +21189,7 @@
     "hq": "United States",
     "token": "PIRATE",
     "twitter": "https://x.com/PirateNation",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "pirate-nation.md"
   },
   {
@@ -21203,7 +21203,7 @@
     ],
     "description": "Game and digital collectible ecosystem centered on Pixelmon characters.",
     "primary_url": "https://www.pixelmon.ai/",
-    "product_url": "https://app.pixelmon.ai/launchpool/profile",
+    "product_url": "https://wardensascent.com",
     "founded": "n/a",
     "hq": "Metaverse",
     "token": "n/a",
@@ -21247,7 +21247,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/Pizza_DAO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "pizzadao.md"
   },
   {
@@ -21267,7 +21267,7 @@
     "hq": "Metaverse",
     "token": "PTP",
     "twitter": "https://x.com/Platypusdefi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "platypus-finance.md"
   },
   {
@@ -21286,7 +21286,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/playember",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "playember.md"
   },
   {
@@ -21306,7 +21306,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/PleasrDAO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "pleasrdao.md"
   },
   {
@@ -21365,7 +21365,7 @@
     ],
     "description": "Decentralized RPC infrastructure for blockchain applications.",
     "primary_url": "https://www.pokt.network",
-    "product_url": "https://www.pokt.network",
+    "product_url": "https://docs.pocket.network/",
     "founded": "2020",
     "hq": "United States",
     "token": "POKT",
@@ -21462,7 +21462,7 @@
     ],
     "description": "Cross-chain identity and liquidity coordination layer in Polygon ecosystem.",
     "primary_url": "https://polygon.technology/agglayer",
-    "product_url": "https://polygon.technology/agglayer",
+    "product_url": "https://docs.polygon.technology/interoperability/agglayer/get-started",
     "founded": "2024",
     "hq": "India",
     "token": "POL",
@@ -21563,7 +21563,7 @@
     ],
     "description": "Options and derivatives protocol in Optimism ecosystem.",
     "primary_url": "https://www.polynomial.fi",
-    "product_url": "https://app.polynomial.fi",
+    "product_url": "https://polynomial.fi/en/mainnet/trade/ETH-USD",
     "founded": "2022",
     "hq": "Metaverse",
     "token": "n/a",
@@ -21788,7 +21788,7 @@
     "hq": "Metaverse",
     "token": "PRISMA",
     "twitter": "https://x.com/PrismaFi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "prisma-finance.md"
   },
   {
@@ -21853,7 +21853,7 @@
     "hq": "Seychelles",
     "token": "n/a",
     "twitter": "https://x.com/ProBit_Exchange",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "probit.md"
   },
   {
@@ -21906,7 +21906,7 @@
     ],
     "description": "Human registry protocol for sybil-resistant identity.",
     "primary_url": "https://www.proofofhumanity.id",
-    "product_url": "https://www.proofofhumanity.id/how-it-works",
+    "product_url": "https://v2.proofofhumanity.id",
     "founded": "2021",
     "hq": "Metaverse",
     "token": "n/a",
@@ -21990,7 +21990,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/pudgypenguins",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "pudgy-penguins.md"
   },
   {
@@ -22054,7 +22054,7 @@
     "hq": "United Kingdom",
     "token": "QRDO",
     "twitter": "https://x.com/QredoNetwork",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "qredo.md"
   },
   {
@@ -22093,7 +22093,7 @@
     ],
     "description": "Onchain passport and compliance credential infrastructure.",
     "primary_url": "https://www.quadrata.com",
-    "product_url": "https://www.quadrata.com/products",
+    "product_url": "https://docs.quadrata.com/integration/introduction/introduction-to-quadrata",
     "founded": "2021",
     "hq": "United States",
     "token": "n/a",
@@ -22160,7 +22160,7 @@
     "hq": "Metaverse",
     "token": "QSR",
     "twitter": "https://x.com/quasarfi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "quasar.md"
   },
   {
@@ -22181,7 +22181,7 @@
     "hq": "India",
     "token": "n/a",
     "twitter": "https://x.com/questbookapp",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "questbook.md"
   },
   {
@@ -22371,7 +22371,7 @@
     "hq": "Metaverse",
     "token": "RAFT",
     "twitter": "https://x.com/RaftFi",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "raft.md"
   },
   {
@@ -22391,7 +22391,7 @@
     "hq": "Metaverse",
     "token": "RAGE",
     "twitter": "https://x.com/rage_trade",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "rage-trade.md"
   },
   {
@@ -22718,7 +22718,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/redefine_sec",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "redefine-security.md"
   },
   {
@@ -22847,7 +22847,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/reservoir0x",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "reservoir.md"
   },
   {
@@ -22867,7 +22867,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/resolvxyz",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "resolv.md"
   },
   {
@@ -23017,7 +23017,7 @@
     ],
     "description": "Enterprise-focused blockchain company building payment rails and liquidity services.",
     "primary_url": "https://ripple.com",
-    "product_url": "https://ripple.com/payments",
+    "product_url": "https://docs.ripple.com/",
     "founded": "2012",
     "hq": "United States",
     "token": "XRP",
@@ -23261,7 +23261,7 @@
     "hq": "Argentina",
     "token": "RBTC",
     "twitter": "https://x.com/rootstock_io",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "rootstock.md"
   },
   {
@@ -23432,7 +23432,7 @@
     "hq": "Singapore",
     "token": "n/a",
     "twitter": "https://x.com/SaakuruLabs",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "saakuru.md"
   },
   {
@@ -23540,7 +23540,7 @@
     "hq": "United States",
     "token": "SAGA",
     "twitter": "https://x.com/Sagaxyz__",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "saga.md"
   },
   {
@@ -23843,7 +23843,7 @@
     "hq": "Metaverse",
     "token": "SEAM",
     "twitter": "https://x.com/SeamlessFi",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "seamless-protocol.md"
   },
   {
@@ -23904,7 +23904,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/Securitize",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "securitize.md"
   },
   {
@@ -23920,7 +23920,7 @@
     ],
     "description": "Programmable oracle and data query network.",
     "primary_url": "https://www.seda.xyz",
-    "product_url": "https://www.seda.xyz/docs",
+    "product_url": "https://docs.seda.xyz/developer",
     "founded": "2023",
     "hq": "Metaverse",
     "token": "SEDA",
@@ -24004,7 +24004,7 @@
     "hq": "Mauritius",
     "token": "KEY",
     "twitter": "https://x.com/selfkey",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "selfkey.md"
   },
   {
@@ -24189,7 +24189,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/shieldifysec",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "shieldify.md"
   },
   {
@@ -24227,7 +24227,7 @@
     "hq": "United States",
     "token": "SHRAP",
     "twitter": "https://x.com/playSHRAPNEL",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "shrapnel.md"
   },
   {
@@ -24309,7 +24309,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/simplehash",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "simplehash.md"
   },
   {
@@ -24353,7 +24353,7 @@
     "id": "skale.md"
   },
   {
-    "name": "Skip",
+    "name": "Skip:Go",
     "lead_category": "Infrastructure",
     "tags": [
       "Infrastructure",
@@ -24362,9 +24362,9 @@
     "ecosystem": [
       "Cosmos"
     ],
-    "description": "Infrastructure team focused on transaction flow and MEV tooling in Cosmos.",
-    "primary_url": "https://skip.money",
-    "product_url": "https://skip.money/products",
+    "description": "Cross-chain routing API and developer tools for connecting applications and blockchain ecosystems.",
+    "primary_url": "https://go.skip.build/",
+    "product_url": "https://docs.skip.build/go",
     "founded": "2022",
     "hq": "United States",
     "token": "n/a",
@@ -24431,7 +24431,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/skynet_security",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "skynet-security.md"
   },
   {
@@ -24474,6 +24474,25 @@
     "twitter": "https://x.com/SlowMist_Team",
     "verification_status": "verified",
     "id": "slowmist.md"
+  },
+  {
+    "name": "Slush",
+    "lead_category": "Wallets",
+    "tags": [
+      "Wallets"
+    ],
+    "ecosystem": [
+      "Sui"
+    ],
+    "description": "Mysten Labs self-custody wallet for Sui, formerly Sui Wallet and Stashed.",
+    "primary_url": "https://slush.app/",
+    "product_url": "https://my.slush.app/",
+    "founded": "2023",
+    "hq": "United States",
+    "token": "n/a",
+    "twitter": "n/a",
+    "verification_status": "verified",
+    "id": "sui-wallet.md"
   },
   {
     "name": "Smardex",
@@ -24810,7 +24829,7 @@
     "hq": "Metaverse",
     "token": "SLND",
     "twitter": "https://x.com/solendprotocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "solend.md"
   },
   {
@@ -25064,7 +25083,7 @@
     "hq": "Singapore",
     "token": "SOSO",
     "twitter": "https://x.com/sosovalue",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "sosovalue.md"
   },
   {
@@ -25179,7 +25198,7 @@
     ],
     "description": "Multi-chain name service and identity protocol.",
     "primary_url": "https://space.id",
-    "product_url": "https://space.id/name",
+    "product_url": "https://docs.space.id/developer-guide/web3-name-sdk",
     "founded": "2022",
     "hq": "Singapore",
     "token": "ID",
@@ -25264,7 +25283,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/spearbitdao",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "spearbit.md"
   },
   {
@@ -25393,7 +25412,7 @@
     ],
     "description": "Stablecoin payments and treasury operations infrastructure.",
     "primary_url": "https://www.spherepay.co",
-    "product_url": "https://www.spherepay.co/products",
+    "product_url": "https://spherepay.co/products/dashboard",
     "founded": "2022",
     "hq": "United States",
     "token": "n/a",
@@ -25419,7 +25438,7 @@
     "hq": "India",
     "token": "SPON",
     "twitter": "https://x.com/SpheronFDN",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "spheron.md"
   },
   {
@@ -25458,7 +25477,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/spruceid",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "spruceid.md"
   },
   {
@@ -25858,7 +25877,7 @@
     "hq": "Metaverse",
     "token": "ALPHA",
     "twitter": "https://x.com/StellaStrategy",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "stella.md"
   },
   {
@@ -25957,7 +25976,7 @@
     "hq": "United States",
     "token": "IP",
     "twitter": "https://x.com/storyprotocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "story-protocol.md"
   },
   {
@@ -26054,7 +26073,7 @@
     ],
     "description": "Bitcoin payments platform focused on fast settlements.",
     "primary_url": "https://strike.me",
-    "product_url": "https://strike.me/app",
+    "product_url": "https://docs.strike.me/",
     "founded": "2020",
     "hq": "United States",
     "token": "n/a",
@@ -26217,32 +26236,13 @@
     ],
     "description": "Foundation supporting Sui ecosystem development, education, and grants.",
     "primary_url": "https://sui.io",
-    "product_url": "https://sui.io/build",
+    "product_url": "https://www.sui.io/builders",
     "founded": "2023",
     "hq": "United States",
     "token": "SUI",
     "twitter": "https://x.com/SuiNetwork",
     "verification_status": "verified",
     "id": "sui-foundation.md"
-  },
-  {
-    "name": "Sui Wallet",
-    "lead_category": "Wallets",
-    "tags": [
-      "Wallets"
-    ],
-    "ecosystem": [
-      "Sui"
-    ],
-    "description": "Official wallet experience for Sui ecosystem participants.",
-    "primary_url": "https://sui.io/wallet",
-    "product_url": "https://sui.io/wallet",
-    "founded": "2023",
-    "hq": "United States",
-    "token": "n/a",
-    "twitter": "https://x.com/SuiNetwork",
-    "verification_status": "verified",
-    "id": "sui-wallet.md"
   },
   {
     "name": "SuiScan",
@@ -26300,7 +26300,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/summer_fi",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "summer-fi.md"
   },
   {
@@ -26361,7 +26361,7 @@
     "hq": "Switzerland",
     "token": "SUPER",
     "twitter": "https://x.com/Superfluid_HQ",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "superfluid-governance.md"
   },
   {
@@ -26418,7 +26418,7 @@
     ],
     "description": "Asset management firm building tokenized regulated investment products.",
     "primary_url": "https://superstate.co",
-    "product_url": "https://superstate.co/products",
+    "product_url": "https://docs.superstate.com",
     "founded": "2023",
     "hq": "United States",
     "token": "n/a",
@@ -26563,7 +26563,7 @@
     "hq": "Germany",
     "token": "SMT",
     "twitter": "https://x.com/SwarmMarkets",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "swarm-markets.md"
   },
   {
@@ -26848,7 +26848,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/tableland",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "tableland.md"
   },
   {
@@ -27114,7 +27114,7 @@
     ],
     "description": "Enterprise digital asset custody and tokenization infrastructure.",
     "primary_url": "https://www.taurusgroup.ch",
-    "product_url": "https://www.taurusgroup.ch/products",
+    "product_url": "https://www.taurushq.com/protect/",
     "founded": "2018",
     "hq": "Switzerland",
     "token": "n/a",
@@ -27292,7 +27292,7 @@
     ],
     "description": "Developer platform for smart contract debugging, simulation, and observability.",
     "primary_url": "https://tenderly.co",
-    "product_url": "https://tenderly.co",
+    "product_url": "https://dashboard.tenderly.co/explorer",
     "founded": "2018",
     "hq": "Serbia",
     "token": "n/a",
@@ -27461,7 +27461,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/The_Beacon_GG",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "the-beacon.md"
   },
   {
@@ -27524,7 +27524,7 @@
     "hq": "Hong Kong",
     "token": "SAND",
     "twitter": "https://x.com/TheSandboxGame",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "the-sandbox.md"
   },
   {
@@ -27690,7 +27690,7 @@
     "hq": "Metaverse",
     "token": "THRUST",
     "twitter": "https://x.com/thrusterfinance",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "thruster.md"
   },
   {
@@ -27873,7 +27873,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/tokenlogicxyz",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "tokenlogic.md"
   },
   {
@@ -28147,7 +28147,7 @@
     "hq": "Metaverse",
     "token": "JOE",
     "twitter": "https://x.com/traderjoe_xyz",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "trader-joe.md"
   },
   {
@@ -28189,7 +28189,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/trailblaze_sec",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "trailblaze-security.md"
   },
   {
@@ -28247,7 +28247,7 @@
     ],
     "description": "Creator tools and protocol infrastructure for programmable media.",
     "primary_url": "https://transientlabs.xyz",
-    "product_url": "https://transientlabs.xyz/products",
+    "product_url": "https://lab.transient.xyz",
     "founded": "2021",
     "hq": "United States",
     "token": "n/a",
@@ -28291,7 +28291,7 @@
     "hq": "Metaverse",
     "token": "MAGIC",
     "twitter": "https://x.com/Treasure_DAO",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "treasure-dao.md"
   },
   {
@@ -28389,7 +28389,7 @@
     ],
     "description": "Crypto payment gateway for global merchants.",
     "primary_url": "https://triple-a.io",
-    "product_url": "https://triple-a.io/merchants",
+    "product_url": "https://www.triple-a.io/travel-hospitality",
     "founded": "2017",
     "hq": "Singapore",
     "token": "n/a",
@@ -28591,7 +28591,7 @@
     ],
     "description": "Optimistic oracle and decentralized financial contract infrastructure.",
     "primary_url": "https://uma.xyz",
-    "product_url": "https://uma.xyz/products",
+    "product_url": "https://explorer.uma.xyz/",
     "founded": "2018",
     "hq": "United States",
     "token": "UMA",
@@ -28616,7 +28616,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/unchainedcom",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "unchained.md"
   },
   {
@@ -28948,7 +28948,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/UtopiaLabs_",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "utopia-labs.md"
   },
   {
@@ -29030,7 +29030,7 @@
     "hq": "Singapore",
     "token": "VET",
     "twitter": "https://x.com/vechainofficial",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "vechain-foundation.md"
   },
   {
@@ -29069,7 +29069,7 @@
     "hq": "Metaverse",
     "token": "VELA",
     "twitter": "https://x.com/VelaExchange",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "vela-exchange.md"
   },
   {
@@ -29268,7 +29268,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/verite_id",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "verite.md"
   },
   {
@@ -29288,7 +29288,7 @@
     "hq": "United States",
     "token": "VRTX",
     "twitter": "https://x.com/vertex_protocol",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "vertex-protocol.md"
   },
   {
@@ -29307,7 +29307,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "n/a",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "verus.md"
   },
   {
@@ -29346,7 +29346,7 @@
     ],
     "description": "Money market protocol for Starknet ecosystem.",
     "primary_url": "https://vesu.xyz",
-    "product_url": "https://app.vesu.xyz",
+    "product_url": "https://docs.vesu.xyz/",
     "founded": "2023",
     "hq": "Metaverse",
     "token": "n/a",
@@ -29616,7 +29616,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/wallet_guard",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "wallet-guard.md"
   },
   {
@@ -29721,7 +29721,7 @@
     "hq": "Metaverse",
     "token": "n/a",
     "twitter": "https://x.com/watchpugsec",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "watchpug.md"
   },
   {
@@ -29841,7 +29841,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/web3_storage",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "web3-storage.md"
   },
   {
@@ -29979,7 +29979,7 @@
     "hq": "United States",
     "token": "n/a",
     "twitter": "https://x.com/playwildcard",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "wildcard.md"
   },
   {
@@ -30053,7 +30053,7 @@
     ],
     "description": "Global digital asset market maker and liquidity provider.",
     "primary_url": "https://www.wintermute.com",
-    "product_url": "https://www.wintermute.com/services",
+    "product_url": "https://www.wintermute.com/otc",
     "founded": "2017",
     "hq": "United Kingdom",
     "token": "n/a",
@@ -30075,7 +30075,7 @@
     ],
     "description": "Crypto payments and card platform for retail users.",
     "primary_url": "https://wirexapp.com",
-    "product_url": "https://wirexapp.com/products",
+    "product_url": "https://www.wirexapp.com/developers",
     "founded": "2014",
     "hq": "United Kingdom",
     "token": "WXT",
@@ -30225,7 +30225,7 @@
     "hq": "United States",
     "token": "XAI",
     "twitter": "https://x.com/XAI_GAMES",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "xai.md"
   },
   {
@@ -30265,7 +30265,7 @@
     "hq": "United Kingdom",
     "token": "n/a",
     "twitter": "https://x.com/xdefi_wallet",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "xdefi-wallet.md"
   },
   {
@@ -30558,7 +30558,7 @@
     "hq": "Japan",
     "token": "n/a",
     "twitter": "https://x.com/YoroiWallet",
-    "verification_status": "verified",
+    "verification_status": "rejected",
     "id": "yoroi.md"
   },
   {
@@ -30657,7 +30657,7 @@
     "hq": "India",
     "token": "n/a",
     "twitter": "https://x.com/zebpay",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "zebpay.md"
   },
   {
@@ -30723,7 +30723,7 @@
     "hq": "Israel",
     "token": "n/a",
     "twitter": "https://x.com/Zengo",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "zengo.md"
   },
   {
@@ -30849,7 +30849,7 @@
     "hq": "Metaverse",
     "token": "ZEX",
     "twitter": "https://x.com/ZetaMarkets",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "zeta-markets.md"
   },
   {
@@ -30969,7 +30969,7 @@
     "hq": "Thailand",
     "token": "n/a",
     "twitter": "https://x.com/zipmex",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "zipmex.md"
   },
   {
@@ -31086,7 +31086,7 @@
     "hq": "Metaverse",
     "token": "ZKF",
     "twitter": "https://x.com/ZKFCommunity",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "zkfair.md"
   },
   {
@@ -31167,7 +31167,7 @@
     "hq": "Metaverse",
     "token": "ZKS",
     "twitter": "https://x.com/zkswapfinance",
-    "verification_status": "verified",
+    "verification_status": "needs_update",
     "id": "zkswap-finance.md"
   },
   {
@@ -31204,7 +31204,7 @@
     ],
     "description": "Composable DAO tooling framework built for Safe-based organizations.",
     "primary_url": "https://www.zodiac.wiki",
-    "product_url": "https://www.zodiac.wiki/documentation",
+    "product_url": "https://docs.zodiac.eco",
     "founded": "2021",
     "hq": "Germany",
     "token": "n/a",

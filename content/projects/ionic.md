@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: ION
 twitter: https://x.com/Ionicmoney
-verification_status: verified
+verification_status: "needs_update"
 ---

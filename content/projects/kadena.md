@@ -10,5 +10,5 @@ founded: 2019
 hq: United States
 token: KDA
 twitter: https://x.com/kadena_io
-verification_status: verified
+verification_status: "needs_update"
 ---

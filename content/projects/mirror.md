@@ -10,5 +10,5 @@ founded: 2020
 hq: United States
 token: n/a
 twitter: https://x.com/mirrorxyz
-verification_status: verified
+verification_status: "needs_update"
 ---

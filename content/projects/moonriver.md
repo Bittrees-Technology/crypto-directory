@@ -10,5 +10,5 @@ founded: 2021
 hq: United States
 token: MOVR
 twitter: https://x.com/MoonbeamNetwork
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2021
 hq: Germany
 token: SMT
 twitter: https://x.com/SwarmMarkets
-verification_status: verified
+verification_status: "needs_update"
 ---

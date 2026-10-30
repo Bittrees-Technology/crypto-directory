@@ -5,7 +5,7 @@ tags: [Custody, Infrastructure]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Institutional custody and collateral management platform for digital assets.
 primary_url: https://www.copper.co
-product_url: https://www.copper.co/solutions
+product_url: "https://copper.co/en-ch/solutions/hold/custody"
 founded: 2018
 hq: United Kingdom
 token: n/a

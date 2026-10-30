@@ -10,5 +10,5 @@ founded: 2023
 hq: Hong Kong
 token: MOCA
 twitter: https://x.com/Moca_Network
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -1,11 +1,11 @@
 ---
-name: Gitcoin Passport
+name: "Human Passport"
 lead_category: Identity
 tags: [Identity, DAOs & Governance]
 ecosystem: [Ethereum, Multiple]
 description: Reputation and identity credential system for sybil resistance.
-primary_url: https://passport.gitcoin.co
-product_url: https://support.passport.xyz
+primary_url: "https://passport.human.tech/"
+product_url: "https://app.passport.xyz/"
 founded: 2022
 hq: United States
 token: n/a

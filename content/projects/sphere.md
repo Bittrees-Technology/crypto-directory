@@ -5,7 +5,7 @@ tags: [Payments, Infrastructure]
 ecosystem: [Ethereum, Solana, Multiple]
 description: Stablecoin payments and treasury operations infrastructure.
 primary_url: https://www.spherepay.co
-product_url: https://www.spherepay.co/products
+product_url: "https://spherepay.co/products/dashboard"
 founded: 2022
 hq: United States
 token: n/a

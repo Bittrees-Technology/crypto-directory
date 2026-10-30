@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: ALPHA
 twitter: https://x.com/StellaStrategy
-verification_status: verified
+verification_status: "needs_update"
 ---

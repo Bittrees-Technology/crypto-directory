@@ -10,5 +10,5 @@ founded: 2023
 hq: United States
 token: MOVE
 twitter: https://x.com/movementlabsxyz
-verification_status: verified
+verification_status: "needs_update"
 ---

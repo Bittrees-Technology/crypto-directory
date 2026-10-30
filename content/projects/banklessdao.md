@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: BANK
 twitter: https://x.com/banklessDAO
-verification_status: verified
+verification_status: "needs_update"
 ---

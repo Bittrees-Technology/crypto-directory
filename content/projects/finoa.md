@@ -10,5 +10,5 @@ founded: 2018
 hq: Germany
 token: n/a
 twitter: https://x.com/Finoa_IO
-verification_status: verified
+verification_status: "needs_update"
 ---

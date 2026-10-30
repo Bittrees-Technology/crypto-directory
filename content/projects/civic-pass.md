@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: CVC
 twitter: https://x.com/civickey
-verification_status: verified
+verification_status: "needs_update"
 ---

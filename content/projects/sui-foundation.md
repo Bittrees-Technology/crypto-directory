@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Infrastructure]
 ecosystem: [Sui]
 description: Foundation supporting Sui ecosystem development, education, and grants.
 primary_url: https://sui.io
-product_url: https://sui.io/build
+product_url: "https://www.sui.io/builders"
 founded: 2023
 hq: United States
 token: SUI

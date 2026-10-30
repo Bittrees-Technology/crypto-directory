@@ -10,5 +10,5 @@ founded: 2020
 hq: United Kingdom
 token: n/a
 twitter: https://x.com/xdefi_wallet
-verification_status: verified
+verification_status: "rejected"
 ---

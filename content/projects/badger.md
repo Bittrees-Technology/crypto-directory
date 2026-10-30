@@ -10,5 +10,5 @@ founded: 2020
 hq: Metaverse
 token: BADGER
 twitter: https://x.com/badgerdao
-verification_status: verified
+verification_status: "needs_update"
 ---

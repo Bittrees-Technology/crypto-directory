@@ -5,7 +5,7 @@ tags: [Security, Auditing]
 ecosystem: [Ethereum, BSC, Multiple]
 description: Security audit and smart contract review provider.
 primary_url: https://blockapex.io
-product_url: https://blockapex.io/services
+product_url: "https://blockapex.io/crypto-wallet-audit-services/"
 founded: 2020
 hq: Pakistan
 token: n/a

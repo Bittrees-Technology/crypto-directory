@@ -5,7 +5,7 @@ tags: [Developer Tools, Infrastructure]
 ecosystem: [Ethereum, Solana, Multiple]
 description: Web3 APIs and backend services for building blockchain-enabled applications.
 primary_url: https://moralis.com
-product_url: https://moralis.com/product
+product_url: "https://docs.moralis.com/data-feeds/overview"
 founded: 2020
 hq: Sweden
 token: n/a
