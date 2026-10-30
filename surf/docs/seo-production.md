@@ -25,19 +25,29 @@ The required root CI runs Surf's build, unit/security checks and Chromium accept
 
 Fixture responses do not prove the live Vercel routing, Google indexing, or field performance. Do not report a Lighthouse score or a Core Web Vitals pass without an actual measurement.
 
-## Live checks still required
+## Live verification and remaining Google work
 
-The live HTTP audit was declined during this task. After it is authorized, verify:
+The authorized public HTTP audit on 2026-10-30 confirmed the deployed homepage matches reviewed HTML blob `9e7e914309fb5f46f701d736ffef466a66373278`. The canonical homepage returns 200, has no noindex response header, and serves the expected metadata/JSON-LD. HTTP and index-path variants redirect permanently. Unknown paths return the branded page with HTTP 404 and noindex metadata. Crawl files, raster images/dimensions and API/data indexing controls passed. HTML and JSON are Brotli-compressed. At that check, static and live Surf catalogs each contained the same 1,488 verified IDs as CD, with no missing or extra IDs; the live catalog remains the source of truth as CD curation continues.
 
-1. Homepage returns 200 on the canonical HTTPS host, without an indexing block; HTTP redirects to HTTPS.
-2. Primary Vercel alias and `/index` variants redirect without loops, preserving shared query parameters.
-3. Unknown paths return HTTP 404 with the branded recovery page, rather than a 200 soft 404.
-4. robots.txt, sitemap.xml, share image, icons, CSS and JavaScript return their correct content types; data/API responses carry noindex.
-5. The actual homepage metadata and JSON-LD match the reviewed source. Preview protection and preview noindex remain active.
-6. Measure mobile/desktop PageSpeed and available CrUX/Core Web Vitals; inspect any real LCP, CLS or INP issues before changing caching or rendering behavior.
-7. In the verified bittrees.org Search Console property, submit `https://surf.bittrees.org/sitemap.xml`, inspect the homepage and request indexing if appropriate. A sitemap declaration is not evidence that Search Console accepted it or that Google indexed the site.
+The live audit found that Vercel's wildcard alias redirect matched non-root paths but left the empty root path unredirected. The configuration now includes an explicit, host-scoped root redirect. Its final production response is checked by the release workflow, including shared-query preservation and canonical-host loop protection.
 
-Shared Bittrees sign-in and private collection storage still require their separate activation work. This SEO release does not configure credentials, widen trust, or modify CryptoDirectory listings.
+Small landing text was below 4.5:1 contrast in the footer, eyebrow and description. A consistent darker muted green brings those pairs above 4.5:1 without changing layout or artwork. A numerical contrast regression check guards the actual source colors.
+
+### Repeatable production checks
+
+`.github/workflows/surf-seo-audit.yml` runs on Surf production source pushes. It waits for the public HTML, JavaScript and both stylesheets to match the checked-out release bytes before checking redirects, status codes, crawl files, image dimensions and API noindex/private-cache headers. It then uses pinned Lighthouse 13.6.0 with the standard public runner's preinstalled Chrome to collect mobile and desktop reports and upload the HTTP receipt and lab results. No production credentials or personal browser session are used.
+
+Google's anonymous PageSpeed API returned HTTP 429 quota errors for both profiles during this audit. The independent Lighthouse results are lab measurements, not PageSpeed/CrUX field data or a field Core Web Vitals pass. Inspect those results for LCP, CLS and blocking work; actual-user INP/CrUX data still needs separate verification.
+
+Browser/Search Console control is not available in this session. The remaining account steps are:
+
+1. Reuse the verified `sc-domain:bittrees.org` property and established account; do not create a duplicate property.
+2. Inspect `https://surf.bittrees.org/`, run Google's live test and confirm the canonical and useful landing content.
+3. Check whether `https://surf.bittrees.org/sitemap.xml` is already submitted. Submit only if needed and record Google's actual status and discovered-page count.
+4. Request homepage indexing once if eligible and not already requested. Record the acknowledgement; it is not proof of indexing or ranking.
+5. Track the Surf homepage with a page filter in Search Console, and review field performance when data is available.
+
+This SEO release does not configure or verify live shared Bittrees sign-in/storage activation, widen trust, or modify CryptoDirectory listings.
 
 ## Primary references
 

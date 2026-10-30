@@ -92,6 +92,17 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "bittrees-surf.vercel.app"
+        }
+      ],
+      "destination": "https://surf.bittrees.org/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {

@@ -11,6 +11,21 @@ const metas=[...head.matchAll(/<meta\b[^>]*>/gi)].map(([tag])=>({name:attribute(
 const meta=name=>metas.find(m=>m.name===name)?.content;
 const links=[...head.matchAll(/<link\b[^>]*>/gi)].map(([tag])=>({rel:attribute(tag,'rel'),href:attribute(tag,'href')}));
 
+test('the primary alias has an explicit root redirect without redirecting the canonical or preview hosts',async()=>{
+  const config=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
+  const root=config.redirects.find(r=>r.source==='/'&&r.has?.some(h=>h.type==='host'&&h.value==='bittrees-surf.vercel.app'));
+  assert(root,'Vercel wildcard redirects leave the empty root path unmatched');assert.equal(root.destination,origin);assert.equal(root.permanent,true);
+  assert(!config.redirects.some(r=>r.source==='/'&&!r.has),'An unconditional root redirect would loop on the canonical host');
+});
+
+test('small landing text meets 4.5:1 contrast on the actual paper backgrounds',async()=>{
+  const main=await readFile(new URL('style.css',root),'utf8'),landing=await readFile(new URL('landing.css',root),'utf8');
+  const paper=landing.match(/--paper:(#[0-9a-f]{6})/)[1];
+  const foregrounds=[landing.match(/--muted:(#[0-9a-f]{6})/)[1],landing.match(/\.landing-bar\{[^}]*color:(#[0-9a-f]{6})/)[1],main.match(/\.eyebrow\{[^}]*color:(#[0-9a-f]{6})/)[1]];
+  const luminance=hex=>[0.2126,0.7152,0.0722].reduce((sum,w,i)=>{const c=parseInt(hex.slice(1+i*2,3+i*2),16)/255;return sum+w*(c<=0.04045?c/12.92:((c+0.055)/1.055)**2.4);},0);
+  for(const foreground of foregrounds){const [low,high]=[luminance(foreground),luminance(paper)].sort((a,b)=>a-b);assert((high+0.05)/(low+0.05)>=4.5,foreground);}
+});
+
 test('canonical, search and social metadata agree on one public identity',()=>{
   const title=head.match(/<title>([^<]+)<\/title>/)?.[1].replaceAll('&amp;','&');
   assert(title.includes('Surf by Bittrees')&&title.includes('Web3'));
