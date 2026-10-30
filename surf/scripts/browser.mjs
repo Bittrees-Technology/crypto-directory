@@ -5,8 +5,14 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {chromium} from '@playwright/test';
 import {normalizeCatalog} from '../public/core.js';
-const root=fileURLToPath(new URL('../public/',import.meta.url));
-const server=createServer(async(req,res)=>{try{const u=new URL(req.url,'http://localhost'),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root))throw Error();res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':file.endsWith('.svg')?'image/svg+xml':'text/html');res.end(await readFile(file));}catch{res.statusCode=404;res.end('Not found');}});
+const root=path.resolve(fileURLToPath(new URL('../public/',import.meta.url)));
+const deployment=JSON.parse(await readFile(new URL('../vercel.json',import.meta.url),'utf8'));
+const contentType=file=>file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':file.endsWith('.svg')?'image/svg+xml':file.endsWith('.png')?'image/png':'text/html';
+const server=createServer(async(req,res)=>{
+  for(const header of deployment.headers.find(rule=>rule.source==='/(.*)').headers)res.setHeader(header.key,header.value);
+  try{const u=new URL(req.url,'http://localhost'),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep))throw Error();res.setHeader('Content-Type',contentType(file));res.end(await readFile(file));}
+  catch{res.statusCode=404;res.setHeader('Content-Type','text/html');res.end(await readFile(path.join(root,'404.html')));}
+});
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const origin='http://127.0.0.1:'+server.address().port;
 const base={id:'aave.md',name:'Fixture A',lead_category:'DeFi',verification_status:'verified',description:'Synthetic browser acceptance project.',primary_url:'https://fixture.example.org/a',product_url:'https://fixture.example.org/a/product',tags:[],ecosystem:['Ethereum']};
@@ -18,7 +24,7 @@ async function scenario(name,run,{initial=[base,second],oldSaves=null,frameStatu
   if(seedSaved)await context.addInitScript(value=>{if(!localStorage.getItem('bittrees.surf.v2'))localStorage.setItem('bittrees.surf.v2',JSON.stringify({saved:value}));},seedSaved);
   if(pendingSave)await context.addInitScript(value=>{if(!sessionStorage.getItem('fixture.pending.seeded')){sessionStorage.setItem('surf.pending-save',JSON.stringify(value));sessionStorage.setItem('fixture.pending.seeded','1');}},pendingSave);
   if(nativeOrigin)await context.setOffline(true);
-  if(nativeOrigin)await context.route('https://surf.bittrees.org/**',async route=>{const u=new URL(route.request().url()),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root))throw Error();await route.fulfill({body:await readFile(file),contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html'});});
+  if(nativeOrigin)await context.route('https://surf.bittrees.org/**',async route=>{const u=new URL(route.request().url()),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep))throw Error();await route.fulfill({body:await readFile(file),contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html'});});
   page.on('pageerror',error=>errors.push(name+': '+error.message));
   await context.route('https://fixture.example.org/**',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><head><title>Embedded fixture</title></head><body><h1>Actual embedded website</h1></body></html>'}));
   await page.route('**/catalog.json',route=>route.fulfill({json:{projects:normalizeCatalog(raw),status:'live',checkedAt:new Date().toISOString()}}));
@@ -78,5 +84,28 @@ try{
   await scenario('native shared sign-in starts one resume handoff and preserves the pending bookmark',async({page,handoffs})=>{
     await page.waitForFunction(()=>document.getElementById('saved-count').textContent==='1');assert.equal(handoffs(),1);assert.equal(await page.evaluate(()=>sessionStorage.getItem('surf.pending-save')),null);await page.locator('#nav-saved').click();assert.equal(await page.locator('.collection-item').count(),1);assert(await page.getByText('Your Bittrees collection.',{exact:true}).isVisible());
   },{nativeOrigin:true,resume:true,initial:[base],pendingSave:{id:'aave.md',type:'product'}});
+  await scenario('canonical and structured metadata survive embedded discovery',async({page})=>{
+    assert((await page.title()).includes('Surf by Bittrees'));
+    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://surf.bittrees.org/');
+    assert.equal(await page.locator('meta[property="og:url"]').getAttribute('content'),'https://surf.bittrees.org/');
+    const data=JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
+    assert.equal(data['@graph'].find(n=>n['@type']==='WebSite').url,'https://surf.bittrees.org/');
+    const image=await page.request.get(origin+'/social.png');assert.equal(image.status(),200);assert(image.headers()['content-type'].includes('image/png'));
+    assert.equal((await image.body()).subarray(0,8).toString('hex'),'89504e470d0a1a0a');
+    await startProduct(page);assert(new URL(page.url()).searchParams.has('project'));
+    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://surf.bittrees.org/');
+  });
+  {
+    const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}}),page=await context.newPage();
+    try{
+      await page.goto(origin+'/');assert(await page.getByRole('heading',{name:'Surf the new web.',exact:true}).isVisible());
+      assert(await page.getByRole('link',{name:'browse CryptoDirectory directly',exact:true}).isVisible());
+      assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://surf.bittrees.org/');
+      const response=await page.goto(origin+'/missing-seo-fixture');assert.equal(response.status(),404);
+      assert(await page.getByRole('heading',{name:'That wave has passed.',exact:true}).isVisible());
+      assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'),'noindex, follow');
+      checks.push('landing content is readable without JavaScript and unknown pages return a real 404');
+    }finally{await context.close();}
+  }
   assert.deepEqual(errors,[]);console.log(JSON.stringify({syntheticSurfBrowserChecks:checks,pageErrors:errors}));
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

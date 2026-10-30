@@ -48,3 +48,9 @@ Vercel project `bittrees-surf`, Root Directory `surf`, preset Other, build `npm 
 The earlier PR #21 was merged externally at its unchanged head. This follow-up carries the identity/refresh/middle-click repairs, their regression coverage, required CI wiring, and the embedded viewer and preserved landing-page requests. Discussion resolution and approval of the old head are not evidence that this new source passed review.
 
 Browser acceptance is synthetic and does not claim live identities, email delivery, shared-login activation or production database operations.
+
+## Production SEO
+
+See [the production SEO audit and validation checklist](docs/seo-production.md) for canonical URLs, social metadata, structured data, crawler boundaries, and the remaining live HTTP/Search Console/performance verification. The required CI includes SEO unit contracts and browser acceptance; these do not establish live indexing or Core Web Vitals.
+
+Surf production pushes also run the dedicated SEO audit workflow: it verifies the exact deployed assets and public HTTP behavior, then retains mobile/desktop Lighthouse lab reports. These reports are distinct from real-user CrUX/Core Web Vitals and Search Console indexing.

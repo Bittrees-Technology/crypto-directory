@@ -1,0 +1,38 @@
+name: Surf production SEO audit
+
+on:
+  push:
+    branches: [surf-production]
+    paths: ["surf/**", ".github/workflows/surf-seo-audit.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  surf-lighthouse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Wait for exact production source and verify live SEO responses
+        run: node surf/scripts/verify-live-seo.mjs
+      - name: Audit mobile performance, accessibility and SEO
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npx --yes lighthouse@13.6.0 https://surf.bittrees.org/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=surf-seo-artifacts/mobile.json --quiet
+      - name: Audit desktop performance, accessibility and SEO
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npx --yes lighthouse@13.6.0 https://surf.bittrees.org/ --preset=desktop --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=surf-seo-artifacts/desktop.json --quiet
+      - name: Summarize lab results
+        run: node surf/scripts/summarize-lighthouse.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: surf-production-seo-${{ github.sha }}
+          path: surf-seo-artifacts/
+          if-no-files-found: warn
