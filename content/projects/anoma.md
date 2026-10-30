@@ -5,7 +5,7 @@ tags: [Infrastructure, Privacy]
 ecosystem: [Anoma]
 description: Intent-centric architecture for decentralized applications.
 primary_url: https://anoma.net
-product_url: https://anoma.net/research
+product_url: "https://docs.anoma.net"
 founded: 2020
 hq: Switzerland
 token: n/a

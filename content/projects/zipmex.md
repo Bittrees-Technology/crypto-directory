@@ -10,5 +10,5 @@ founded: 2018
 hq: Thailand
 token: n/a
 twitter: https://x.com/zipmex
-verification_status: verified
+verification_status: "needs_update"
 ---

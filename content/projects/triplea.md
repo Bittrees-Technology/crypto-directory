@@ -5,7 +5,7 @@ tags: [Payments, Infrastructure]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Crypto payment gateway for global merchants.
 primary_url: https://triple-a.io
-product_url: https://triple-a.io/merchants
+product_url: "https://www.triple-a.io/travel-hospitality"
 founded: 2017
 hq: Singapore
 token: n/a

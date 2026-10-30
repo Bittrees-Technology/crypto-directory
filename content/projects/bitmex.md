@@ -10,5 +10,5 @@ founded: 2014
 hq: Seychelles
 token: BMEX
 twitter: https://x.com/BitMEX
-verification_status: verified
+verification_status: "rejected"
 ---

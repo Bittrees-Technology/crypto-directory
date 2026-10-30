@@ -10,5 +10,5 @@ founded: 2021
 hq: Romania
 token: INFRA
 twitter: https://x.com/BwareLabs
-verification_status: verified
+verification_status: "needs_update"
 ---

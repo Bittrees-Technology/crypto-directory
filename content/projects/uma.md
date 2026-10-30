@@ -5,7 +5,7 @@ tags: [Infrastructure, Oracles]
 ecosystem: [Ethereum]
 description: Optimistic oracle and decentralized financial contract infrastructure.
 primary_url: https://uma.xyz
-product_url: https://uma.xyz/products
+product_url: "https://explorer.uma.xyz/"
 founded: 2018
 hq: United States
 token: UMA

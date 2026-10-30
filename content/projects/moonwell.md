@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: WELL
 twitter: https://x.com/MoonwellDeFi
-verification_status: verified
+verification_status: "needs_update"
 ---

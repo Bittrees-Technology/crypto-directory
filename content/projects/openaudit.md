@@ -10,5 +10,5 @@ founded: 2024
 hq: Metaverse
 token: n/a
 twitter: https://x.com/openauditorg
-verification_status: verified
+verification_status: "needs_update"
 ---

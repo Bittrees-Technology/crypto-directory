@@ -5,7 +5,7 @@ tags: [Real World Assets (RWA), DeFi]
 ecosystem: [Ethereum]
 description: Institutional-grade onchain fixed-income infrastructure.
 primary_url: https://opentrade.io
-product_url: https://opentrade.io/products
+product_url: "https://www.opentrade.io/earn"
 founded: 2023
 hq: United Kingdom
 token: n/a

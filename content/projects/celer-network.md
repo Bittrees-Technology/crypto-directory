@@ -5,7 +5,7 @@ tags: [Infrastructure, Cross-chain]
 ecosystem: [Ethereum, Multiple]
 description: Inter-chain messaging and bridging infrastructure.
 primary_url: https://www.celer.network
-product_url: https://www.celer.network/products
+product_url: "https://cbridge.celer.network/#/transfer"
 founded: 2018
 hq: United States
 token: CELR

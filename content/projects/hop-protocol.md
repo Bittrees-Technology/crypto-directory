@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: HOP
 twitter: https://x.com/HopProtocol
-verification_status: verified
+verification_status: "rejected"
 ---

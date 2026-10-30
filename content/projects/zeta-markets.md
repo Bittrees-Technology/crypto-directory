@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: ZEX
 twitter: https://x.com/ZetaMarkets
-verification_status: verified
+verification_status: "needs_update"
 ---

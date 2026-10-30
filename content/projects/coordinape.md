@@ -10,5 +10,5 @@ founded: 2021
 hq: United States
 token: n/a
 twitter: https://x.com/coordinape
-verification_status: verified
+verification_status: "rejected"
 ---

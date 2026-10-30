@@ -10,5 +10,5 @@ founded: 2021
 hq: Germany
 token: n/a
 twitter: https://x.com/GelatoNetwork
-verification_status: verified
+verification_status: "needs_update"
 ---

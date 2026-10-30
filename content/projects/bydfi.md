@@ -10,5 +10,5 @@ founded: 2020
 hq: Singapore
 token: n/a
 twitter: https://x.com/BYDFi_Official
-verification_status: verified
+verification_status: "needs_update"
 ---

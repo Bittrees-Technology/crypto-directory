@@ -10,5 +10,5 @@ founded: 2023
 hq: United States
 token: ANKR
 twitter: https://x.com/ankr
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: JOE
 twitter: https://x.com/traderjoe_xyz
-verification_status: verified
+verification_status: "needs_update"
 ---

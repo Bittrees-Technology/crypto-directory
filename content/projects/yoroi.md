@@ -10,5 +10,5 @@ founded: 2018
 hq: Japan
 token: n/a
 twitter: https://x.com/YoroiWallet
-verification_status: verified
+verification_status: "rejected"
 ---

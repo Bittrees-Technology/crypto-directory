@@ -5,7 +5,7 @@ tags: [Wallets, Bitcoin]
 ecosystem: [Bitcoin]
 description: Federated Bitcoin app and custody stack for communities.
 primary_url: https://fedi.xyz
-product_url: https://fedi.xyz/products
+product_url: "https://www.fedi.xyz/get-the-app"
 founded: 2023
 hq: United States
 token: n/a

@@ -5,7 +5,7 @@ tags: [DeFi, Lending, Real World Assets (RWA)]
 ecosystem: [Ethereum, Polygon]
 description: Institutional credit marketplace connecting DeFi capital and borrowers.
 primary_url: https://clearpool.finance
-product_url: https://app.clearpool.finance
+product_url: "https://clearpool.finance/lending"
 founded: 2022
 hq: Singapore
 token: CPOOL

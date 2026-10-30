@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: n/a
 twitter: https://x.com/dotdid
-verification_status: verified
+verification_status: "needs_update"
 ---

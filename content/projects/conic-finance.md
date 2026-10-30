@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: CNC
 twitter: https://x.com/ConicFinance
-verification_status: verified
+verification_status: "needs_update"
 ---

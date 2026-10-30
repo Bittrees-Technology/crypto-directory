@@ -10,5 +10,5 @@ founded: 2017
 hq: Germany
 token: CFG
 twitter: https://x.com/centrifuge
-verification_status: verified
+verification_status: "needs_update"
 ---

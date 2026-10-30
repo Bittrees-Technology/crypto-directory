@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: SPELL
 twitter: https://x.com/MIM_Spell
-verification_status: verified
+verification_status: "needs_update"
 ---

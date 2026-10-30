@@ -5,7 +5,7 @@ tags: [Payments, Liquidity]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Institutional OTC liquidity provider for digital assets.
 primary_url: https://cumberland.io
-product_url: https://cumberland.io/services
+product_url: "https://www.cumberland.io/products-we-trade"
 founded: 2014
 hq: United States
 token: n/a

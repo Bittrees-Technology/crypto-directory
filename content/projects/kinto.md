@@ -10,5 +10,5 @@ founded: 2024
 hq: Metaverse
 token: K
 twitter: https://x.com/KintoXYZ
-verification_status: verified
+verification_status: "needs_update"
 ---

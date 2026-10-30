@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: KWENTA
 twitter: https://x.com/Kwenta_io
-verification_status: verified
+verification_status: "needs_update"
 ---

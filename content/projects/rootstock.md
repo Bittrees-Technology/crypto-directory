@@ -10,5 +10,5 @@ founded: 2018
 hq: Argentina
 token: RBTC
 twitter: https://x.com/rootstock_io
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2023
 hq: United States
 token: n/a
 twitter: https://x.com/bonfire_xyz
-verification_status: verified
+verification_status: "rejected"
 ---

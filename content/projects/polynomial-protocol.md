@@ -5,7 +5,7 @@ tags: [DeFi, Derivatives]
 ecosystem: [Optimism]
 description: Options and derivatives protocol in Optimism ecosystem.
 primary_url: https://www.polynomial.fi
-product_url: https://app.polynomial.fi
+product_url: "https://polynomial.fi/en/mainnet/trade/ETH-USD"
 founded: 2022
 hq: Metaverse
 token: n/a

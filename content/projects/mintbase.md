@@ -10,5 +10,5 @@ founded: 2018
 hq: Portugal
 token: MINT
 twitter: https://x.com/mintbase
-verification_status: verified
+verification_status: "needs_update"
 ---

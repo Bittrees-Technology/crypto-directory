@@ -10,5 +10,5 @@ founded: 2022
 hq: Metaverse
 token: RAGE
 twitter: https://x.com/rage_trade
-verification_status: verified
+verification_status: "needs_update"
 ---

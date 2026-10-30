@@ -10,5 +10,5 @@ founded: 2023
 hq: Switzerland
 token: COREUM
 twitter: https://x.com/CoreumOfficial
-verification_status: verified
+verification_status: "needs_update"
 ---

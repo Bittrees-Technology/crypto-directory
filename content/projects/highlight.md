@@ -5,7 +5,7 @@ tags: [NFTs & Creator Economy, Creator Tools]
 ecosystem: [Ethereum, Base]
 description: Creator platform for tokenized communities and experiences.
 primary_url: https://highlight.xyz
-product_url: https://highlight.xyz/create
+product_url: "https://docs.highlight.xyz"
 founded: 2021
 hq: United States
 token: n/a

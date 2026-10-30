@@ -10,5 +10,5 @@ founded: 2018
 hq: Singapore
 token: n/a
 twitter: https://x.com/merkle_science
-verification_status: verified
+verification_status: "needs_update"
 ---

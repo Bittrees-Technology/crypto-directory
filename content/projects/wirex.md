@@ -5,7 +5,7 @@ tags: [Payments, Cards]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Crypto payments and card platform for retail users.
 primary_url: https://wirexapp.com
-product_url: https://wirexapp.com/products
+product_url: "https://www.wirexapp.com/developers"
 founded: 2014
 hq: United Kingdom
 token: WXT

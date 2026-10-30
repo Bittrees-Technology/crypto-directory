@@ -5,7 +5,7 @@ tags: [Payments, Infrastructure]
 ecosystem: [XRP Ledger]
 description: Enterprise-focused blockchain company building payment rails and liquidity services.
 primary_url: https://ripple.com
-product_url: https://ripple.com/payments
+product_url: "https://docs.ripple.com/"
 founded: 2012
 hq: United States
 token: XRP

@@ -5,7 +5,7 @@ tags: [Infrastructure, Developer Tools]
 ecosystem: [Ethereum]
 description: Developer platform for deploying and managing rollups.
 primary_url: https://conduit.xyz
-product_url: https://conduit.xyz/product
+product_url: "https://app.conduit.xyz/"
 founded: 2023
 hq: United States
 token: n/a

@@ -10,5 +10,5 @@ founded: 2024
 hq: United States
 token: n/a
 twitter: https://x.com/trailblaze_sec
-verification_status: verified
+verification_status: "needs_update"
 ---

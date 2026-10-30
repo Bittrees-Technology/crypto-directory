@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: VRTX
 twitter: https://x.com/vertex_protocol
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2021
 hq: United Kingdom
 token: n/a
 twitter: https://x.com/summer_fi
-verification_status: verified
+verification_status: "rejected"
 ---

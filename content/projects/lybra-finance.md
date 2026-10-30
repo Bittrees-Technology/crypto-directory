@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: LBR
 twitter: https://x.com/LybraFinanceLSD
-verification_status: verified
+verification_status: "needs_update"
 ---

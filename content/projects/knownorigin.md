@@ -10,5 +10,5 @@ founded: 2018
 hq: United Kingdom
 token: n/a
 twitter: https://x.com/KnownOrigin_io
-verification_status: verified
+verification_status: "rejected"
 ---

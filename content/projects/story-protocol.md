@@ -10,5 +10,5 @@ founded: 2024
 hq: United States
 token: IP
 twitter: https://x.com/storyprotocol
-verification_status: verified
+verification_status: "needs_update"
 ---

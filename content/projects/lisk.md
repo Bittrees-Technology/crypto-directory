@@ -10,5 +10,5 @@ founded: 2016
 hq: Switzerland
 token: LSK
 twitter: https://x.com/LiskHQ
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2021
 hq: Canada
 token: n/a
 twitter: https://x.com/niftykitapp
-verification_status: verified
+verification_status: "rejected"
 ---

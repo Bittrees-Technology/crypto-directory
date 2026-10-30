@@ -10,5 +10,5 @@ founded: 2022
 hq: United Arab Emirates
 token: n/a
 twitter: https://x.com/IvendPay
-verification_status: verified
+verification_status: "needs_update"
 ---

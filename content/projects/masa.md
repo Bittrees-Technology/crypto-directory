@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: MASA
 twitter: https://x.com/getmasafi
-verification_status: verified
+verification_status: "needs_update"
 ---

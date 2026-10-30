@@ -5,7 +5,7 @@ tags: [Custody, Infrastructure]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Institutional custody platform for digital assets.
 primary_url: https://hextrust.com
-product_url: https://hextrust.com/solutions
+product_url: "https://www.hextrust.com/services/custody"
 founded: 2018
 hq: Hong Kong
 token: n/a

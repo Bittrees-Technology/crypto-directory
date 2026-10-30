@@ -5,7 +5,7 @@ tags: [Infrastructure, Developer Tools]
 ecosystem: [Ethereum]
 description: Rollup platform for launching app-specific chains.
 primary_url: https://www.caldera.xyz
-product_url: https://www.caldera.xyz/product
+product_url: "https://docs.caldera.xyz/"
 founded: 2022
 hq: United States
 token: n/a

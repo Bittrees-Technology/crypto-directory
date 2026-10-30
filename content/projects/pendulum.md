@@ -5,7 +5,7 @@ tags: [Real World Assets (RWA), Payments]
 ecosystem: [Polkadot]
 description: Network focused on bridging traditional finance rails with DeFi.
 primary_url: https://pendulumchain.org
-product_url: https://pendulumchain.org/ecosystem
+product_url: "https://docs.pendulumchain.org/"
 founded: 2021
 hq: Germany
 token: PEN

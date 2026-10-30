@@ -10,5 +10,5 @@ founded: 2022
 hq: Metaverse
 token: MARS
 twitter: https://x.com/mars_protocol
-verification_status: verified
+verification_status: "needs_update"
 ---

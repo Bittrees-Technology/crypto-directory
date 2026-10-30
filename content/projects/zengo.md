@@ -10,5 +10,5 @@ founded: 2019
 hq: Israel
 token: n/a
 twitter: https://x.com/Zengo
-verification_status: verified
+verification_status: "needs_update"
 ---

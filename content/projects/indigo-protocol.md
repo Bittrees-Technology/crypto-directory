@@ -5,7 +5,7 @@ tags: [DeFi, Stablecoin]
 ecosystem: [Cardano]
 description: Synthetic assets and collateral protocol for Cardano.
 primary_url: https://indigoprotocol.io
-product_url: https://app.indigoprotocol.io
+product_url: "https://docs.indigoprotocol.io"
 founded: 2022
 hq: Metaverse
 token: INDY

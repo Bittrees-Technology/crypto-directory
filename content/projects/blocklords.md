@@ -10,5 +10,5 @@ founded: 2023
 hq: United Kingdom
 token: LRDS
 twitter: https://x.com/blocklords
-verification_status: verified
+verification_status: "needs_update"
 ---

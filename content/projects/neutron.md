@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: NTRN
 twitter: https://x.com/Neutron_org
-verification_status: verified
+verification_status: "needs_update"
 ---

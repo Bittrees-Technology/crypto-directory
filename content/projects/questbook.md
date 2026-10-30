@@ -10,5 +10,5 @@ founded: 2021
 hq: India
 token: n/a
 twitter: https://x.com/questbookapp
-verification_status: verified
+verification_status: "needs_update"
 ---

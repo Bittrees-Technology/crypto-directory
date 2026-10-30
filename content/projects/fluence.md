@@ -10,5 +10,5 @@ founded: 2017
 hq: United States
 token: FLT
 twitter: https://x.com/fluence_project
-verification_status: verified
+verification_status: "needs_update"
 ---

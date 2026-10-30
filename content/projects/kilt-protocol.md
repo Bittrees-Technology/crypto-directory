@@ -10,5 +10,5 @@ founded: 2018
 hq: Germany
 token: KILT
 twitter: https://x.com/Kiltprotocol
-verification_status: verified
+verification_status: "needs_update"
 ---

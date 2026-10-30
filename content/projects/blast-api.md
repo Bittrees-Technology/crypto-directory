@@ -10,5 +10,5 @@ founded: 2021
 hq: Romania
 token: n/a
 twitter: https://x.com/blastapi
-verification_status: verified
+verification_status: "rejected"
 ---

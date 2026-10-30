@@ -10,5 +10,5 @@ founded: 2021
 hq: Switzerland
 token: SUPER
 twitter: https://x.com/Superfluid_HQ
-verification_status: verified
+verification_status: "needs_update"
 ---

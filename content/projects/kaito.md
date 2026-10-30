@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: KAITO
 twitter: https://x.com/KaitoAI
-verification_status: verified
+verification_status: "needs_update"
 ---

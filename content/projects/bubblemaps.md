@@ -4,7 +4,7 @@ lead_category: Data & Analytics
 tags: [Data & Analytics, Intelligence]
 ecosystem: [Ethereum, BNB Chain, Multiple]
 description: Visualization platform for token holder and wallet relationship analysis.
-primary_url: https://www.bubblemaps.io
+primary_url: "https://bubblemaps.io/"
 product_url: https://app.bubblemaps.io
 founded: 2021
 hq: France

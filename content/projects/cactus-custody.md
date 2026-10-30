@@ -4,8 +4,8 @@ lead_category: Custody
 tags: [Custody, Infrastructure]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Institutional digital asset custody and staking services.
-primary_url: https://www.cactuscustody.com
-product_url: https://www.cactuscustody.com/solutions
+primary_url: "https://www.mycactus.com/"
+product_url: "https://www.mycactus.com/"
 founded: 2019
 hq: Hong Kong
 token: n/a

@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: PRISMA
 twitter: https://x.com/PrismaFi
-verification_status: verified
+verification_status: "needs_update"
 ---

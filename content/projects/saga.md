@@ -10,5 +10,5 @@ founded: 2024
 hq: United States
 token: SAGA
 twitter: https://x.com/Sagaxyz__
-verification_status: verified
+verification_status: "needs_update"
 ---

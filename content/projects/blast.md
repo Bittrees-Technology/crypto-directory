@@ -10,5 +10,5 @@ founded: 2024
 hq: Metaverse
 token: BLAST
 twitter: https://x.com/Blast_L2
-verification_status: verified
+verification_status: "rejected"
 ---

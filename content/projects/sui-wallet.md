@@ -1,14 +1,14 @@
 ---
-name: Sui Wallet
+name: "Slush"
 lead_category: Wallets
 tags: [Wallets]
 ecosystem: [Sui]
-description: Official wallet experience for Sui ecosystem participants.
-primary_url: https://sui.io/wallet
-product_url: https://sui.io/wallet
+description: "Mysten Labs self-custody wallet for Sui, formerly Sui Wallet and Stashed."
+primary_url: "https://slush.app/"
+product_url: "https://my.slush.app/"
 founded: 2023
 hq: United States
 token: n/a
-twitter: https://x.com/SuiNetwork
+twitter: "n/a"
 verification_status: verified
 ---

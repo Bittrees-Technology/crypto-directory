@@ -10,5 +10,5 @@ founded: 2017
 hq: Cayman Islands
 token: LA
 twitter: https://x.com/latokens
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -10,5 +10,5 @@ founded: 2020
 hq: United States
 token: BOND
 twitter: https://x.com/Barn_Bridge
-verification_status: verified
+verification_status: "needs_update"
 ---

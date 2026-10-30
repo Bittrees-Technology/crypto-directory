@@ -5,7 +5,7 @@ tags: [Security, Auditing]
 ecosystem: [Ethereum, BSC, Multiple]
 description: Smart contract audit and blockchain security provider.
 primary_url: https://immunebytes.com
-product_url: https://immunebytes.com/services
+product_url: "https://www.immunebytes.com/smart-contract-audit"
 founded: 2020
 hq: India
 token: n/a

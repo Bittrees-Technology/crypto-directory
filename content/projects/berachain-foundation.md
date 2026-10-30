@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2]
 ecosystem: [Berachain]
 description: Ecosystem steward for Berachain network development.
 primary_url: https://www.berachain.com
-product_url: https://www.berachain.com/ecosystem
+product_url: "https://explore.berachain.com/"
 founded: 2024
 hq: Cayman Islands
 token: BERA

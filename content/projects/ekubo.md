@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: n/a
 twitter: https://x.com/EkuboProtocol
-verification_status: verified
+verification_status: "needs_update"
 ---

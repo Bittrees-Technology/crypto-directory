@@ -10,5 +10,5 @@ founded: 2018
 hq: United Kingdom
 token: QRDO
 twitter: https://x.com/QredoNetwork
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -5,7 +5,7 @@ tags: [Payments]
 ecosystem: [Bitcoin, Ethereum]
 description: Consumer wallet and payments platform in Southeast Asia.
 primary_url: https://coins.ph
-product_url: https://coins.ph/app
+product_url: "https://www.coins.ph/en-ph/trade/BTC/PHP"
 founded: 2014
 hq: Philippines
 token: n/a

@@ -5,7 +5,7 @@ tags: [Identity, Zero Knowledge]
 ecosystem: [Ethereum]
 description: Human identity verification network for sybil resistance.
 primary_url: https://humanity.org
-product_url: https://humanity.org/technology
+product_url: "https://app.humanity.org/login"
 founded: 2024
 hq: Metaverse
 token: n/a

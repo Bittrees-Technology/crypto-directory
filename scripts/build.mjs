@@ -249,7 +249,7 @@ function indexPage(projects, categories) {
     .concat(categories.map((c) => `<option value=\"${escapeHtml(c)}\">${escapeHtml(c)}</option>`))
     .join('');
 
-  const visibleProjects = projects.filter((p) => p.verification_status !== 'rejected');
+  const visibleProjects = projects.filter((p) => p.verification_status === 'verified');
   const rows = tableRows(visibleProjects);
   const body = `<section class=\"controls\">
   <input id=\"search\" type=\"search\" placeholder=\"Search name, tag, ecosystem\">
@@ -326,7 +326,7 @@ function render() {
   const category = categoryEl.value;
   const filtered = projects.filter((p) => {
     const inCategory = !category || p.lead_category === category;
-    const inStatus = p.verification_status !== 'rejected';
+    const inStatus = p.verification_status === 'verified';
     const haystack = [p.name, p.description, p.tags.join(' '), p.ecosystem.join(' ')].join(' ').toLowerCase();
     const inQuery = !q || haystack.includes(q);
     return inCategory && inStatus && inQuery;
@@ -365,7 +365,7 @@ categoryEl.addEventListener('change', render);
 }
 
 function categoryPage(category, projects) {
-  const visible = projects.filter((p) => p.verification_status !== 'rejected');
+  const visible = projects.filter((p) => p.verification_status === 'verified');
   const slug = slugify(category);
   const scope = category === 'AI Agents' ? '<p>Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.</p>' : '';
   const empty = visible.length ? '' : '<p>No listings have been added to this category yet. New suggestions go through review before appearing here.</p>';

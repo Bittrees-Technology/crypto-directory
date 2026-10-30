@@ -10,5 +10,5 @@ founded: 2020
 hq: Metaverse
 token: BAL
 twitter: https://x.com/Balancer
-verification_status: verified
+verification_status: "needs_update"
 ---

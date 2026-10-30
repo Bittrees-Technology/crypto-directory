@@ -5,7 +5,7 @@ tags: [Infrastructure, Cross-chain]
 ecosystem: [Axelar, Ethereum, Cosmos]
 description: Interchain network and tooling for cross-chain messaging and connectivity.
 primary_url: https://axelar.network
-product_url: https://axelar.network/products
+product_url: "https://docs.axelar.dev/"
 founded: 2020
 hq: Canada
 token: AXL

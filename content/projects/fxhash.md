@@ -10,5 +10,5 @@ founded: 2021
 hq: France
 token: n/a
 twitter: https://x.com/fx_hash_
-verification_status: verified
+verification_status: "needs_update"
 ---

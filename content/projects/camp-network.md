@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Identity]
 ecosystem: [Camp]
 description: Identity-first blockchain ecosystem for communities and apps.
 primary_url: https://campnetwork.xyz
-product_url: https://campnetwork.xyz/docs
+product_url: "https://portal.campnetwork.xyz/"
 founded: 2024
 hq: Metaverse
 token: n/a

@@ -10,5 +10,5 @@ founded: 2022
 hq: Singapore
 token: MAX
 twitter: https://x.com/Matr1xOfficial
-verification_status: verified
+verification_status: "needs_update"
 ---

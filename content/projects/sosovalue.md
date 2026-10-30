@@ -10,5 +10,5 @@ founded: 2024
 hq: Singapore
 token: SOSO
 twitter: https://x.com/sosovalue
-verification_status: verified
+verification_status: "needs_update"
 ---

@@ -5,7 +5,7 @@ tags: [Security, Auditing]
 ecosystem: [Ethereum, Solana]
 description: Smart contract audit and security review provider.
 primary_url: https://guardianaudits.com
-product_url: https://guardianaudits.com/services
+product_url: "https://guardian.security/vanguard/"
 founded: 2022
 hq: United States
 token: n/a

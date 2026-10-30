@@ -10,5 +10,5 @@ founded: 2014
 hq: United Kingdom
 token: n/a
 twitter: https://x.com/CryptoCompare
-verification_status: verified
+verification_status: "needs_update"
 ---

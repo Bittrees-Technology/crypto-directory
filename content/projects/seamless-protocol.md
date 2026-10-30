@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: SEAM
 twitter: https://x.com/SeamlessFi
-verification_status: verified
+verification_status: "rejected"
 ---

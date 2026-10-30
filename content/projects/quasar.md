@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: QSR
 twitter: https://x.com/quasarfi
-verification_status: verified
+verification_status: "needs_update"
 ---

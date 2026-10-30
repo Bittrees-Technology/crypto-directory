@@ -4,8 +4,8 @@ lead_category: Data & Analytics
 tags: [Data & Analytics, Research]
 ecosystem: [Ethereum, Multiple]
 description: Institutional-grade research and analytics platform.
-primary_url: https://blockworks.co/research
-product_url: n/a
+primary_url: "https://blockworks.com/products/intel?from=bwr"
+product_url: "https://app.blockworks.com/"
 founded: 2020
 hq: United States
 token: n/a

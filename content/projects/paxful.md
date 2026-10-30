@@ -10,5 +10,5 @@ founded: 2015
 hq: United States
 token: n/a
 twitter: https://x.com/paxful
-verification_status: verified
+verification_status: "rejected"
 ---

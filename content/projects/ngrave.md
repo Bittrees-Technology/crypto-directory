@@ -5,7 +5,7 @@ tags: [Wallets, Security]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: High-security hardware wallet and custody stack.
 primary_url: https://www.ngrave.io
-product_url: https://www.ngrave.io/products
+product_url: "https://www.ngrave.io/en/zero"
 founded: 2018
 hq: Belgium
 token: n/a

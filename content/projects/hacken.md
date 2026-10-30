@@ -10,5 +10,5 @@ founded: 2017
 hq: Estonia
 token: HAI
 twitter: https://x.com/hackenclub
-verification_status: verified
+verification_status: "needs_update"
 ---

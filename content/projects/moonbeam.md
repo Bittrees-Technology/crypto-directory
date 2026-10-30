@@ -10,5 +10,5 @@ founded: 2022
 hq: United States
 token: GLMR
 twitter: https://x.com/MoonbeamNetwork
-verification_status: verified
+verification_status: "needs_update"
 ---

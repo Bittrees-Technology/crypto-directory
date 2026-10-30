@@ -10,5 +10,5 @@ founded: 2021
 hq: Metaverse
 token: ZKS
 twitter: https://x.com/zkswapfinance
-verification_status: verified
+verification_status: "needs_update"
 ---

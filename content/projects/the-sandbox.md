@@ -10,5 +10,5 @@ founded: 2018
 hq: Hong Kong
 token: SAND
 twitter: https://x.com/TheSandboxGame
-verification_status: verified
+verification_status: "needs_update"
 ---

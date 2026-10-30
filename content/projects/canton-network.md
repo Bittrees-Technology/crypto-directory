@@ -5,7 +5,7 @@ tags: [Real World Assets (RWA), Infrastructure]
 ecosystem: [Canton]
 description: Institutional blockchain network for tokenized financial markets.
 primary_url: https://canton.network
-product_url: https://canton.network/learn
+product_url: "https://www.canton.network/ecosystem"
 founded: 2023
 hq: United States
 token: n/a

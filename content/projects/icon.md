@@ -10,5 +10,5 @@ founded: 2017
 hq: South Korea
 token: ICX
 twitter: https://x.com/helloiconworld
-verification_status: verified
+verification_status: "needs_update"
 ---

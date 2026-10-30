@@ -10,5 +10,5 @@ founded: 2020
 hq: Canada
 token: n/a
 twitter: https://x.com/chain_patrol
-verification_status: verified
+verification_status: "needs_update"
 ---

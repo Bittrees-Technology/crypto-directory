@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: RAFT
 twitter: https://x.com/RaftFi
-verification_status: verified
+verification_status: "needs_update"
 ---
