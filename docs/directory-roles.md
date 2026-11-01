@@ -22,13 +22,13 @@ PublicNode's public Ethereum endpoint and do not delay the sign-in session.
 Missing records, RPC failures, invalid normalization and CCIP-only records retain
 the shortened wallet address. Resolver-selected offchain URLs are not fetched.
 
-| Current project authority | Navigation | Existing listings | New submissions |
-| --- | --- | --- | --- |
-| Superadmin / Admin | All four staff links | Propose metadata updates | Submit; review another person's submission |
-| Editor | All four staff links | Propose metadata updates only | Cannot submit or decide |
-| Reviewer | All four staff links | No edits | Review and accept/reject only |
-| Signed in, no staff role | Staff links hidden | Public reading | Submit and inspect own submissions |
-| Signed out | Staff links hidden | Public reading | Sign in first |
+| Current project authority | Navigation | Existing listings | New submissions | Requested changes |
+| --- | --- | --- | --- | --- |
+| Superadmin / Admin | All four staff links | Propose metadata updates | Submit; independently accept/reject | Submit; independently accept/reject |
+| Editor | All four staff links | Propose metadata updates only | Submit suggestions; cannot decide | Submit; inspect/close requests; cannot approve |
+| Reviewer | All four staff links | Cannot edit directly | Submit; independently accept/reject | Submit; independently accept/reject immutable changes/removal |
+| Signed in, no staff role | Staff links hidden | Public reading | Submit and inspect own submissions | Request changes and inspect own requests |
+| Signed out | Staff links hidden | Public reading | Sign in first | Sign in first |
 
 Roles combine only when separately assigned. Partner tiers and browser-provided
 role labels confer no staff access. Administration remains verified-wallet-only;
@@ -44,12 +44,17 @@ IPFS mirror never receives session cookies, private app keys or signing authorit
 
 ## Review and release
 
-Signed-in nonstaff, Editors and Admins can request corrections to an existing,
-non-rejected listing. Reviewers retain their new-submission-only role. Requests
+Anyone signed in can submit a new listing or request corrections to an existing,
+non-rejected listing. A staff role is not needed for intake. Requests
 are stored as `editRequests` in the existing signed intake journal; old journals
 without that field remain compatible. Requests are idempotent and limited to
-three pending per person and 256 total. Only Editors/Admins see other people's
-requests, open them in the existing editor, or close them with an outcome note.
+three pending per person and 256 total. Staff see the change queue and can close
+requests with an outcome note. Only Editors/Admins open the direct listing editor.
+Reviewers/Admins accept or reject another actor's immutable requested changes.
+Acceptance rechecks the current listing SHA and duplicates, preserves its body
+and unknown metadata, and creates a protected release proposal. A stale request
+must be refreshed; it cannot overwrite a newer listing. Older free-text requests
+must first become structured changes before they can be accepted.
 Closing a request records its review outcome only; it neither edits a listing nor
 claims a change was released. The existing editor creates a separate protected
 release proposal using the current listing SHA and preserving verification state.
@@ -73,10 +78,10 @@ checkboxes: shutdown, unavailable website/product, duplicate, merger/rebrand,
 out-of-scope, inaccurate/misleading listing, security/impersonation concern, or
 other. At least one reason and an explanation are required. The server rejects
 unknown reasons and mixed removal/edit payloads. Removal requests only record
-review evidence: they do not delete files, change verification, hide listings or
-create a release proposal. Editors/Admins can inspect the source and close the
-request with an outcome; an administrator must separately prepare the protected
-removal proposal. No new deletion capability or role grant is introduced.
+review evidence until an independent Reviewer/Admin accepts them. Approval
+proposes `verification_status: rejected` while retaining the file, metadata and
+body. Public discovery changes only after the protected release. No source file
+deletion or role grant is introduced.
 
 Submissions are separate from `content/projects` on the `directory-intake` branch.
 The form explicitly discloses public storage of submitted business details and
@@ -95,6 +100,16 @@ one listing; rejection never creates a listing. Editors can propose changes only
 to an existing non-rejected listing at its current content SHA and cannot change
 verification state. Submitted entries stay pending until a review; accepted source
 proposals are marked verified but remain unpublished until the protected release.
+
+An explicitly assigned Reviewer may also approve through the authenticated MCP
+automation path with independent evidence and a recorded rationale. Admin or
+Superadmin alone does not grant automatic-review authority. Browser cookies and
+an `automatic` label cannot impersonate an enrolled source connection. Automatic
+review also blocks self-approval using purpose-bound opaque same-person provenance,
+without exposing cross-app contact aliases. Unmapped historical owners require
+manual native review.
+Actual enrollment, source consent and an exact current MCP delegation remain
+separate from native sign-in and role assignment; see the [editorial MCP contract](../integrations/editorial-mcp.md).
 
 The app never merges, bypasses checks or deploys. The existing repository review,
 CI, production deployment and verified IPNS synchronizer publish approved source
@@ -140,9 +155,9 @@ or budget change needs separate explicit approval.
 
 ## Role activation and acceptance
 
-The Roles companion stages Editor/Reviewer definitions without changing the active
-registry manifest or appointing a person. Finish any existing controller/registry
-transition first. Prepare the new policy from the then-current verified head,
+Verify the current Editor/Reviewer definitions and registry policy before activation;
+an app release never appoints a person or proves a role is active. Finish any held
+controller/registry transition first. Prepare any needed policy from its verified head,
 approve its exact policy/manifest/definitions in the existing controller/Safe/TLD
 flow, wait for finality, and only then enable
 `CRYPTO_DIRECTORY_STAFF_ROLES_ENABLED=1` in Roles. Assign people separately through

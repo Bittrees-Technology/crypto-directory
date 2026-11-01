@@ -6,6 +6,10 @@
   },
   "rewrites": [
     {
+      "source": "/api/integrations/mcp",
+      "destination": "/api/editorial-mcp"
+    },
+    {
       "source": "/api/directory/:path*",
       "destination": "/api/directory"
     },

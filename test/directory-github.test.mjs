@@ -49,3 +49,14 @@ test('duplicate checks use the current release index and hold stale or changed a
     assert(!f.calls.some(c=>c.url.includes('/contents/site/data/projects.json')));
   }
 });
+
+test('staff workspace snapshots use fixed paths, digest checks and unchanged release metadata',async()=>{
+  const main='1'.repeat(40),data='[]',manifest=JSON.stringify({schemaVersion:1,repository:'Bittrees-Technology/crypto-directory',sourceCommit:main,files:{'data/projects.json':hash(data),'data/process-status.json':hash(data)}});
+  for(const failure of [null,'digest','manifest']){
+    const store=new GitHubStore({env:{}});let calls=0;
+    store.main=async()=>main;store.productionText=async path=>{calls++;return path==='/release.json'?(failure==='manifest'&&calls===3?manifest+' ':manifest):failure==='digest'?'[1]':data;};
+    if(failure)await assert.rejects(()=>store.workspaceSnapshot('/data/process-status.json'),e=>e.status===503);
+    else assert.deepEqual(await store.workspaceSnapshot('/data/process-status.json'),{sourceCommit:main,data:[]});
+    await assert.rejects(()=>store.workspaceSnapshot('/api/project-admin/status'),e=>e.status===503);
+  }
+});
