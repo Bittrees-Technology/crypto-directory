@@ -3,5 +3,27 @@
   "version": 1,
   "projectId": "crypto-directory",
   "canonicalDiscovery": "https://mcp.bittrees.org/mcp",
-  "connections": []
+  "connections": [
+    {
+      "projectId": "crypto-directory",
+      "transport": "local-mcp-adapter",
+      "endpoint": "https://cd.bittrees.org/data/projects.json",
+      "verification": "Local stdio implementation; public release/data digest and revision checked per refresh. Registration does not launch or grant access.",
+      "source": "https://github.com/Bittrees-Technology/crypto-directory/blob/main/integrations/crypto-directory-read-mcp.mjs",
+      "operations": {
+        "read": [
+          "directory.search",
+          "directory.get_listing",
+          "directory.list_categories",
+          "directory.read_release"
+        ]
+      },
+      "boundary": "Credential-free local stdio reads only fixed https://cd.bittrees.org/release.json and /data/projects.json, with SHA-256 and unchanged-release checks. Verified-only 14-field maximum projection; no bodies, held/rejected rows, research/duplicate metadata or private APIs. Deterministic pagination bound to revision/search/limit; at most 100 results, 512000-byte JSON result, 60-second cache, 3 GETs per refresh, 20-second deadline, 4 MB dataset and zero automatic retries. No arbitrary URLs, redirects, third-party fetches, cookies, tokens, accounts, writes, models, paid APIs, grants, signatures, pins or publishing. Listing text is untrusted third-party data, not Bittrees affiliation, MCP availability or authority. Release metadata is source-reported consistency evidence, not approval or ENS synchronization. No stale fallback or automatic activation. Requires separately reviewed gateway allowlist/setup and protected source review.",
+      "setup": {
+        "command": "node",
+        "args": ["integrations/crypto-directory-read-mcp.mjs"],
+        "authentication": "none"
+      }
+    }
+  ]
 }
