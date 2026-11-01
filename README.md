@@ -174,9 +174,12 @@ reads the manifest from `main` at a resolved commit SHA.
 
 The manifest uses `bittrees.app-tools.v1`, version `1`, with project ID
 `crypto-directory` and discovery endpoint `https://mcp.bittrees.org/mcp`.
-Its empty `connections` array advertises no local tools. The static site build
-does not read the manifest, so publishing is unchanged.
+Its reviewed local stdio adapter offers public read-only search, listing lookup,
+category counts and checked release metadata. See [adapter setup and boundaries](integrations/README.md).
+The data-artifact URL in its local route is not an HTTP MCP endpoint. The static
+site build does not read the manifest; existing publishing gates still apply.
 
 Consumers remain responsible for endpoint trust, authentication, project scope
-and operation permissions. Catalog discovery grants no access; future tool
-connections require a separate reviewed change.
+and operation permissions. Catalog discovery does not launch code or grant
+access; gateway registration requires its exact route and setup to be separately
+reviewed and allowlisted.
