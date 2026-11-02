@@ -199,7 +199,7 @@ Sitemap: ${absoluteUrl('sitemap.xml')}
 
 function siteNav(navPrefix = '') {
   return `<nav class="site-nav" data-staff hidden aria-label="Staff tools">
-    <a href="${escapeHtml(navPrefix)}index.html">Directory</a>
+    <a href="${escapeHtml(navPrefix || './')}">Directory</a>
     <a href="${escapeHtml(navPrefix)}review.html">Review Queue</a>
     <a href="${escapeHtml(navPrefix)}needs-update.html">Needs Update</a>
     <a href="${escapeHtml(navPrefix)}process-status.html">Process Status</a>
@@ -222,7 +222,7 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
 <body>
   <main>
     <header class="directory-header">
-      <a class="directory-brand" href="${escapeHtml(navPrefix)}index.html" aria-label="CryptoDirectory home"><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
+      <a class="directory-brand" href="${escapeHtml(navPrefix || './')}" aria-label="CryptoDirectory home"><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
       <nav class="header-forms" aria-label="Contribute to the directory"><a href="${escapeHtml(navPrefix)}submit.html">Submit a project</a><a href="${escapeHtml(navPrefix)}request-edit.html">Request an edit</a></nav>
       <div class="directory-account">
         <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in" title="Sign in with email or Ethereum">Sign in</a>
@@ -232,7 +232,7 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
     <div class="directory-navigation">
     ${siteNav(navPrefix)}
     </div>
-    ${home?'':`<a class="directory-back" href="${escapeHtml(navPrefix)}index.html"><span aria-hidden="true">←</span>Back to directory</a>`}
+    ${home?'':`<a class="directory-back" href="${escapeHtml(navPrefix || './')}"><span aria-hidden="true">←</span>Back to directory</a>`}
     <section class="page-heading"><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(subtitle)}</p></section>
     <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     ${body}
@@ -369,7 +369,7 @@ function categoryPage(category, projects) {
   const slug = slugify(category);
   const scope = category === 'AI Agents' ? '<p>Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.</p>' : '';
   const empty = visible.length ? '' : '<p>No listings have been added to this category yet. New suggestions go through review before appearing here.</p>';
-  const body = `<section class=\"card\" style=\"margin:18px 0\">${visible.length} entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href=\"../index.html\">Back to index</a></section>
+  const body = `<section class=\"card\" style=\"margin:18px 0\">${visible.length} entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href=\"../\">Back to index</a></section>
 <table>
   <thead>
     <tr>
@@ -450,7 +450,7 @@ function needsUpdatePage(projects) {
   const flagged = projects.filter((p) => p.verification_status === 'needs_update');
   const body = `<section class=\"card\" style=\"margin:18px 0\">
 <strong>${flagged.length}</strong> entries currently flagged as needs_update.
-<div style=\"margin-top:8px\"><a href=\"index.html\">Back to index</a></div>
+<div style=\"margin-top:8px\"><a href=\"./\">Back to index</a></div>
 </section>
 <table>
   <thead>
@@ -612,7 +612,6 @@ async function main() {
 
   const sitemapPaths = [
     '',
-    'index.html',
     'review.html',
     'needs-update.html',
     'process-status.html',
