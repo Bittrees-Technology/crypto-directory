@@ -97,14 +97,14 @@ try{
     assert.equal(await page.locator('h1').count(),1);assert.equal(await page.locator('[data-login-link]:visible').count(),1);
     assert.equal(await page.locator('.submission-nav').count(),0);assert.equal(await page.locator('#directory-message').isVisible(),false);
     const back=page.getByRole('link',{name:'Back to directory',exact:true});assert(await back.isVisible());
-    assert.equal(await page.getByRole('link',{name:'CryptoDirectory home',exact:true}).getAttribute('href'),'index.html');
+    assert.equal(await page.getByRole('link',{name:'CryptoDirectory home',exact:true}).getAttribute('href'),'./');
     await screenshot(page,'signed-out-desktop');
     await page.setViewportSize({width:360,height:800});
     const brand=await page.locator('.directory-brand').boundingBox(),account=await page.locator('.directory-account').boundingBox();
     const forms=await page.locator('.header-forms').boundingBox();assert(brand.y<forms.y);assert(forms.x+forms.width<=account.x);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     assert(await back.isVisible());await screenshot(page,'signed-out-mobile');
-    await back.click();await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
-    await page.goto(origin+'/categories/wallets.html');assert.equal(await page.getByRole('link',{name:'Back to directory',exact:true}).getAttribute('href'),'../index.html');
+    await back.click();await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();assert.equal(page.url(),origin+'/');
+    await page.goto(origin+'/categories/wallets.html');assert.equal(await page.getByRole('link',{name:'Back to directory',exact:true}).getAttribute('href'),'../');
     await page.getByRole('link',{name:'Back to directory',exact:true}).click();await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
     let mirrorApiCalls=0;
     await page.route('https://cryptodirectory.eth.limo/**',async route=>{
