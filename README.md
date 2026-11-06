@@ -4,6 +4,8 @@ Minimal static directory for active onchain companies and projects.
 
 Directory email/wallet sign-in, Editor/Reviewer permissions, submissions and
 required deployment/authority setup: [directory roles](docs/directory-roles.md).
+Page/workflow coverage and the default-off, Roles-authorized editorial MCP:
+[editorial MCP contract](integrations/editorial-mcp.md).
 
 ## Source status (October 29, 2026)
 - Repository: https://github.com/Bittrees-Technology/crypto-directory

@@ -404,7 +404,7 @@ function categoryPage(category, projects) {
 }
 
 function reviewPage(projects) {
-  return pageShell({title:'Review Queue',subtitle:'Review new project, company and organization submissions',body:'<section data-can-review hidden id="directory-review" class="card">Loading submissions…</section><p data-review-unavailable hidden>A Reviewer, Admin or Superadmin role is required to review new submissions.</p><p data-signed-out>Sign in with a Reviewer, Admin or Superadmin role to review new submissions.</p>'});
+  return pageShell({title:'Review Queue',subtitle:'Review new listings and requested updates',body:'<section data-can-review hidden id="directory-review" class="card">Loading submissions…</section><section data-can-review hidden class="card"><h2 id="edit-requests-heading">Edit and removal requests</h2><div id="edit-requests"></div></section><p data-review-unavailable hidden>A Reviewer, Admin or Superadmin role is required to review submissions and requested changes.</p><p data-signed-out>Sign in with a Reviewer, Admin or Superadmin role to review submissions and requested changes.</p>'});
 }
 
 function listingControls(){

@@ -56,6 +56,7 @@ async function reviewQueue(){
     const details=document.createElement('dl');for(const [key,value] of Object.entries(record.entry)){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key.replaceAll('_',' ');dd.textContent=Array.isArray(value)?value.join(', '):value;details.append(dt,dd);}card.append(details);
     const label=document.createElement('label');label.textContent='Review rationale';const reason=document.createElement('textarea');reason.minLength=10;reason.maxLength=1000;reason.required=true;if(record.status==='accepting')reason.value=record.history.at(-1)?.reason||'';label.append(reason);card.append(label);
     const state=document.createElement('p');state.setAttribute('role','status');card.append(state);
+    if(record.status==='accepting'&&record.history.at(-1)?.mode==='automatic'){reason.disabled=true;state.textContent='This automatic decision is awaiting its authorized operation receipt. Reconcile it through the approved review connection.';root.append(card);continue;}
     for(const decision of record.status==='accepting'?['accept']:['accept','reject']){const button=document.createElement('button');button.type='button';button.textContent=record.status==='accepting'?'Check acceptance outcome':decision==='accept'?'Accept for release review':'Reject';button.addEventListener('click',async()=>{if(!reason.reportValidity())return;button.disabled=true;try{await refresh();if(!session?.canReview)throw Error('Reviewer access is required.');const response=await api('review',{id:record.id,revision:record.revision,decision,reason:reason.value});proposalMessage(response);await reviewQueue();}catch(error){state.textContent=error.message;}finally{button.disabled=false;}});card.append(button);}
     root.append(card);
   }
@@ -63,7 +64,7 @@ async function reviewQueue(){
 async function ownSubmissions(){const root=byId('my-submissions');if(!root||!session?.canSubmit)return;const result=await api('submissions');root.replaceChildren();for(const record of result.submissions){const p=document.createElement('p');p.textContent=record.entry.name+' — '+(record.status==='accepted'?'accepted; see release proposal':record.status);if(record.proposal&&/^https:\/\/github\.com\/Bittrees-Technology\/crypto-directory\/pull\/\d+$/.test(record.proposal.url)){const link=document.createElement('a');link.href=record.proposal.url;link.textContent=' Release proposal';p.append(link);}root.append(p);}}
 async function editRequests(){
   const root=byId('edit-requests');if(!root||!session)return;
-  byId('edit-requests-heading').textContent=session.canEdit?'Edit and removal requests':'Your change requests';
+  byId('edit-requests-heading').textContent=session.canHandleRequests?'Edit and removal requests':'Your change requests';
   const result=await api('edit-requests');root.replaceChildren();
   if(!result.requests.length){root.textContent='No edit requests yet.';return;}
   for(const record of result.requests){
@@ -72,11 +73,19 @@ async function editRequests(){
     if(record.patch)card.append(patchTable(record));
     if(record.kind==='removal'){const reasons=document.createElement('ul');for(const reason of record.removalReasons||[]){const li=document.createElement('li');li.textContent=document.querySelector('[data-reason-label][value="'+CSS.escape(reason)+'"]')?.dataset.reasonLabel||reason;reasons.append(li);}card.append(reasons);}
     for(const text of [record.changes,record.sources,record.outcome?.reason].filter(Boolean)){const p=document.createElement('p');p.className='request-details';p.textContent=text;card.append(p);}
-    if(session.canEdit&&record.status==='pending'){
-      const link=document.createElement('a');link.href=record.kind==='removal'?'https://github.com/Bittrees-Technology/crypto-directory/blob/main/content/projects/'+encodeURIComponent(record.projectId):'edit.html?'+new URLSearchParams({id:record.projectId,request:record.id});link.textContent=record.kind==='removal'?'View listing source for removal review':'Open listing editor';card.append(link);
+    if(session.canHandleRequests&&['pending','accepting'].includes(record.status)){
+      if(session.canEdit&&record.status==='pending'){const link=document.createElement('a');link.href=record.kind==='removal'?'https://github.com/Bittrees-Technology/crypto-directory/blob/main/content/projects/'+encodeURIComponent(record.projectId):'edit.html?'+new URLSearchParams({id:record.projectId,request:record.id});link.textContent=record.kind==='removal'?'View listing source for removal review':'Open listing editor';card.append(link);}
       const label=document.createElement('label');label.textContent='Review outcome';const reason=document.createElement('textarea');reason.minLength=10;reason.maxLength=1000;reason.required=true;label.append(reason);card.append(label);
-      const close=document.createElement('button');close.type='button';close.textContent='Close request';close.addEventListener('click',async()=>{if(!reason.reportValidity())return;close.disabled=true;try{await refresh();const response=await api('close-edit-request',{id:record.id,revision:record.revision,reason:reason.value});message(response.message);await editRequests();}catch(error){message(error.message);}finally{close.disabled=false;}});card.append(close);
-      const note=document.createElement('p');note.textContent=record.kind==='removal'?'An administrator must prepare a separate removal proposal for independent release approval. Closing this request does not remove the listing.':'Closing a request does not change the listing. Propose changes in the editor for independent release approval.';card.append(note);
+      if(session.canReview&&!(record.status==='accepting'&&record.review?.mode==='automatic')){
+        if(record.status==='accepting')reason.value=record.review?.reason||'';
+        for(const decision of record.status==='accepting'?['accept']:['accept','reject']){
+          const button=document.createElement('button');button.type='button';button.textContent=record.status==='accepting'?'Check approval outcome':decision==='accept'?'Accept change for release review':'Reject change';
+          button.addEventListener('click',async()=>{if(!reason.reportValidity())return;button.disabled=true;try{await refresh();const result=await api('review-edit-request',{id:record.id,revision:record.revision,decision,reason:reason.value,mode:record.review?.mode||'manual'});proposalMessage(result);await editRequests();}catch(error){message(error.message);}finally{button.disabled=false;}});card.append(button);
+        }
+      }
+      if(record.status==='accepting'&&record.review?.mode==='automatic'){reason.disabled=true;const pending=document.createElement('p');pending.textContent='This automatic decision must be reconciled through its approved review connection.';card.append(pending);}
+      if(record.status==='pending'){const close=document.createElement('button');close.type='button';close.textContent='Close request';close.addEventListener('click',async()=>{if(!reason.reportValidity())return;close.disabled=true;try{await refresh();const response=await api('close-edit-request',{id:record.id,revision:record.revision,reason:reason.value});message(response.message);await editRequests();}catch(error){message(error.message);}finally{close.disabled=false;}});card.append(close);}
+      const note=document.createElement('p');note.textContent='An accepted change creates a release proposal. The public listing changes after required checks and independent release approval. Closing a request does not change the listing.';card.append(note);
     }
     root.append(card);
   }
@@ -96,7 +105,7 @@ async function requestEditForm(){
   form.addEventListener('submit',async event=>{
     event.preventDefault();mode();if(busy||!current||!form.reportValidity())return;
     const data=new FormData(form),actor=session?.identity,kind=remove.checked?'removal':'edit',input={id:current.id,sha:current.sha,kind,changes:String(data.get('changes')),sources:String(data.get('sources')),operationId,...(kind==='edit'?{entry:readEntry(form)}:{removalReasons:data.getAll('removalReasons')})};busy=true;mode();
-    try{await refresh();if(!session?.canRequestEdit||session.identity!==actor)throw Error('Your sign-in changed. Reload before sending this request.');const result=await api('request-edit',input);message(result.status==='closed'?'This request has already been reviewed.':kind==='removal'?'Removal request received. The listing stays visible until review and release approval.':'Edit request received. An Editor or Admin will review it before any listing changes.');current=null;form.reset();status.textContent='Choose a listing to load its current details.';operationId=crypto.randomUUID();await editRequests();}catch(error){message(error.message);}finally{busy=false;mode();}
+    try{await refresh();if(!session?.canRequestEdit||session.identity!==actor)throw Error('Your sign-in changed. Reload before sending this request.');const result=await api('request-edit',input);message(result.status==='closed'?'This request has already been reviewed.':kind==='removal'?'Removal request received. The listing stays visible until review and release approval.':'Edit request received. A Reviewer or Admin will review it before release.');current=null;form.reset();status.textContent='Choose a listing to load its current details.';operationId=crypto.randomUUID();await editRequests();}catch(error){message(error.message);}finally{busy=false;mode();}
   });
   const selected=new URLSearchParams(location.search).get('id');if(selected)select.value=selected;await load();
 }

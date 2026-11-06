@@ -16,7 +16,7 @@ async function screenshot(page,name,options={}){if(process.env.DIRECTORY_SCREENS
 const base={name:'Browser Fixture Project',lead_category:'Infrastructure',tags:['Infrastructure'],ecosystem:['Ethereum'],description:'A synthetic onchain project used only for local browser acceptance.',primary_url:'https://fixture.example.org',product_url:'https://fixture.example.org/app',founded:'2024',hq:'Metaverse',token:'n/a',token_url:'https://fixture.example.org/token',twitter:'n/a'};
 async function scenario(role,run){
   const context=await browser.newContext({viewport:{width:1360,height:900}}),page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
-  const staff=['admin','editor','reviewer'].includes(role),session={identity:role==='admin'?'0x'+'1'.repeat(40):'fixture@example.org',staff,admin:role==='admin',editor:role==='editor',reviewer:role==='reviewer',canEdit:['admin','editor'].includes(role),canReview:['admin','reviewer'].includes(role),canSubmit:['admin','submitter'].includes(role),canRequestEdit:['admin','editor','submitter'].includes(role),csrf:'fixture-csrf',storageConfigured:true};
+  const staff=['admin','editor','reviewer'].includes(role),session={identity:role==='admin'?'0x'+'1'.repeat(40):'fixture@example.org',staff,admin:role==='admin',editor:role==='editor',reviewer:role==='reviewer',canEdit:['admin','editor'].includes(role),canReview:['admin','reviewer'].includes(role),canAutoReview:role==='reviewer',canHandleRequests:staff,canSubmit:role!=='anonymous',canRequestEdit:role!=='anonymous',csrf:'fixture-csrf',storageConfigured:true};
   const editRequests=[{id:'22222222-2222-4222-8222-222222222222',projectId:'existing.md',projectName:'Existing Project',changes:'Please correct the official project description.',sources:'https://fixture.example.org/announcement',kind:'edit',patch:{description:'A requested correction to this existing project description.'},original:{description:base.description},listingSha:'a'.repeat(40),status:'pending',revision:1}];
   if(role==='editor')editRequests.push({id:'33333333-3333-4333-8333-333333333333',projectId:'existing.md',projectName:'Shutdown fixture',kind:'removal',removalReasons:['shutdown'],changes:'The project announced it has permanently shut down.',sources:'https://fixture.example.org/shutdown',status:'pending',revision:1});
   const records=[{id:'11111111-1111-4111-8111-111111111111',entry:{...base,verification_status:'pending_audit'},status:'pending',revision:1,history:[]}];let writes=[];
@@ -28,6 +28,7 @@ async function scenario(role,run){
     else if(endpoint==='edit-requests')data={requests:editRequests};
     else if(endpoint==='request-edit'){const value=route.request().postDataJSON();writes.push({endpoint,value});editRequests.push({id:value.operationId,projectId:value.id,projectName:base.name,kind:value.kind,changes:value.changes,sources:value.sources,removalReasons:value.removalReasons,...(value.kind==='edit'?{patch:{description:value.entry.description},original:{description:base.description}}:{}),status:'pending',revision:1});data={status:'pending'};}
     else if(endpoint==='close-edit-request'){const value=route.request().postDataJSON();writes.push({endpoint,value});editRequests[0].status='closed';data={status:'closed',message:'Edit request closed.'};}
+    else if(endpoint==='review-edit-request'){const value=route.request().postDataJSON();writes.push({endpoint,value});editRequests[0].status=value.decision==='accept'?'accepted':'rejected';data={status:value.decision==='accept'?'release-pending':'rejected',...(value.decision==='accept'?{proposal:{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/101',number:101}}:{})};}
     else if(endpoint==='project')data={id:u.searchParams.get('id'),sha:'a'.repeat(40),entry:{...base,verification_status:'verified'}};
     else if(endpoint==='submissions')data={revision:1,submissions:records};
     else if(['submit','edit','review'].includes(endpoint)){const value=route.request().postDataJSON();writes.push({endpoint,value});if(endpoint==='review')records[0].status=value.decision==='accept'?'accepted':'rejected';data=endpoint==='submit'?{id:value.operationId,status:'pending'}:{status:endpoint==='review'&&value.decision==='reject'?'rejected':'release-pending',proposal:{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}};}
@@ -139,7 +140,7 @@ try{
     await page.locator('[name="description"]').fill('Requested new description based on the official project announcement.');
     await page.locator('[name="changes"]').fill('Please correct the official project details using this source.');await page.locator('[name="sources"]').fill('https://fixture.example.org/announcement');
     await screenshot(page,'edit-request-mobile',{fullPage:true});await page.setViewportSize({width:1360,height:900});await screenshot(page,'edit-request-desktop',{fullPage:true});
-    await page.getByRole('button',{name:'Send edit request',exact:true}).click();await page.getByText('Edit request received. An Editor or Admin will review it before any listing changes.',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'Send edit request',exact:true}).click();await page.getByText('Edit request received. A Reviewer or Admin will review it before release.',{exact:true}).waitFor();
     assert.equal(writes.at(-1).endpoint,'request-edit');assert.equal(writes.at(-1).value.id,'aave.md');assert.equal(await page.getByRole('link',{name:'Open listing editor',exact:true}).count(),0);
     assert.equal(writes.at(-1).value.kind,'edit');assert.equal(writes.at(-1).value.sha,'a'.repeat(40));assert.equal(writes.at(-1).value.entry.token_url,base.token_url);assert.equal('verification_status' in writes.at(-1).value.entry,false);
     await page.locator('[name="id"]').selectOption('aave.md');await page.getByText('Current details loaded. Change the fields below, or request removal.',{exact:true}).waitFor();await page.getByLabel('Request removal of this listing',{exact:true}).check();
@@ -152,7 +153,7 @@ try{
   });
   await scenario('editor',async({page,writes,editRequests})=>{
     await page.goto(origin+'/request-edit.html');await page.getByRole('link',{name:'Open listing editor',exact:true}).waitFor();
-    assert.equal(await page.getByRole('link',{name:'Open listing editor',exact:true}).count(),1);assert(await page.getByText('An administrator must prepare a separate removal proposal for independent release approval. Closing this request does not remove the listing.',{exact:true}).isVisible());
+    assert.equal(await page.getByRole('link',{name:'Open listing editor',exact:true}).count(),1);assert(await page.getByText('An accepted change creates a release proposal. The public listing changes after required checks and independent release approval. Closing a request does not change the listing.',{exact:true}).first().isVisible());
     await page.getByRole('link',{name:'Open listing editor',exact:true}).click();await page.getByText('Requested correction:',{exact:false}).waitFor();
     assert((await page.locator('[name="reason"]').inputValue()).includes('22222222-2222-4222-8222-222222222222'));
     assert.equal(await page.locator('[name="description"]').inputValue(),editRequests[0].patch.description);
@@ -168,7 +169,10 @@ try{
     await page.goto(origin+'/review.html');await page.getByRole('button',{name:'Accept for release review',exact:true}).waitFor();assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
     await page.getByLabel('Review rationale').fill('Reviewed official website and live onchain product.');await page.getByRole('button',{name:'Accept for release review',exact:true}).click();await page.getByText('No new submissions are waiting for review.',{exact:true}).waitFor();
     assert.equal(writes[0].endpoint,'review');assert.equal(writes[0].value.decision,'accept');assert.equal('entry' in writes[0].value,false);
-    await page.goto(origin+'/request-edit.html');await page.locator('[data-request-unavailable]').waitFor({state:'visible'});assert.equal(await page.locator('#listing-request-form').isVisible(),false);assert.equal(await page.getByRole('link',{name:'Open listing editor',exact:true}).count(),0);
+    await page.getByLabel('Review outcome').fill('Independently checked the requested official correction.');await page.getByRole('button',{name:'Accept change for release review',exact:true}).click();await page.getByRole('heading',{name:'Existing Project — accepted',exact:true}).waitFor();
+    assert.equal(writes[1].endpoint,'review-edit-request');assert.equal(writes[1].value.decision,'accept');assert.equal('entry' in writes[1].value,false);
+    await page.goto(origin+'/request-edit.html');await page.locator('#listing-request-form').waitFor({state:'visible'});assert.equal(await page.getByRole('link',{name:'Open listing editor',exact:true}).count(),0);
+    await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});
   });
   await scenario('admin',async({page})=>{
     await page.goto(origin+'/');await page.locator('.site-nav').waitFor({state:'visible'});assert(await page.locator('.header-forms').isVisible());assert(await page.locator('[data-edit-entry]').first().isVisible());

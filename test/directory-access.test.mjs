@@ -44,9 +44,9 @@ function fixture(roles=[],identity=wallet){
   const storeFactory=()=>({
     configured:()=>true,
     async load(){if(state.revokeOnLoad)state.roles=[];return {sha:String(state.value.revision),value:structuredClone(state.value)};},
-    async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;return String(next.revision);},
+    async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;if(state.revokeAfterWrite)state.roles=[];return String(next.revision);},
     async duplicate(){return false;},
-    async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:'a'.repeat(40),raw:frontMatter({...listing,founded:state.numericFounded??listing.founded,verification_status:'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
+    async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:state.listingSha||'a'.repeat(40),raw:frontMatter({...listing,founded:state.numericFounded??listing.founded,verification_status:state.listingStatus||'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
     async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
     async reconcile(operation){return state.proposals.some(p=>p.operation===operation)?{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}:null;}
   });
@@ -56,7 +56,7 @@ function fixture(roles=[],identity=wallet){
   return {state,service,call,cookie,csrf};
 }
 test('signed wallet and email role decisions expose only their exact scoped capabilities',async()=>{
-  for(const [roles,expected] of [[[],[false,false,true]],[['role.editor'],[true,false,false]],[['role.reviewer'],[false,true,false]],[['role.editor','role.reviewer'],[true,true,false]],[['project.admin'],[true,true,true]],[['tier.partner'],[false,false,true]]]){
+  for(const [roles,expected] of [[[],[false,false,true]],[['role.editor'],[true,false,true]],[['role.reviewer'],[false,true,true]],[['role.editor','role.reviewer'],[true,true,true]],[['project.admin'],[true,true,true]],[['tier.partner'],[false,false,true]]]){
     for(const identity of [wallet,'person@example.org']){
       const f=fixture(roles,identity),r=await f.call('session');assert.equal(r.status,200);const value=await r.json();
       const result=identity.includes('@')&&roles.includes('project.admin')?[false,false,true]:expected;
@@ -81,9 +81,9 @@ test('edit requests are idempotent, scoped to existing entries, private by actor
   const rows=await (await f.call('edit-requests')).json();assert.equal(rows.requests.length,1);assert(!('requester' in rows.requests[0]));assert(!JSON.stringify(f.state.value).includes('person@example.org'));
   assert.equal((await f.call('close-edit-request',{id:input.operationId,revision:1,reason:'Request reviewed and closed.'})).status,403);
 });
-test('only Editors/Admins handle edit requests; Reviewer permissions, CSRF and current authority remain enforced',async()=>{
+test('staff handle requests; all authenticated users may request corrections while CSRF and current authority remain enforced',async()=>{
   const input={id:'existing.md',changes:'Correct these existing official project details.',sources:'',operationId:randomUUID()};
-  const reviewer=fixture(['role.reviewer']);assert.equal((await reviewer.call('request-edit',input)).status,403);assert.equal((await reviewer.call('close-edit-request',{})).status,403);
+  const reviewer=fixture(['role.reviewer']);assert.equal((await reviewer.call('request-edit',input)).status,201);assert.equal((await reviewer.call('close-edit-request',{})).status,400);
   const editor=fixture(['role.editor']);assert.equal((await editor.call('request-edit',input)).status,201);
   for(const extra of [{origin:'https://attacker.example'},{'x-directory-csrf':'bad'},{'sec-fetch-site':'cross-site'}])assert.equal((await editor.call('request-edit',{...input,operationId:randomUUID()},extra)).status,403);
   const close={id:input.operationId,revision:1,reason:'Checked official sources; an update proposal is handled separately.'};
@@ -106,7 +106,7 @@ test('structured edit requests capture the actual changed fields without changin
   assert.equal(f.state.writes,1);assert.equal(f.state.proposals.length,0);assert.equal(record.patch.verification_status,undefined);
   assert.equal((await f.call('request-edit',{...input,entry:{...input.entry,name:'Changed again'}})).status,409);
   assert.equal((await f.call('request-edit',{...input,operationId:randomUUID(),entry:{...input.entry,verification_status:'verified'}})).status,400);
-  assert.equal((await f.call('edit',{})).status,403);assert.equal((await fixture(['role.reviewer']).call('project?id=existing.md')).status,403);
+  assert.equal((await f.call('edit',{})).status,403);assert.equal((await fixture(['role.reviewer']).call('project?id=existing.md')).status,200);
 });
 test('structured requests hold stale snapshots and reject no-op edits before any journal write',async()=>{
   const f=fixture(),input={id:'existing.md',sha:'b'.repeat(40),kind:'edit',entry:{...listing,name:'Corrected name'},changes:'Official sources now use this corrected project name.',sources:'',operationId:randomUUID()};
@@ -165,7 +165,7 @@ test('Editor updates existing metadata only; forged approval/status/create attem
   assert.equal((await f.call('edit',{...request,id:'new-project.md',operationId:randomUUID()})).status,404);
   assert.equal((await f.call('edit',{...request,sha:'b'.repeat(40),operationId:randomUUID()})).status,409);
   assert.equal((await f.call('edit',{...request,entry:{...request.entry,verification_status:'verified'},operationId:randomUUID()})).status,400);
-  assert.equal((await f.call('submit',{entry:newEntry,operationId:randomUUID()})).status,403);
+  assert.equal((await f.call('submit',{entry:newEntry,operationId:randomUUID()})).status,201);assert.equal(f.state.value.submissions.length,1);assert.equal(f.state.proposals.length,1);
   assert.equal((await f.call('review',{})).status,403);
 });
 test('Reviewer accepts the immutable new entry or rejects it; no existing edit or self-review',async()=>{
@@ -175,7 +175,7 @@ test('Reviewer accepts the immutable new entry or rejects it; no existing edit o
     assert.equal((await f.call('review',{...request,entry:{...newEntry,name:'Altered'}})).status,400);
     assert.equal((await f.call('review',request)).status,decision==='accept'?201:200);
     assert.equal(f.state.value.submissions[0].status,decision==='accept'?'accepted':'rejected');assert.equal(f.state.proposals.length,decision==='accept'?1:0);
-    assert.equal((await f.call('edit',{})).status,403);assert.equal((await f.call('submit',{})).status,403);
+    assert.equal((await f.call('edit',{})).status,403);assert.equal((await f.call('submit',{})).status,400);
     assert.equal((await f.call('review',request)).status,409);
   }
   const f=fixture(['project.admin']),id=randomUUID();await f.call('submit',{entry:newEntry,operationId:id});assert.equal((await f.call('review',{id,revision:1,decision:'accept',reason:'This is my own submission.'})).status,403);
@@ -213,4 +213,60 @@ test('entry serialization preserves adversarial text and rejects executable URLs
   assert.equal(documentBody(frontMatter(value)+'\nRetained body\r\n'),'\nRetained body\r\n');
   for(const change of [{primary_url:'javascript:alert(1)'},{description:'description\nverification_status: verified'},{lead_category:'Not a category'},{tags:['okay\nadmin']}])assert.throws(()=>entry({...newEntry,...change}));
   const state={version:1,revision:0,submissions:[],edits:[]},signed=signedState(state,secret);assert.deepEqual(readState(signed,secret),state);signed.value.revision=9;assert.throws(()=>readState(signed,secret));
+});
+
+async function requestedFixture(kind='edit',roles=['role.reviewer']){
+  const submitter=fixture([], 'submitter@example.org');
+  const input={id:'existing.md',sha:'a'.repeat(40),kind,changes:'Official project evidence supports this requested correction.',sources:'https://existing.example.org/announcement',operationId:randomUUID(),...(kind==='edit'?{entry:{...listing,description:'Corrected existing project description supported by official sources.'}}:{removalReasons:['shutdown']})};
+  assert.equal((await submitter.call('request-edit',input)).status,201);
+  const reviewer=fixture(roles,'reviewer@example.org');reviewer.state.value=structuredClone(submitter.state.value);
+  const decision={id:input.operationId,revision:1,decision:'accept',reason:'Independently reviewed the current official project evidence.'};
+  return {reviewer,submitter,decision};
+}
+test('Reviewer accepts immutable requested changes while preserving metadata and document body',async()=>{
+  const {reviewer:f,decision}=await requestedFixture();f.state.listingStatus='needs_update';
+  assert.equal((await f.call('review-edit-request',{...decision,entry:{name:'Injected'}})).status,400);
+  assert.equal((await f.call('review-edit-request',decision)).status,201);
+  const proposal=f.state.proposals[0];assert.equal(proposal.id,'existing.md');assert.equal(proposal.value.description,'Corrected existing project description supported by official sources.');
+  assert.equal(proposal.value.verification_status,'verified');assert.equal(proposal.value.curation_note,'Preserve this existing metadata');assert.equal(proposal.options.existingSha,'a'.repeat(40));assert.equal(proposal.options.body,'\n## Existing notes\nKeep this text.\n');
+  const record=f.state.value.editRequests[0];assert.equal(record.status,'accepted');assert.equal(record.review.mode,'manual');assert.equal(record.review.reviewer.length,64);
+  assert.equal((await f.call('review-edit-request',decision)).status,409);
+});
+test('removal approval retains the record and history and proposes exclusion without deleting source',async()=>{
+  const {reviewer:f,decision}=await requestedFixture('removal');
+  assert.equal((await f.call('review-edit-request',decision)).status,201);
+  assert.equal(f.state.proposals[0].value.verification_status,'rejected');assert.equal(f.state.proposals[0].value.name,listing.name);assert.deepEqual(f.state.value.editRequests[0].removalReasons,['shutdown']);assert.equal(f.state.proposals[0].options.kind,'edit');
+});
+test('only Reviewer or wallet Admin may accept/reject requests; anyone signed in may submit',async()=>{
+  for(const roles of [[],['role.editor']]){
+    const {reviewer:f,decision}=await requestedFixture('edit',roles);assert.equal((await f.call('review-edit-request',decision)).status,403);assert.equal(f.state.proposals.length,0);
+  }
+  const {reviewer:f,decision}=await requestedFixture();assert.equal((await f.call('review-edit-request',{...decision,decision:'reject'})).status,200);assert.equal(f.state.proposals.length,0);assert.equal(f.state.value.editRequests[0].status,'rejected');
+  for(const roles of [[],['role.editor'],['role.reviewer']]){const f=fixture(roles,'anyone@example.org');assert.equal((await f.call('submit',{entry:newEntry,operationId:randomUUID()})).status,201);assert.equal((await f.call('request-edit',{id:'existing.md',changes:'A current official update needs review.',sources:'',operationId:randomUUID()})).status,201);}
+});
+test('self-approval, stale request revision, stale listing and legacy free-text acceptance are blocked',async()=>{
+  const {reviewer:f,submitter,decision}=await requestedFixture();
+  submitter.state.roles=['role.reviewer'];assert.equal((await submitter.call('review-edit-request',decision)).status,403);
+  assert.equal((await f.call('review-edit-request',{...decision,revision:2})).status,409);
+  f.state.listingSha='b'.repeat(40);assert.equal((await f.call('review-edit-request',decision)).status,409);f.state.listingSha=null;
+  f.state.value.editRequests[0].kind='legacy';assert.equal((await f.call('review-edit-request',decision)).status,409);assert.equal(f.state.writes,0);
+});
+test('native browser approval cannot impersonate an enrolled automatic Reviewer connection',async()=>{
+  for(const [roles,identity] of [[[],wallet],[['role.editor'],wallet],[['project.admin'],wallet]]){
+    const f=fixture(roles,identity);f.state.value.submissions.push({id:randomUUID(),submitter:'other',entry:entry(newEntry),revision:1,status:'pending',history:[]});
+    assert.equal((await f.call('review',{id:f.state.value.submissions[0].id,revision:1,decision:'accept',reason:'Current official evidence was independently reviewed.',mode:'automatic'})).status,403);assert.equal(f.state.writes,0);
+  }
+  for(const route of ['review','review-edit-request']){
+    const {reviewer:f,decision}=await requestedFixture();
+    if(route==='review')f.state.value.submissions.push({id:decision.id,submitter:'other',entry:entry(newEntry),revision:1,status:'pending',history:[]});
+    assert.equal((await f.call(route,{...decision,mode:'automatic'})).status,403);
+    assert.equal(f.state.proposals.length,0);assert.equal(f.state.writes,0);
+  }
+});
+test('revoked Reviewer cannot continue after reservation; uncertain update outcomes reconcile without replay',async()=>{
+  const {reviewer:f,decision}=await requestedFixture();f.state.revokeAfterWrite=true;
+  assert.equal((await f.call('review-edit-request',decision)).status,403);assert.equal(f.state.proposals.length,0);assert.equal(f.state.value.editRequests[0].status,'accepting');
+  const {reviewer:g,decision:d}=await requestedFixture();g.state.failProposal=true;
+  assert.equal((await g.call('review-edit-request',d)).status,503);assert.equal(g.state.value.editRequests[0].status,'accepting');assert.equal((await g.call('review-edit-request',d)).status,409);assert.equal(g.state.proposals.length,0);
+  assert.equal((await g.call('review-edit-request',{...d,reason:'Changed review rationale is not a replay.'})).status,409);
 });
