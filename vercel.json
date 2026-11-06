@@ -29,5 +29,12 @@
       "source": "/api/shared-roles-health",
       "destination": "/api/project-admin"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
