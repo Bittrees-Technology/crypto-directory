@@ -95,59 +95,6 @@ function parseFrontMatter(filePath, text) {
   return meta;
 }
 
-function badges(values) {
-  return values.map((v) => `<span class=\"badge\">${escapeHtml(v)}</span>`).join('');
-}
-
-function tokenLinksHtml(tokenValue, tokenUrl = '') {
-  const raw = String(tokenValue || '').trim();
-  if (!raw || raw.toLowerCase() === 'n/a') return 'n/a';
-  const symbols = raw.split(',').map((s) => s.trim()).filter(Boolean);
-  if (symbols.length === 0) return 'n/a';
-  const explicitTokenUrl = String(tokenUrl || '').trim();
-  return symbols
-    .map((symbol) => {
-      const href = explicitTokenUrl || `https://www.coingecko.com/en/search?query=${encodeURIComponent(symbol)}`;
-      return `<a class=\"token-link\" href=\"${escapeHtml(href)}\" target=\"_blank\" rel=\"noopener\">${escapeHtml(symbol)}</a>`;
-    })
-    .join(', ');
-}
-
-function linksCellHtml(project) {
-  const links = [
-    `<a class=\"link-pill\" href=\"${escapeHtml(project.primary_url)}\" target=\"_blank\" rel=\"noopener\">Website</a>`
-  ];
-  if (project.product_url && project.product_url !== 'n/a' && project.product_url !== project.primary_url) {
-    links.push(`<a class=\"link-pill\" href=\"${escapeHtml(project.product_url)}\" target=\"_blank\" rel=\"noopener\">Product</a>`);
-  }
-  return `<div class=\"links-cell\">${links.join('')}</div>`;
-}
-
-function twitterCellHtml(twitter) {
-  const xLink = twitter && twitter !== 'n/a'
-    ? `<a href=\"${escapeHtml(twitter)}\" target=\"_blank\" rel=\"noopener\">X</a>`
-    : 'n/a';
-  return xLink;
-}
-
-function tableRows(projects,navPrefix='') {
-  return projects
-    .map((p) => {
-      return `<tr>
-<td><strong>${escapeHtml(p.name)}</strong><br><small>${escapeHtml(p.lead_category)}</small><br><a data-edit-entry data-can-edit hidden href="${escapeHtml(navPrefix+'edit.html?id='+encodeURIComponent(p.id||''))}">Edit listing</a></td>
-<td>${escapeHtml(p.description)}</td>
-<td>${linksCellHtml(p)}</td>
-<td>${badges(p.tags)}</td>
-<td>${badges(p.ecosystem)}</td>
-<td>${escapeHtml(String(p.founded))}</td>
-<td>${escapeHtml(p.hq)}</td>
-<td>${tokenLinksHtml(p.token, p.token_url)}</td>
-<td>${twitterCellHtml(p.twitter)}</td>
-</tr>`;
-    })
-    .join('\n');
-}
-
 function seoHead({ title, description, canonicalPath = '', jsonLd = null, robots = 'index,follow' }) {
   const canonical = absoluteUrl(canonicalPath);
   const descriptionEscaped = escapeHtml(description);
@@ -560,12 +507,6 @@ async function main() {
 
   // Every public page in each bounded series is crawlable and self-canonical.
   // Staff tools remain crawlable for noindex, outside the public sitemap.
-  // Keep staff tools crawlable so their noindex directive can be observed,
-  // but include only public discovery pages in the sitemap.
-  const sitemapPaths = [
-    '',
-    ...categories.map((c) => `categories/${slugify(c)}.html`)
-  ];
   await fs.writeFile(path.join(siteDir, 'sitemap.xml'), sitemapXml(sitemapPaths));
   await fs.writeFile(path.join(siteDir, 'robots.txt'), robotsTxt());
   await writeReleaseManifest(root, siteDir);
