@@ -22,6 +22,10 @@ The preflight accepts only current verified directory IDs and website/product ty
 
 CryptoDirectory's public feed remains the catalog source of truth. The server fetches it with a five-minute CDN cache; a dated snapshot is clearly labeled during outages. Visible pages refresh every five minutes and on returning to the tab.
 
+The first-load `public/catalog.json` and runtime outage fallback both use the reviewed `public/data/source.json`. The Surf build does not substitute the root directory's `site/data/projects.json`: that tracked artifact can belong to an older CryptoDirectory revision on the independent `surf-production` branch. `SNAPSHOT_DATE` in `lib/catalog.js` labels both generated and runtime snapshots.
+
+For a snapshot refresh, verify the current public CD feed against its release manifest and retain that provenance with the release evidence. Copy the approved feed bytes to `public/data/source.json` without changing IDs or entry fields, set `SNAPSHOT_DATE` to the verification date, and run the existing build and tests. Compare the generated catalog and runtime fallback with the current verified CD IDs again before release. The build/fallback regression check prevents two different bundled cohorts; it does not establish that a bundled snapshot is still current after later CD curation. Refresh the reviewed Surf snapshot through the existing release process when CD eligibility changes. Live feed refresh, frame preflight, account boundaries and release prerequisites remain unchanged.
+
 ## Identity and refresh repairs
 
 Project IDs now use CryptoDirectory's stable entry filenames, never destination URLs. `public/legacy-ids.js` retains the original URL identifiers so existing bookmarks and shared links keep resolving when URLs change. Guest saves migrate once from `bittrees.surf.v1` to `bittrees.surf.v2`; removed migrated saves are not resurrected on reload.
