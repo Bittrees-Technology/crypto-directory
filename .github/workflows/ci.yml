@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "surf-production"]
 
 permissions:
   contents: read
