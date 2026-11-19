@@ -3,11 +3,13 @@ import path from 'node:path';
 import { loadProcessStatuses } from './lib/process-metrics.mjs';
 import { writeReleaseManifest } from './lib/release-manifest.mjs';
 import {CATEGORIES,LISTING_FIELDS,REMOVAL_REASONS} from '../lib/directory/model.mjs';
+import { filterProjects, projectPage, catalogPagePath, pageSummary, escapeHtml, tableRows } from '../web/catalog.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
 const siteDir = path.join(root, 'site');
 const categoryDir = path.join(siteDir, 'categories');
+const pageDir = path.join(siteDir, 'pages');
 const dataDir = path.join(siteDir, 'data');
 const SITE_URL = (process.env.SITE_URL || 'https://cryptodirectory.eth.limo').replace(/\/+$/, '');
 const FAVICON_URL = 'https://euc.li/cryptodirectory.eth';
@@ -26,15 +28,6 @@ const required = [
   'twitter',
   'verification_status'
 ];
-
-function escapeHtml(input = '') {
-  return String(input)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
-}
 
 function slugify(input = '') {
   return input
@@ -102,59 +95,6 @@ function parseFrontMatter(filePath, text) {
   return meta;
 }
 
-function badges(values) {
-  return values.map((v) => `<span class=\"badge\">${escapeHtml(v)}</span>`).join('');
-}
-
-function tokenLinksHtml(tokenValue, tokenUrl = '') {
-  const raw = String(tokenValue || '').trim();
-  if (!raw || raw.toLowerCase() === 'n/a') return 'n/a';
-  const symbols = raw.split(',').map((s) => s.trim()).filter(Boolean);
-  if (symbols.length === 0) return 'n/a';
-  const explicitTokenUrl = String(tokenUrl || '').trim();
-  return symbols
-    .map((symbol) => {
-      const href = explicitTokenUrl || `https://www.coingecko.com/en/search?query=${encodeURIComponent(symbol)}`;
-      return `<a class=\"token-link\" href=\"${escapeHtml(href)}\" target=\"_blank\" rel=\"noopener\">${escapeHtml(symbol)}</a>`;
-    })
-    .join(', ');
-}
-
-function linksCellHtml(project) {
-  const links = [
-    `<a class=\"link-pill\" href=\"${escapeHtml(project.primary_url)}\" target=\"_blank\" rel=\"noopener\">Website</a>`
-  ];
-  if (project.product_url && project.product_url !== 'n/a' && project.product_url !== project.primary_url) {
-    links.push(`<a class=\"link-pill\" href=\"${escapeHtml(project.product_url)}\" target=\"_blank\" rel=\"noopener\">Product</a>`);
-  }
-  return `<div class=\"links-cell\">${links.join('')}</div>`;
-}
-
-function twitterCellHtml(twitter) {
-  const xLink = twitter && twitter !== 'n/a'
-    ? `<a href=\"${escapeHtml(twitter)}\" target=\"_blank\" rel=\"noopener\">X</a>`
-    : 'n/a';
-  return xLink;
-}
-
-function tableRows(projects,navPrefix='') {
-  return projects
-    .map((p) => {
-      return `<tr>
-<td><strong>${escapeHtml(p.name)}</strong><br><small>${escapeHtml(p.lead_category)}</small><br><a data-edit-entry data-can-edit hidden href="${escapeHtml(navPrefix+'edit.html?id='+encodeURIComponent(p.id||''))}">Edit listing</a></td>
-<td>${escapeHtml(p.description)}</td>
-<td>${linksCellHtml(p)}</td>
-<td>${badges(p.tags)}</td>
-<td>${badges(p.ecosystem)}</td>
-<td>${escapeHtml(String(p.founded))}</td>
-<td>${escapeHtml(p.hq)}</td>
-<td>${tokenLinksHtml(p.token, p.token_url)}</td>
-<td>${twitterCellHtml(p.twitter)}</td>
-</tr>`;
-    })
-    .join('\n');
-}
-
 function seoHead({ title, description, canonicalPath = '', jsonLd = null, robots = 'index,follow' }) {
   const canonical = absoluteUrl(canonicalPath);
   const descriptionEscaped = escapeHtml(description);
@@ -177,11 +117,12 @@ function seoHead({ title, description, canonicalPath = '', jsonLd = null, robots
 }
 
 function sitemapXml(paths) {
-  const now = new Date().toISOString();
+  // No reliable per-page modification date is recorded; omit lastmod instead
+  // of reporting every routine rebuild as a content change.
   const urls = paths
     .map((p) => {
       const loc = absoluteUrl(p);
-      return `<url><loc>${escapeHtml(loc)}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq></url>`;
+      return `<url><loc>${escapeHtml(loc)}</loc></url>`;
     })
     .join('');
   return `<?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -244,163 +185,96 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
 </html>`.replace(/[ \t]+(?=\n)/g,'');
 }
 
-function indexPage(projects, categories) {
-  const options = ['<option value="">All categories</option>']
-    .concat(categories.map((c) => `<option value=\"${escapeHtml(c)}\">${escapeHtml(c)}</option>`))
-    .join('');
+function navigationPrefix(canonicalPath) {
+  return '../'.repeat(canonicalPath.split('/').length - 1);
+}
 
-  const visibleProjects = projects.filter((p) => p.verification_status === 'verified');
-  const rows = tableRows(visibleProjects);
-  const body = `<section class=\"controls\">
-  <input id=\"search\" type=\"search\" placeholder=\"Search name, tag, ecosystem\">
-  <select id=\"category\">${options}</select>
-</section>
-<section class=\"card\" style=\"margin-bottom:12px\">
-  <div style=\"margin-top:8px\">Category pages: ${categories.map((c) => `<a href=\"categories/${slugify(c)}.html\">${escapeHtml(c)}</a>`).join(' | ')}</div>
-  <div style=\"margin-top:8px\">Disclosure: This directory is informational only and is not an endorsement or financial advice.</div>
-</section>
+function paginationHtml(state, canonicalPath, categorySlug = '') {
+  const prefix = navigationPrefix(canonicalPath);
+  const link = (page, label, rel = '') => `<a ${rel ? `rel="${rel}" ` : ''}href="${escapeHtml(prefix + catalogPagePath(page, categorySlug) || './')}">${label}</a>`;
+  return `<nav class="catalog-pagination" id="catalog-pagination" aria-label="${categorySlug ? 'Category' : 'Directory'} pages">
+    ${state.page > 1 ? link(1, 'First page') + link(state.page - 1, 'Previous page', 'prev') : ''}
+    <span aria-current="page">Page ${state.page} of ${state.pageCount}</span>
+    ${state.page < state.pageCount ? link(state.page + 1, 'Next page', 'next') + link(state.pageCount, 'Last page') : ''}
+  </nav>`;
+}
+
+function catalogTable(rows) {
+  return `<div class="catalog-table" tabindex="0" role="region" aria-label="Project listings">
 <table>
   <thead>
     <tr>
-      <th>Name</th><th>Description</th><th>Links</th><th>Tags</th><th>Ecosystem</th><th>Founded</th><th>HQ</th><th>Token</th><th>X</th>
+      <th scope="col">Name</th><th scope="col">Description</th><th scope="col">Links</th><th scope="col">Tags</th><th scope="col">Ecosystem</th><th scope="col">Founded</th><th scope="col">HQ</th><th scope="col">Token</th><th scope="col">X</th>
     </tr>
   </thead>
-  <tbody id=\"rows\">${rows}</tbody>
-</table>`;
-
-  const script = `<script>
-const projects = ${JSON.stringify(projects).replaceAll('<','\\u003c')};
-const rowsEl = document.getElementById('rows');
-const searchEl = document.getElementById('search');
-const categoryEl = document.getElementById('category');
-
-function esc(s) {
-  return String(s)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
+  <tbody id="rows">${rows}</tbody>
+</table></div>`;
 }
 
-function badge(v) {
-  return '<span class="badge">' + esc(v) + '</span>';
+function indexPage(projects, categories, page = 1) {
+  const visibleProjects = filterProjects(projects);
+  const state = projectPage(visibleProjects, page);
+  const canonicalPath = catalogPagePath(page);
+  const prefix = navigationPrefix(canonicalPath);
+  const options = ['<option value="">All categories</option>']
+    .concat(categories.map(category => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`)).join('');
+  const title = page === 1 ? 'CryptoDirectory' : `CryptoDirectory | Page ${page}`;
+  const description = `CryptoDirectory is a curated global index of active onchain companies and projects across ${categories.length} categories.${page > 1 ? ` Page ${page} of ${state.pageCount}.` : ''}`;
+  const body = `<section class="controls" data-catalog-search data-source="${prefix}data/projects.json" data-prefix="${prefix}">
+  <label>Search all projects<input id="search" type="search" placeholder="Search name, tag, ecosystem"></label>
+  <label>Category<select id="category">${options}</select></label>
+</section>
+<p id="catalog-search-status" role="status" aria-live="polite"></p>
+<button id="catalog-retry" type="button" hidden>Retry search</button>
+<noscript><p>Search needs JavaScript. Browse every project using the category and page links.</p></noscript>
+<section class="card" style="margin-bottom:12px">
+  <div>Category pages: ${categories.map(category => `<a href="${prefix}categories/${slugify(category)}.html">${escapeHtml(category)}</a>`).join(' | ')}</div>
+</section>
+<p id="catalog-count" class="status" role="status" aria-live="polite">${pageSummary(state)}</p>
+${catalogTable(tableRows(state.items, prefix))}
+${paginationHtml(state, canonicalPath)}
+<nav class="catalog-pagination" id="search-pagination" aria-label="Search result pages" hidden>
+  <button id="search-previous" type="button">Previous results</button>
+  <span id="search-page" aria-current="page"></span>
+  <button id="search-next" type="button">Next results</button>
+</nav>`;
+  const head = seoHead({ title, description, canonicalPath, jsonLd: page === 1 ? {
+    '@context': 'https://schema.org', '@type': 'WebSite', name: 'CryptoDirectory',
+    url: absoluteUrl(''), description: `Curated index of ${visibleProjects.length} active onchain companies and projects.`, inLanguage: 'en'
+  } : {
+    '@context': 'https://schema.org', '@type': 'CollectionPage', name: title,
+    url: absoluteUrl(canonicalPath), isPartOf: absoluteUrl(''), inLanguage: 'en'
+  } });
+  return pageShell({ title, heading: 'Explore the directory', home: true,
+    subtitle: 'Active global onchain companies and projects', body, extraHead: head,
+    extraScript: `<script type="module" src="${prefix}assets/directory-search.js"></script>`,
+    stylesheetHref: `${prefix}assets/styles.css`, navPrefix: prefix });
 }
 
-function tokenCell(v, tokenUrl) {
-  const raw = String(v || '').trim();
-  if (!raw || raw.toLowerCase() === 'n/a') return 'n/a';
-  const symbols = raw.split(',').map((s) => s.trim()).filter(Boolean);
-  if (symbols.length === 0) return 'n/a';
-  const explicitTokenUrl = String(tokenUrl || '').trim();
-  return symbols.map((s) => {
-    const href = explicitTokenUrl || ('https://www.coingecko.com/en/search?query=' + encodeURIComponent(s));
-    return '<a class="token-link" href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(s) + '</a>';
-  }).join(', ');
-}
-
-function row(p) {
-  const hasDistinctProduct = p.product_url && p.product_url !== 'n/a' && p.product_url !== p.primary_url;
-  const product = hasDistinctProduct
-    ? '<a class="link-pill" href="' + esc(p.product_url) + '" target="_blank" rel="noopener">Product</a>'
-    : 'n/a';
-  const links = '<div class="links-cell"><a class="link-pill" href="' + esc(p.primary_url) + '" target="_blank" rel="noopener">Website</a>' + (product === 'n/a' ? '' : product) + '</div>';
-  const xCell = (p.twitter && p.twitter !== 'n/a')
-    ? '<a href="' + esc(p.twitter) + '" target="_blank" rel="noopener">X</a>'
-    : 'n/a';
-  return '<tr>' +
-    '<td><strong>' + esc(p.name) + '</strong><br><small>' + esc(p.lead_category) + '</small><br><a data-edit-entry data-can-edit hidden href="edit.html?id=' + encodeURIComponent(p.id||'') + '">Edit listing</a></td>' +
-    '<td>' + esc(p.description) + '</td>' +
-    '<td>' + links + '</td>' +
-    '<td>' + p.tags.map(badge).join('') + '</td>' +
-    '<td>' + p.ecosystem.map(badge).join('') + '</td>' +
-    '<td>' + esc(p.founded) + '</td>' +
-    '<td>' + esc(p.hq) + '</td>' +
-    '<td>' + tokenCell(p.token, p.token_url) + '</td>' +
-    '<td>' + xCell + '</td>' +
-  '</tr>';
-}
-
-function render() {
-  const q = searchEl.value.trim().toLowerCase();
-  const category = categoryEl.value;
-  const filtered = projects.filter((p) => {
-    const inCategory = !category || p.lead_category === category;
-    const inStatus = p.verification_status === 'verified';
-    const haystack = [p.name, p.description, p.tags.join(' '), p.ecosystem.join(' ')].join(' ').toLowerCase();
-    const inQuery = !q || haystack.includes(q);
-    return inCategory && inStatus && inQuery;
-  });
-  rowsEl.innerHTML = filtered.map(row).join('');
-  document.dispatchEvent(new Event('directory-rows-rendered'));
-}
-
-searchEl.addEventListener('input', render);
-categoryEl.addEventListener('change', render);
-</script>`;
-
-  const head = seoHead({
-    title: 'CryptoDirectory',
-    description: `CryptoDirectory is a curated global index of active onchain companies and projects across ${categories.length} categories.`,
-    canonicalPath: '',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'CryptoDirectory',
-      url: absoluteUrl(''),
-      description: `Curated index of ${visibleProjects.length} active onchain companies and projects.`,
-      inLanguage: 'en'
-    }
-  });
-
-  return pageShell({
-    title: 'CryptoDirectory',
-    heading: 'Explore the directory',
-    home: true,
-    subtitle: 'Active global onchain companies and projects',
-    body,
-    extraHead: head,
-    extraScript: script
-  });
-}
-
-function categoryPage(category, projects) {
-  const visible = projects.filter((p) => p.verification_status === 'verified');
+function categoryPage(category, projects, page = 1) {
+  const visible = filterProjects(projects, { category });
+  const state = projectPage(visible, page);
   const slug = slugify(category);
+  const canonicalPath = catalogPagePath(page, slug);
+  const prefix = navigationPrefix(canonicalPath);
   const scope = category === 'AI Agents' ? '<p>Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.</p>' : '';
   const empty = visible.length ? '' : '<p>No listings have been added to this category yet. New suggestions go through review before appearing here.</p>';
-  const body = `<section class=\"card\" style=\"margin:18px 0\">${visible.length} entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href=\"../\">Back to index</a></section>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th><th>Description</th><th>Links</th><th>Tags</th><th>Ecosystem</th><th>Founded</th><th>HQ</th><th>Token</th><th>X</th>
-    </tr>
-  </thead>
-  <tbody>${tableRows(visible,'../')}</tbody>
-</table>`;
-
-  const head = seoHead({
-    title: `CryptoDirectory | ${category}`,
-    description: `Browse ${visible.length} active onchain projects in the ${category} category.`,
-    canonicalPath: `categories/${slug}.html`,
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: `CryptoDirectory - ${category}`,
-      url: absoluteUrl(`categories/${slug}.html`),
-      isPartOf: absoluteUrl(''),
-      inLanguage: 'en'
+  const body = `<section class="card" style="margin:18px 0">${visible.length} entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href="${prefix}">Back to index</a></section>
+<p id="catalog-count" class="status">${pageSummary(state)}</p>
+${catalogTable(tableRows(state.items, prefix))}
+${paginationHtml(state, canonicalPath, slug)}`;
+  const title = `CryptoDirectory | ${category}${page > 1 ? ` | Page ${page}` : ''}`;
+  const head = seoHead({ title,
+    description: `Browse ${visible.length} active onchain projects in the ${category} category.${page > 1 ? ` Page ${page} of ${state.pageCount}.` : ''}`,
+    canonicalPath, jsonLd: {
+      '@context': 'https://schema.org', '@type': 'CollectionPage',
+      name: `CryptoDirectory - ${category}${page > 1 ? ` - Page ${page}` : ''}`,
+      url: absoluteUrl(canonicalPath), isPartOf: absoluteUrl(''), inLanguage: 'en'
     }
   });
-
-  return pageShell({
-    title: `Category: ${category}`,
-    subtitle: 'Sorted by lead category',
-    body,
-    extraHead: head,
-    stylesheetHref: '../assets/styles.css',
-    navPrefix: '../'
-  });
+  return pageShell({ title, heading: `Category: ${category}`,
+    subtitle: 'Sorted by lead category', body, extraHead: head,
+    stylesheetHref: `${prefix}assets/styles.css`, navPrefix: prefix });
 }
 
 function reviewPage(projects) {
@@ -575,8 +449,8 @@ ${cards || '<section class="card" style="margin:18px 0">No tracked processes fou
 }
 
 async function main() {
-  await fs.mkdir(categoryDir, { recursive: true });
   await fs.mkdir(dataDir, { recursive: true });
+  await fs.mkdir(path.join(siteDir, 'assets'), { recursive: true });
 
   const files = (await fs.readdir(contentDir))
     .filter((f) => f.endsWith('.md'))
@@ -596,7 +470,19 @@ async function main() {
 
   await fs.writeFile(path.join(dataDir, 'projects.json'), JSON.stringify(projects, null, 2) + '\n');
   await fs.writeFile(path.join(dataDir, 'process-status.json'), JSON.stringify(processStatuses, null, 2) + '\n');
-  await fs.writeFile(path.join(siteDir, 'index.html'), indexPage(projects, categories));
+  // These directories contain generated discovery pages only. Rebuild them so
+  // withdrawn entries cannot survive in old pagination files after counts shrink.
+  await fs.rm(categoryDir, { recursive: true, force: true });
+  await fs.rm(pageDir, { recursive: true, force: true });
+  await fs.mkdir(categoryDir, { recursive: true });
+  await fs.mkdir(pageDir, { recursive: true });
+  const sitemapPaths = [];
+  const globalPages = projectPage(filterProjects(projects)).pageCount;
+  for (let page = 1; page <= globalPages; page += 1) {
+    const outputPath = catalogPagePath(page);
+    await fs.writeFile(path.join(siteDir, outputPath || 'index.html'), indexPage(projects, categories, page));
+    sitemapPaths.push(outputPath);
+  }
   await fs.writeFile(path.join(siteDir, 'review.html'), reviewPage(projects));
   await fs.writeFile(path.join(siteDir, 'needs-update.html'), needsUpdatePage(projects));
   await fs.writeFile(path.join(siteDir, 'process-status.html'), processStatusPage(processStatuses));
@@ -605,19 +491,22 @@ async function main() {
   await fs.writeFile(path.join(siteDir,'request-edit.html'),editRequestPage(projects));
   await fs.writeFile(path.join(siteDir,'sign-in.html'),pageShell({title:'CryptoDirectory',subtitle:'Sign in with email or Ethereum',body:'<section class="card"><p>Opening the shared Bittrees sign-in…</p><a href="https://roles.bittrees.org/sign-in?app=crypto-directory">Continue to sign-in</a></section>'}));
   await fs.copyFile(path.join(root,'web/directory-client.js'),path.join(siteDir,'assets/directory-client.js'));
+  await fs.copyFile(path.join(root,'web/catalog.mjs'),path.join(siteDir,'assets/catalog.mjs'));
+  await fs.copyFile(path.join(root,'web/directory-search.mjs'),path.join(siteDir,'assets/directory-search.js'));
 
   for (const category of categories) {
-    const catProjects = projects.filter((p) => p.lead_category === category);
-    const output = categoryPage(category, catProjects);
-    await fs.writeFile(path.join(categoryDir, `${slugify(category)}.html`), output);
+    const slug = slugify(category);
+    const categoryPages = projectPage(filterProjects(projects, { category })).pageCount;
+    for (let page = 1; page <= categoryPages; page += 1) {
+      const outputPath = catalogPagePath(page, slug);
+      await fs.mkdir(path.dirname(path.join(siteDir, outputPath)), { recursive: true });
+      await fs.writeFile(path.join(siteDir, outputPath), categoryPage(category, projects, page));
+      sitemapPaths.push(outputPath);
+    }
   }
 
-  // Keep staff tools crawlable so their noindex directive can be observed,
-  // but include only public discovery pages in the sitemap.
-  const sitemapPaths = [
-    '',
-    ...categories.map((c) => `categories/${slugify(c)}.html`)
-  ];
+  // Every public page in each bounded series is crawlable and self-canonical.
+  // Staff tools remain crawlable for noindex, outside the public sitemap.
   await fs.writeFile(path.join(siteDir, 'sitemap.xml'), sitemapXml(sitemapPaths));
   await fs.writeFile(path.join(siteDir, 'robots.txt'), robotsTxt());
   await writeReleaseManifest(root, siteDir);

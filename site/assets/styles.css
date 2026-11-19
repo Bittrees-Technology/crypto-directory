@@ -177,3 +177,16 @@ ul {
   th:nth-child(5), td:nth-child(5), th:nth-child(8), td:nth-child(8) { display: none; }
   main { padding: 16px; }
 }
+
+/* Bounded discovery tables keep pagination and controls usable on small screens. */
+.controls label {display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;}
+.controls input,.controls select {max-width:100%;}
+.catalog-table {max-width:100%;overflow-x:auto;}
+.catalog-table:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
+.catalog-pagination {display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:20px 0;}
+.catalog-pagination a,.catalog-pagination span {padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:14px;}
+.catalog-pagination [aria-current] {font-weight:600;background:#f0eee6;}
+#catalog-search-status:empty {display:none;}
+#catalog-search-status {line-height:1.5;}
+#catalog-retry {margin-bottom:16px;}
+@media(max-width:480px){.controls label{width:100%}.controls input,.controls select{min-width:0;width:100%}}

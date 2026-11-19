@@ -3,11 +3,12 @@ import {readFile,mkdir} from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {chromium} from '@playwright/test';
+import {DIRECTORY_PAGE_SIZE} from '../web/catalog.mjs';
 
 // Synthetic browser acceptance. This does not claim live identities, grants,
 // GitHub writes, email delivery or ENS transaction approval.
 const root=path.resolve('site');
-const server=createServer(async(req,res)=>{try{const u=new URL(req.url,'http://localhost'),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep))throw Error('Path rejected');const content=await readFile(file);res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html');res.end(content);}catch{res.statusCode=404;res.end('Not found');}});
+const server=createServer(async(req,res)=>{try{const u=new URL(req.url,'http://localhost'),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep))throw Error('Path rejected');const content=await readFile(file);res.setHeader('Content-Type',/\.m?js$/.test(file)?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html');res.end(content);}catch{res.statusCode=404;res.end('Not found');}});
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const origin='http://127.0.0.1:'+server.address().port;
 const browser=await chromium.launch({headless:true});
@@ -37,6 +38,32 @@ async function scenario(role,run){
   });
   try{await run({context,page,session,writes,editRequests});checks.push(role);}finally{await context.close();}
 }
+async function settleSearch(page) {
+  await page.waitForFunction(() => !document.getElementById('rows').hasAttribute('aria-busy'));
+  assert.equal(await page.locator('#catalog-search-status').textContent(), '');
+}
+async function walkDiscovery(page, start) {
+  await page.goto(start);
+  const seen = new Set(), collected = [];
+  let canonicalOrigin;
+  while (true) {
+    assert(!seen.has(page.url()), 'Pagination cycle'); seen.add(page.url());
+    const ids = await page.locator('tbody tr[data-project-id]').evaluateAll(rows => rows.map(row => row.dataset.projectId));
+    assert(ids.length <= DIRECTORY_PAGE_SIZE); collected.push(...ids);
+    const canonical = new URL(await page.locator('link[rel=canonical]').getAttribute('href'));
+    canonicalOrigin ||= canonical.origin;
+    assert.equal(canonical.origin, canonicalOrigin);
+    assert.equal(canonical.pathname, new URL(page.url()).pathname);
+    assert.equal(await page.locator('meta[name=robots]').getAttribute('content'), 'index,follow');
+    const next = page.locator('#catalog-pagination a[rel=next]');
+    if (!(await next.count())) break;
+    assert(await next.getAttribute('href'), 'Next page must be a normal anchor');
+    await next.click();
+  }
+  assert.equal(new Set(collected).size, collected.length, 'No duplicated records within a series');
+  return collected.sort();
+}
+
 try{
   await scenario('anonymous',async({page})=>{
     await page.goto(origin+'/');await page.getByRole('heading',{name:'Explore the directory',exact:true}).waitFor();
@@ -60,38 +87,49 @@ try{
     }
     const agents=published.filter(project=>project.lead_category==='AI Agents'&&project.verification_status==='verified');
     assert(agents.length>0,'Reviewed AI Agents must reach the public category');
-    for(const agent of agents)assert(await page.getByText(agent.name,{exact:true}).first().isVisible(),agent.name);
+    assert.deepEqual(await walkDiscovery(page,origin+'/categories/ai-agents.html'),agents.map(project=>project.id).sort());
     await page.getByRole('link',{name:'Back to directory',exact:true}).click();
     const newAgent=agents.find(project=>project.name==='Virtuals Protocol')||agents[0];
-    await page.locator('#search').fill(newAgent.name);
+    await page.locator('#search').fill(newAgent.name);await settleSearch(page);
     assert(await page.getByText(newAgent.name,{exact:true}).first().isVisible());
     for(const name of ['Slither','DeDust','Monero']){
-      await page.locator('#search').fill(name);
+      await page.locator('#search').fill(name);await settleSearch(page);
       assert(await page.getByText(name,{exact:true}).first().isVisible(),name+' missing from directory search');
     }
-    await page.locator('#search').fill('');
+    await page.locator('#search').fill('');await settleSearch(page);
     // Public discovery must agree with Surf's verified-only catalogue. Exercise
     // both server-rendered category pages and client-rendered search results.
     const visible=published.filter(project=>project.verification_status==='verified');
     const rowIds=selector=>page.locator(selector+' [data-edit-entry]').evaluateAll(links=>links.map(link=>new URL(link.href).searchParams.get('id')).sort());
-    assert.deepEqual(await rowIds('#rows'),visible.map(project=>project.id).sort());
+    assert.deepEqual(await rowIds('#rows'),visible.slice(0,DIRECTORY_PAGE_SIZE).map(project=>project.id).sort());
     for(const status of ['needs_update','rejected','pending_audit']){
       const excluded=published.find(project=>project.verification_status===status);
       if(!excluded)continue;
-      await page.locator('#search').fill(excluded.name);
+      await page.locator('#search').fill(excluded.name);await settleSearch(page);
       assert(!(await rowIds('#rows')).includes(excluded.id),'Excluded listing returned through search: '+excluded.id);
     }
     const staticContext=await browser.newContext({javaScriptEnabled:false});
     try{
       const staticPage=await staticContext.newPage();
+      assert.deepEqual(await walkDiscovery(staticPage,origin+'/'),visible.map(project=>project.id).sort());
       for(const category of ['Wallets','DeFi','AI Agents']){
         const slug=category.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-        await staticPage.goto(origin+'/categories/'+slug+'.html');
-        const ids=await staticPage.locator('tbody [data-edit-entry]').evaluateAll(links=>links.map(link=>new URL(link.href).searchParams.get('id')).sort());
+        const ids=await walkDiscovery(staticPage,origin+'/categories/'+slug+'.html');
         assert.deepEqual(ids,visible.filter(project=>project.lead_category===category).map(project=>project.id).sort());
       }
     }finally{await staticContext.close();}
-    await page.locator('#search').fill('');
+    if(visible.length>DIRECTORY_PAGE_SIZE){
+      await page.goto(origin+'/pages/2.html');
+      const initialIds=await rowIds('#rows');
+      assert.deepEqual(initialIds,visible.slice(DIRECTORY_PAGE_SIZE,DIRECTORY_PAGE_SIZE*2).map(project=>project.id).sort());
+      await page.locator('#search').fill(visible.at(-1).name);await settleSearch(page);
+      assert((await rowIds('#rows')).includes(visible.at(-1).id),'Search must find records outside this static page');
+      assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
+      await page.locator('#search').fill('');await settleSearch(page);
+      assert.deepEqual(await rowIds('#rows'),initialIds);
+      assert(await page.locator('#catalog-pagination').isVisible());
+    }
+    await page.locator('#search').fill('');await settleSearch(page);
     await page.evaluate(()=>localStorage.setItem('role','superadmin'));await page.reload();await page.locator('[data-login-link]').waitFor();assert.equal(await page.locator('.site-nav').isVisible(),false);
     await page.goto(origin+'/submit.html');assert.equal(await page.locator('#listing-form').isVisible(),false);
     assert.equal(await page.locator('h1').count(),1);assert.equal(await page.locator('[data-login-link]:visible').count(),1);
@@ -109,8 +147,17 @@ try{
     let mirrorApiCalls=0;
     await page.route('https://cryptodirectory.eth.limo/**',async route=>{
       const u=new URL(route.request().url());if(u.pathname.startsWith('/api/')){mirrorApiCalls++;return route.fulfill({status:404,json:{}});}
-      const file=path.resolve(root,'.'+u.pathname);assert(file.startsWith(root+path.sep));await route.fulfill({body:await readFile(file),contentType:file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html'});
+      const file=path.resolve(root,'.'+u.pathname);assert(file.startsWith(root+path.sep));await route.fulfill({body:await readFile(file),contentType:/\.m?js$/.test(file)?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html'});
     });
+    if(visible.length>DIRECTORY_PAGE_SIZE){
+      await page.goto('https://cryptodirectory.eth.limo/pages/2.html');
+      assert.deepEqual(await rowIds('#rows'),visible.slice(DIRECTORY_PAGE_SIZE,DIRECTORY_PAGE_SIZE*2).map(project=>project.id).sort());
+      await page.locator('#search').fill(visible.at(-1).name);await settleSearch(page);
+      assert((await rowIds('#rows')).includes(visible.at(-1).id),'Mirror search must load its relative catalogue');
+      assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
+      await page.locator('#search').fill('');await settleSearch(page);
+      assert(await page.locator('#catalog-pagination').isVisible());
+    }
     await page.goto('https://cryptodirectory.eth.limo/submit.html');
     await page.waitForFunction(()=>document.querySelector('[data-login-link]').href.includes('?return_to='));
     assert.equal(await page.locator('#directory-message').isVisible(),false);assert(await page.getByRole('link',{name:'Back to directory',exact:true}).isVisible());
@@ -159,7 +206,7 @@ try{
     assert.equal(await page.locator('[name="description"]').inputValue(),editRequests[0].patch.description);
     editRequests[0].listingSha='b'.repeat(40);await page.reload();await page.getByText('The listing changed since this request.',{exact:false}).waitFor();assert.equal(await page.locator('[name="description"]').inputValue(),base.description);
     await page.goto(origin+'/');await page.locator('.site-nav').waitFor({state:'visible'});assert.equal(await page.locator('.site-nav a').count(),4);assert(await page.locator('[data-edit-entry]').first().isVisible());
-    await page.locator('#search').fill('aave');await page.locator('[data-edit-entry]').first().waitFor({state:'visible'});
+    await page.locator('#search').fill('aave');await settleSearch(page);await page.locator('[data-edit-entry]').first().waitFor({state:'visible'});
     await page.goto(origin+'/edit.html?id=existing.md');await page.locator('[name="name"]').waitFor({state:'visible'});assert.equal(await page.locator('[name="name"]').inputValue(),base.name);
     await page.locator('[name="description"]').fill('Updated synthetic details of this existing project.');await page.locator('[name="reason"]').fill('Official fixture details have changed.');await page.getByRole('button',{name:'Propose update',exact:true}).click();await page.locator('#directory-result').waitFor({state:'visible'});
     assert.equal(writes[0].endpoint,'edit');assert.equal('verification_status' in writes[0].value.entry,false);
