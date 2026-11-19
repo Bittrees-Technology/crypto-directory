@@ -155,7 +155,7 @@ function tableRows(projects,navPrefix='') {
     .join('\n');
 }
 
-function seoHead({ title, description, canonicalPath = '', jsonLd = null }) {
+function seoHead({ title, description, canonicalPath = '', jsonLd = null, robots = 'index,follow' }) {
   const canonical = absoluteUrl(canonicalPath);
   const descriptionEscaped = escapeHtml(description);
   const titleEscaped = escapeHtml(title);
@@ -163,7 +163,7 @@ function seoHead({ title, description, canonicalPath = '', jsonLd = null }) {
     ? `<script type=\"application/ld+json\">${JSON.stringify(jsonLd).replaceAll('<','\\u003c')}</script>`
     : '';
   return `<meta name=\"description\" content=\"${descriptionEscaped}\">
-  <meta name=\"robots\" content=\"index,follow\">
+  <meta name=\"robots\" content=\"${escapeHtml(robots)}\">
   <link rel=\"canonical\" href=\"${escapeHtml(canonical)}\">
   <meta property=\"og:type\" content=\"website\">
   <meta property=\"og:site_name\" content=\"CryptoDirectory\">
@@ -404,7 +404,7 @@ function categoryPage(category, projects) {
 }
 
 function reviewPage(projects) {
-  return pageShell({title:'Review Queue',subtitle:'Review new listings and requested updates',body:'<section data-can-review hidden id="directory-review" class="card">Loading submissions…</section><section data-can-review hidden class="card"><h2 id="edit-requests-heading">Edit and removal requests</h2><div id="edit-requests"></div></section><p data-review-unavailable hidden>A Reviewer, Admin or Superadmin role is required to review submissions and requested changes.</p><p data-signed-out>Sign in with a Reviewer, Admin or Superadmin role to review submissions and requested changes.</p>'});
+  return pageShell({title:'Review Queue',subtitle:'Review new listings and requested updates',extraHead:'<meta name="robots" content="noindex,follow">',body:'<section data-can-review hidden id="directory-review" class="card">Loading submissions…</section><section data-can-review hidden class="card"><h2 id="edit-requests-heading">Edit and removal requests</h2><div id="edit-requests"></div></section><p data-review-unavailable hidden>A Reviewer, Admin or Superadmin role is required to review submissions and requested changes.</p><p data-signed-out>Sign in with a Reviewer, Admin or Superadmin role to review submissions and requested changes.</p>'});
 }
 
 function listingControls(){
@@ -424,7 +424,7 @@ function listingFormPage(edit) {
   <button type="submit">${edit?'Propose update':'Submit for review'}</button></form></section>
   ${edit?'':'<section class="card my-submissions" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>'}
   <section class="signed-out-notice" data-signed-out><p>${edit?'Sign in with an Editor, Admin or Superadmin role to update this listing.':'Sign in with your Bittrees email or Ethereum wallet to continue.'}</p><p class="status">You can browse the directory without signing in.</p></section>`;
-  return pageShell({title:edit?'Update a listing':'Submit a listing',subtitle:edit?'Propose changes to an existing listing. Verification and approval stay unchanged.':'Suggest a project, company or organization for review.',showSubmissionLink:edit,body});
+  return pageShell({title:edit?'Update a listing':'Submit a listing',subtitle:edit?'Propose changes to an existing listing. Verification and approval stay unchanged.':'Suggest a project, company or organization for review.',showSubmissionLink:edit,extraHead:edit?'<meta name="robots" content="noindex,follow">':'',body});
 }
 
 function editRequestPage(projects){
@@ -465,6 +465,7 @@ function needsUpdatePage(projects) {
     title: 'CryptoDirectory | Needs Update Queue',
     description: 'Entries flagged for refresh in CryptoDirectory.',
     canonicalPath: 'needs-update.html',
+    robots: 'noindex,follow',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
@@ -549,6 +550,7 @@ function processStatusPage(statuses) {
     title: 'CryptoDirectory | Process Status',
     description: 'Progress tracking against design and plan specs for CryptoDirectory projects.',
     canonicalPath: 'process-status.html',
+    robots: 'noindex,follow',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
@@ -610,11 +612,10 @@ async function main() {
     await fs.writeFile(path.join(categoryDir, `${slugify(category)}.html`), output);
   }
 
+  // Keep staff tools crawlable so their noindex directive can be observed,
+  // but include only public discovery pages in the sitemap.
   const sitemapPaths = [
     '',
-    'review.html',
-    'needs-update.html',
-    'process-status.html',
     ...categories.map((c) => `categories/${slugify(c)}.html`)
   ];
   await fs.writeFile(path.join(siteDir, 'sitemap.xml'), sitemapXml(sitemapPaths));
