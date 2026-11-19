@@ -57,6 +57,7 @@ npm run build
 ```
 
 Build output is static HTML/JSON in `site/`.
+- Public catalogue and category pages use [bounded crawlable pagination](docs/catalog-pagination.md); the full data feed and project IDs remain unchanged.
 - `site/process-status.html` shows project completion vs design/plan specs
 - `site/data/process-status.json` exposes machine-readable progress and timeline data
 

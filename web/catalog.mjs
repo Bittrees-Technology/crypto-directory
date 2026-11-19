@@ -1,0 +1,78 @@
+// Shared by static directory pages and the optional client-side search.
+// The public data feed retains all records; only verified records enter discovery.
+export const DIRECTORY_PAGE_SIZE = 50;
+
+export function filterProjects(projects, { query = '', category = '' } = {}) {
+  const q = String(query).trim().toLowerCase();
+  return projects.filter(project => {
+    if (project.verification_status !== 'verified' || (category && project.lead_category !== category)) return false;
+    const haystack = [project.name, project.description, project.tags.join(' '), project.ecosystem.join(' ')].join(' ').toLowerCase();
+    return !q || haystack.includes(q);
+  });
+}
+
+export function projectPage(projects, requestedPage = 1, pageSize = DIRECTORY_PAGE_SIZE) {
+  if (!Number.isInteger(pageSize) || pageSize < 1) throw new Error('Invalid directory page size');
+  const total = projects.length;
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  const page = Math.min(pageCount, Math.max(1, Number.isInteger(requestedPage) ? requestedPage : 1));
+  const offset = (page - 1) * pageSize;
+  return { items: projects.slice(offset, offset + pageSize), page, pageCount, total,
+    first: total ? offset + 1 : 0, last: Math.min(offset + pageSize, total) };
+}
+
+export function catalogPagePath(page, categorySlug = '') {
+  if (!Number.isInteger(page) || page < 1) throw new Error('Invalid directory page');
+  if (categorySlug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(categorySlug)) throw new Error('Invalid category slug');
+  if (categorySlug) return page === 1 ? `categories/${categorySlug}.html` : `categories/${categorySlug}/${page}.html`;
+  return page === 1 ? '' : `pages/${page}.html`;
+}
+
+export function pageSummary(state, filtered = false) {
+  const number = value => value.toLocaleString('en-US');
+  if (!state.total) return filtered ? 'No verified projects match these filters.' : 'No verified projects in this category yet.';
+  return `Showing ${number(state.first)}–${number(state.last)} of ${number(state.total)} ${filtered ? 'matching ' : ''}verified projects.`;
+}
+
+export function escapeHtml(input = '') {
+  return String(input).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
+function badges(values) {
+  return values.map(value => `<span class="badge">${escapeHtml(value)}</span>`).join('');
+}
+
+function tokenLinksHtml(tokenValue, tokenUrl = '') {
+  const raw = String(tokenValue || '').trim();
+  if (!raw || raw.toLowerCase() === 'n/a') return 'n/a';
+  const symbols = raw.split(',').map(symbol => symbol.trim()).filter(Boolean);
+  if (!symbols.length) return 'n/a';
+  const explicitTokenUrl = String(tokenUrl || '').trim();
+  return symbols.map(symbol => {
+    const href = explicitTokenUrl || `https://www.coingecko.com/en/search?query=${encodeURIComponent(symbol)}`;
+    return `<a class="token-link" href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(symbol)}</a>`;
+  }).join(', ');
+}
+
+function linksCellHtml(project) {
+  const links = [`<a class="link-pill" href="${escapeHtml(project.primary_url)}" target="_blank" rel="noopener">Website</a>`];
+  if (project.product_url && project.product_url !== 'n/a' && project.product_url !== project.primary_url) {
+    links.push(`<a class="link-pill" href="${escapeHtml(project.product_url)}" target="_blank" rel="noopener">Product</a>`);
+  }
+  return `<div class="links-cell">${links.join('')}</div>`;
+}
+
+export function tableRows(projects, navPrefix = '') {
+  return projects.map(project => `<tr data-project-id="${escapeHtml(project.id || '')}">
+<td><strong>${escapeHtml(project.name)}</strong><br><small>${escapeHtml(project.lead_category)}</small><br><a data-edit-entry data-can-edit hidden href="${escapeHtml(navPrefix + 'edit.html?id=' + encodeURIComponent(project.id || ''))}">Edit listing</a></td>
+<td>${escapeHtml(project.description)}</td>
+<td>${linksCellHtml(project)}</td>
+<td>${badges(project.tags)}</td>
+<td>${badges(project.ecosystem)}</td>
+<td>${escapeHtml(String(project.founded))}</td>
+<td>${escapeHtml(project.hq)}</td>
+<td>${tokenLinksHtml(project.token, project.token_url)}</td>
+<td>${project.twitter && project.twitter !== 'n/a' ? `<a href="${escapeHtml(project.twitter)}" target="_blank" rel="noopener">X</a>` : 'n/a'}</td>
+</tr>`).join('\n');
+}
