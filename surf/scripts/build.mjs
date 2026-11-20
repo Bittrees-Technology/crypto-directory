@@ -1,10 +1,11 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { normalizeCatalog } from '../public/core.js';
+import { SOURCE, SNAPSHOT_DATE } from '../lib/catalog.js';
 const root = new URL('../', import.meta.url);
-let raw;
-try { raw = JSON.parse(await readFile(new URL('../site/data/projects.json', root), 'utf8')); }
-catch { raw = JSON.parse(await readFile(new URL('public/data/source.json', root), 'utf8')); }
+// The reviewed snapshot also backs runtime outages. The directory build in this
+// independent release branch can be older and must not replace that snapshot.
+const raw = JSON.parse(await readFile(new URL('public/data/source.json', root), 'utf8'));
 const projects = normalizeCatalog(raw);
 if (!projects.length) throw new Error('No verified directory projects');
-await writeFile(new URL('public/catalog.json', root), JSON.stringify({ projects, status: 'snapshot', snapshotDate: '2026-10-29', source: 'https://cd.bittrees.org/data/projects.json' }));
+await writeFile(new URL('public/catalog.json', root), JSON.stringify({ projects, status: 'snapshot', snapshotDate: SNAPSHOT_DATE, source: SOURCE }));
 console.log(`Surf ready: ${projects.length} projects, ${new Set(projects.map(p => p.category)).size} categories.`);

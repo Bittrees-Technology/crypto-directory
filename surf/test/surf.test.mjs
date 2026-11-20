@@ -1,14 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { fileURLToPath } from 'node:url';
 import { normalizeCatalog, safeUrl, candidates, chooseProject, targetFor } from '../public/core.js';
-import { getCatalog, SOURCE } from '../lib/catalog.js';
+import { getCatalog, SOURCE, SNAPSHOT_DATE } from '../lib/catalog.js';
 const raw = JSON.parse(await readFile(new URL('../public/data/source.json',import.meta.url),'utf8'));
 test('directory feed excludes rejected projects and preserves distinct product URLs',()=>{
   const projects=normalizeCatalog(raw);
-  assert.equal(projects.length,1003);
-  assert.equal(new Set(projects.map(p=>p.category)).size,14);
-  assert.ok(!projects.some(p=>raw.some(r=>r.verification_status==='rejected'&&r.name===p.name)));
+  const verified=raw.filter(p=>p.verification_status==='verified');
+  assert.deepEqual(projects.map(p=>p.id).sort(),verified.map(p=>p.id).sort());
+  assert.deepEqual([...new Set(projects.map(p=>p.category))].sort(),[...new Set(verified.map(p=>p.lead_category))].sort());
+  assert.ok(!projects.some(p=>raw.some(r=>r.verification_status!=='verified'&&r.id===p.id)));
   const aave=projects.find(p=>p.name==='Aave');assert.equal(aave.website,'https://aave.com/');assert.equal(aave.product,'https://app.aave.com/');
 });
 test('unsafe outbound URLs never become surf destinations',()=>{
@@ -36,6 +40,14 @@ test('runtime sync reflects new data and removed entries without a redeploy',asy
 });
 test('outages and empty feeds use an explicitly labeled snapshot',async()=>{
   for(const fetcher of [async()=>{throw new Error('offline');},async()=>({ok:false}),async()=>({ok:true,json:async()=>[]})]){
-    const catalog=await getCatalog({fetcher});assert.equal(catalog.status,'snapshot');assert.equal(catalog.projects.length,1003);assert.ok(catalog.snapshotDate);
+    const catalog=await getCatalog({fetcher});assert.equal(catalog.status,'snapshot');assert.deepEqual(catalog.projects,normalizeCatalog(raw));assert.equal(catalog.snapshotDate,SNAPSHOT_DATE);
   }
+});
+test('the built first-load catalog and runtime fallback use one reviewed snapshot',async()=>{
+  await promisify(execFile)(process.execPath,[fileURLToPath(new URL('../scripts/build.mjs',import.meta.url))]);
+  const built=JSON.parse(await readFile(new URL('../public/catalog.json',import.meta.url),'utf8'));
+  const fallback=await getCatalog({fetcher:async()=>{throw new Error('offline');}});
+  assert.equal(built.status,'snapshot');assert.equal(built.source,SOURCE);
+  assert.equal(built.snapshotDate,fallback.snapshotDate);
+  assert.deepEqual(built.projects,fallback.projects,'An older root directory build must not override the reviewed Surf snapshot');
 });
