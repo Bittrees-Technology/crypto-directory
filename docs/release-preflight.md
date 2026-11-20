@@ -1,0 +1,11 @@
+# Validate before starting a hosted build
+
+Run `npm run check:source` with Node 24 before publishing a branch or requesting a deployment. It parses JavaScript and JSON and checks text sources for unresolved merge markers, without installing dependencies, running application code, building artifacts or using the network. The same preflight is the first validation in the required `build-and-check` job and runs automatically before `npm run build`.
+
+The complete existing CI suite remains required. A syntax pass is not a substitute for role, signing, publishing, browser and application tests. CI uses Node 24, matching both existing Vercel projects. Superseded runs for the same pull request are canceled; independent pull requests keep their checks.
+
+Vercel's Git configuration allows automatic CryptoDirectory builds only from `main`, and Surf builds only from `surf-production`. `**` also matches branch names containing slashes. Feature-branch pushes do not start automatic preview builds. When a preview is needed, the release owner must first verify the exact commit's required checks and current spending authorization, then request one preview on the existing project. Never bypass an independent review or a required check. Keep `main`'s existing up-to-date-branch and review protection intact; Surf releases also retain their independent source-review gate.
+
+These rules are source configuration, not a new hosted service or a billing cap. They apply to commits containing this configuration. Existing branches with older configuration need the same guard before use; the active `surf-production` branch needs a separately reviewed companion change. Direct dashboard/CLI deploys can bypass Git triggering rules, so run the preflight before those too. Do not rerun unchanged failed builds or introduce a paid fallback. The existing CryptoDirectory IPFS synchronizer remains the owner of ENS publication after an approved production release.
+
+No dependency, permission, secret, role, Safe, billing or live application data changes are required. Normal successful production deployments retain the existing service costs; these guards reduce avoidable builds and do not promise that all future failures or costs can be eliminated.
