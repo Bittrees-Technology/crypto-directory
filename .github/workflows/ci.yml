@@ -4,7 +4,11 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "surf-production"]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -21,7 +25,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
+
+      - name: Verify source before installing dependencies or building
+        run: npm run check:source
 
       - name: Verify approval policy
         run: node --test test/approval-bot.test.mjs

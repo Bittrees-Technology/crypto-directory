@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "description": "Static markdown-powered crypto company and project directory",
   "scripts": {
+    "check:source": "node scripts/check-source.mjs && node --test test/source-guard.test.mjs",
+    "prebuild": "npm run check:source",
     "test:directory": "node --test test/directory-*.test.mjs",
     "test:directory-browser": "node scripts/directory-browser.mjs",
     "build": "node scripts/build.mjs",
