@@ -2,6 +2,8 @@
 
 Run `npm run check:source` with Node 24 before publishing a branch or requesting a deployment. It parses JavaScript and JSON and checks text sources for unresolved merge markers, without installing dependencies, running application code, building artifacts or using the network. The same preflight is the first validation in the required `build-and-check` job and runs automatically before `npm run build`.
 
+Source-only deployment snapshots are checked without requiring Git metadata. The check skips installed dependencies and Vercel's generated files while scanning the packaged source.
+
 The complete existing CI suite remains required. A syntax pass is not a substitute for role, signing, publishing, browser and application tests. CI uses Node 24, matching both existing Vercel projects. Superseded runs for the same pull request are canceled; independent pull requests keep their checks.
 
 Vercel's Git configuration allows automatic CryptoDirectory builds only from `main`, and Surf builds only from `surf-production`. `**` also matches branch names containing slashes. Feature-branch pushes do not start automatic preview builds. When a preview is needed, the release owner must first verify the exact commit's required checks and current spending authorization, then request one preview on the existing project. Never bypass an independent review or a required check. Keep `main`'s existing up-to-date-branch and review protection intact; Surf releases also retain their independent source-review gate.

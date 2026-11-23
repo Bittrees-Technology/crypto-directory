@@ -1,11 +1,12 @@
 import { execFileSync, spawnSync } from 'node:child_process';
-import { readFileSync, lstatSync } from 'node:fs';
-import { dirname, resolve, extname } from 'node:path';
+import { existsSync, lstatSync, readdirSync, readFileSync } from 'node:fs';
+import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const javascript = new Set(['.js', '.mjs', '.cjs']);
 const textFiles = new Set([...javascript, '.json', '.yml', '.yaml', '.html', '.css', '.md', '.sh', '.py']);
+const snapshotExcluded = new Set(['.git', '.vercel', 'node_modules']);
 
 // Parse only: never import application code, install packages, generate files or use the network.
 export function validateSource(path, source) {
@@ -28,16 +29,26 @@ export function validateSource(path, source) {
   return errors;
 }
 
-export function checkSource() {
-  // Include new, nonignored files so the local preflight also protects changes before commit.
-  const paths = [...new Set(execFileSync('git',
-    ['ls-files', '--cached', '--others', '--exclude-standard', '-z'],
-    { cwd: root, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 }).split('\0').filter(Boolean))];
+function* snapshotPaths(sourceRoot, prefix = '') {
+  for (const entry of readdirSync(join(sourceRoot, prefix), { withFileTypes: true })) {
+    if (snapshotExcluded.has(entry.name)) continue;
+    const path = join(prefix, entry.name);
+    if (entry.isDirectory()) yield* snapshotPaths(sourceRoot, path);
+    else yield path;
+  }
+}
+
+export function checkSource(sourceRoot = root) {
+  // A Git checkout honors ignore rules and includes new files before commit.
+  const paths = existsSync(join(sourceRoot, '.git'))
+    ? new Set(execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'],
+      { cwd: sourceRoot, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 }).split('\0').filter(Boolean))
+    : snapshotPaths(sourceRoot);
   let checked = 0;
   const failures = [];
   for (const path of paths) {
     if (!textFiles.has(extname(path))) continue;
-    const fullPath = resolve(root, path);
+    const fullPath = resolve(sourceRoot, path);
     let stat;
     try { stat = lstatSync(fullPath); } catch (error) {
       if (error.code === 'ENOENT') continue; // A staged deletion is valid.

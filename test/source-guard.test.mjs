@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { validateSource } from '../scripts/check-source.mjs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { checkSource, validateSource } from '../scripts/check-source.mjs';
 
 test('rejects the imported/local tableRows collision that broke the preview build', () => {
   const source = "import { tableRows } from '../web/catalog.mjs';\nfunction tableRows() {}\n";
@@ -30,6 +32,18 @@ test('rejects unresolved merge markers in source, config and content', () => {
 test('accepts common markdown rules and CommonJS handlers', () => {
   assert.deepEqual(validateSource('README.md', 'Title\n=======\n---\n'), []);
   assert.deepEqual(validateSource('api/example.cjs', 'module.exports = () => 1;'), []);
+});
+
+test('checks a source snapshot without Git metadata or dependencies', t => {
+  const snapshot = mkdtempSync(join(tmpdir(), 'directory-source-'));
+  t.after(() => rmSync(snapshot, { recursive: true }));
+  mkdirSync(join(snapshot, 'scripts'));
+  mkdirSync(join(snapshot, 'node_modules'));
+  writeFileSync(join(snapshot, 'node_modules', 'generated.js'), 'const = ;');
+  writeFileSync(join(snapshot, 'scripts', 'build.mjs'), 'export const checked = true;');
+  assert.doesNotThrow(() => checkSource(snapshot));
+  writeFileSync(join(snapshot, 'scripts', 'build.mjs'), 'export const checked = ;');
+  assert.throws(() => checkSource(snapshot), /scripts[\\/]build.mjs/);
 });
 
 test('automatic builds are limited to the app release branch, including names with slashes', () => {
