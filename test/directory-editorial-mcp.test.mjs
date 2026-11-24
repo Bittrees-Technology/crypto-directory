@@ -102,6 +102,25 @@ test('proposal preparation performs no business write; exactly one fresh authori
   assert.deepEqual(f.state.businessWrites.map(r=>r.step),['create_branch','write_file','create_pr']);assert.equal(f.state.value.submissions[0].status,'accepted');assert.equal(f.state.prs.length,1);
   assert.equal((await step(f,second.data)).response.status,409);assert.equal(f.state.businessWrites.length,3);
 });
+test('enrolled project Admin self-review remains bound to current Admin on every continuation',async t=>{
+  const f=fixture(t,['project.admin','role.reviewer']),id=seedSubmission(f,f.native.sourceSubject);
+  f.state.value.submissions[0].submitterOwner=f.native.personSubject;
+  const prepared=await f.call('review_submission',{id,revision:1,decision:'accept',reason});
+  assert.equal(prepared.data.status,'prepared');assert.equal(f.state.value.mcpOperations[0].plan.capability,'canReviewOwn');
+  assert.equal(f.state.value.submissions[0].history[0].selfReviewOverride.role,'admin');assert.equal(f.state.businessWrites.length,0);
+  f.state.roles=['role.reviewer'];assert.equal((await step(f,prepared.data)).response.status,403);assert.equal(f.state.businessWrites.length,0);
+  f.state.roles=['project.admin','role.reviewer'];let result=await step(f,prepared.data);result=await step(f,result.data);result=await step(f,result.data);
+  assert.equal(result.data.status,'complete');assert.equal(f.state.businessWrites.length,3);
+});
+test('automatic self-review requires both actual Admin and explicitly assigned Reviewer, even on later steps',async t=>{
+  const f=fixture(t,['project.admin']),id=seedSubmission(f,f.native.sourceSubject);f.state.value.submissions[0].submitterOwner=f.native.personSubject;
+  const args={target:'submission',id,revision:1,reason,evidence:'Independently verified the exact official website and current product.'};
+  assert.equal((await f.call('auto_review',args)).response.status,403);assert.equal(f.state.businessWrites.length,0);
+  f.state.roles=['project.admin','role.reviewer'];const prepared=await f.call('auto_review',args);
+  assert.equal(prepared.data.status,'prepared');assert.equal(f.state.value.mcpOperations.at(-1).plan.capability,'canAutoReviewOwn');
+  f.state.roles=['project.admin'];assert.equal((await step(f,prepared.data)).response.status,403);
+  f.state.roles=['role.reviewer'];assert.equal((await step(f,prepared.data)).response.status,403);assert.equal(f.state.businessWrites.length,0);
+});
 test('steps cannot be reordered, skipped, widened, replayed or redirected to another branch or source',async t=>{
   const f=fixture(t),r=await prepare(f);
   for(const change of [{step:'write_file'},{revision:999},{expectedHeadSha:'9'.repeat(40)},{expectedDiffDigest:'f'.repeat(64)},{operationId:randomUUID()}])assert.equal((await step(f,r.data,change)).response.status,change.operationId?404:409);

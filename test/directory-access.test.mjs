@@ -44,11 +44,11 @@ function fixture(roles=[],identity=wallet){
   const cookie='__Host-project-admin-session='+seal({project:'crypto-directory',identity,key:randomUUID(),authTime:Date.now(),expires:Date.now()+590000},sessionSecret);
   const storeFactory=()=>({
     configured:()=>true,
-    async load(){if(state.revokeOnLoad)state.roles=[];if(state.demoteOnLoad)state.superadmin=false;return {sha:String(state.value.revision),value:structuredClone(state.value)};},
+    async load(){if(state.revokeOnLoad)state.roles=[];if(state.rolesOnLoad)state.roles=[...state.rolesOnLoad];return {sha:String(state.value.revision),value:structuredClone(state.value)};},
     async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;if(state.revokeAfterWrite)state.roles=[];return String(next.revision);},
     async duplicate(){return false;},
     async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:state.listingSha||'a'.repeat(40),raw:frontMatter({...listing,founded:state.numericFounded??listing.founded,verification_status:state.listingStatus||'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
-    async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});if(state.demoteAfterProposal)state.superadmin=false;return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
+    async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});if(state.rolesAfterProposal)state.roles=[...state.rolesAfterProposal];return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
     async reconcile(operation){return state.proposals.some(p=>p.operation===operation)?{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}:null;}
   });
   const service=createDirectoryService({env,fetcher,storeFactory,resolveName:async identity=>identity===wallet?'fixture.eth':null});
@@ -179,64 +179,47 @@ test('Reviewer accepts the immutable new entry or rejects it; no existing edit o
     assert.equal((await f.call('edit',{})).status,403);assert.equal((await f.call('submit',{})).status,400);
     assert.equal((await f.call('review',request)).status,409);
   }
-  const f=fixture(['project.admin']),id=randomUUID();await f.call('submit',{entry:newEntry,operationId:id});assert.equal((await f.call('review',{id,revision:1,decision:'accept',reason:'This is my own submission.'})).status,403);
+  const f=fixture(['role.reviewer']),id=randomUUID();await f.call('submit',{entry:newEntry,operationId:id});assert.equal((await f.call('review',{id,revision:1,decision:'accept',reason:'This is my own submission.'})).status,403);
 });
-const scopedWallet='0xe5350d96fc3161bf5c385843ec5ee24e8b465b2f';
-const scopedBounties={...newEntry,name:'Bittrees Bounties',lead_category:'Payments',tags:['Bounties','ERC-20','Escrow'],ecosystem:['Ethereum','Base'],
-  description:'Token-funded bounties for builders with milestone proposals, delivery evidence, and ERC-20 escrow. Visitors can browse public builder profiles.',
-  primary_url:'https://bounties.bittrees.org/',product_url:'https://bounties.bittrees.org/profiles',founded:'n/a'};
-const scopedReview={id:'c1c6df41-5df7-4ea3-bf8a-0ce7a989240e',revision:1,decision:'accept',reason:'Checked the public project and builder profiles.'};
-async function scopedReviewFixture({identity=scopedWallet,superadmin=true,id=scopedReview.id,project=scopedBounties}={}){
-  const f=fixture(['project.admin'],identity);
-  f.state.superadmin=superadmin;
-  assert.equal((await f.call('submit',{entry:project,operationId:id})).status,201);
-  return f;
-}
-test('the one-time exception accepts the exact submission and records the exception in the journal and PR',async()=>{
-  const f=await scopedReviewFixture();
-  assert.equal((await f.call('review',scopedReview)).status,201);
-  const record=f.state.value.submissions[0];
-  assert.equal(record.status,'accepted');
-  assert.equal(record.history[0].exception,'bittrees-three-listings-2026-11-24');
-  assert.equal(f.state.proposals.length,1);
-  assert.match(f.state.proposals[0].options.reason,/One-time Superadmin self-review exception/);
-  assert.equal((await f.call('review',scopedReview)).status,403);
-  assert.equal(f.state.proposals.length,1);
-});
-test('the exception rejects another wallet, weaker roles, unrelated or changed listings, and non-manual acceptance',async()=>{
-  const outsideId=randomUUID();
-  for(const [options,request] of [
-    [{identity:other},scopedReview],
-    [{superadmin:false},scopedReview],
-    [{id:outsideId},{...scopedReview,id:outsideId}],
-    [{project:{...scopedBounties,description:'A changed description for the original project.'}},scopedReview],
-    [{},{...scopedReview,decision:'reject'}],
-    [{},{...scopedReview,mode:'automatic'}],
-  ]){
-    const f=await scopedReviewFixture(options);
-    assert.equal((await f.call('review',request)).status,403);
-    assert.equal(f.state.value.submissions[0].status,'pending');
-    assert.equal(f.state.writes,1);
-    assert.equal(f.state.proposals.length,0);
+test('current wallet Admin and Superadmin may accept or reject their own submissions with an audited override',async()=>{
+  for(const superadmin of [false,true])for(const decision of ['accept','reject']){
+    const f=fixture(['project.admin'],other),id=randomUUID();f.state.superadmin=superadmin;
+    assert.equal((await f.call('submit',{entry:newEntry,operationId:id})).status,201);
+    const request={id,revision:1,decision,reason:'Current official website and product evidence were reviewed.'};
+    assert.equal((await f.call('review',request)).status,decision==='accept'?201:200);
+    const record=f.state.value.submissions[0],audit=record.history[0].selfReviewOverride;
+    assert.equal(audit.policy,'directory-admin-self-review-v1');assert.equal(audit.role,superadmin?'superadmin':'admin');assert.match(audit.authorityReference,/^[a-f0-9]{64}$/);
+    assert.equal(record.history[0].reviewer,record.submitter);assert.equal(record.history[0].reason,request.reason);
+    assert.equal(f.state.proposals.length,decision==='accept'?1:0);
+    if(decision==='accept')assert.match(f.state.proposals[0].options.reason,/self-review override.*Independent repository approval/);
+    assert.equal((await f.call('review',request)).status,409);
   }
 });
-test('an exception requires fresh Superadmin authority for writes and safe partial-outcome recovery',async()=>{
-  const demoted=await scopedReviewFixture();
-  demoted.state.demoteOnLoad=true;
-  assert.equal((await demoted.call('review',scopedReview)).status,403);
-  assert.equal(demoted.state.value.submissions[0].status,'pending');
-  assert.equal(demoted.state.writes,1);
-
-  const interrupted=await scopedReviewFixture();
-  interrupted.state.demoteAfterProposal=true;
-  assert.equal((await interrupted.call('review',scopedReview)).status,403);
-  assert.equal(interrupted.state.value.submissions[0].status,'accepting');
-  assert.equal((await interrupted.call('review',scopedReview)).status,403);
-  interrupted.state.superadmin=true;
-  assert.equal((await interrupted.call('review',{...scopedReview,reason:'A different rationale must not reconcile.'})).status,409);
-  assert.equal((await interrupted.call('review',scopedReview)).status,200);
-  assert.equal(interrupted.state.value.submissions[0].status,'accepted');
-  assert.equal(interrupted.state.proposals.length,1);
+test('displayed tiers, editor/reviewer roles and email-only Admin claims cannot self-review',async()=>{
+  for(const [roles,identity] of [[['role.reviewer'],wallet],[['role.editor'],wallet],[['tier.partner','role.reviewer'],wallet],[['project.admin','role.reviewer'],'person@example.org']]){
+    const f=fixture(roles,identity),id=randomUUID();
+    await f.call('submit',{entry:newEntry,operationId:id});
+    assert.equal((await f.call('review',{id,revision:1,decision:'accept',reason:'This is my own immutable submission.'})).status,403);
+    assert.equal(f.state.value.submissions[0].status,'pending');assert.equal(f.state.proposals.length,0);
+  }
+});
+test('self-review requires Admin at every write even if Reviewer remains, and reconciles without replay',async()=>{
+  const f=fixture(['project.admin','role.reviewer']),id=randomUUID();await f.call('submit',{entry:newEntry,operationId:id});
+  const request={id,revision:1,decision:'accept',reason:'Current official product evidence was checked.'};
+  f.state.rolesOnLoad=['role.reviewer'];assert.equal((await f.call('review',request)).status,403);
+  assert.equal(f.state.value.submissions[0].status,'pending');assert.equal(f.state.proposals.length,0);
+  delete f.state.rolesOnLoad;f.state.roles=['project.admin','role.reviewer'];f.state.rolesAfterProposal=['role.reviewer'];
+  assert.equal((await f.call('review',request)).status,403);assert.equal(f.state.value.submissions[0].status,'accepting');assert.equal(f.state.proposals.length,1);
+  assert.equal((await f.call('review',request)).status,403);
+  delete f.state.rolesAfterProposal;f.state.roles=['project.admin','role.reviewer'];
+  assert.equal((await f.call('review',{...request,reason:'Different rationale must never replay this proposal.'})).status,409);
+  assert.equal((await f.call('review',request)).status,200);assert.equal(f.state.proposals.length,1);
+});
+test('historical one-time self-review receipts remain readable and unchanged',async()=>{
+  const f=fixture(['project.admin']),id=randomUUID();await f.call('submit',{entry:newEntry,operationId:id});
+  f.state.value.submissions[0].status='accepted';f.state.value.submissions[0].history=[{exception:'bittrees-three-listings-2026-11-24',reviewer:'historical-reviewer',reason:'Original approved exception.'}];
+  const before=JSON.stringify(f.state.value.submissions[0]);assert.equal((await f.call('submissions')).status,200);
+  assert.equal(JSON.stringify(f.state.value.submissions[0]),before);
 });
 test('uncertain source writes remain held and retries reconcile without another proposal',async()=>{
   const f=fixture(['role.reviewer']);f.state.failProposal=true;
@@ -294,6 +277,18 @@ test('removal approval retains the record and history and proposes exclusion wit
   const {reviewer:f,decision}=await requestedFixture('removal');
   assert.equal((await f.call('review-edit-request',decision)).status,201);
   assert.equal(f.state.proposals[0].value.verification_status,'rejected');assert.equal(f.state.proposals[0].value.name,listing.name);assert.deepEqual(f.state.value.editRequests[0].removalReasons,['shutdown']);assert.equal(f.state.proposals[0].options.kind,'edit');
+});
+test('Admin and Superadmin can review their own edit and removal requests, preserving the original requester and listing',async()=>{
+  for(const superadmin of [false,true])for(const kind of ['edit','removal']){
+    const f=fixture(['project.admin']),operationId=randomUUID();f.state.superadmin=superadmin;f.state.listingStatus='needs_update';
+    const input={id:'existing.md',sha:'a'.repeat(40),kind,operationId,changes:'Current official sources support this requested correction.',sources:'https://existing.example.org/announcement',...(kind==='edit'?{entry:{...listing,description:'An updated description supported by current official project evidence.'}}:{removalReasons:['shutdown']})};
+    assert.equal((await f.call('request-edit',input)).status,201);
+    const requester=f.state.value.editRequests[0].requester;
+    assert.equal((await f.call('review-edit-request',{id:operationId,revision:1,decision:'accept',reason:'Official project evidence confirms the exact requested change.'})).status,201);
+    const record=f.state.value.editRequests[0];assert.equal(record.requester,requester);assert.equal(record.review.reviewer,requester);
+    assert.equal(record.review.selfReviewOverride.role,superadmin?'superadmin':'admin');assert.match(record.review.selfReviewOverride.authorityReference,/^[a-f0-9]{64}$/);
+    const proposal=f.state.proposals[0];assert.equal(proposal.value.verification_status,kind==='edit'?'verified':'rejected');assert.equal(proposal.value.curation_note,'Preserve this existing metadata');assert.match(proposal.options.reason,/self-review override/);
+  }
 });
 test('only Reviewer or wallet Admin may accept/reject requests; anyone signed in may submit',async()=>{
   for(const roles of [[],['role.editor']]){
