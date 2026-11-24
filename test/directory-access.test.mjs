@@ -36,18 +36,19 @@ function fixture(roles=[],identity=wallet){
     assert.equal(url,'https://roles.bittrees.org/api/authority/ecosystem-decision');
     const packet=JSON.parse(options.body),request=packet.request;
     assert(verifyEcosystemSignature(ecosystemRequestMessage(request),packet.signature,requestKeys.publicKey.export({format:'pem',type:'spki'})));
-    const decision={version:1,issuer:'https://roles.bittrees.org',audience:request.source,request,authoritative:true,enrolled:true,actions:state.roles,checkedAt:Date.now(),expiresAt:Date.now()+4900,requiresPrivateOwnership:true};
+    const decision={version:1,issuer:'https://roles.bittrees.org',audience:request.source,request,authoritative:true,enrolled:true,actions:state.roles,checkedAt:Date.now(),expiresAt:Date.now()+4900,requiresPrivateOwnership:true,
+      ...(state.superadmin?{administration:{model:'ecosystem',project:'crypto-directory',roles:['admin','superadmin'],status:'current'}}:{})};
     return Response.json({decision,signature:sign(null,Buffer.from(ecosystemDecisionMessage(decision)),decisionKeys.privateKey).toString('base64')});
   };
   const sessionSecret=createHmac('sha256',secret).update('bittrees project administration session v1:'+ORIGIN).digest('hex');
   const cookie='__Host-project-admin-session='+seal({project:'crypto-directory',identity,key:randomUUID(),authTime:Date.now(),expires:Date.now()+590000},sessionSecret);
   const storeFactory=()=>({
     configured:()=>true,
-    async load(){if(state.revokeOnLoad)state.roles=[];return {sha:String(state.value.revision),value:structuredClone(state.value)};},
+    async load(){if(state.revokeOnLoad)state.roles=[];if(state.demoteOnLoad)state.superadmin=false;return {sha:String(state.value.revision),value:structuredClone(state.value)};},
     async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;if(state.revokeAfterWrite)state.roles=[];return String(next.revision);},
     async duplicate(){return false;},
     async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:state.listingSha||'a'.repeat(40),raw:frontMatter({...listing,founded:state.numericFounded??listing.founded,verification_status:state.listingStatus||'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
-    async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
+    async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});if(state.demoteAfterProposal)state.superadmin=false;return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
     async reconcile(operation){return state.proposals.some(p=>p.operation===operation)?{url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100}:null;}
   });
   const service=createDirectoryService({env,fetcher,storeFactory,resolveName:async identity=>identity===wallet?'fixture.eth':null});
@@ -179,6 +180,63 @@ test('Reviewer accepts the immutable new entry or rejects it; no existing edit o
     assert.equal((await f.call('review',request)).status,409);
   }
   const f=fixture(['project.admin']),id=randomUUID();await f.call('submit',{entry:newEntry,operationId:id});assert.equal((await f.call('review',{id,revision:1,decision:'accept',reason:'This is my own submission.'})).status,403);
+});
+const scopedWallet='0xe5350d96fc3161bf5c385843ec5ee24e8b465b2f';
+const scopedBounties={...newEntry,name:'Bittrees Bounties',lead_category:'Payments',tags:['Bounties','ERC-20','Escrow'],ecosystem:['Ethereum','Base'],
+  description:'Token-funded bounties for builders with milestone proposals, delivery evidence, and ERC-20 escrow. Visitors can browse public builder profiles.',
+  primary_url:'https://bounties.bittrees.org/',product_url:'https://bounties.bittrees.org/profiles',founded:'n/a'};
+const scopedReview={id:'c1c6df41-5df7-4ea3-bf8a-0ce7a989240e',revision:1,decision:'accept',reason:'Checked the public project and builder profiles.'};
+async function scopedReviewFixture({identity=scopedWallet,superadmin=true,id=scopedReview.id,project=scopedBounties}={}){
+  const f=fixture(['project.admin'],identity);
+  f.state.superadmin=superadmin;
+  assert.equal((await f.call('submit',{entry:project,operationId:id})).status,201);
+  return f;
+}
+test('the one-time exception accepts the exact submission and records the exception in the journal and PR',async()=>{
+  const f=await scopedReviewFixture();
+  assert.equal((await f.call('review',scopedReview)).status,201);
+  const record=f.state.value.submissions[0];
+  assert.equal(record.status,'accepted');
+  assert.equal(record.history[0].exception,'bittrees-three-listings-2026-11-24');
+  assert.equal(f.state.proposals.length,1);
+  assert.match(f.state.proposals[0].options.reason,/One-time Superadmin self-review exception/);
+  assert.equal((await f.call('review',scopedReview)).status,403);
+  assert.equal(f.state.proposals.length,1);
+});
+test('the exception rejects another wallet, weaker roles, unrelated or changed listings, and non-manual acceptance',async()=>{
+  const outsideId=randomUUID();
+  for(const [options,request] of [
+    [{identity:other},scopedReview],
+    [{superadmin:false},scopedReview],
+    [{id:outsideId},{...scopedReview,id:outsideId}],
+    [{project:{...scopedBounties,description:'A changed description for the original project.'}},scopedReview],
+    [{},{...scopedReview,decision:'reject'}],
+    [{},{...scopedReview,mode:'automatic'}],
+  ]){
+    const f=await scopedReviewFixture(options);
+    assert.equal((await f.call('review',request)).status,403);
+    assert.equal(f.state.value.submissions[0].status,'pending');
+    assert.equal(f.state.writes,1);
+    assert.equal(f.state.proposals.length,0);
+  }
+});
+test('an exception requires fresh Superadmin authority for writes and safe partial-outcome recovery',async()=>{
+  const demoted=await scopedReviewFixture();
+  demoted.state.demoteOnLoad=true;
+  assert.equal((await demoted.call('review',scopedReview)).status,403);
+  assert.equal(demoted.state.value.submissions[0].status,'pending');
+  assert.equal(demoted.state.writes,1);
+
+  const interrupted=await scopedReviewFixture();
+  interrupted.state.demoteAfterProposal=true;
+  assert.equal((await interrupted.call('review',scopedReview)).status,403);
+  assert.equal(interrupted.state.value.submissions[0].status,'accepting');
+  assert.equal((await interrupted.call('review',scopedReview)).status,403);
+  interrupted.state.superadmin=true;
+  assert.equal((await interrupted.call('review',{...scopedReview,reason:'A different rationale must not reconcile.'})).status,409);
+  assert.equal((await interrupted.call('review',scopedReview)).status,200);
+  assert.equal(interrupted.state.value.submissions[0].status,'accepted');
+  assert.equal(interrupted.state.proposals.length,1);
 });
 test('uncertain source writes remain held and retries reconcile without another proposal',async()=>{
   const f=fixture(['role.reviewer']);f.state.failProposal=true;
