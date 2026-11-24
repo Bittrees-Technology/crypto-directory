@@ -95,7 +95,11 @@ not create preview builds or model-review jobs. Actual listing proposals retain
 the ordinary required PR checks and release process.
 
 An independent Reviewer/Admin accepts or rejects the unchanged submission with a
-rationale. Self-review is denied. Acceptance creates a pull request adding exactly
+rationale. The November 24, 2026 exception lets the pinned wallet for
+`raging.eth`, while holding current Superadmin authority, manually accept the
+exact original Bittrees Bounties, Capital and Research submissions. The journal
+and release proposals identify the exception. All other submissions require
+independent review. Acceptance creates a pull request adding exactly
 one listing; rejection never creates a listing. Editors can propose changes only
 to an existing non-rejected listing at its current content SHA and cannot change
 verification state. Submitted entries stay pending until a review; accepted source
