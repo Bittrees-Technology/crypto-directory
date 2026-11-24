@@ -19,7 +19,7 @@ native listing validator, queue, permission checks and release proposals.
 | Submission form and own submissions | `directory.submit_project`, `directory.list_submissions` | Any signed-in source identity; MCP also needs its own enrollment/grant |
 | Change/removal form and own requests | `directory.request_change`, `directory.read_editable_listing`, `directory.list_change_requests` | Same intake rule |
 | Existing listing editor | `directory.propose_edit` | Editor or native wallet Admin |
-| Review queue | `directory.review_submission`, `directory.review_change` | Reviewer or native wallet Admin; no self-approval |
+| Review queue | `directory.review_submission`, `directory.review_change` | Reviewer or native wallet Admin; own-item review additionally requires current project Admin/Superadmin |
 | Automatic editorial approval | `directory.auto_review` | Explicit current Reviewer plus exact delegated action and independent evidence |
 | Needs-update and process-status pages | `directory.read_workspace` | Staff; administration view additionally needs Admin |
 | Request close-out | `directory.close_change_request` | Staff; closing changes no listing |
@@ -31,6 +31,18 @@ transaction, merges a pull request, publishes IPNS or changes ENS contenthash.
 Any signed-in browser user can submit suggestions without staff authority. This
 does not create anonymous MCP write authority or make an agent inherit a human's
 role merely through ownership of its key.
+
+The `directory-admin-self-review-v1` native policy allows a currently verified,
+wallet-backed project Admin/Superadmin to review their own immutable submission,
+change or removal request. Each override records its role and an opaque digest
+of the review-time authoritative source decision, alongside the existing original requester,
+reviewer, rationale and time. Prepared MCP proposals retain `canReviewOwn`, or
+`canAutoReviewOwn` for automatic review, so every later step must still have that
+same authority. Automatic self-review also needs the explicitly assigned Reviewer
+role and all existing enrollment, delegation, evidence, proof and consent checks.
+An agent never inherits its sponsor's browser role. Reviewer-only self-review and
+unknown historical owner provenance remain held. Existing historical exception
+receipts are preserved. This policy changes no release approval or role grants.
 
 ## Explicit setup gates
 
