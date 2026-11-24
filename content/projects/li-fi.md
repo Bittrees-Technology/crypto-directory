@@ -5,10 +5,10 @@ tags: [Infrastructure, Cross-chain]
 ecosystem: [Ethereum, Multiple]
 description: Aggregation layer for cross-chain swaps and bridges.
 primary_url: https://li.fi
-product_url: https://li.fi/products
+product_url: "https://li.fi/api-sdk"
 founded: 2021
 hq: Germany
 token: n/a
 twitter: https://x.com/lifiprotocol
-verification_status: "needs_update"
+verification_status: "verified"
 ---

@@ -5,10 +5,10 @@ tags: [Data & Analytics, Research]
 ecosystem: [Ethereum, Multiple]
 description: Market intelligence and macro analytics platform for digital assets.
 primary_url: https://sosovalue.com
-product_url: https://sosovalue.com/markets
+product_url: "https://sosovalue.com/dashboard/charts"
 founded: 2024
 hq: Singapore
 token: SOSO
 twitter: https://x.com/sosovalue
-verification_status: "needs_update"
+verification_status: "verified"
 ---

@@ -3,11 +3,11 @@ name: Mina Foundation
 lead_category: Infrastructure
 tags: [Infrastructure, Zero Knowledge]
 ecosystem: [Mina]
-description: Ecosystem steward for lightweight zk-powered Mina protocol.
-primary_url: https://mina.foundation
+description: "Switzerland-based Mina ecosystem foundation scaling down toward a solvent wind-down and decentralized treasury handover."
+primary_url: "https://www.minafoundation.com/"
 product_url: https://minaprotocol.com
-founded: 2021
-hq: United States
+founded: "n/a"
+hq: "Switzerland"
 token: MINA
 twitter: https://x.com/minaprotocol
 verification_status: "needs_update"

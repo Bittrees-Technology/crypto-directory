@@ -2,13 +2,13 @@
 name: Moonwell
 lead_category: DeFi
 tags: [DeFi, Lending]
-ecosystem: [Base, Moonbeam]
+ecosystem: ["Ethereum", "Base", "Optimism"]
 description: Open lending and borrowing protocol ecosystem.
 primary_url: https://moonwell.fi
-product_url: https://app.moonwell.fi
+product_url: "https://moonwell.fi/discover"
 founded: 2022
 hq: United States
 token: WELL
 twitter: https://x.com/MoonwellDeFi
-verification_status: "needs_update"
+verification_status: "verified"
 ---

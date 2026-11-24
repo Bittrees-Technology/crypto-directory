@@ -1,11 +1,11 @@
 ---
 name: Moonbeam
-lead_category: Layer 1 / Layer 2
-tags: [Layer 1 / Layer 2, Infrastructure]
-ecosystem: [Polkadot]
-description: Smart contract platform in the Polkadot ecosystem.
+lead_category: "AI Agents"
+tags: ["AI Agents", "Infrastructure"]
+ecosystem: ["Base"]
+description: "Pre-launch agent transaction settlement and assurance protocol planned for Base; joining and its SDK are not yet generally available."
 primary_url: https://moonbeam.network
-product_url: https://moonbeam.network/build
+product_url: "https://moonbeam.network/docs"
 founded: 2022
 hq: United States
 token: GLMR

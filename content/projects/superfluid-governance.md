@@ -3,12 +3,12 @@ name: Superfluid Governance
 lead_category: DAOs & Governance
 tags: [DAOs & Governance, Developer Tools]
 ecosystem: [Ethereum, Polygon, Optimism]
-description: Governance and token streaming tools for DAOs.
-primary_url: https://www.superfluid.finance
-product_url: https://www.superfluid.finance/dao
+description: "Governance for the Superfluid money-streaming protocol and its ecosystem incentives."
+primary_url: "https://superfluid.org/"
+product_url: "https://superfluid.org/governance"
 founded: 2021
 hq: Switzerland
-token: SUPER
+token: "SUP"
 twitter: https://x.com/Superfluid_HQ
-verification_status: "needs_update"
+verification_status: "verified"
 ---
