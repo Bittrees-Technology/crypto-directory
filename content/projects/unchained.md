@@ -3,12 +3,12 @@ name: Unchained
 lead_category: Custody
 tags: [Custody, Bitcoin]
 ecosystem: [Bitcoin]
-description: Bitcoin-native custody and financial services platform.
-primary_url: https://unchained.com
-product_url: https://unchained.com/services
+description: "Bitcoin collaborative custody service with multisignature vaults and an account portal."
+primary_url: "https://www.unchained.com/"
+product_url: "https://www.unchained.com/vaults"
 founded: 2016
 hq: United States
 token: n/a
 twitter: https://x.com/unchainedcom
-verification_status: "needs_update"
+verification_status: "verified"
 ---

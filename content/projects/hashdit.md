@@ -3,12 +3,12 @@ name: HashDit
 lead_category: Security
 tags: [Security, Monitoring]
 ecosystem: [Ethereum, BSC]
-description: Web3 security platform focused on scam prevention and alerts.
-primary_url: https://hashdit.io
-product_url: https://hashdit.io/products
+description: "Web3 security tools for transaction and signature risk warnings, scam prevention and monitoring."
+primary_url: "https://www.hashdit.io/"
+product_url: "https://chromewebstore.google.com/detail/hashdit-pro/hjplojcanomjhmbmpnfkdhicomfdkhmi"
 founded: 2022
 hq: Hong Kong
 token: n/a
 twitter: https://x.com/hashdit
-verification_status: "needs_update"
+verification_status: "verified"
 ---
