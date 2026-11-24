@@ -79,6 +79,11 @@ test('own-review authority fails closed for other projects, expired decisions, u
     const actual=permissions({...valid,...patch},now);assert.equal(actual.canReviewOwn,false);assert.equal(actual.canAutoReviewOwn,false);
   }
 });
+test('authenticated sessions without role metadata keep public intake but never receive own-review authority',async()=>{
+  const service=createDirectoryService({env:{BITTREES_ADMIN_SSO_CLIENT_SECRET:secret},administration:async()=>Response.json({identity:wallet}),storeFactory:()=>({configured:()=>true})});
+  const response=await service(new Request(ORIGIN+'/api/directory/session'));
+  assert.equal(response.status,200);const access=await response.json();assert.equal(access.canSubmit,true);assert.equal(access.admin,false);assert.equal(access.canReviewOwn,false);assert.equal(access.canAutoReviewOwn,false);
+});
 test('edit requests are idempotent, scoped to existing entries, private by actor and never publish listings',async()=>{
   const f=fixture([], 'person@example.org'),input={id:'existing.md',changes:'Please update the official product URL to its new location.',sources:'https://existing.example.org/announcement',operationId:randomUUID()};
   assert.equal((await f.call('request-edit',input)).status,201);assert.equal((await f.call('request-edit',input)).status,200);assert.equal(f.state.writes,1);assert.equal(f.state.proposals.length,0);
