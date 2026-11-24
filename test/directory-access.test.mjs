@@ -45,7 +45,7 @@ function fixture(roles=[],identity=wallet){
   const storeFactory=()=>({
     configured:()=>true,
     async load(){if(state.revokeOnLoad)state.roles=[];if(state.rolesOnLoad)state.roles=[...state.rolesOnLoad];return {sha:String(state.value.revision),value:structuredClone(state.value)};},
-    async save(current,next){await this.authorize();if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;if(state.revokeAfterWrite)state.roles=[];return String(next.revision);},
+    async save(current,next){await this.authorize();if(state.concurrentOwnerChange){state.value.revision++;state.value.editRequests[0].requester='concurrent-requester';state.value.editRequests[0].revision++;delete state.concurrentOwnerChange;}if(current.sha!==String(state.value.revision))throw fail('Concurrent update',409);state.value=structuredClone(next);state.writes++;if(state.revokeAfterWrite)state.roles=[];return String(next.revision);},
     async duplicate(){return false;},
     async listing(id){if(id!=='existing.md'&&id!==state.collideId)throw fail('Not found',404);return {sha:state.listingSha||'a'.repeat(40),raw:frontMatter({...listing,founded:state.numericFounded??listing.founded,verification_status:state.listingStatus||'verified',curation_note:'Preserve this existing metadata'})+'\n## Existing notes\nKeep this text.\n'};},
     async proposal(operation,id,value,options){await this.authorize();if(state.failProposal)throw Error('Uncertain outcome');state.proposals.push({operation,id,value,options});if(state.rolesAfterProposal)state.roles=[...state.rolesAfterProposal];return {url:'https://github.com/Bittrees-Technology/crypto-directory/pull/100',number:100};},
@@ -70,6 +70,14 @@ test('ENS display metadata never replaces the authenticated address or grants a 
   const session=await (await f.call('session')).json();assert.equal(session.identity,wallet);assert.equal(session.staff,false);
   assert.deepEqual(await (await fixture([], 'person@example.org').call('identity')).json(),{identity:'person@example.org',ensName:null});
   assert.equal((await f.call('identity',null,{cookie:''})).status,401);
+});
+test('own-review authority fails closed for other projects, expired decisions, unrelated wallets and role labels',()=>{
+  const now=Date.now(),request={project:'crypto-directory',source:'cd.bittrees.org',authenticatedWallet:wallet,subjects:[wallet]};
+  const valid={authoritative:true,enrolled:true,audience:'cd.bittrees.org',request,checkedAt:now,expiresAt:now+4900,actions:['project.admin','role.reviewer']};
+  assert.equal(permissions(valid,now).canAutoReviewOwn,true);
+  for(const patch of [{authoritative:false},{enrolled:false},{audience:'other.bittrees.org'},{expiresAt:now},{checkedAt:now-6000},{request:{...request,project:'other'}},{request:{...request,source:'other.bittrees.org'}},{request:{...request,authenticatedWallet:null}},{request:{...request,subjects:[other]}},{actions:['role.reviewer'],administration:{roles:['superadmin']}}]){
+    const actual=permissions({...valid,...patch},now);assert.equal(actual.canReviewOwn,false);assert.equal(actual.canAutoReviewOwn,false);
+  }
 });
 test('edit requests are idempotent, scoped to existing entries, private by actor and never publish listings',async()=>{
   const f=fixture([], 'person@example.org'),input={id:'existing.md',changes:'Please update the official product URL to its new location.',sources:'https://existing.example.org/announcement',operationId:randomUUID()};
@@ -289,6 +297,13 @@ test('Admin and Superadmin can review their own edit and removal requests, prese
     assert.equal(record.review.selfReviewOverride.role,superadmin?'superadmin':'admin');assert.match(record.review.selfReviewOverride.authorityReference,/^[a-f0-9]{64}$/);
     const proposal=f.state.proposals[0];assert.equal(proposal.value.verification_status,kind==='edit'?'verified':'rejected');assert.equal(proposal.value.curation_note,'Preserve this existing metadata');assert.match(proposal.options.reason,/self-review override/);
   }
+});
+test('a concurrent requester/revision change blocks an Admin self-review without creating a proposal',async()=>{
+  const f=fixture(['project.admin']),operationId=randomUUID();
+  await f.call('request-edit',{id:'existing.md',sha:'a'.repeat(40),kind:'removal',operationId,changes:'Official closure supports removal from current discovery.',sources:'https://existing.example.org/closure',removalReasons:['shutdown']});
+  f.state.concurrentOwnerChange=true;
+  assert.equal((await f.call('review-edit-request',{id:operationId,revision:1,decision:'accept',reason:'Current official closure evidence has been checked.'})).status,409);
+  assert.equal(f.state.value.editRequests[0].status,'pending');assert.equal(f.state.value.editRequests[0].requester,'concurrent-requester');assert.equal(f.state.value.editRequests[0].review,undefined);assert.equal(f.state.proposals.length,0);
 });
 test('only Reviewer or wallet Admin may accept/reject requests; anyone signed in may submit',async()=>{
   for(const roles of [[],['role.editor']]){

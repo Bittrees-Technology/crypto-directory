@@ -61,7 +61,7 @@ submission while approving it. Reviewer-only and Editor-only accounts cannot
 approve their own submissions or requests. A currently authorized,
 wallet-authenticated CryptoDirectory Admin or Superadmin may review their own
 submissions and change/removal requests. The source records the original
-requester, reviewer, rationale, time, override policy and authoritative decision
+requester, reviewer, rationale, time, override policy and review-time authoritative decision
 reference. Authority is checked again before each write and proposal step. This
 exception does not authorize self-approval of roles, Safe transactions or GitHub
 reviews, and does not grant an agent its human sponsor's authority.

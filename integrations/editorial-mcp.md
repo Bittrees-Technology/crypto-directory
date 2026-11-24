@@ -35,7 +35,7 @@ role merely through ownership of its key.
 The `directory-admin-self-review-v1` native policy allows a currently verified,
 wallet-backed project Admin/Superadmin to review their own immutable submission,
 change or removal request. Each override records its role and an opaque digest
-of the authoritative source decision, alongside the existing original requester,
+of the review-time authoritative source decision, alongside the existing original requester,
 reviewer, rationale and time. Prepared MCP proposals retain `canReviewOwn`, or
 `canAutoReviewOwn` for automatic review, so every later step must still have that
 same authority. Automatic self-review also needs the explicitly assigned Reviewer
