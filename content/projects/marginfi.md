@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: n/a
 twitter: https://x.com/marginfi
-verification_status: "needs_update"
+verification_status: "rejected"
 ---

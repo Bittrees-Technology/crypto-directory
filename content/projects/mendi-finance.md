@@ -10,5 +10,5 @@ founded: 2023
 hq: Metaverse
 token: MENDI
 twitter: https://x.com/MendiFinance
-verification_status: "needs_update"
+verification_status: "rejected"
 ---
