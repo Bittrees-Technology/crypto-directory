@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Privacy]
 ecosystem: [Penumbra]
 description: Private DEX and shielded transaction network.
 primary_url: https://penumbra.zone
-product_url: https://penumbra.zone/learn
+product_url: "https://guide.penumbra.zone/network/frontend"
 founded: 2024
 hq: Metaverse
 token: n/a

@@ -10,5 +10,5 @@ founded: 2023
 hq: United States
 token: PIRATE
 twitter: https://x.com/PirateNation
-verification_status: "needs_update"
+verification_status: "rejected"
 ---

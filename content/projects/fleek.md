@@ -10,5 +10,5 @@ founded: 2018
 hq: United States
 token: n/a
 twitter: https://x.com/Fleek
-verification_status: "needs_update"
+verification_status: "rejected"
 ---
