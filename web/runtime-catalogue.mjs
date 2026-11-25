@@ -23,7 +23,9 @@ export async function fetchCatalogue(fetcher=fetch,expectedStoreId=null){
   if(!response.ok||response.redirected||!/^application\/json(?:;|$)/i.test(response.headers.get('content-type')||''))throw Error('Live directory unavailable.');
   const raw=await response.text();if(new TextEncoder().encode(raw).length>2500000)throw Error('Directory exceeds its bound.');
   const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw)))].map(x=>x.toString(16).padStart(2,'0')).join('');
-  if(response.headers.get('etag')!=='"'+digest+'"')throw Error('Directory integrity check failed.');
+  // Compression can weaken the transport ETag. The decoded body must still
+  // match the exact SHA-256, and the separately pinned store must also match.
+  if(response.headers.get('etag')?.replace(/^W\//,'')!=='"'+digest+'"')throw Error('Directory integrity check failed.');
   const storeId=response.headers.get('x-directory-catalogue-store');if(!/^[a-f0-9-]{36}$/.test(storeId||'')||expectedStoreId&&storeId!==expectedStoreId)throw Error('Directory store changed.');
   const revision=response.headers.get('x-directory-catalogue-revision');if(!/^\d+$/.test(revision||'')||!Number.isSafeInteger(Number(revision)))throw Error('Directory revision unavailable.');
   return {rows:checkedCatalogue(JSON.parse(raw)),storeId,revision:Number(revision)};
