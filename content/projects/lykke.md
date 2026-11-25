@@ -10,5 +10,5 @@ founded: 2015
 hq: Switzerland
 token: LKK
 twitter: https://x.com/Lykke
-verification_status: "needs_update"
+verification_status: "rejected"
 ---

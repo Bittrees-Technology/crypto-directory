@@ -3,9 +3,9 @@ name: "Bunzz"
 lead_category: "Developer Tools"
 tags: ["Developer Tools"]
 ecosystem: ["n/a"]
-description: "Tools and services for building and deploying smart contract applications."
+description: "Smart contract development and documentation tools; the hosted platform currently reports maintenance."
 primary_url: "https://www.bunzz.dev/"
-product_url: "https://app.bunzz.dev/explorer"
+product_url: "https://docs.bunzz.dev/product-docs/introduction/decipher"
 founded: "n/a"
 hq: "Metaverse"
 token: "n/a"
