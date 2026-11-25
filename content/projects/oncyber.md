@@ -1,14 +1,14 @@
 ---
-name: OnCyber
+name: "Oncyber (open-source galleries)"
 lead_category: NFTs & Creator Economy
 tags: [NFTs & Creator Economy, Creator Tools]
-ecosystem: [Ethereum]
-description: Immersive 3D world creation platform for digital communities and assets.
-primary_url: https://oncyber.io
-product_url: https://oncyber.io/spaces
+ecosystem: ["Ethereum", "Solana", "Tezos"]
+description: "Open-source browser platform for creating and visiting 3D galleries and worlds, including displays of NFTs from connected Ethereum, Solana and Tezos wallets."
+primary_url: "https://www.oncyber.com/about"
+product_url: "https://www.oncyber.com/"
 founded: 2021
-hq: United States
+hq: "n/a"
 token: n/a
 twitter: https://x.com/oncyber
-verification_status: "needs_update"
+verification_status: "verified"
 ---
