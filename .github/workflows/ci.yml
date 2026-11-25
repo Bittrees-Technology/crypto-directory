@@ -39,6 +39,9 @@ jobs:
       - name: Verify directory roles, intake and review boundaries
         run: npm run test:directory
 
+      - name: Verify transactional catalogue boundaries
+        run: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s runtime -p 'test_*.py'
+
       - name: Verify ENS packet and signing boundaries
         run: npm run test:ens
 
@@ -56,6 +59,15 @@ jobs:
 
       - name: Verify role-based navigation and intake forms
         run: npm run test:directory-browser
+
+      - name: Verify shared runtime catalogue pages without production writes
+        env:
+          DIRECTORY_DATA_BACKEND: runtime-v1
+          DIRECTORY_RUNTIME_STORE_ID: e38a1a2e-3602-4e3b-875b-ac80ce210c90
+          DIRECTORY_BUILD_OUTPUT: /tmp/cryptodirectory-runtime-site
+        run: |
+          node scripts/build.mjs
+          node scripts/runtime-browser.mjs
 
       - name: Build Surf discovery site
         run: npm --prefix surf run build

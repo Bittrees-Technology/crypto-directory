@@ -233,3 +233,32 @@ test('a PR created at an unexpected head is held and never reported as an approv
   const r=await step(f,b.data);assert.equal(r.response.status,409);assert.equal(r.data,undefined);assert.equal(f.state.value.mcpOperations[0].status,'held');assert.equal(f.state.value.submissions[0].status,'accepting');
   const read=await f.call('read_operation',{operationId:p.data.operationId});assert.equal(read.data.status,'held');assert.equal(f.state.prs.length,1);assert.equal(f.state.prs[0].state,'open');assert.equal(f.state.businessWrites.length,3);
 });
+
+test('runtime migration rejects legacy GitHub-step consent before any journal or source effect',async t=>{
+  const f=fixture(t);f.env.DIRECTORY_DATA_BACKEND='runtime-v1';f.env.DIRECTORY_RUNTIME_STORE_ID=randomUUID();
+  assert.equal((await f.call('read_access')).response.status,403);
+  assert.equal(f.state.journalWrites,0);assert.equal(f.state.businessWrites.length,0);
+});
+test('new runtime consent binds the exact store and an assigned Reviewer can publish without GitHub steps',async t=>{
+  let catalogueRevision=0;const receipts=new Map();
+  const f=fixture(t,['role.reviewer'],{storeFactory:({state})=>({
+    atomicPublication:true,backend:'runtime-v1',configured:()=>true,
+    load:async()=>({sha:String(state.value.revision),catalogueRevision,value:structuredClone(state.value)}),
+    async save(current,next){await this.authorize();assert.equal(current.sha,String(state.value.revision));state.value=structuredClone(next);state.journalWrites++;return String(next.revision);},
+    async saveAudit(current,next){assert.equal(current.sha,String(state.value.revision));state.value=structuredClone(next);state.journalWrites++;return String(next.revision);},
+    duplicate:async()=>false,listing:async()=>{throw Object.assign(Error('Not found'),{status:404});},
+    async commitReview(current,next,input){const actor=await this.authorize();assert.equal(actor.requiredCapability,'canAutoReview');assert(actor.writeDeadline<=f.clock.value+4900);assert.equal(current.sha,String(state.value.revision));
+      const publication={operationId:input.operationId,projectId:input.id,catalogueRevision:++catalogueRevision,storeId:f.env.DIRECTORY_RUNTIME_STORE_ID,appliedAt:f.clock.value,contentHash:'a'.repeat(64),listingSha:'b'.repeat(40)};const record=next[input.collection].find(row=>row.id===input.recordId);record.status='accepted';record.publication=publication;const operation=next.mcpOperations.find(row=>row.id===input.operationId);operation.status='complete';operation.capability=actor.requiredCapability;operation.outcome={status:'published',publication};state.value=structuredClone(next);receipts.set(input.operationId,publication);if(state.lateRuntimeResponse){f.clock.value+=6000;throw Object.assign(Error('Late committed response'),{status:409});}return {status:'published',publication};},
+    receipt:async id=>({receipt:{...receipts.get(id),...(f.state.corruptRuntimeReceipt?{contentHash:'c'.repeat(64)}:{})}})
+  })});
+  const storeId=randomUUID();f.env.DIRECTORY_DATA_BACKEND='runtime-v1';f.env.DIRECTORY_RUNTIME_STORE_ID=storeId;
+  const oldBinding=f.connection.bindingDigest;f.connection.publicationBackend='runtime-v1';f.connection.catalogueStoreId=storeId;f.connection.actions=f.connection.actions.filter(action=>action!=='directory.execute_step');f.connection.bindingDigest=connectionBinding(f.connection);assert.notEqual(f.connection.bindingDigest,oldBinding);f.env.DIRECTORY_MCP_CONNECTIONS_JSON=JSON.stringify([f.connection]);
+  const args={target:'submission',id:seedSubmission(f),revision:1,reason,evidence:'Checked the official website, application and current documentation.'};
+  const published=await f.call('auto_review',args);assert.equal(published.response.status,200,JSON.stringify(published.wire));assert.equal(published.data.status,'complete');assert.equal(published.data.outcome.status,'published');assert.equal(catalogueRevision,1);assert.equal(f.state.businessWrites.length,0);
+  const duplicate=await f.call('auto_review',args,{operationId:published.data.operationId});assert.equal(duplicate.response.status,409);assert.match(duplicate.wire.error.message,/read_operation/);assert.equal(catalogueRevision,1);
+  const read=await f.call('read_operation',{operationId:published.data.operationId});assert.equal(read.response.status,200);assert.equal(read.data.outcome.publication.catalogueRevision,1);
+  assert.equal(read.data.outcome.publication.storeId,storeId);assert.equal(read.data.outcome.publication.appliedAt,f.clock.value);
+  f.state.corruptRuntimeReceipt=true;assert.equal((await f.call('read_operation',{operationId:published.data.operationId})).response.status,409);delete f.state.corruptRuntimeReceipt;
+  f.state.lateRuntimeResponse=true;const lateId=seedSubmission(f);Object.assign(f.state.value.submissions.at(-1).entry,{name:'Second Runtime Fixture',primary_url:'https://second-runtime.example/'});const late=await f.call('auto_review',{...args,id:lateId});assert.equal(late.response.status,409,JSON.stringify(late.wire));const original=await f.call('read_operation',{operationId:late.packet.request.operationId});assert.equal(original.response.status,200);assert.equal(original.data.status,'complete');assert.equal(original.data.outcome.publication.catalogueRevision,2);assert.equal(f.state.businessWrites.length,0);
+  const oldProof=f.proof('directory.read_access',{});f.connection.catalogueStoreId=randomUUID();f.connection.bindingDigest=connectionBinding(f.connection);f.env.DIRECTORY_MCP_CONNECTIONS_JSON=JSON.stringify([f.connection]);assert.equal((await f.call('read_access',{}, {packet:oldProof})).response.status,403);
+});

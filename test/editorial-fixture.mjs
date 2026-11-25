@@ -10,7 +10,7 @@ export const listing={name:'Existing Project',lead_category:'Infrastructure',tag
 export const newEntry={...listing,name:'New Project',primary_url:'https://new.example.org/',product_url:'https://new.example.org/app'};
 const blob=raw=>createHash('sha1').update('blob '+Buffer.byteLength(raw)+'\0'+raw).digest('hex');
 const pem=key=>key.export({format:'pem',type:'spki'});
-export function fixture(t,roles=['role.reviewer']){
+export function fixture(t,roles=['role.reviewer'],options={}){
   const clock={value:Date.now()};t.mock.method(Date,'now',()=>clock.value);
   const gateway=generateKeyPairSync('ed25519'),actor=generateKeyPairSync('ed25519'),decision=generateKeyPairSync('ed25519'),ecosystem=generateKeyPairSync('ed25519'),source=generateKeyPairSync('ed25519'),app=generateKeyPairSync('rsa',{modulusLength:2048});
   const secret='synthetic-editorial-journal-secret-'.repeat(3),token='a'.repeat(64),identity='0x'+'1'.repeat(40);
@@ -89,7 +89,7 @@ export function fixture(t,roles=['role.reviewer']){
     throw Error('Unexpected synthetic source route: '+method+' '+route);
   };
   const identityProvider=async({connection:binding,context})=>{assert.equal(binding.sourceTokenHash,undefined);assert.equal(binding.actorPublicKey,undefined);assert.equal(context.selection,undefined);assert.equal(context.sourceContext,undefined);if(context.kind==='execute')assert.equal(context.authorityProof.request.parametersDigest,context.parametersDigest);return {...native,verified:!state.identityRevoked,contextDigest:digest(context),checkedAt:clock.value,expiresAt:clock.value+4900,...(state.providerChange||{})};};
-  const handler=createEditorialMcp({env,fetcher,identityProvider,now:()=>clock.value});
+  const handler=createEditorialMcp({env,fetcher,identityProvider,...(options.storeFactory?{storeFactory:()=>options.storeFactory({state,env})}:{}),now:()=>clock.value});
   function proof(name,args,operationId= args.operationId||randomUUID(),change){
     // Valid requests sign the same source-normalized payload as the gateway.
     // Invalid argument fixtures intentionally sign raw input to test rejection.

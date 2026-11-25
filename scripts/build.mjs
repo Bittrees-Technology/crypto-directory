@@ -7,7 +7,7 @@ import { filterProjects, projectPage, catalogPagePath, pageSummary, escapeHtml, 
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
-const siteDir = path.join(root, 'site');
+const siteDir = process.env.DIRECTORY_BUILD_OUTPUT?path.resolve(process.env.DIRECTORY_BUILD_OUTPUT):path.join(root,'site');
 const categoryDir = path.join(siteDir, 'categories');
 const pageDir = path.join(siteDir, 'pages');
 const dataDir = path.join(siteDir, 'data');
@@ -147,7 +147,9 @@ function siteNav(navPrefix = '') {
   </nav>`;
 }
 
-function pageShell({ title, heading = title, subtitle, body, home = false, showSubmissionLink = true, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css', navPrefix = '' }) {
+const RUNTIME_CATALOGUE=process.env.DIRECTORY_DATA_BACKEND==='runtime-v1';
+
+function pageShell({ title, heading = title, subtitle, body, home = false, showSubmissionLink = true, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css', navPrefix = '', catalogueView = '', catalogueCategory = '', cataloguePage = 1 }) {
   return `<!doctype html>
 <html lang=\"en\">
 <head>
@@ -160,7 +162,7 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
   <link rel=\"stylesheet\" href=\"${escapeHtml(stylesheetHref)}\">
   ${extraHead}
 </head>
-<body>
+<body${RUNTIME_CATALOGUE?` data-live-catalogue data-catalogue-store="${escapeHtml(process.env.DIRECTORY_RUNTIME_STORE_ID||'')}" data-catalogue-view="${escapeHtml(catalogueView)}" data-catalogue-category="${escapeHtml(catalogueCategory)}" data-catalogue-page="${cataloguePage}" data-catalogue-prefix="${escapeHtml(navPrefix)}"`:''}>
   <main>
     <header class="directory-header">
       <a class="directory-brand" href="${escapeHtml(navPrefix || './')}" aria-label="CryptoDirectory home"><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
@@ -180,6 +182,7 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
     <p class=\"footer\">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
   </main>
   ${extraScript}
+  ${RUNTIME_CATALOGUE?`<script type="module" src="${escapeHtml(navPrefix)}assets/runtime-catalogue.mjs"></script>`:''}
   <script type="module" src="${escapeHtml(navPrefix)}assets/directory-client.js"></script>
 </body>
 </html>`.replace(/[ \t]+(?=\n)/g,'');
@@ -247,7 +250,8 @@ ${paginationHtml(state, canonicalPath)}
   } });
   return pageShell({ title, heading: 'Explore the directory', home: true,
     subtitle: 'Active global onchain companies and projects', body, extraHead: head,
-    extraScript: `<script type="module" src="${prefix}assets/directory-search.js"></script>`,
+    catalogueView: 'verified', cataloguePage: page,
+    extraScript: RUNTIME_CATALOGUE?'':`<script type="module" src="${prefix}assets/directory-search.js"></script>`,
     stylesheetHref: `${prefix}assets/styles.css`, navPrefix: prefix });
 }
 
@@ -259,7 +263,7 @@ function categoryPage(category, projects, page = 1) {
   const prefix = navigationPrefix(canonicalPath);
   const scope = category === 'AI Agents' ? '<p>Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.</p>' : '';
   const empty = visible.length ? '' : '<p>No listings have been added to this category yet. New suggestions go through review before appearing here.</p>';
-  const body = `<section class="card" style="margin:18px 0">${visible.length} entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href="${prefix}">Back to index</a></section>
+  const body = `<section class="card" style="margin:18px 0"><span id="category-total">${visible.length}</span> entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href="${prefix}">Back to index</a></section>
 <p id="catalog-count" class="status">${pageSummary(state)}</p>
 ${catalogTable(tableRows(state.items, prefix))}
 ${paginationHtml(state, canonicalPath, slug)}`;
@@ -273,7 +277,7 @@ ${paginationHtml(state, canonicalPath, slug)}`;
     }
   });
   return pageShell({ title, heading: `Category: ${category}`,
-    subtitle: 'Sorted by lead category', body, extraHead: head,
+    subtitle: 'Sorted by lead category', body, extraHead: head, catalogueView:'verified', catalogueCategory:category,cataloguePage:page,
     stylesheetHref: `${prefix}assets/styles.css`, navPrefix: prefix });
 }
 
@@ -294,7 +298,7 @@ function listingFormPage(edit) {
   <h2>Listing details</h2>
   <form id="listing-form" method="post" data-mode="${edit?'edit':'submit'}">${controls}
   ${edit?'<label class="form-field-wide">Why is this update needed?<textarea name="reason" required minlength="10" maxlength="1000"></textarea></label>':''}
-  <p class="submission-disclosure form-field-wide">Listing details, review notes and release proposals are public on GitHub. Do not include private information. Your sign-in email stays private.</p>
+  <p class="submission-disclosure form-field-wide">${RUNTIME_CATALOGUE?'Approved listing details are public. Requests and review notes are visible to you and authorized staff. Do not include private information. Your sign-in email stays private.':'Listing details, review notes and release proposals are public on GitHub. Do not include private information. Your sign-in email stays private.'}</p>
   <button type="submit">${edit?'Propose update':'Submit for review'}</button></form></section>
   ${edit?'':'<section class="card my-submissions" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>'}
   <section class="signed-out-notice" data-signed-out><p>${edit?'Sign in with an Editor, Admin or Superadmin role to update this listing.':'Sign in with your Bittrees email or Ethereum wallet to continue.'}</p><p class="status">You can browse the directory without signing in.</p></section>`;
@@ -313,7 +317,7 @@ function editRequestPage(projects){
   <fieldset id="removal-reasons" class="removal-reasons form-field-wide" hidden disabled><legend>Why should this listing be removed?</legend>${REMOVAL_REASONS.map(([key,label])=>`<label class="checkbox-label"><input type="checkbox" name="removalReasons" value="${key}" data-reason-label="${label}">${label}</label>`).join('')}<p class="status">Choose all reasons that apply. The listing stays visible until a removal is reviewed and approved for release.</p></fieldset>
   <label class="form-field-wide">Reason for this request<textarea name="changes" minlength="20" maxlength="2000" required></textarea></label>
   <label class="form-field-wide">Official sources or supporting links<textarea name="sources" maxlength="1500"></textarea></label>
-  <p class="submission-disclosure form-field-wide">Requests and review notes are public on GitHub. Do not include private information. Your sign-in email stays private. An Editor or Admin reviews requests; this form does not change the listing.</p>
+  <p class="submission-disclosure form-field-wide">${RUNTIME_CATALOGUE?'Requests and review notes are visible to you and authorized staff. A Reviewer or Admin approves changes before publication. Do not include private information. Your sign-in email stays private.':'Requests and review notes are public on GitHub. Do not include private information. Your sign-in email stays private. An Editor or Admin reviews requests; this form does not change the listing.'}</p>
   <button type="submit" disabled>Send edit request</button></form></section>
   <section class="card my-submissions" data-signed-in hidden><h2 id="edit-requests-heading">Your edit requests</h2><div id="edit-requests"></div></section>
   <section class="signed-out-notice" data-signed-out><p>Sign in with your Bittrees email or Ethereum wallet to request an edit.</p><p class="status">You can browse the directory without signing in.</p></section>
@@ -323,7 +327,7 @@ function editRequestPage(projects){
 function needsUpdatePage(projects) {
   const flagged = projects.filter((p) => p.verification_status === 'needs_update');
   const body = `<section class=\"card\" style=\"margin:18px 0\">
-<strong>${flagged.length}</strong> entries currently flagged as needs_update.
+<strong id="needs-update-total">${flagged.length}</strong> entries currently flagged as needs_update.
 <div style=\"margin-top:8px\"><a href=\"./\">Back to index</a></div>
 </section>
 <table>
@@ -332,7 +336,7 @@ function needsUpdatePage(projects) {
       <th>Name</th><th>Description</th><th>Links</th><th>Tags</th><th>Ecosystem</th><th>Founded</th><th>HQ</th><th>Token</th><th>X</th>
     </tr>
   </thead>
-  <tbody>${tableRows(flagged)}</tbody>
+  <tbody id="rows">${tableRows(flagged)}</tbody>
 </table>`;
 
   const head = seoHead({
@@ -352,8 +356,8 @@ function needsUpdatePage(projects) {
 
   return pageShell({
     title: 'Needs Update Queue',
-    subtitle: 'Entries with verification_status: needs_update',
-    body,
+    subtitle: 'Listings needing review', catalogueView:'needs-update',
+    body:body+'<p id="catalog-count" role="status"></p><nav id="catalog-pagination" class="catalog-pagination" aria-label="Queue pages"></nav>',
     extraHead: head
   });
 }
@@ -451,6 +455,7 @@ ${cards || '<section class="card" style="margin:18px 0">No tracked processes fou
 async function main() {
   await fs.mkdir(dataDir, { recursive: true });
   await fs.mkdir(path.join(siteDir, 'assets'), { recursive: true });
+  if(siteDir!==path.join(root,'site'))await fs.copyFile(path.join(root,'site/assets/styles.css'),path.join(siteDir,'assets/styles.css'));
 
   const files = (await fs.readdir(contentDir))
     .filter((f) => f.endsWith('.md'))
@@ -491,6 +496,7 @@ async function main() {
   await fs.writeFile(path.join(siteDir,'request-edit.html'),editRequestPage(projects));
   await fs.writeFile(path.join(siteDir,'sign-in.html'),pageShell({title:'CryptoDirectory',subtitle:'Sign in with email or Ethereum',body:'<section class="card"><p>Opening the shared Bittrees sign-in…</p><a href="https://roles.bittrees.org/sign-in?app=crypto-directory">Continue to sign-in</a></section>'}));
   await fs.copyFile(path.join(root,'web/directory-client.js'),path.join(siteDir,'assets/directory-client.js'));
+  await fs.copyFile(path.join(root,'web/runtime-catalogue.mjs'),path.join(siteDir,'assets/runtime-catalogue.mjs'));
   await fs.copyFile(path.join(root,'web/catalog.mjs'),path.join(siteDir,'assets/catalog.mjs'));
   await fs.copyFile(path.join(root,'web/directory-search.mjs'),path.join(siteDir,'assets/directory-search.js'));
 

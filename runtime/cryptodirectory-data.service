@@ -1,0 +1,36 @@
+# Install only after source approval and a verified dedicated ingress/backup.
+# Existing Wallet services, credentials and directories are unrelated.
+[Unit]
+Description=CryptoDirectory catalogue data origin
+After=network.target
+
+[Service]
+Type=simple
+User=cryptodirectory-data
+Group=cryptodirectory-data
+WorkingDirectory=/srv/storage/cryptodirectory-data/app/runtime
+ExecStart=/usr/bin/python3 -B serve.py --config /srv/storage/cryptodirectory-data/private/runtime.json
+Environment=PYTHONDONTWRITEBYTECODE=1
+UMask=0077
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/storage/cryptodirectory-data/data
+ReadOnlyPaths=/srv/storage/cryptodirectory-data/app /srv/storage/cryptodirectory-data/private
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=127.0.0.0/8
+MemoryMax=192M
+TasksMax=24
+LimitNOFILE=128
+StandardOutput=null
+StandardError=journal
+LogRateLimitIntervalSec=60
+LogRateLimitBurst=10
+
+[Install]
+WantedBy=multi-user.target

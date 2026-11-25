@@ -26,7 +26,7 @@ const unescape = value => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"
 async function fixture() {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'directory-pages-'));
   for (const file of ['scripts/build.mjs', 'scripts/lib/process-metrics.mjs', 'scripts/lib/release-manifest.mjs',
-    'lib/directory/model.mjs', 'web/catalog.mjs', 'web/directory-search.mjs', 'web/directory-client.js', 'site/assets/styles.css']) {
+    'lib/directory/model.mjs', 'web/catalog.mjs', 'web/directory-search.mjs', 'web/runtime-catalogue.mjs', 'web/directory-client.js', 'site/assets/styles.css']) {
     const target = path.join(directory, file);
     await fs.mkdir(path.dirname(target), { recursive: true });
     await fs.copyFile(path.join(source, file), target);

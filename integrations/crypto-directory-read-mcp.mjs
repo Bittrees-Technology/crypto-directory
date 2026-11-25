@@ -66,7 +66,13 @@ function releaseInfo(bytes) {
   const value = parseJson(bytes);
   const digest = value?.files?.['data/projects.json'];
   if (!object(value) || value.schemaVersion !== 1 || value.repository !== 'Bittrees-Technology/crypto-directory' || !/^[a-f0-9]{40}$/.test(value.sourceCommit ?? '') || !/^[a-f0-9]{64}$/.test(digest ?? '')) reject('Invalid public release manifest.');
-  return { sourceCommit: value.sourceCommit, datasetSha256: digest, releaseSha256: sha(bytes) };
+  let catalogue=null;
+  if(Object.hasOwn(value,'catalogue')){
+    const c=value.catalogue;
+    if(!object(c)||Object.keys(c).sort().join(',')!=='manifest,storeId,url,version'||!/^[a-f0-9-]{36}$/.test(c.storeId||'')||c.version!==1||c.url!==ORIGIN+'/api/catalogue'||c.manifest!==ORIGIN+'/api/catalogue/manifest')reject('Invalid runtime catalogue descriptor.');
+    catalogue=c;
+  }
+  return { sourceCommit: value.sourceCommit, datasetSha256: digest, releaseSha256: sha(bytes), ...(catalogue?{catalogue}:{}) };
 }
 async function abortable(promise, signal) {
   if (signal.aborted) { void Promise.resolve(promise).catch(() => {}); signal.throwIfAborted(); }
@@ -108,8 +114,22 @@ export function createReader({ request = globalThis.fetch, clock = () => perform
     const started = clock(), signal = AbortSignal.timeout(deadlineMs);
     const before = await readBytes(request, RELEASE, 128000, signal);
     const release = releaseInfo(before);
-    const bytes = await readBytes(request, DATA, 4000000, signal);
-    if (sha(bytes) !== release.datasetSha256) reject('Public dataset digest does not match its release.');
+    let bytes;
+    if(release.catalogue){
+      const before=await readBytes(request,release.catalogue.manifest,4096,signal),manifest=parseJson(before);
+      if(!object(manifest)||manifest.schemaVersion!==1||manifest.storeId!==release.catalogue.storeId||!Number.isSafeInteger(manifest.revision)||manifest.revision<0||!Number.isSafeInteger(manifest.appliedAt)||!/^[a-f0-9]{40}$/.test(manifest.seedSourceCommit||'')||!/^[a-f0-9]{64}$/.test(manifest.datasetSha256||''))reject('Invalid runtime catalogue manifest.');
+      bytes=await readBytes(request,release.catalogue.url,4000000,signal);
+      const after=await readBytes(request,release.catalogue.manifest,4096,signal);
+      if(!before.equals(after)||sha(bytes)!==manifest.datasetSha256)reject('Runtime catalogue changed or its digest does not match.');
+      release.bootstrapDatasetSha256=release.datasetSha256;release.datasetSha256=manifest.datasetSha256;
+      release.catalogueRevision=manifest.revision;release.catalogueStoreId=manifest.storeId;release.seedSourceCommit=manifest.seedSourceCommit;
+      release.dataSource='runtime-v1';
+      // Data changes invalidate cursors even when the software release is identical.
+      release.releaseSha256=sha(Buffer.concat([Buffer.from(release.releaseSha256),before]));
+    }else{
+      bytes=await readBytes(request,DATA,4000000,signal);
+      if(sha(bytes)!==release.datasetSha256)reject('Public dataset digest does not match its release.');
+    }
     const after = await readBytes(request, RELEASE, 128000, signal);
     if (!before.equals(after)) reject('Public release changed during the read. Retry later.');
     const raw = parseJson(bytes);
