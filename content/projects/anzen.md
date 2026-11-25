@@ -3,9 +3,9 @@ name: Anzen
 lead_category: Real World Assets (RWA)
 tags: [Real World Assets (RWA), DeFi]
 ecosystem: [Ethereum]
-description: Protocol offering collateralized real-world credit exposure onchain.
+description: "USDz stablecoin and tokenized-credit protocol in wind-down, with operations scheduled to cease on 15 December 2026."
 primary_url: https://anzen.finance
-product_url: https://anzen.finance/app
+product_url: "https://app.anzen.finance/transparency"
 founded: 2024
 hq: Metaverse
 token: n/a

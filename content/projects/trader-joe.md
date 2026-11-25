@@ -9,6 +9,6 @@ product_url: "https://lfj.gg/swap"
 founded: 2021
 hq: Metaverse
 token: JOE
-twitter: https://x.com/traderjoe_xyz
-verification_status: "needs_update"
+twitter: "https://x.com/LFJ_gg"
+verification_status: "verified"
 ---

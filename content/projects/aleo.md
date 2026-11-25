@@ -5,10 +5,10 @@ tags: [Infrastructure, Privacy]
 ecosystem: [Aleo]
 description: Privacy-preserving blockchain platform and developer tools.
 primary_url: https://aleo.org
-product_url: https://developer.aleo.org
+product_url: "https://aleo.org/ecosystems/"
 founded: 2024
 hq: United States
 token: ALEO
 twitter: https://x.com/AleoHQ
-verification_status: "needs_update"
+verification_status: "verified"
 ---

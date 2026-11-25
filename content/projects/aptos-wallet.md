@@ -10,5 +10,5 @@ founded: 2022
 hq: Metaverse
 token: n/a
 twitter: https://x.com/Aptos
-verification_status: "needs_update"
+verification_status: "rejected"
 ---

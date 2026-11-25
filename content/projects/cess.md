@@ -5,7 +5,7 @@ tags: ["Infrastructure"]
 ecosystem: ["n/a"]
 description: "Decentralized infrastructure for data storage and application services."
 primary_url: "https://cess.network/"
-product_url: "https://github.com/CESSProject/Whitepaper/blob/main/cess-whitepaper.pdf"
+product_url: "https://github.com/CESSProject/cess-nodeadm"
 founded: "n/a"
 hq: "Metaverse"
 token: "n/a"

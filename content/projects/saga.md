@@ -1,14 +1,14 @@
 ---
-name: Saga
-lead_category: Gaming
-tags: [Gaming, Layer 1 / Layer 2]
+name: "Saga Security Chain"
+lead_category: "Layer 1 / Layer 2"
+tags: ["Layer 1 / Layer 2", "Infrastructure"]
 ecosystem: [Saga]
-description: Protocol for launching app-specific chains, with gaming focus.
-primary_url: https://www.saga.xyz
-product_url: https://www.saga.xyz
-founded: 2024
-hq: United States
+description: "Security chain supporting Saga's application-specific Chainlets, with published protocol code and a public mainnet explorer."
+primary_url: "https://github.com/sagaxyz/ssc"
+product_url: "https://explorer.nodestake.org/saga"
+founded: "n/a"
+hq: "Metaverse"
 token: SAGA
-twitter: https://x.com/Sagaxyz__
-verification_status: "needs_update"
+twitter: "n/a"
+verification_status: "verified"
 ---

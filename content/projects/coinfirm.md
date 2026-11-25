@@ -1,14 +1,14 @@
 ---
-name: Coinfirm
+name: "Lukka Blockchain Analytics (Coinfirm)"
 lead_category: Data & Analytics
 tags: [Data & Analytics, Compliance]
 ecosystem: [Bitcoin, Ethereum, Multiple]
-description: AML and compliance analytics for digital asset businesses.
-primary_url: https://www.coinfirm.com
-product_url: https://www.coinfirm.com/products
-founded: 2016
-hq: United Kingdom
+description: "Blockchain analytics and AML software offered within Lukka following its acquisition and integration of Coinfirm."
+primary_url: "https://lukka.tech/"
+product_url: "https://lukka.tech/resources/blockchain-analytics-product-sheet/"
+founded: "n/a"
+hq: "n/a"
 token: n/a
-twitter: https://x.com/coinfirm_io
-verification_status: "needs_update"
+twitter: "n/a"
+verification_status: "verified"
 ---

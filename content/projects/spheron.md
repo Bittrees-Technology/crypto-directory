@@ -3,9 +3,9 @@ name: Spheron
 lead_category: Infrastructure
 tags: [Infrastructure, Developer Tools]
 ecosystem: [Ethereum, Multiple]
-description: Decentralized compute and hosting platform for web3 developers.
-primary_url: https://spheron.network
-product_url: https://spheron.network/products
+description: "GPU compute marketplace with documented USDC payments; current operation of its earlier decentralized hosting network remains unconfirmed."
+primary_url: "https://www.spheron.network/"
+product_url: "https://docs.spheron.ai/getting-started/"
 founded: 2021
 hq: India
 token: SPON

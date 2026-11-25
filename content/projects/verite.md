@@ -3,9 +3,9 @@ name: Verite
 lead_category: Identity
 tags: [Identity]
 ecosystem: [Ethereum]
-description: Open framework for identity credentials and attestations.
-primary_url: https://verite.id
-product_url: https://verite.id/docs
+description: "Archived experimental framework for identity credentials in crypto finance; the original SDK was not intended for production use."
+primary_url: "https://github.com/circlefin/verite"
+product_url: "https://github.com/circlefin/verite/blob/main/packages/verite/README.md"
 founded: 2022
 hq: United States
 token: n/a

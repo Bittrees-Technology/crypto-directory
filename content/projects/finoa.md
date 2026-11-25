@@ -1,11 +1,11 @@
 ---
 name: Finoa
-lead_category: Custody
-tags: [Custody, Infrastructure]
+lead_category: "Infrastructure"
+tags: ["Infrastructure"]
 ecosystem: [Bitcoin, Ethereum, Multiple]
-description: Institutional-grade custody and staking service provider.
-primary_url: https://finoa.io
-product_url: https://finoa.io/solutions
+description: "Technology infrastructure provider for businesses bringing digital assets onchain; Finoa states it does not provide custody or control client assets."
+primary_url: "https://www.finoa.io/"
+product_url: "n/a"
 founded: "2019"
 hq: Germany
 token: n/a

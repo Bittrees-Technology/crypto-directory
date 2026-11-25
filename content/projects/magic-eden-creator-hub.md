@@ -2,10 +2,10 @@
 name: Magic Eden Creator Hub
 lead_category: NFTs & Creator Economy
 tags: [NFTs & Creator Economy, Creator Tools]
-ecosystem: [Solana, Ethereum, Bitcoin]
-description: Creator tooling and launch products within Magic Eden ecosystem.
+ecosystem: ["Solana"]
+description: "Magic Eden's documented Solana collection-management tool; current application access remains unconfirmed."
 primary_url: https://magiceden.io/launchpad
-product_url: https://magiceden.io/launchpad
+product_url: "n/a"
 founded: 2023
 hq: United States
 token: n/a
