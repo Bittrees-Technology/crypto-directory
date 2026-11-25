@@ -6,6 +6,9 @@ Directory email/wallet sign-in, Editor/Reviewer permissions, submissions and
 required deployment/authority setup: [directory roles](docs/directory-roles.md).
 Page/workflow coverage and the default-off, Roles-authorized editorial MCP:
 [editorial MCP contract](integrations/editorial-mcp.md).
+The optional, default-off [runtime catalogue](docs/runtime-catalogue.md) separates
+reviewed entry updates from GitHub software releases. It requires a verified
+data origin, explicit migration and new MCP consent before activation.
 
 ## Source status (October 29, 2026)
 - Repository: https://github.com/Bittrees-Technology/crypto-directory

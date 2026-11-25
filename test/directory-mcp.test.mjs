@@ -212,3 +212,18 @@ test('real stdio executable initializes/lists with no network and rejects config
   const override = spawn(process.execPath, [script, '--origin=https://other.invalid'], { stdio: ['pipe', 'pipe', 'pipe'] }); let stderr = ''; override.stderr.on('data', x => stderr += x); override.stdin.end();
   assert.equal((await once(override, 'close'))[0], 1); assert.match(stderr, /no arguments/);
 });
+
+test('runtime discovery keeps software and live data revisions distinct and invalidates old data cursors',async()=>{
+  const origin='https://cd.bittrees.org';let revision=1;
+  const bootstrap=fixture([row('bootstrap-only')]);const software=Buffer.from(JSON.stringify({...JSON.parse(bootstrap.manifest),catalogue:{version:1,storeId:'e38a1a2e-3602-4e3b-875b-ac80ce210c90',url:origin+'/api/catalogue',manifest:origin+'/api/catalogue/manifest'}}));
+  let tick=0;const calls=[];
+  const request=async url=>{calls.push(url);const bytes=Buffer.from(JSON.stringify([row('active-one'),row('active-two'),row('held',{verification_status:'needs_update'})]));return response(url.endsWith('/release.json')?software:url.endsWith('/manifest')?JSON.stringify({schemaVersion:1,storeId:'e38a1a2e-3602-4e3b-875b-ac80ce210c90',revision,appliedAt:100+revision,seedSourceCommit:'a'.repeat(40),datasetSha256:hash(bytes)}):bytes);};
+  const call=createAdapter({request,clock:()=>tick});const result=await call('directory.search',{limit:1});assert.equal(result.dataSource,'runtime-v1');assert.equal(result.catalogueRevision,1);assert.equal(result.sourceCommit,'a'.repeat(40));assert.equal(result.total,2);assert(!result.listings.some(x=>x.id==='bootstrap-only.md'));assert(!calls.some(url=>url.endsWith('/data/projects.json')));
+  revision=2;tick=60001;await assert.rejects(()=>call('directory.search',{limit:1,cursor:result.nextCursor}),/Cursor/);
+});
+test('runtime discovery rejects changed manifests, corrupt bytes and arbitrary source URLs without a static fallback',async()=>{
+  const f=fixture(),descriptor={version:1,storeId:'e38a1a2e-3602-4e3b-875b-ac80ce210c90',url:'https://cd.bittrees.org/api/catalogue',manifest:'https://cd.bittrees.org/api/catalogue/manifest'};
+  const software={...JSON.parse(f.manifest),catalogue:descriptor};
+  let calls=[];const wrong=createAdapter({request:async url=>{calls.push(url);return response(JSON.stringify({...software,catalogue:{...descriptor,url:'https://evil.example/data'}}));}});await assert.rejects(()=>wrong('directory.read_release'),/descriptor/);assert.equal(calls.length,1);
+  let manifests=0;calls=[];const changed=createAdapter({request:async url=>{calls.push(url);if(url.endsWith('/release.json'))return response(JSON.stringify(software));if(url.endsWith('/manifest'))return response(JSON.stringify({schemaVersion:1,storeId:'e38a1a2e-3602-4e3b-875b-ac80ce210c90',revision:++manifests,appliedAt:100,seedSourceCommit:'a'.repeat(40),datasetSha256:hash(f.bytes)}));return response(f.bytes);}});await assert.rejects(()=>changed('directory.search'),/changed/);assert(!calls.some(url=>url.endsWith('/data/projects.json')));
+});

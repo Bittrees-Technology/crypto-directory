@@ -7,7 +7,7 @@ import {DIRECTORY_PAGE_SIZE} from '../web/catalog.mjs';
 
 // Synthetic browser acceptance. This does not claim live identities, grants,
 // GitHub writes, email delivery or ENS transaction approval.
-const root=path.resolve('site');
+const root=path.resolve(process.env.DIRECTORY_BUILD_OUTPUT||'site');
 const server=createServer(async(req,res)=>{try{const u=new URL(req.url,'http://localhost'),file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep))throw Error('Path rejected');const content=await readFile(file);res.setHeader('Content-Type',/\.m?js$/.test(file)?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html');res.end(content);}catch{res.statusCode=404;res.end('Not found');}});
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const origin='http://127.0.0.1:'+server.address().port;
@@ -187,7 +187,7 @@ try{
     await page.locator('[name="description"]').fill('Requested new description based on the official project announcement.');
     await page.locator('[name="changes"]').fill('Please correct the official project details using this source.');await page.locator('[name="sources"]').fill('https://fixture.example.org/announcement');
     await screenshot(page,'edit-request-mobile',{fullPage:true});await page.setViewportSize({width:1360,height:900});await screenshot(page,'edit-request-desktop',{fullPage:true});
-    await page.getByRole('button',{name:'Send edit request',exact:true}).click();await page.getByText('Edit request received. A Reviewer or Admin will review it before release.',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'Send edit request',exact:true}).click();await page.getByText('Edit request received. A Reviewer or Admin will review it before publication.',{exact:true}).waitFor();
     assert.equal(writes.at(-1).endpoint,'request-edit');assert.equal(writes.at(-1).value.id,'aave.md');assert.equal(await page.getByRole('link',{name:'Open listing editor',exact:true}).count(),0);
     assert.equal(writes.at(-1).value.kind,'edit');assert.equal(writes.at(-1).value.sha,'a'.repeat(40));assert.equal(writes.at(-1).value.entry.token_url,base.token_url);assert.equal('verification_status' in writes.at(-1).value.entry,false);
     await page.locator('[name="id"]').selectOption('aave.md');await page.getByText('Current details loaded. Change the fields below, or request removal.',{exact:true}).waitFor();await page.getByLabel('Request removal of this listing',{exact:true}).check();
@@ -195,7 +195,7 @@ try{
     await page.locator('[name="changes"]').fill('The project announced a permanent shutdown and its website is offline.');await page.getByRole('button',{name:'Send removal request',exact:true}).click();assert.equal(writes.length,2);
     await page.getByLabel('Project has shut down',{exact:true}).check();await page.getByLabel('Website or product is no longer available',{exact:true}).check();await page.locator('[name="sources"]').fill('https://fixture.example.org/shutdown');
     await screenshot(page,'removal-request-desktop',{fullPage:true});await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await screenshot(page,'removal-request-mobile',{fullPage:true});
-    await page.getByRole('button',{name:'Send removal request',exact:true}).click();await page.getByText('Removal request received. The listing stays visible until review and release approval.',{exact:true}).waitFor();assert.equal(writes.at(-1).value.kind,'removal');assert.deepEqual(writes.at(-1).value.removalReasons,['shutdown','unavailable']);assert.equal('entry' in writes.at(-1).value,false);
+    await page.getByRole('button',{name:'Send removal request',exact:true}).click();await page.getByText('Removal request received. The listing stays visible until a Reviewer or Admin approves removal.',{exact:true}).waitFor();assert.equal(writes.at(-1).value.kind,'removal');assert.deepEqual(writes.at(-1).value.removalReasons,['shutdown','unavailable']);assert.equal('entry' in writes.at(-1).value,false);
     await page.goto(origin+'/submit.html?form=request-edit&id='+encodeURIComponent('//attacker.example/'));await page.waitForURL(origin+'/request-edit.html');assert.equal(await page.locator('[name="id"]').inputValue(),'');
   });
   await scenario('editor',async({page,writes,editRequests})=>{
