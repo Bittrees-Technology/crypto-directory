@@ -16,7 +16,7 @@ async function contextFor(origin,role='anonymous'){
     const url=new URL(route.request().url());
     if(url.href==='https://cd.bittrees.org/api/catalogue'){
       calls.push(url.href);if(unavailable)return route.fulfill({status:503,json:{error:'Held fixture'}});
-      const raw=JSON.stringify(rows),etag='"'+createHash('sha256').update(raw).digest('hex')+'"';
+      const raw=JSON.stringify(rows),etag='W/"'+createHash('sha256').update(raw).digest('hex')+'"';
       return route.fulfill({body:raw,headers:{'content-type':'application/json','access-control-allow-origin':'*','access-control-expose-headers':'ETag, X-Directory-Catalogue-Revision, X-Directory-Catalogue-Store','etag':etag,'x-directory-catalogue-revision':String(revision),'x-directory-catalogue-store':storeId}});
     }
     if(url.pathname.startsWith('/api/')){

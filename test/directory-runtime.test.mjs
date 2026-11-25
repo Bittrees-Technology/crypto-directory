@@ -99,3 +99,19 @@ test('late source response observes the shorter original proof deadline and reje
   assert.throws(()=>publicationReceipt(receipt,randomUUID()),/does not match/);
   assert.throws(()=>publicationReceipt(receipt,env.DIRECTORY_RUNTIME_STORE_ID,{contentHash:'c'.repeat(64)}),/does not match/);
 });
+
+test('Vercel rewrite metadata reaches only the fixed public catalogue manifest',async t=>{
+  const f=await fixture(t),handler=createPublicCatalogue({env,fetcher:f.fetcher});
+  for(const pathname of ['/api/catalogue/manifest','/api/catalogue']){
+    const result=await handler(new Request(ORIGIN+pathname+'?path=manifest'));
+    assert.equal(result.status,200,'Vercel appends an unused wildcard as a query parameter');
+    const data=await result.json();assert.equal(data.schemaVersion,1);assert.equal(data.storeId,env.DIRECTORY_RUNTIME_STORE_ID);assert.equal(data.revision,0);
+  }
+  for(const query of ['path=elsewhere','path=manifest&extra=1','path=manifest&path=manifest','path=https://evil.example/manifest'])assert.equal((await handler(new Request(ORIGIN+'/api/catalogue/manifest?'+query))).status,404);
+});
+test('Vercel weak ETags retain mandatory body digest and store checks',async t=>{
+  const f=await fixture(t),handler=createPublicCatalogue({env,fetcher:f.fetcher}),response=await handler(new Request(ORIGIN+'/api/catalogue'));
+  const headers=new Headers(response.headers);headers.set('etag','W/'+headers.get('etag'));const raw=await response.text();
+  const snapshot=await fetchCatalogue(async()=>new Response(raw,{headers}),env.DIRECTORY_RUNTIME_STORE_ID);assert.equal(snapshot.rows.length,1);assert.equal(snapshot.revision,0);
+  headers.set('etag','W/"'+'0'.repeat(64)+'"');await assert.rejects(()=>fetchCatalogue(async()=>new Response(raw,{headers})),/integrity/);
+});
