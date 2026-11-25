@@ -3,9 +3,9 @@ name: Notional Finance
 lead_category: DeFi
 tags: [DeFi, Yield]
 ecosystem: [Ethereum, Arbitrum]
-description: Fixed-rate DeFi lending and borrowing protocol.
+description: "DeFi lending and leveraged-yield protocol whose current offering is Notional Exponent vaults."
 primary_url: https://notional.finance
-product_url: https://app.notional.finance
+product_url: "https://notional.finance/vaults"
 founded: 2020
 hq: United States
 token: NOTE

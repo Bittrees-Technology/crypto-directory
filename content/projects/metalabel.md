@@ -10,5 +10,5 @@ founded: 2023
 hq: United States
 token: n/a
 twitter: https://x.com/metalabel_
-verification_status: "needs_update"
+verification_status: "rejected"
 ---

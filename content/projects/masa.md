@@ -1,10 +1,10 @@
 ---
 name: Masa
-lead_category: Identity
-tags: [Identity, Data]
-ecosystem: [Ethereum, BNB Chain]
-description: Decentralized identity and personal data network.
-primary_url: https://www.masa.finance
+lead_category: "Data & Analytics"
+tags: ["Data & Analytics", "Infrastructure"]
+ecosystem: ["Bittensor"]
+description: "Decentralized data network for AI builders, miners and validators, describing MASA staking and Bittensor subnets."
+primary_url: "https://beta.masa.ai/about"
 product_url: https://www.masa.finance/products
 founded: 2022
 hq: United States

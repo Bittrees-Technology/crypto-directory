@@ -1,5 +1,5 @@
 ---
-name: IvendPay
+name: "IVPAY (formerly ivendPay)"
 lead_category: Payments
 tags: [Payments, Infrastructure]
 ecosystem: [Ethereum, Bitcoin, Multiple]

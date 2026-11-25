@@ -1,14 +1,14 @@
 ---
-name: JokeRace
+name: "Confetti (formerly JokeRace)"
 lead_category: DAOs & Governance
 tags: [DAOs & Governance]
-ecosystem: [Ethereum, Base]
-description: Competitive governance and onchain voting platform.
-primary_url: https://jokerace.io
-product_url: https://jokerace.io/explore
+ecosystem: ["Polygon"]
+description: "Onchain contest platform where participants vote on outcomes and creators configure rewards."
+primary_url: "https://confetti.win/"
+product_url: "https://confetti.win/"
 founded: 2023
 hq: United States
 token: n/a
-twitter: https://x.com/jokerace_io
-verification_status: "needs_update"
+twitter: "n/a"
+verification_status: "verified"
 ---

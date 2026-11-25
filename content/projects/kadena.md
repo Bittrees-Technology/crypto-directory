@@ -1,14 +1,14 @@
 ---
-name: Kadena
+name: "Kadena (Community Edition)"
 lead_category: Layer 1 / Layer 2
 tags: [Layer 1 / Layer 2, Infrastructure]
 ecosystem: [Kadena]
-description: Scalable proof-of-work blockchain ecosystem.
-primary_url: https://kadena.io
-product_url: https://kadena.io/ecosystem
+description: "Community-maintained proof-of-work blockchain using Chainweb and Pact, continued independently after Kadena LLC ceased operations."
+primary_url: "https://kda-chain.org/"
+product_url: "https://nodes.kadena.ws/"
 founded: 2019
-hq: United States
+hq: "Metaverse"
 token: KDA
-twitter: https://x.com/kadena_io
-verification_status: "needs_update"
+twitter: "n/a"
+verification_status: "verified"
 ---
