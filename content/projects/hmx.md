@@ -1,14 +1,14 @@
 ---
-name: HMX
+name: "DESK (formerly HMX)"
 lead_category: DeFi
 tags: [DeFi, Derivatives]
-ecosystem: [Arbitrum]
-description: Decentralized perpetual exchange protocol and vault ecosystem.
-primary_url: https://hmx.org
-product_url: https://app.hmx.org
+ecosystem: ["Base"]
+description: "Perpetual trading infrastructure for traders and Web3 agents on Base, migrated from HMX; current product access remains unverified."
+primary_url: "https://desk.exchange/"
+product_url: "n/a"
 founded: 2023
 hq: Metaverse
-token: HMX
-twitter: https://x.com/HMXorg
+token: "n/a"
+twitter: "https://x.com/TradeOnDESK"
 verification_status: "needs_update"
 ---

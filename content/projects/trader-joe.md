@@ -1,11 +1,11 @@
 ---
-name: Trader Joe
+name: "LFJ (formerly Trader Joe)"
 lead_category: DeFi
 tags: [DeFi, DEX]
 ecosystem: [Avalanche, Arbitrum]
 description: Decentralized exchange and liquidity protocol with concentrated liquidity tooling.
-primary_url: https://www.traderjoexyz.com
-product_url: https://traderjoexyz.com/avalanche/trade
+primary_url: "https://lfj.gg/"
+product_url: "https://lfj.gg/swap"
 founded: 2021
 hq: Metaverse
 token: JOE

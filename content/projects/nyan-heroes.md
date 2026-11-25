@@ -10,5 +10,5 @@ founded: 2021
 hq: United States
 token: NYAN
 twitter: https://x.com/nyanheroes
-verification_status: "needs_update"
+verification_status: "rejected"
 ---

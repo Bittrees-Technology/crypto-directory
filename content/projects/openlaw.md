@@ -1,10 +1,10 @@
 ---
-name: OpenLaw
+name: "Tribute Labs (formerly OpenLaw)"
 lead_category: DAOs & Governance
 tags: [DAOs & Governance, Developer Tools]
 ecosystem: [Ethereum]
-description: Legal and DAO tooling for contract automation.
-primary_url: https://openlaw.io
+description: "DAO infrastructure company behind OpenLaw and Tribute frameworks, now developing autonomous venture tools."
+primary_url: "https://tributelabs.xyz/"
 product_url: https://openlaw.io/products
 founded: 2017
 hq: United States
