@@ -1,14 +1,14 @@
 ---
-name: Coreum
+name: "tx (formerly Coreum)"
 lead_category: Layer 1 / Layer 2
 tags: [Layer 1 / Layer 2, RWA]
-ecosystem: [Coreum]
-description: Enterprise-ready L1 ecosystem with asset tokenization features.
-primary_url: https://www.coreum.com
-product_url: https://www.coreum.com/ecosystem
-founded: 2023
-hq: Switzerland
-token: COREUM
-twitter: https://x.com/CoreumOfficial
-verification_status: "needs_update"
+ecosystem: ["tx"]
+description: "Layer-1 network following the Coreum and Sologenic merger, with smart-token developer tooling and a public network explorer; trader and issuer marketplace offerings are marked coming soon."
+primary_url: "https://tx.org/"
+product_url: "https://explorer.tx.org/tx"
+founded: "n/a"
+hq: "n/a"
+token: "TX"
+twitter: "n/a"
+verification_status: "verified"
 ---

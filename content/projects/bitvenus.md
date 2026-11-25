@@ -1,14 +1,14 @@
 ---
-name: "BVOX"
+name: "BVOX (mobile app)"
 lead_category: "Payments"
 tags: ["Payments"]
 ecosystem: ["n/a"]
-description: "Centralized cryptocurrency exchange offering spot and perpetual futures markets."
-primary_url: "https://www.bvox.com/"
-product_url: "n/a"
+description: "Published Android cryptocurrency trading app from Bitvenus Technology Ltd., branded BVOX; service eligibility and regional availability apply."
+primary_url: "https://play.google.com/store/apps/details?hl=en_US&id=io.bitvenus.app.first"
+product_url: "https://play.google.com/store/apps/details?hl=en_US&id=io.bitvenus.app.first"
 founded: "n/a"
-hq: "Metaverse"
+hq: "n/a"
 token: "n/a"
 twitter: "n/a"
-verification_status: "needs_update"
+verification_status: "verified"
 ---

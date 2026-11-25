@@ -10,5 +10,5 @@ founded: 2019
 hq: United States
 token: ONE
 twitter: https://x.com/harmonyprotocol
-verification_status: "needs_update"
+verification_status: "rejected"
 ---

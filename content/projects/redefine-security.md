@@ -1,14 +1,14 @@
 ---
-name: Redefine Security
+name: "Redefine (DeFirewall)"
 lead_category: Security
-tags: [Security, Auditing]
+tags: ["Security", "Monitoring"]
 ecosystem: [Ethereum]
-description: Specialized security reviews for DeFi protocols.
-primary_url: https://redefine.security
-product_url: https://redefine.security/services
-founded: 2024
-hq: Metaverse
+description: "Publishes DeFirewall transaction-risk and due-diligence API documentation; current service availability remains unconfirmed."
+primary_url: "https://redefine-api-docs.readme.io/reference/getting-started-with-your-api"
+product_url: "https://redefine-api-docs.readme.io/reference/getting-started-with-your-api"
+founded: "n/a"
+hq: "n/a"
 token: n/a
-twitter: https://x.com/redefine_sec
+twitter: "n/a"
 verification_status: "needs_update"
 ---
