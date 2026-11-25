@@ -5,10 +5,10 @@ tags: [Layer 1 / Layer 2, Bitcoin]
 ecosystem: [Bitcoin]
 description: Smart contract platform secured by Bitcoin mining.
 primary_url: https://rootstock.io
-product_url: https://rootstock.io/developers
+product_url: "https://dev.rootstock.io/"
 founded: 2018
 hq: Argentina
 token: RBTC
 twitter: https://x.com/rootstock_io
-verification_status: "needs_update"
+verification_status: "verified"
 ---

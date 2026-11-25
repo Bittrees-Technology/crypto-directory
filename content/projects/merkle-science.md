@@ -5,10 +5,10 @@ tags: [Data & Analytics, Compliance]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Risk and compliance intelligence platform for digital assets.
 primary_url: https://www.merklescience.com
-product_url: https://www.merklescience.com/products
+product_url: "https://www.merklescience.com/platform/transaction-wallet-monitoring"
 founded: 2018
 hq: Singapore
 token: n/a
 twitter: https://x.com/merkle_science
-verification_status: "needs_update"
+verification_status: "verified"
 ---

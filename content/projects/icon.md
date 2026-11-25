@@ -3,7 +3,7 @@ name: ICON
 lead_category: Layer 1 / Layer 2
 tags: [Layer 1 / Layer 2, Infrastructure]
 ecosystem: [ICON]
-description: Interoperable blockchain ecosystem and network.
+description: "Blockchain network in a planned migration and wind-down, with permanent chain shutdown announced for 31 December 2026."
 primary_url: https://icon.community
 product_url: https://icon.community/ecosystem
 founded: 2017

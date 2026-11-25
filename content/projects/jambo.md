@@ -3,12 +3,12 @@ name: Jambo
 lead_category: DeFi
 tags: [DeFi, Consumer]
 ecosystem: [Solana, Ethereum]
-description: Consumer-focused web3 app ecosystem with integrated trading and rewards.
-primary_url: https://jambo.technology
-product_url: https://jambo.technology/products
+description: "Crypto-native mobile ecosystem with JamboPhone devices, wallet and onchain apps."
+primary_url: "https://www.jambo.technology/"
+product_url: "https://jambophone.xyz/collections/all"
 founded: 2022
 hq: United States
 token: J
 twitter: https://x.com/JamboTechnology
-verification_status: "needs_update"
+verification_status: "verified"
 ---

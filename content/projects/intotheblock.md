@@ -1,14 +1,14 @@
 ---
-name: IntoTheBlock
+name: "Sentora Research (formerly IntoTheBlock Analytics)"
 lead_category: Data & Analytics
 tags: [Data & Analytics, Intelligence]
-ecosystem: [Ethereum, Multiple]
-description: Onchain intelligence and DeFi analytics tools.
-primary_url: https://app.intotheblock.com
-product_url: https://app.intotheblock.com
-founded: 2018
-hq: United States
+ecosystem: ["n/a"]
+description: "DeFi market research, reports and dashboards succeeding the retired IntoTheBlock analytics service."
+primary_url: "https://sentora.com/"
+product_url: "https://sentora.com/research"
+founded: "n/a"
+hq: "Metaverse"
 token: n/a
-twitter: https://x.com/intotheblock
-verification_status: "needs_update"
+twitter: "n/a"
+verification_status: "verified"
 ---

@@ -5,10 +5,10 @@ tags: [Payments, Exchange]
 ecosystem: [Bitcoin, Ethereum]
 description: Crypto exchange platform with presence in Japan and other regions.
 primary_url: https://bitflyer.com
-product_url: https://bitflyer.com/en-jp/exchange
+product_url: "https://lightning.bitflyer.com/?region=EU"
 founded: 2014
 hq: Japan
 token: n/a
 twitter: https://x.com/bitFlyer
-verification_status: "needs_update"
+verification_status: "verified"
 ---
