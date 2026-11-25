@@ -5,10 +5,10 @@ tags: [Wallets, Security]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Keyless self-custody wallet for mobile users.
 primary_url: https://zengo.com
-product_url: https://zengo.com/download
+product_url: "https://zengo.com/crypto-wallet/"
 founded: 2019
 hq: Israel
 token: n/a
 twitter: https://x.com/Zengo
-verification_status: "needs_update"
+verification_status: "verified"
 ---

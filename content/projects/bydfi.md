@@ -5,10 +5,10 @@ tags: [Payments, Exchange]
 ecosystem: [Bitcoin, Ethereum, Multiple]
 description: Global exchange platform for spot and derivatives.
 primary_url: https://www.bydfi.com
-product_url: https://www.bydfi.com/trade
+product_url: "https://www.bydfi.com/markets/crypto/spot/usdt/main"
 founded: 2020
 hq: Singapore
 token: n/a
 twitter: https://x.com/BYDFi_Official
-verification_status: "needs_update"
+verification_status: "verified"
 ---

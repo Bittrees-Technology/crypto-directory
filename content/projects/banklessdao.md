@@ -1,11 +1,11 @@
 ---
-name: BanklessDAO
+name: "Black Flag DAO (formerly BanklessDAO)"
 lead_category: DAOs & Governance
 tags: [DAOs & Governance, Media]
 ecosystem: [Ethereum]
 description: Decentralized media and contributor DAO focused on crypto education and coordination.
-primary_url: https://bankless.community
-product_url: https://bankless.community/join
+primary_url: "https://blackflagdao.notion.site/"
+product_url: "https://blackflagdao.notion.site/"
 founded: 2021
 hq: Metaverse
 token: BANK

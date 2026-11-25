@@ -3,12 +3,12 @@ name: "Persistence Core-1"
 lead_category: "Layer 1 / Layer 2"
 tags: ["Layer 1 / Layer 2", "Proof of Stake"]
 ecosystem: ["Cosmos"]
-description: "Proof-of-stake blockchain network supporting XPRT staking, governance and digital asset applications."
+description: "Persistence Core-1 blockchain ecosystem with XPRT governance and the Persistence DEX."
 primary_url: "https://persistence.one/history/"
-product_url: "https://docs.persistence.one/"
+product_url: "https://app.persistence.one/pools"
 founded: "n/a"
 hq: "Metaverse"
 token: "XPRT"
 twitter: "n/a"
-verification_status: "needs_update"
+verification_status: "verified"
 ---
