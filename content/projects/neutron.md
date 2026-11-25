@@ -5,7 +5,7 @@ tags: [Layer 1 / Layer 2, Infrastructure]
 ecosystem: [Cosmos]
 description: Cosmos appchain ecosystem for smart contracts and DeFi.
 primary_url: https://neutron.org
-product_url: https://neutron.org
+product_url: "https://neutron.celat.one/neutron-1"
 founded: 2023
 hq: Metaverse
 token: NTRN

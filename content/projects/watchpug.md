@@ -9,6 +9,6 @@ product_url: "https://github.com/pendle-finance/pendle-core-v2-public/blob/main/
 founded: 2022
 hq: Metaverse
 token: n/a
-twitter: https://x.com/watchpugsec
-verification_status: "needs_update"
+twitter: "https://x.com/WatchPug_"
+verification_status: "verified"
 ---

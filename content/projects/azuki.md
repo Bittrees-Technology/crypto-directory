@@ -5,10 +5,10 @@ tags: [NFTs & Creator Economy, Consumer Brands]
 ecosystem: [Ethereum]
 description: Anime-inspired NFT brand and creator ecosystem.
 primary_url: https://www.azuki.com
-product_url: https://www.azuki.com/collectibles
+product_url: "https://www.azuki.com/gallery"
 founded: 2022
 hq: United States
 token: n/a
 twitter: https://x.com/Azuki
-verification_status: "needs_update"
+verification_status: "verified"
 ---
