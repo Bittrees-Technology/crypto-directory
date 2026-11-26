@@ -274,6 +274,61 @@ class DiscoveryTests(unittest.TestCase):
         self.child='bafk'+'b'*50
     def tearDown(self):self.temp.cleanup()
 
+    def previous_discovery(self,provided,source='b'*40):
+        directory=self.root/'releases'/source;directory.mkdir(parents=True)
+        candidate={'cid':'bafy'+'d'*50,'sourceCommit':source,'artifactManifestSHA256':'e'*64,'files':{'index.html':'f'*64}}
+        sync.write(directory/'candidate.json',candidate)
+        receipt={'cid':candidate['cid'],'manifestSHA256':candidate['artifactManifestSHA256'],'provided':provided}
+        sync.write(directory/'discovery.json',receipt)
+        return directory
+
+    def test_new_release_reuses_fresh_identical_blocks_but_announces_its_new_root(self):
+        self.previous_discovery({self.child:99990,'bafk'+'c'*50:99995})
+        with patch.object(sync,'ipfs',side_effect=lambda *args,**kwargs:self.child if args[0]=='refs' else '') as commands,patch.object(sync,'guard',return_value=None),patch.object(sync.time,'time',return_value=100000):
+            sync.announce(self.root,self.op,self.release)
+        self.assertEqual([call.args[-1] for call in commands.call_args_list if call.args[:2]==('routing','provide')],[CID])
+        receipt=json.loads((self.op/'discovery.json').read_text())
+        self.assertEqual(receipt['cid'],CID);self.assertEqual(receipt['manifestSHA256'],'c'*64)
+        self.assertEqual(receipt['provided'],{self.child:99990,CID:100000})
+
+    def test_cached_discovery_does_not_mask_a_failed_new_announcement(self):
+        self.previous_discovery({self.child:99990})
+        def ipfs(*args,**kwargs):
+            if args[0]=='refs':return self.child
+            raise subprocess.TimeoutExpired('provide',40)
+        with patch.object(sync,'ipfs',side_effect=ipfs),patch.object(sync,'guard',return_value=None),patch.object(sync.time,'time',return_value=100000),self.assertRaises(ValueError):
+            sync.announce(self.root,self.op,self.release)
+        self.assertEqual(json.loads((self.op/'discovery.json').read_text())['provided'],{self.child:99990})
+
+    def test_cached_discovery_rejects_expired_future_and_noninteger_timestamps(self):
+        for at in (1,100061,'99990',True):
+            with self.subTest(at=at):
+                directory=self.previous_discovery({self.child:at},source=hashlib.sha1(str(at).encode()).hexdigest())
+                self.assertEqual(sync.recent_discovery(self.root,self.op,{self.child},100000),{})
+                (directory/'discovery.json').unlink()
+
+    def test_cached_discovery_requires_matching_bounded_evidence(self):
+        directory=self.previous_discovery({self.child:99990})
+        path=directory/'discovery.json';original=path.read_bytes()
+        candidate_path=directory/'candidate.json';candidate=candidate_path.read_bytes()
+        mutations=[b'{broken',json.dumps({'cid':CID,'manifestSHA256':'e'*64,'provided':{self.child:99990}}).encode(),json.dumps({'cid':'bafy'+'d'*50,'manifestSHA256':'a'*64,'provided':{self.child:99990}}).encode(),b' '*(sync.MAX_MANIFEST+1)]
+        for raw in mutations:
+            path.write_bytes(raw)
+            self.assertEqual(sync.recent_discovery(self.root,self.op,{self.child},100000),{})
+        path.write_bytes(original)
+        candidate_path.write_bytes(b'{broken')
+        self.assertEqual(sync.recent_discovery(self.root,self.op,{self.child},100000),{})
+        candidate_path.write_bytes(candidate)
+        path.unlink();path.symlink_to(candidate_path)
+        self.assertEqual(sync.recent_discovery(self.root,self.op,{self.child},100000),{})
+
+    def test_cached_discovery_reads_only_the_bounded_recent_receipts(self):
+        self.previous_discovery({self.child:99990},source='c'*40)
+        self.previous_discovery({CID:99991},source='d'*40)
+        with patch.object(sync,'MAX_DISCOVERY_RECEIPTS',1):
+            self.assertEqual(len(sync.recent_discovery(self.root,self.op,{self.child,CID},100000)),1)
+        self.assertEqual(sync.recent_discovery(self.root,self.op,{self.child,CID},100000),{self.child:99990,CID:99991})
+
     def test_direct_announcements_deduplicate_and_resume_fresh_receipts(self):
         calls=[]
         def ipfs(*args,**kwargs):

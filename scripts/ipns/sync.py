@@ -33,6 +33,7 @@ MAX_VERIFY = 6
 MAX_DISCOVERY_BLOCKS = 512
 MAX_DISCOVERY_SECONDS = 180
 MAX_DISCOVERY_BLOCK_SECONDS = 40
+MAX_DISCOVERY_RECEIPTS = 16
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -132,6 +133,46 @@ def same_production(raw):
     if fetch(PRODUCTION+'/release.json',MAX_MANIFEST)[0]!=raw:
         raise ValueError('Production changed during release; do not publish stale content')
 
+def recent_discovery(root,op,nodes,now):
+    """Reuse recent completed announcements for identical immutable blocks."""
+    releases=root/'releases'
+    if not releases.is_dir() or releases.is_symlink():
+        return {}
+    paths=[]
+    for directory in releases.iterdir():
+        path=directory/'discovery.json'
+        if directory==op or directory.is_symlink() or not re.fullmatch('[a-f0-9]{40}',directory.name):
+            continue
+        if path.is_file() and not path.is_symlink():
+            paths.append((path.stat().st_mtime,path))
+    provided={}
+    for _,path in sorted(paths,reverse=True)[:MAX_DISCOVERY_RECEIPTS]:
+        try:
+            values=[]
+            for file in (path,path.parent/'candidate.json'):
+                if file.is_symlink():
+                    raise ValueError('Linked discovery evidence')
+                with file.open('rb') as stream:
+                    raw=stream.read(MAX_MANIFEST+1)
+                if len(raw)>MAX_MANIFEST:
+                    raise ValueError('Discovery evidence exceeds bounds')
+                values.append(json.loads(raw))
+            receipt,candidate=values
+            validate(candidate)
+            if candidate.get('sourceCommit')!=path.parent.name or not re.fullmatch('[a-f0-9]{64}',candidate.get('artifactManifestSHA256','')):
+                continue
+            records=receipt.get('provided')
+            if receipt.get('cid')!=candidate['cid'] or receipt.get('manifestSHA256')!=candidate['artifactManifestSHA256'] or not isinstance(records,dict) or len(records)>MAX_DISCOVERY_BLOCKS:
+                continue
+            # This is discovery evidence only. Current source approval, pins,
+            # complete gateway retrieval and signing guards still run afresh.
+            for node,at in records.items():
+                if node in nodes and type(at) is int and now-86400<=at<=now+60:
+                    provided[node]=max(at,provided.get(node,at))
+        except (OSError,ValueError,TypeError,KeyError,AttributeError):
+            continue # Optional old evidence cannot authorize or block a release.
+    return provided
+
 def announce(root,op,release):
     """Announce this pinned DAG with bounded work, retaining partial progress."""
     nodes=set(ipfs('refs','--recursive','--unique',release['cid']).splitlines())|{release['cid']}
@@ -144,6 +185,11 @@ def announce(root,op,release):
         raise ValueError('Release discovery receipt identity changed')
     now=int(time.time())
     receipt['provided']={node:at for node,at in receipt['provided'].items() if isinstance(at,int) and now-86400<=at<=now+60}
+    reused=recent_discovery(root,op,nodes,now)
+    if reused:
+        for node,at in reused.items():
+            receipt['provided'][node]=max(at,receipt['provided'].get(node,at))
+        write(path,receipt)
     pending=sorted(nodes-set(receipt['provided']),key=lambda node:(not node.startswith('bafy'),node))
     deadline=time.monotonic()+MAX_DISCOVERY_SECONDS
     def provide(node):
