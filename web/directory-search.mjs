@@ -1,4 +1,4 @@
-import { filterProjects, projectPage, pageSummary, tableRows } from './catalog.mjs';
+import { filterProjects, projectPage, pageSummary, tableRows, updateCatalogueSchema } from './catalog.mjs';
 
 function validCatalog(value) {
   return Array.isArray(value) && value.every(project => project &&
@@ -16,12 +16,14 @@ export function mountDirectorySearch({ document = globalThis.document, fetch = g
   const count = byId('catalog-count'), nativePages = byId('catalog-pagination');
   const resultPages = byId('search-pagination'), previous = byId('search-previous'), next = byId('search-next');
   const status = byId('catalog-search-status'), retry = byId('catalog-retry');
-  const original = { rows: rows.innerHTML, count: count.textContent };
+  const schema=byId('catalog-schema');
+  const original = { rows: rows.innerHTML, count: count.textContent, schema:schema?.textContent };
   let catalogue, pending, serial = 0, resultPage = 1;
   const changed = () => document.dispatchEvent(new Event('directory-rows-rendered'));
   function restore() {
     rows.innerHTML = original.rows;
     count.textContent = original.count;
+    if(schema)schema.textContent=original.schema;
     nativePages.hidden = false;
     resultPages.hidden = true;
     rows.removeAttribute('aria-busy');
@@ -54,6 +56,7 @@ export function mountDirectorySearch({ document = globalThis.document, fetch = g
       const state = projectPage(filterProjects(projects, filters), resultPage);
       resultPage = state.page;
       rows.innerHTML = tableRows(state.items, controls.dataset.prefix);
+      updateCatalogueSchema(document,state);
       count.textContent = pageSummary(state, true);
       nativePages.hidden = true;
       resultPages.hidden = state.pageCount === 1;

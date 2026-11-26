@@ -65,14 +65,30 @@ function linksCellHtml(project) {
 
 export function tableRows(projects, navPrefix = '') {
   return projects.map(project => `<tr data-project-id="${escapeHtml(project.id || '')}">
-<td><strong>${escapeHtml(project.name)}</strong><br><small>${escapeHtml(project.lead_category)}</small><br><a data-edit-entry data-can-edit hidden href="${escapeHtml(navPrefix + 'edit.html?id=' + encodeURIComponent(project.id || ''))}">Edit listing</a></td>
-<td>${escapeHtml(project.description)}</td>
-<td>${linksCellHtml(project)}</td>
-<td>${badges(project.tags)}</td>
-<td>${badges(project.ecosystem)}</td>
-<td>${escapeHtml(String(project.founded))}</td>
-<td>${escapeHtml(project.hq)}</td>
-<td>${tokenLinksHtml(project.token, project.token_url)}</td>
-<td>${project.twitter && project.twitter !== 'n/a' ? `<a href="${escapeHtml(project.twitter)}" target="_blank" rel="noopener">X</a>` : 'n/a'}</td>
+<th scope="row" class="project-name"><strong>${escapeHtml(project.name)}</strong><br><small>${escapeHtml(project.lead_category)}</small><br><a data-edit-entry data-can-edit hidden href="${escapeHtml(navPrefix + 'edit.html?id=' + encodeURIComponent(project.id || ''))}">Edit listing</a></th>
+<td class="project-description" data-label="Description">${escapeHtml(project.description)}</td>
+<td class="project-links" data-label="Links">${linksCellHtml(project)}</td>
+<td class="project-tags" data-label="Tags">${badges(project.tags)}</td>
+<td class="project-ecosystem" data-label="Ecosystem">${badges(project.ecosystem)}</td>
+<td data-label="Founded">${escapeHtml(String(project.founded))}</td>
+<td data-label="HQ">${escapeHtml(project.hq)}</td>
+<td data-label="Token">${tokenLinksHtml(project.token, project.token_url)}</td>
+<td data-label="X">${project.twitter && project.twitter !== 'n/a' ? `<a href="${escapeHtml(project.twitter)}" target="_blank" rel="noopener" aria-label="${escapeHtml(project.name)} on X">X</a>` : 'n/a'}</td>
 </tr>`).join('\n');
+}
+
+export function catalogueItemList(state) {
+  return {'@type':'ItemList',numberOfItems:state.items.length,
+    itemListElement:state.items.map((project,index)=>({'@type':'ListItem',position:state.first+index,
+      item:{'@type':'WebSite',name:project.name,url:project.primary_url,description:project.description}}))};
+}
+
+// Keep structured data consistent with the actual visible page after live
+// catalogue refreshes, filters and pagination; never mark held rows as public.
+export function updateCatalogueSchema(document,state) {
+  const node=document.getElementById('catalog-schema');
+  if(!node)return;
+  try{const data=JSON.parse(node.textContent),list=data['@graph']?.find(item=>item['@type']==='ItemList');
+    if(list){Object.assign(list,catalogueItemList(state));node.textContent=JSON.stringify(data).replaceAll('<','\\u003c');}
+  }catch{/* A missing optional search hint cannot prevent directory browsing. */}
 }

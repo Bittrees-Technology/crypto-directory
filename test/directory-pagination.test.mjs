@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { CATEGORIES } from '../lib/directory/model.mjs';
-import { DIRECTORY_PAGE_SIZE, filterProjects, projectPage, catalogPagePath, tableRows } from '../web/catalog.mjs';
+import { DIRECTORY_PAGE_SIZE, filterProjects, projectPage, catalogPagePath, tableRows, catalogueItemList, updateCatalogueSchema } from '../web/catalog.mjs';
 import { mountDirectorySearch } from '../web/directory-search.mjs';
 
 const source = path.resolve(new URL('..', import.meta.url).pathname);
@@ -26,7 +26,7 @@ const unescape = value => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"
 async function fixture() {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'directory-pages-'));
   for (const file of ['scripts/build.mjs', 'scripts/lib/process-metrics.mjs', 'scripts/lib/release-manifest.mjs',
-    'lib/directory/model.mjs', 'web/catalog.mjs', 'web/directory-search.mjs', 'web/runtime-catalogue.mjs', 'web/directory-client.js', 'site/assets/styles.css']) {
+    'lib/directory/model.mjs', 'web/catalog.mjs', 'web/directory-search.mjs', 'web/runtime-catalogue.mjs', 'web/directory-client.js', 'site/assets/styles.css', 'site/assets/social-card.png', 'site/assets/directory-icon.jpg']) {
     const target = path.join(directory, file);
     await fs.mkdir(path.dirname(target), { recursive: true });
     await fs.copyFile(path.join(source, file), target);
@@ -109,6 +109,15 @@ test('fresh builds expose every verified ID once per global/category series with
     assert(!sitemap.includes('<lastmod>'), 'A rebuild is not evidence of a content-change date');
     const feed = JSON.parse(await fs.readFile(path.join(f.site, 'data/projects.json'), 'utf8'));
     assert.deepEqual(feed, [...allEntries].sort((a, b) => a.name.localeCompare(b.name)));
+    for(const url of expectedUrls){
+      const html=await fs.readFile(path.join(f.site,new URL(url).pathname.slice(1)||'index.html'),'utf8');
+      const data=JSON.parse(html.match(/<script id="catalog-schema" type="application\/ld\+json">([^<]+)<\/script>/)[1]);
+      const collection=data['@graph'].find(x=>x['@type']==='CollectionPage'),list=data['@graph'].find(x=>x['@type']==='ItemList');
+      assert.equal(collection.url,url);assert.equal(list.numberOfItems,ids(html).length);assert.equal(list.itemListElement.length,list.numberOfItems);
+      assert.match(html,/<meta name="twitter:card" content="summary_large_image">/);
+      assert.match(html,/<meta property="og:image" content="https:\/\/cd\.bittrees\.org\/assets\/social-card\.png">/);
+    }
+    for(const file of ['submit.html','request-edit.html','sign-in.html'])assert.match(await fs.readFile(path.join(f.site,file),'utf8'),/<meta name="robots" content="noindex,follow">/);
     const manifest = JSON.parse(await fs.readFile(path.join(f.site, 'release.json'), 'utf8'));
     assert(Object.keys(manifest.files).length < 128);
     for (const url of expectedUrls) assert(manifest.files[new URL(url).pathname.slice(1) || 'index.html']);
@@ -219,4 +228,27 @@ for (const failure of ['network', 'invalid-json']) test(`search ${failure} keeps
   assert.deepEqual(ids(f.nodes.get('rows').innerHTML), ['project-126.md']);
   assert.equal(f.nodes.get('catalog-retry').hidden, true);
   assert.equal(requests, 2);
+});
+
+test('mobile rows retain every listing field and semantic row headers, with safe labels',()=>{
+  const html=tableRows([{...entries[0],name:'Unsafe <name>',description:'</script><img src=x>',token:'FIX',token_url:'https://fixture.example/token'}]);
+  assert.match(html,/<th scope="row" class="project-name">/);assert.match(html,/Unsafe &lt;name&gt;/);assert(!html.includes('<img'));
+  for(const label of ['Description','Links','Tags','Ecosystem','Founded','HQ','Token','X'])assert(html.includes('data-label="'+label+'"'));
+});
+test('live and filtered structured data track only the visible bounded page and preserve its canonical graph',()=>{
+  const state=projectPage(entries,2),list=catalogueItemList(state);assert.equal(list.numberOfItems,50);assert.equal(list.itemListElement[0].position,51);
+  const node={textContent:JSON.stringify({'@graph':[{'@type':'CollectionPage',url:baseUrl+'/pages/2.html'},list]})},document={getElementById:()=>node};
+  const updated=projectPage([{...entries[0],name:'</script>Public update'}]);updateCatalogueSchema(document,updated);
+  assert(!node.textContent.includes('</script>'));const graph=JSON.parse(node.textContent)['@graph'];assert.equal(graph[0].url,baseUrl+'/pages/2.html');assert.equal(graph[1].numberOfItems,1);assert.equal(graph[1].itemListElement[0].item.name,'</script>Public update');
+});
+
+test('server-rendered listing schema escapes HTML delimiters without changing the source text',async()=>{
+  const f=await fixture();
+  try{
+    const description='Official </script><img src=x> project description with source evidence.';
+    await f.write([{...entries[0],description}]);f.build();
+    const html=await fs.readFile(path.join(f.site,'index.html'),'utf8'),raw=html.match(/<script id="catalog-schema" type="application\/ld\+json">([^<]+)<\/script>/)[1];
+    assert(!raw.includes('</script>'));
+    const list=JSON.parse(raw)['@graph'].find(x=>x['@type']==='ItemList');assert.equal(list.itemListElement[0].item.description,description);
+  }finally{await f.cleanup();}
 });

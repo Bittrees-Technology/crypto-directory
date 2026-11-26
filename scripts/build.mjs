@@ -3,7 +3,7 @@ import path from 'node:path';
 import { loadProcessStatuses } from './lib/process-metrics.mjs';
 import { writeReleaseManifest } from './lib/release-manifest.mjs';
 import {CATEGORIES,LISTING_FIELDS,REMOVAL_REASONS} from '../lib/directory/model.mjs';
-import { filterProjects, projectPage, catalogPagePath, pageSummary, escapeHtml, tableRows } from '../web/catalog.mjs';
+import { filterProjects, projectPage, catalogPagePath, pageSummary, escapeHtml, tableRows, catalogueItemList } from '../web/catalog.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const contentDir = path.join(root, 'content', 'projects');
@@ -11,8 +11,8 @@ const siteDir = process.env.DIRECTORY_BUILD_OUTPUT?path.resolve(process.env.DIRE
 const categoryDir = path.join(siteDir, 'categories');
 const pageDir = path.join(siteDir, 'pages');
 const dataDir = path.join(siteDir, 'data');
-const SITE_URL = (process.env.SITE_URL || 'https://cryptodirectory.eth.limo').replace(/\/+$/, '');
-const FAVICON_URL = 'https://euc.li/cryptodirectory.eth';
+const SITE_URL = (process.env.SITE_URL || 'https://cd.bittrees.org').replace(/\/+$/, '');
+const FAVICON_URL = 'assets/directory-icon.jpg';
 
 const required = [
   'name',
@@ -95,12 +95,12 @@ function parseFrontMatter(filePath, text) {
   return meta;
 }
 
-function seoHead({ title, description, canonicalPath = '', jsonLd = null, robots = 'index,follow' }) {
+function seoHead({ title, description, canonicalPath = '', jsonLd = null, schemaId = '', robots = 'index,follow' }) {
   const canonical = absoluteUrl(canonicalPath);
   const descriptionEscaped = escapeHtml(description);
   const titleEscaped = escapeHtml(title);
   const jsonLdScript = jsonLd
-    ? `<script type=\"application/ld+json\">${JSON.stringify(jsonLd).replaceAll('<','\\u003c')}</script>`
+    ? `<script${schemaId ? ` id="${escapeHtml(schemaId)}"` : ''} type=\"application/ld+json\">${JSON.stringify(jsonLd).replaceAll('<','\\u003c')}</script>`
     : '';
   return `<meta name=\"description\" content=\"${descriptionEscaped}\">
   <meta name=\"robots\" content=\"${escapeHtml(robots)}\">
@@ -110,10 +110,50 @@ function seoHead({ title, description, canonicalPath = '', jsonLd = null, robots
   <meta property=\"og:title\" content=\"${titleEscaped}\">
   <meta property=\"og:description\" content=\"${descriptionEscaped}\">
   <meta property=\"og:url\" content=\"${escapeHtml(canonical)}\">
-  <meta name=\"twitter:card\" content=\"summary\">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="${escapeHtml(absoluteUrl('assets/social-card.png'))}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CryptoDirectory — Crypto and Web3 project directory">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${escapeHtml(absoluteUrl('assets/social-card.png'))}">
+  <meta name="twitter:image:alt" content="CryptoDirectory — Crypto and Web3 project directory">
   <meta name=\"twitter:title\" content=\"${titleEscaped}\">
   <meta name=\"twitter:description\" content=\"${descriptionEscaped}\">
   ${jsonLdScript}`;
+}
+
+function categoryDescription(category) {
+  const summaries={
+    'AI Agents':'Discover crypto and Web3 AI agents, agent frameworks and onchain agent marketplaces.',
+    'Custody':'Explore crypto custody providers and tools for safeguarding digital assets.',
+    'DAOs & Governance':'Find DAO platforms, onchain voting systems and governance tools.',
+    'Data & Analytics':'Explore blockchain data platforms, onchain analytics and crypto research tools.',
+    'DeFi':'Find decentralized exchanges, lending protocols and other decentralized finance projects.',
+    'Developer Tools':'Discover Web3 development frameworks, smart contract tools and blockchain APIs.',
+    'Gaming':'Explore blockchain games, onchain gaming platforms and Web3 gaming tools.',
+    'Identity':'Find decentralized identity, naming, credentials and onchain reputation projects.',
+    'Infrastructure':'Discover blockchain infrastructure, node services, interoperability and Web3 networks.',
+    'Layer 1 / Layer 2':'Explore layer 1 blockchains, Ethereum scaling networks and layer 2 ecosystems.',
+    'NFTs & Creator Economy':'Find NFT platforms, creator tools, digital collectibles and onchain publishing projects.',
+    'Payments':'Discover crypto payment services, stablecoin tools and onchain payment infrastructure.',
+    'Real World Assets (RWA)':'Explore tokenization platforms and projects connecting real world assets with blockchains.',
+    'Security':'Find smart contract auditing, blockchain security, monitoring and risk assessment tools.',
+    'Wallets':'Explore Ethereum and multichain wallets, smart accounts and digital asset wallet tools.'
+  };
+  return (summaries[category]||`Explore crypto and Web3 projects in ${category}.`)+' Browse official websites and product links.';
+}
+function catalogueGraph({title,description,canonicalPath,state,page,category=''}) {
+  const url=absoluteUrl(canonicalPath),home=absoluteUrl('');
+  const crumbs=[{name:'CryptoDirectory',url:home}];
+  if(category)crumbs.push({name:category,url:absoluteUrl(catalogPagePath(1,slugify(category)))});
+  if(page>1)crumbs.push({name:`Page ${page}`,url});
+  return {'@context':'https://schema.org','@graph':[
+    {'@type':'WebSite','@id':home+'#website',name:'CryptoDirectory',url:home,inLanguage:'en'},
+    {'@type':'CollectionPage','@id':url+'#webpage',name:title,description,url,inLanguage:'en',isPartOf:{'@id':home+'#website'},mainEntity:{'@id':url+'#projects'},...(crumbs.length>1?{breadcrumb:{'@id':url+'#breadcrumbs'}}:{})},
+    {'@id':url+'#projects',...catalogueItemList(state)},
+    ...(crumbs.length>1?[{'@type':'BreadcrumbList','@id':url+'#breadcrumbs',itemListElement:crumbs.map((crumb,index)=>({'@type':'ListItem',position:index+1,name:crumb.name,item:crumb.url}))}]:[])
+  ]};
 }
 
 function sitemapXml(paths) {
@@ -156,16 +196,17 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
   <meta charset=\"utf-8\">
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
   <title>${escapeHtml(title)}</title>
-  <link rel=\"icon\" href=\"${escapeHtml(FAVICON_URL)}\">
-  <link rel=\"shortcut icon\" href=\"${escapeHtml(FAVICON_URL)}\">
-  <link rel=\"apple-touch-icon\" href=\"${escapeHtml(FAVICON_URL)}\">
+  <link rel=\"icon\" href=\"${escapeHtml(navPrefix + FAVICON_URL)}\">
+  <link rel=\"shortcut icon\" href=\"${escapeHtml(navPrefix + FAVICON_URL)}\">
+  <link rel=\"apple-touch-icon\" href=\"${escapeHtml(navPrefix + FAVICON_URL)}\">
   <link rel=\"stylesheet\" href=\"${escapeHtml(stylesheetHref)}\">
   ${extraHead}
 </head>
 <body${RUNTIME_CATALOGUE?` data-live-catalogue data-catalogue-store="${escapeHtml(process.env.DIRECTORY_RUNTIME_STORE_ID||'')}" data-catalogue-view="${escapeHtml(catalogueView)}" data-catalogue-category="${escapeHtml(catalogueCategory)}" data-catalogue-page="${cataloguePage}" data-catalogue-prefix="${escapeHtml(navPrefix)}"`:''}>
+  <a class="skip-link" href="#directory-content">Skip to content</a>
   <main>
     <header class="directory-header">
-      <a class="directory-brand" href="${escapeHtml(navPrefix || './')}" aria-label="CryptoDirectory home"><img class="directory-icon" src="${escapeHtml(FAVICON_URL)}" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
+      <a class="directory-brand" href="${escapeHtml(navPrefix || './')}" aria-label="CryptoDirectory home"><img class="directory-icon" src="${escapeHtml(navPrefix + FAVICON_URL)}" width="28" height="28" alt=""><span>CryptoDirectory</span></a>
       <nav class="header-forms" aria-label="Contribute to the directory"><a href="${escapeHtml(navPrefix)}submit.html">Submit a project</a><a href="${escapeHtml(navPrefix)}request-edit.html">Request an edit</a></nav>
       <div class="directory-account">
         <a data-login-link data-signed-out class="account-button" href="https://cd.bittrees.org/sign-in" title="Sign in with email or Ethereum">Sign in</a>
@@ -176,7 +217,7 @@ function pageShell({ title, heading = title, subtitle, body, home = false, showS
     ${siteNav(navPrefix)}
     </div>
     ${home?'':`<a class="directory-back" href="${escapeHtml(navPrefix || './')}"><span aria-hidden="true">←</span>Back to directory</a>`}
-    <section class="page-heading"><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(subtitle)}</p></section>
+    <section class="page-heading" id="directory-content" tabindex="-1"><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(subtitle)}</p></section>
     <p id="directory-message" role="status" aria-live="polite"></p><a id="directory-result" hidden rel="noopener" target="_blank"></a>
     ${body}
     <p class=\"footer\">Disclosure: This directory is informational only and is not an endorsement or financial advice.</p>
@@ -204,7 +245,7 @@ function paginationHtml(state, canonicalPath, categorySlug = '') {
 
 function catalogTable(rows) {
   return `<div class="catalog-table" tabindex="0" role="region" aria-label="Project listings">
-<table>
+<table class="project-table">
   <thead>
     <tr>
       <th scope="col">Name</th><th scope="col">Description</th><th scope="col">Links</th><th scope="col">Tags</th><th scope="col">Ecosystem</th><th scope="col">Founded</th><th scope="col">HQ</th><th scope="col">Token</th><th scope="col">X</th>
@@ -221,18 +262,19 @@ function indexPage(projects, categories, page = 1) {
   const prefix = navigationPrefix(canonicalPath);
   const options = ['<option value="">All categories</option>']
     .concat(categories.map(category => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`)).join('');
-  const title = page === 1 ? 'CryptoDirectory' : `CryptoDirectory | Page ${page}`;
-  const description = `CryptoDirectory is a curated global index of active onchain companies and projects across ${categories.length} categories.${page > 1 ? ` Page ${page} of ${state.pageCount}.` : ''}`;
+  const title = page === 1 ? 'CryptoDirectory | Crypto & Web3 Project Directory' : `Crypto & Web3 Projects, Page ${page} | CryptoDirectory`;
+  const description = `Browse active crypto and Web3 projects across DeFi, wallets, infrastructure, AI agents and more. Find official websites and product links.${page > 1 ? ` Page ${page}.` : ''}`;
   const body = `<section class="controls" data-catalog-search data-source="${prefix}data/projects.json" data-prefix="${prefix}">
-  <label>Search all projects<input id="search" type="search" placeholder="Search name, tag, ecosystem"></label>
+  <label>Search all projects<input id="search" type="search" placeholder="Search name, tag, ecosystem" enterkeyhint="search" autocomplete="off"></label>
   <label>Category<select id="category">${options}</select></label>
 </section>
 <p id="catalog-search-status" role="status" aria-live="polite"></p>
 <button id="catalog-retry" type="button" hidden>Retry search</button>
 <noscript><p>Search needs JavaScript. Browse every project using the category and page links.</p></noscript>
-<section class="card" style="margin-bottom:12px">
-  <div>Category pages: ${categories.map(category => `<a href="${prefix}categories/${slugify(category)}.html">${escapeHtml(category)}</a>`).join(' | ')}</div>
-</section>
+<nav class="category-browse" aria-label="Browse project categories">
+  <p class="category-label">Browse by category</p>
+  <div class="category-links">${categories.map(category => `<a href="${prefix}categories/${slugify(category)}.html">${escapeHtml(category)}</a>`).join('')}</div>
+</nav>
 <p id="catalog-count" class="status" role="status" aria-live="polite">${pageSummary(state)}</p>
 ${catalogTable(tableRows(state.items, prefix))}
 ${paginationHtml(state, canonicalPath)}
@@ -241,13 +283,8 @@ ${paginationHtml(state, canonicalPath)}
   <span id="search-page" aria-current="page"></span>
   <button id="search-next" type="button">Next results</button>
 </nav>`;
-  const head = seoHead({ title, description, canonicalPath, jsonLd: page === 1 ? {
-    '@context': 'https://schema.org', '@type': 'WebSite', name: 'CryptoDirectory',
-    url: absoluteUrl(''), description: `Curated index of ${visibleProjects.length} active onchain companies and projects.`, inLanguage: 'en'
-  } : {
-    '@context': 'https://schema.org', '@type': 'CollectionPage', name: title,
-    url: absoluteUrl(canonicalPath), isPartOf: absoluteUrl(''), inLanguage: 'en'
-  } });
+  const head = seoHead({ title, description, canonicalPath, schemaId:'catalog-schema',
+    jsonLd: catalogueGraph({title,description,canonicalPath,state,page}) });
   return pageShell({ title, heading: 'Explore the directory', home: true,
     subtitle: 'Active global onchain companies and projects', body, extraHead: head,
     catalogueView: 'verified', cataloguePage: page,
@@ -267,17 +304,12 @@ function categoryPage(category, projects, page = 1) {
 <p id="catalog-count" class="status">${pageSummary(state)}</p>
 ${catalogTable(tableRows(state.items, prefix))}
 ${paginationHtml(state, canonicalPath, slug)}`;
-  const title = `CryptoDirectory | ${category}${page > 1 ? ` | Page ${page}` : ''}`;
-  const head = seoHead({ title,
-    description: `Browse ${visible.length} active onchain projects in the ${category} category.${page > 1 ? ` Page ${page} of ${state.pageCount}.` : ''}`,
-    canonicalPath, jsonLd: {
-      '@context': 'https://schema.org', '@type': 'CollectionPage',
-      name: `CryptoDirectory - ${category}${page > 1 ? ` - Page ${page}` : ''}`,
-      url: absoluteUrl(canonicalPath), isPartOf: absoluteUrl(''), inLanguage: 'en'
-    }
-  });
+  const title = `${category} Projects & Tools${page > 1 ? `, Page ${page}` : ''} | CryptoDirectory`;
+  const description=categoryDescription(category)+(page>1?` Page ${page}.`:'');
+  const head = seoHead({title,description,canonicalPath,schemaId:'catalog-schema',
+    jsonLd:catalogueGraph({title,description,canonicalPath,state,page,category})});
   return pageShell({ title, heading: `Category: ${category}`,
-    subtitle: 'Sorted by lead category', body, extraHead: head, catalogueView:'verified', catalogueCategory:category,cataloguePage:page,
+    subtitle: categoryDescription(category), body, extraHead: head, catalogueView:'verified', catalogueCategory:category,cataloguePage:page,
     stylesheetHref: `${prefix}assets/styles.css`, navPrefix: prefix });
 }
 
@@ -302,12 +334,12 @@ function listingFormPage(edit) {
   <button type="submit">${edit?'Propose update':'Submit for review'}</button></form></section>
   ${edit?'':'<section class="card my-submissions" data-can-submit hidden><h2>Your submissions</h2><div id="my-submissions"></div></section>'}
   <section class="signed-out-notice" data-signed-out><p>${edit?'Sign in with an Editor, Admin or Superadmin role to update this listing.':'Sign in with your Bittrees email or Ethereum wallet to continue.'}</p><p class="status">You can browse the directory without signing in.</p></section>`;
-  return pageShell({title:edit?'Update a listing':'Submit a listing',subtitle:edit?'Propose changes to an existing listing. Verification and approval stay unchanged.':'Suggest a project, company or organization for review.',showSubmissionLink:edit,extraHead:edit?'<meta name="robots" content="noindex,follow">':'',body});
+  return pageShell({title:edit?'Update a listing':'Submit a listing',subtitle:edit?'Propose changes to an existing listing. Verification and approval stay unchanged.':'Suggest a project, company or organization for review.',showSubmissionLink:edit,extraHead:seoHead({title:(edit?'Update a Listing':'Submit a Project')+' | CryptoDirectory',description:edit?'Propose a correction to an existing CryptoDirectory listing.':'Submit a crypto or Web3 project for directory review.',canonicalPath:edit?'edit.html':'submit.html',robots:'noindex,follow'}),body});
 }
 
 function editRequestPage(projects){
   const options=projects.filter(p=>p.verification_status!=='rejected').map(p=>`<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)}</option>`).join('');
-  return pageShell({title:'Request an edit',subtitle:'Suggest corrections or request removal of an existing project, company or organization.',body:`
+  return pageShell({title:'Request an edit',extraHead:seoHead({title:'Request an Edit | CryptoDirectory',description:'Suggest a correction or request removal of an existing listing.',canonicalPath:'request-edit.html',robots:'noindex,follow'}),subtitle:'Suggest corrections or request removal of an existing project, company or organization.',body:`
   <section class="card listing-form-card" data-can-request-edit hidden><h2>Listing details</h2>
   <form id="listing-request-form" method="post">
   <label class="form-field-wide">Existing listing<select name="id" required><option value="">Choose a listing</option>${options}</select></label>
@@ -330,7 +362,7 @@ function needsUpdatePage(projects) {
 <strong id="needs-update-total">${flagged.length}</strong> entries currently flagged as needs_update.
 <div style=\"margin-top:8px\"><a href=\"./\">Back to index</a></div>
 </section>
-<table>
+<table class="project-table">
   <thead>
     <tr>
       <th>Name</th><th>Description</th><th>Links</th><th>Tags</th><th>Ecosystem</th><th>Founded</th><th>HQ</th><th>Token</th><th>X</th>
@@ -455,7 +487,7 @@ ${cards || '<section class="card" style="margin:18px 0">No tracked processes fou
 async function main() {
   await fs.mkdir(dataDir, { recursive: true });
   await fs.mkdir(path.join(siteDir, 'assets'), { recursive: true });
-  if(siteDir!==path.join(root,'site'))await fs.copyFile(path.join(root,'site/assets/styles.css'),path.join(siteDir,'assets/styles.css'));
+  if(siteDir!==path.join(root,'site'))for(const asset of ['styles.css','social-card.png','directory-icon.jpg'])await fs.copyFile(path.join(root,'site/assets',asset),path.join(siteDir,'assets',asset));
 
   const files = (await fs.readdir(contentDir))
     .filter((f) => f.endsWith('.md'))
@@ -494,7 +526,7 @@ async function main() {
   await fs.writeFile(path.join(siteDir,'submit.html'),listingFormPage(false));
   await fs.writeFile(path.join(siteDir,'edit.html'),listingFormPage(true));
   await fs.writeFile(path.join(siteDir,'request-edit.html'),editRequestPage(projects));
-  await fs.writeFile(path.join(siteDir,'sign-in.html'),pageShell({title:'CryptoDirectory',subtitle:'Sign in with email or Ethereum',body:'<section class="card"><p>Opening the shared Bittrees sign-in…</p><a href="https://roles.bittrees.org/sign-in?app=crypto-directory">Continue to sign-in</a></section>'}));
+  await fs.writeFile(path.join(siteDir,'sign-in.html'),pageShell({title:'Sign in | CryptoDirectory',subtitle:'Sign in with email or Ethereum',extraHead:seoHead({title:'Sign in | CryptoDirectory',description:'Sign in to submit a project or manage authorized directory work.',canonicalPath:'sign-in.html',robots:'noindex,follow'}),body:'<section class="card"><p>Opening the shared Bittrees sign-in…</p><a href="https://roles.bittrees.org/sign-in?app=crypto-directory">Continue to sign-in</a></section>'}));
   await fs.copyFile(path.join(root,'web/directory-client.js'),path.join(siteDir,'assets/directory-client.js'));
   await fs.copyFile(path.join(root,'web/runtime-catalogue.mjs'),path.join(siteDir,'assets/runtime-catalogue.mjs'));
   await fs.copyFile(path.join(root,'web/catalog.mjs'),path.join(siteDir,'assets/catalog.mjs'));

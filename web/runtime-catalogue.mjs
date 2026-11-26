@@ -1,4 +1,4 @@
-import {filterProjects,projectPage,pageSummary,tableRows} from './catalog.mjs';
+import {filterProjects,projectPage,pageSummary,tableRows,updateCatalogueSchema} from './catalog.mjs';
 
 const ENDPOINT='https://cd.bittrees.org/api/catalogue';
 const textFields=['name','lead_category','description','founded','hq','token'];
@@ -50,6 +50,7 @@ export function mountRuntimeCatalogue(document,location,history){
     const rows=scope==='needs-update'?snapshot.rows.filter(x=>x.verification_status==='needs_update'):filterProjects(snapshot.rows,{query:search?.value||'',category:category?.value||root.dataset.catalogueCategory||''});
     const state=projectPage(rows,filtering?filteredPage:currentPage());
     table.innerHTML=tableRows(state.items,root.dataset.cataloguePrefix||'');
+    updateCatalogueSchema(document,state);
     if(count)count.textContent=scope==='needs-update'?`Showing ${state.first}–${state.last} of ${state.total} listings needing an update.`:pageSummary(state,filtering);
     const total=document.getElementById('category-total');if(total)total.textContent=String(rows.length);
     const marked=document.getElementById('needs-update-total');if(marked)marked.textContent=String(rows.length);
