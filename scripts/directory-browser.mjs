@@ -244,6 +244,13 @@ try{
     const filtered=JSON.parse(await page.locator('#catalog-schema').textContent())['@graph'].find(n=>n['@type']==='ItemList');assert.equal(filtered.numberOfItems,await page.locator('#rows tr').count());
     assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
   },{name:'mobile-'+width,context:{viewport:{width,height:844}}});
+  await scenario('admin',async({page})=>{
+    await page.goto(origin+'/');const row=page.locator('#rows tr').first(),edit=row.locator('[data-edit-entry]');await edit.waitFor({state:'visible'});
+    const category=await row.locator('small').boundingBox(),link=await edit.boundingBox();
+    assert(link.y>=category.y+category.height,'The mobile edit action must be separate from the category label');assert(link.height>=44);
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    await screenshot(page,'mobile-admin');
+  },{name:'mobile-admin',context:{viewport:{width:390,height:844}}});
   await scenario('member',async({page})=>{
     await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
