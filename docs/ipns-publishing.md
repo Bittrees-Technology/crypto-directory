@@ -28,6 +28,8 @@ The manifest, previous candidate/state, approval evidence and operation journal 
 
 Public verification compares all content files on both domains with the approved artifact. The homepage must resolve the new CID. Byte-identical cached assets are valid even if their cache provenance headers refer to an earlier root. eth.limo supplies its own gateway-level `robots.txt`, which is excluded from content equality. Failed preflight checks have three bounded attempts, and public convergence has six; exhausted retries produce held evidence rather than repeated signing or paid fallback.
 
+Recent discovery receipts can also supply evidence for identical blocks shared by successive approved releases. The worker reads at most sixteen recent receipt/candidate pairs, each file bounded to 128 KiB, and skips linked, malformed or mismatched evidence. Only exact block IDs in the current pinned DAG with completed announcement timestamps from the last twenty-four hours are reused; a different root, missing blocks and expired records cannot satisfy current discovery. Partial preflight receipts are useful because they record individual completed announcements. This reuse does not approve a source, skip gateway file checks, extend time or retry limits, reset exhausted journals or permit another signature. A new approved release still needs its own complete discovery evidence and current approval checks.
+
 ## Operations
 
 Run `python3 sync.py --state-dir <existing-state-directory>` for a verified dry run. Add `--publish` only for the existing approved release operation; scheduled execution already includes it. Run `python3 -m unittest discover -s scripts/ipns -v` for approval, provenance, publication, crash/retry and file-manifest tests.
