@@ -246,6 +246,7 @@ ul {
   .link-pill {display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;font-size:14px;}
   .badge {font-size:14px;margin-bottom:0;}
   .token-link,tr[data-project-id] > td[data-label="X"] a,[data-edit-entry] {display:inline-flex;align-items:center;min-height:44px;}
+  .project-name [data-edit-entry] {display:flex;width:max-content;max-width:100%;margin-top:4px;}
   .catalog-pagination {gap:8px;}
   .catalog-pagination a,.catalog-pagination span {padding:10px;font-size:14px;}
 }
