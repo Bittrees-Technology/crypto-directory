@@ -11,7 +11,7 @@ let rows=Array.from({length:112},(_,i)=>({...base,id:`runtime-${String(i).padSta
 let revision=1,unavailable=false;const calls=[],writes=[],errors=[];
 const browser=await chromium.launch({headless:true});
 async function contextFor(origin,role='anonymous'){
-  const context=await browser.newContext({viewport:{width:1280,height:900}});const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
+  const context=await browser.newContext({viewport:{width:390,height:844}});const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
   await context.route('**/*',async route=>{
     const url=new URL(route.request().url());
     if(url.href==='https://cd.bittrees.org/api/catalogue'){
@@ -42,9 +42,12 @@ try{
   for(const origin of ['https://cd.bittrees.org','https://cryptodirectory.eth.limo']){
     const {context,page}=await contextFor(origin);
     await page.goto(origin+'/');await page.waitForFunction(()=>document.body.dataset.catalogueRevision==='1');
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Live phone catalogue must fit the viewport');
+    assert.equal(await page.locator('#rows tr').first().locator('[data-label=Ecosystem]').isVisible(),true);
+    assert.equal(JSON.parse(await page.locator('#catalog-schema').textContent())['@graph'].find(x=>x['@type']==='ItemList').numberOfItems,50);
     assert.equal(await page.locator('#rows tr').count(),50);assert((await page.locator('#catalog-count').textContent()).includes('112'));
     await page.getByRole('button',{name:'Last page',exact:true}).click();assert.equal(await page.locator('#rows tr').count(),12);assert(page.url().includes('page=3'));
-    await page.locator('#search').fill('Runtime 111');assert.equal(await page.locator('#rows tr').count(),1);assert((await page.locator('#rows').textContent()).includes('Runtime 111'));
+    await page.locator('#search').fill('Runtime 111');assert.equal(JSON.parse(await page.locator('#catalog-schema').textContent())['@graph'].find(x=>x['@type']==='ItemList').itemListElement[0].item.name,'Runtime 111');assert.equal(await page.locator('#rows tr').count(),1);assert((await page.locator('#rows').textContent()).includes('Runtime 111'));
     await page.locator('#search').fill('');assert.equal(await page.locator('#rows tr').count(),12);
     await page.goto(origin+'/categories/infrastructure.html');await page.waitForFunction(()=>document.body.dataset.catalogueRevision==='1');assert.equal(await page.locator('#category-total').textContent(),'112');
     assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
@@ -63,5 +66,5 @@ try{
   assert.equal(writes.length,1);assert.equal(writes[0].verifyListing,true);assert(/^[a-f0-9-]{36}$/.test(writes[0].operationId));
   await page.goto('https://cd.bittrees.org/request-edit.html');await page.waitForFunction(()=>document.querySelector('#listing-request-form select[name=id]').options.length===114);
   await context.close();assert.equal(errors.length,0,errors.join('\n'));assert(calls.length>=8);
-  console.log(JSON.stringify({checks:['Vercel live catalogue','ENS shared catalogue','runtime pagination and search','category counts','new revision without rebuild','labelled offline fallback and retry','Reviewer publication with explicit verification','live edit selector'],errors}));
+  console.log(JSON.stringify({checks:['Vercel live catalogue','ENS shared catalogue','runtime pagination and search','category counts','new revision without rebuild','labelled offline fallback and retry','Reviewer publication with explicit verification','live edit selector','mobile reflow on both hosts','structured data matches live search results'],errors}));
 }finally{await browser.close();}
