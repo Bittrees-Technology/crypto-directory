@@ -1,5 +1,5 @@
 // Isolated synthetic browser coverage; no real identity or production write.
-import {chromium} from '@playwright/test';
+import {chromium,webkit} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -7,13 +7,14 @@ import {createHash} from 'node:crypto';
 const root=path.resolve(process.env.DIRECTORY_BUILD_OUTPUT||'site');
 const storeId='e38a1a2e-3602-4e3b-875b-ac80ce210c90';
 const base={lead_category:'Infrastructure',tags:['Infrastructure'],ecosystem:['Ethereum'],description:'A synthetic runtime listing for isolated browser validation.',primary_url:'https://fixture.example/',product_url:'n/a',founded:'2020',hq:'Metaverse',token:'n/a',twitter:'n/a',verification_status:'verified'};
-let rows=Array.from({length:112},(_,i)=>({...base,id:`runtime-${String(i).padStart(3,'0')}.md`,name:`Runtime ${String(i).padStart(3,'0')}`}));rows.push({...base,id:'held-fixture.md',name:'Held fixture',verification_status:'needs_update'});
+let rows=Array.from({length:112},(_,i)=>({...base,id:`runtime-${String(i).padStart(3,'0')}.md`,name:`Runtime ${String(i).padStart(3,'0')}`})).reverse();rows.push({...base,id:'held-fixture.md',name:'Held fixture',verification_status:'needs_update'});
 let revision=1,unavailable=false;const calls=[],writes=[],errors=[];
-const browser=await chromium.launch({headless:true});
+const browser=await (process.env.DIRECTORY_TEST_BROWSER==='webkit'?webkit:chromium).launch({headless:true});
 async function contextFor(origin,role='anonymous'){
   const context=await browser.newContext({viewport:{width:390,height:844}});const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));
   await context.route('**/*',async route=>{
     const url=new URL(route.request().url());
+    if(url.pathname==='/assets/catalog.mjs')return route.fulfill({contentType:'text/javascript',body:'throw new Error("An older cached module was loaded");'});
     if(url.href==='https://cd.bittrees.org/api/catalogue'){
       calls.push(url.href);if(unavailable)return route.fulfill({status:503,json:{error:'Held fixture'}});
       const raw=JSON.stringify(rows),etag='W/"'+createHash('sha256').update(raw).digest('hex')+'"';
@@ -46,9 +47,20 @@ try{
     assert.equal(await page.locator('#rows tr').first().locator('[data-label=Ecosystem]').isVisible(),true);
     assert.equal(JSON.parse(await page.locator('#catalog-schema').textContent())['@graph'].find(x=>x['@type']==='ItemList').numberOfItems,50);
     assert.equal(await page.locator('#rows tr').count(),50);assert((await page.locator('#catalog-count').textContent()).includes('112'));
-    await page.getByRole('button',{name:'Last page',exact:true}).click();assert.equal(await page.locator('#rows tr').count(),12);assert(page.url().includes('page=3'));
+    assert.equal(await page.locator('#rows strong').first().textContent(),'Runtime 000');
+    const feedCalls=calls.length;
+    await page.locator('#catalog-load-more').scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===100);
+    await page.locator('#catalog-load-more').scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===112);
+    assert.equal(await page.locator('#catalog-load-more').isDisabled(),true);assert.equal(calls.length,feedCalls);
+    const names=await page.locator('#rows strong').allTextContents();assert.deepEqual(names,[...names].sort());
+    const ids=await page.locator('#rows tr').evaluateAll(rows=>rows.map(row=>row.dataset.projectId));assert.equal(new Set(ids).size,112);
+    assert.equal(JSON.parse(await page.locator('#catalog-schema').textContent())['@graph'].find(x=>x['@type']==='ItemList').numberOfItems,112);
+    assert.equal(new URL(page.url()).search,'');
     await page.locator('#search').fill('Runtime 111');assert.equal(JSON.parse(await page.locator('#catalog-schema').textContent())['@graph'].find(x=>x['@type']==='ItemList').itemListElement[0].item.name,'Runtime 111');assert.equal(await page.locator('#rows tr').count(),1);assert((await page.locator('#rows').textContent()).includes('Runtime 111'));
-    await page.locator('#search').fill('');assert.equal(await page.locator('#rows tr').count(),12);
+    await page.locator('#search').fill('');assert.equal(await page.locator('#rows tr').count(),50);
+    await page.goto(origin+'/pages/2.html');await page.waitForFunction(()=>document.body.dataset.catalogueRevision==='1');
+    assert.equal(await page.locator('#rows strong').first().textContent(),'Runtime 050');
+    await page.locator('#catalog-load-more').scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===62);
     await page.goto(origin+'/categories/infrastructure.html');await page.waitForFunction(()=>document.body.dataset.catalogueRevision==='1');assert.equal(await page.locator('#category-total').textContent(),'112');
     assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
     if(origin.includes('eth.limo'))assert((await page.locator('.header-forms a').first().getAttribute('href')).startsWith('https://cd.bittrees.org/'));
@@ -66,5 +78,5 @@ try{
   assert.equal(writes.length,1);assert.equal(writes[0].verifyListing,true);assert(/^[a-f0-9-]{36}$/.test(writes[0].operationId));
   await page.goto('https://cd.bittrees.org/request-edit.html');await page.waitForFunction(()=>document.querySelector('#listing-request-form select[name=id]').options.length===114);
   await context.close();assert.equal(errors.length,0,errors.join('\n'));assert(calls.length>=8);
-  console.log(JSON.stringify({checks:['Vercel live catalogue','ENS shared catalogue','runtime pagination and search','category counts','new revision without rebuild','labelled offline fallback and retry','Reviewer publication with explicit verification','live edit selector','mobile reflow on both hosts','structured data matches live search results'],errors}));
+  console.log(JSON.stringify({checks:['Vercel live catalogue','ENS shared catalogue','automatic alphabetical scroll through every row','no duplicate rows or extra feed requests while scrolling','search resets the loaded window','category counts','new revision without rebuild','labelled offline fallback and retry','Reviewer publication with explicit verification','live edit selector','mobile reflow on both hosts','structured data matches all loaded rows'],errors}));
 }finally{await browser.close();}

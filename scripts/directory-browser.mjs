@@ -3,7 +3,7 @@ import {readFile,mkdir} from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {chromium,webkit} from '@playwright/test';
-import {DIRECTORY_PAGE_SIZE} from '../web/catalog.mjs';
+import {DIRECTORY_PAGE_SIZE,filterProjects} from '../web/catalog.mjs';
 
 // Synthetic browser acceptance. This does not claim live identities, grants,
 // GitHub writes, email delivery or ENS transaction approval.
@@ -87,7 +87,9 @@ try{
     }
     const agents=published.filter(project=>project.lead_category==='AI Agents'&&project.verification_status==='verified');
     assert(agents.length>0,'Reviewed AI Agents must reach the public category');
-    assert.deepEqual(await walkDiscovery(page,origin+'/categories/ai-agents.html'),agents.map(project=>project.id).sort());
+    await page.goto(origin+'/categories/ai-agents.html');await settleSearch(page);
+    while(await page.getByRole('button',{name:'Load more projects',exact:true}).count())await page.getByRole('button',{name:'Load more projects',exact:true}).click();
+    assert.deepEqual(await page.locator('#rows tr').evaluateAll(rows=>rows.map(row=>row.dataset.projectId).sort()),agents.map(project=>project.id).sort());
     await page.getByRole('link',{name:'Back to directory',exact:true}).click();
     const newAgent=agents.find(project=>project.name==='Virtuals Protocol')||agents[0];
     await page.locator('#search').fill(newAgent.name);await settleSearch(page);
@@ -99,7 +101,7 @@ try{
     await page.locator('#search').fill('');await settleSearch(page);
     // Public discovery must agree with Surf's verified-only catalogue. Exercise
     // both server-rendered category pages and client-rendered search results.
-    const visible=published.filter(project=>project.verification_status==='verified');
+    const visible=filterProjects(published);
     const rowIds=selector=>page.locator(selector+' [data-edit-entry]').evaluateAll(links=>links.map(link=>new URL(link.href).searchParams.get('id')).sort());
     assert.deepEqual(await rowIds('#rows'),visible.slice(0,DIRECTORY_PAGE_SIZE).map(project=>project.id).sort());
     for(const status of ['needs_update','rejected','pending_audit']){
@@ -245,11 +247,17 @@ try{
     assert.equal(await page.locator('[data-edit-entry]:visible').count(),0);
   },{name:'mobile-'+width,context:{viewport:{width,height:844}}});
   await scenario('admin',async({page})=>{
+    await page.addInitScript(()=>{window.IntersectionObserver=undefined;});
     await page.goto(origin+'/');const row=page.locator('#rows tr').first(),edit=row.locator('[data-edit-entry]');await edit.waitFor({state:'visible'});
     const category=await row.locator('small').boundingBox(),link=await edit.boundingBox();
     assert(link.y>=category.y+category.height,'The mobile edit action must be separate from the category label');assert(link.height>=44);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     await screenshot(page,'mobile-admin');
+    const firstRow=await row.elementHandle();
+    await page.locator('#catalog-load-more').focus();await page.locator('#catalog-load-more').press('Enter');
+    await page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===100);
+    assert(await firstRow.evaluate(node=>node.isConnected),'Appending must retain existing rows and their focus targets');
+    assert.equal(await page.locator('[data-edit-entry]:visible').count(),100,'New rows must retain current role enforcement');
   },{name:'mobile-admin',context:{viewport:{width:390,height:844}}});
   await scenario('member',async({page})=>{
     await page.goto(origin+'/submit.html');await page.locator('#listing-form').waitFor({state:'visible'});

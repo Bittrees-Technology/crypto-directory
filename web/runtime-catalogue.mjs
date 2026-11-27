@@ -1,4 +1,4 @@
-import {filterProjects,projectPage,pageSummary,tableRows,updateCatalogueSchema} from './catalog.mjs';
+import {filterProjects,projectPage,projectWindow,createCatalogueScroller,pageSummary,tableRows,updateCatalogueSchema} from './catalog.mjs';
 
 const ENDPOINT='https://cd.bittrees.org/api/catalogue';
 const textFields=['name','lead_category','description','founded','hq','token'];
@@ -42,19 +42,22 @@ export function mountRuntimeCatalogue(document,location,history){
   retry.hidden=true;
   const search=document.getElementById('search'),category=document.getElementById('category'),count=document.getElementById('catalog-count'),pagination=document.getElementById('catalog-pagination');
   document.getElementById('search-pagination')?.remove();
-  let snapshot=null,filteredPage=1;
+  let snapshot=null,filteredPage=1,batches=1;
+  const scroller=table&&root.dataset.catalogueView==='verified'?createCatalogueScroller(document,pagination,()=>{batches++;render(true);}):null;
   const currentPage=()=>{const query=new URLSearchParams(location.search).get('page');return query&&/^\d{1,5}$/.test(query)?Number(query):Number(root.dataset.cataloguePage||1);};
-  function render(){
+  function render(append=false){
     if(!table||!snapshot)return;
     const filtering=!!(search?.value.trim()||category?.value),scope=root.dataset.catalogueView;
     const rows=scope==='needs-update'?snapshot.rows.filter(x=>x.verification_status==='needs_update'):filterProjects(snapshot.rows,{query:search?.value||'',category:category?.value||root.dataset.catalogueCategory||''});
-    const state=projectPage(rows,filtering?filteredPage:currentPage());
-    table.innerHTML=tableRows(state.items,root.dataset.cataloguePrefix||'');
+    const state=scroller?projectWindow(rows,filtering?1:currentPage(),batches):projectPage(rows,filtering?filteredPage:currentPage());
+    if(append&&scroller)table.insertAdjacentHTML('beforeend',tableRows(state.items.slice(table.children.length),root.dataset.cataloguePrefix||''));
+    else table.innerHTML=tableRows(state.items,root.dataset.cataloguePrefix||'');
     updateCatalogueSchema(document,state);
     if(count)count.textContent=scope==='needs-update'?`Showing ${state.first}–${state.last} of ${state.total} listings needing an update.`:pageSummary(state,filtering);
     const total=document.getElementById('category-total');if(total)total.textContent=String(rows.length);
     const marked=document.getElementById('needs-update-total');if(marked)marked.textContent=String(rows.length);
-    if(pagination){
+    if(scroller)scroller.update(state);
+    else if(pagination){
       pagination.replaceChildren();
       const move=(page,label)=>{const button=document.createElement('button');button.type='button';button.textContent=label;button.addEventListener('click',()=>{if(filtering)filteredPage=page;else{const target=new URL(location.href);target.searchParams.set('page',String(page));history.pushState(null,'',target.pathname+target.search);}render();});pagination.append(button);};
       if(state.page>1){move(1,'First page');move(state.page-1,'Previous page');}
@@ -64,6 +67,7 @@ export function mountRuntimeCatalogue(document,location,history){
     document.dispatchEvent(new Event('directory-rows-rendered'));
   }
   async function load(){
+    batches=1;
     retry.hidden=true;status.textContent='Loading current listings…';
     try{
       const next=await fetchCatalogue(fetch,root.dataset.catalogueStore);const expected=new URLSearchParams(location.search).get('revision');if(expected&&/^\d+$/.test(expected)&&next.revision<Number(expected))throw Error('The published revision has not reached this cache yet.');snapshot=next;root.dataset.catalogueRevision=String(next.revision);status.textContent='';
@@ -72,8 +76,8 @@ export function mountRuntimeCatalogue(document,location,history){
     }catch{status.textContent='Latest updates could not be loaded. Showing the saved directory.';retry.hidden=false;return null;}
   }
   retry.addEventListener('click',()=>void load());
-  for(const control of [search,category].filter(Boolean))control.addEventListener(control===search?'input':'change',()=>{filteredPage=1;render();});
-  globalThis.addEventListener?.('popstate',render);
+  for(const control of [search,category].filter(Boolean))control.addEventListener(control===search?'input':'change',()=>{filteredPage=1;batches=1;render();});
+  globalThis.addEventListener?.('popstate',()=>{filteredPage=1;batches=1;render();});
   return load();
 }
 if(typeof document!=='undefined')globalThis.directoryCatalogueReady=mountRuntimeCatalogue(document,location,history);
