@@ -190,6 +190,30 @@ function siteNav(navPrefix = '') {
 
 const RUNTIME_CATALOGUE=process.env.DIRECTORY_DATA_BACKEND==='runtime-v1';
 
+async function retireBrowserModules(currentNames) {
+  const assets = path.join(siteDir, 'assets');
+  let retired;
+  for (const name of await fs.readdir(assets)) {
+    const match = /^cd-(catalog|runtime-catalogue|directory-search|directory-client)\.([a-f0-9]{16})\.(mjs|js)$/.exec(name);
+    if (!match || currentNames.has(name) || match[3] !== (['catalog', 'runtime-catalogue'].includes(match[1]) ? 'mjs' : 'js')) continue;
+    const file = path.join(assets, name), before = await fs.lstat(file);
+    if (!before.isFile() || before.nlink !== 1 || before.size > 16 * 1024 * 1024) continue;
+    const bytes = await fs.readFile(file), after = await fs.lstat(file);
+    if (before.ino !== after.ino || before.size !== after.size || before.mtimeMs !== after.mtimeMs || before.ctimeMs !== after.ctimeMs) continue;
+    if (createHash('sha256').update(bytes).digest('hex').slice(0, 16) !== match[2]) continue;
+    if (!retired) {
+      const history = path.join(path.dirname(siteDir), '.cd-browser-module-history');
+      if (history === siteDir) throw new Error('Module history must remain outside the published site');
+      await fs.mkdir(history, { mode: 0o700 }).catch(error => { if (error.code !== 'EEXIST') throw error; });
+      if (!(await fs.lstat(history)).isDirectory()) throw new Error('Module history must be a real directory');
+      retired = await fs.mkdtemp(path.join(history, 'retired-'));
+    }
+    // Rename into a unique sibling history folder: preserve bytes, permissions
+    // and metadata rather than discarding earlier generated versions.
+    await fs.rename(file, path.join(retired, name));
+  }
+}
+
 async function versionBrowserModules(htmlPaths) {
   const names = new Map();
   for (const name of ['catalog.mjs', 'runtime-catalogue.mjs', 'directory-search.js', 'directory-client.js']) {
@@ -208,6 +232,7 @@ async function versionBrowserModules(htmlPaths) {
       (original, prefix, name, suffix) => names.has(name) ? prefix + names.get(name) + suffix : original);
     await fs.writeFile(file, html);
   }
+  await retireBrowserModules(new Set(names.values()));
 }
 
 function pageShell({ title, heading = title, subtitle, body, home = false, showSubmissionLink = true, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css', navPrefix = '', catalogueView = '', catalogueCategory = '', cataloguePage = 1 }) {
