@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { loadProcessStatuses } from './lib/process-metrics.mjs';
 import { writeReleaseManifest } from './lib/release-manifest.mjs';
 import {CATEGORIES,LISTING_FIELDS,REMOVAL_REASONS} from '../lib/directory/model.mjs';
@@ -189,6 +190,26 @@ function siteNav(navPrefix = '') {
 
 const RUNTIME_CATALOGUE=process.env.DIRECTORY_DATA_BACKEND==='runtime-v1';
 
+async function versionBrowserModules(htmlPaths) {
+  const names = new Map();
+  for (const name of ['catalog.mjs', 'runtime-catalogue.mjs', 'directory-search.js', 'directory-client.js']) {
+    let code = await fs.readFile(path.join(siteDir, 'assets', name), 'utf8');
+    if (name !== 'catalog.mjs') code = code.replaceAll('./catalog.mjs', './' + names.get('catalog.mjs'));
+    const extension = path.extname(name), digest = createHash('sha256').update(code).digest('hex').slice(0, 16);
+    const versioned = `cd-${path.basename(name, extension)}.${digest}${extension}`;
+    names.set(name, versioned);
+    await fs.writeFile(path.join(siteDir, 'assets', name), code);
+    await fs.writeFile(path.join(siteDir, 'assets', versioned), code);
+  }
+  for (const relative of htmlPaths) {
+    const file = path.join(siteDir, relative || 'index.html');
+    let html = await fs.readFile(file, 'utf8');
+    html = html.replace(/(<script type="module" src="(?:\.\.\/)*assets\/)([^"]+)("><\/script>)/g,
+      (original, prefix, name, suffix) => names.has(name) ? prefix + names.get(name) + suffix : original);
+    await fs.writeFile(file, html);
+  }
+}
+
 function pageShell({ title, heading = title, subtitle, body, home = false, showSubmissionLink = true, extraHead = '', extraScript = '', stylesheetHref = 'assets/styles.css', navPrefix = '', catalogueView = '', catalogueCategory = '', cataloguePage = 1 }) {
   return `<!doctype html>
 <html lang=\"en\">
@@ -264,7 +285,7 @@ function indexPage(projects, categories, page = 1) {
     .concat(categories.map(category => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`)).join('');
   const title = page === 1 ? 'CryptoDirectory | Crypto & Web3 Project Directory' : `Crypto & Web3 Projects, Page ${page} | CryptoDirectory`;
   const description = `Browse active crypto and Web3 projects across DeFi, wallets, infrastructure, AI agents and more. Find official websites and product links.${page > 1 ? ` Page ${page}.` : ''}`;
-  const body = `<section class="controls" data-catalog-search data-source="${prefix}data/projects.json" data-prefix="${prefix}">
+  const body = `<section class="controls" data-catalog-search data-source="${prefix}data/projects.json" data-prefix="${prefix}" data-page="${page}">
   <label>Search all projects<input id="search" type="search" placeholder="Search name, tag, ecosystem" enterkeyhint="search" autocomplete="off"></label>
   <label>Category<select id="category">${options}</select></label>
 </section>
@@ -275,6 +296,7 @@ function indexPage(projects, categories, page = 1) {
   <p class="category-label">Browse by category</p>
   <div class="category-links">${categories.map(category => `<a href="${prefix}categories/${slugify(category)}.html">${escapeHtml(category)}</a>`).join('')}</div>
 </nav>
+<p class="muted">Projects are listed A–Z. More load as you scroll.</p>
 <p id="catalog-count" class="status" role="status" aria-live="polite">${pageSummary(state)}</p>
 ${catalogTable(tableRows(state.items, prefix))}
 ${paginationHtml(state, canonicalPath)}
@@ -300,8 +322,11 @@ function categoryPage(category, projects, page = 1) {
   const prefix = navigationPrefix(canonicalPath);
   const scope = category === 'AI Agents' ? '<p>Crypto and Web3 agents, frameworks and agent marketplaces with an onchain use case.</p>' : '';
   const empty = visible.length ? '' : '<p>No listings have been added to this category yet. New suggestions go through review before appearing here.</p>';
-  const body = `<section class="card" style="margin:18px 0"><span id="category-total">${visible.length}</span> entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href="${prefix}">Back to index</a></section>
-<p id="catalog-count" class="status">${pageSummary(state)}</p>
+  const body = `<section class="card" style="margin:18px 0" data-catalog-search data-source="${prefix}data/projects.json" data-prefix="${prefix}" data-page="${page}" data-category="${escapeHtml(category)}"><span id="category-total">${visible.length}</span> entries in <strong>${escapeHtml(category)}</strong>.${scope}${empty} <a href="${prefix}">Back to index</a></section>
+<p id="catalog-search-status" role="status" aria-live="polite"></p>
+<button id="catalog-retry" type="button" hidden>Reload directory</button>
+<p class="muted">Projects are listed A–Z. More load as you scroll.</p>
+<p id="catalog-count" class="status" role="status" aria-live="polite">${pageSummary(state)}</p>
 ${catalogTable(tableRows(state.items, prefix))}
 ${paginationHtml(state, canonicalPath, slug)}`;
   const title = `${category} Projects & Tools${page > 1 ? `, Page ${page}` : ''} | CryptoDirectory`;
@@ -310,6 +335,7 @@ ${paginationHtml(state, canonicalPath, slug)}`;
     jsonLd:catalogueGraph({title,description,canonicalPath,state,page,category})});
   return pageShell({ title, heading: `Category: ${category}`,
     subtitle: categoryDescription(category), body, extraHead: head, catalogueView:'verified', catalogueCategory:category,cataloguePage:page,
+    extraScript: RUNTIME_CATALOGUE?'':`<script type="module" src="${prefix}assets/directory-search.js"></script>`,
     stylesheetHref: `${prefix}assets/styles.css`, navPrefix: prefix });
 }
 
@@ -547,6 +573,7 @@ async function main() {
   // Staff tools remain crawlable for noindex, outside the public sitemap.
   await fs.writeFile(path.join(siteDir, 'sitemap.xml'), sitemapXml(sitemapPaths));
   await fs.writeFile(path.join(siteDir, 'robots.txt'), robotsTxt());
+  await versionBrowserModules([...sitemapPaths,'review.html','needs-update.html','process-status.html','submit.html','edit.html','request-edit.html','sign-in.html']);
   await writeReleaseManifest(root, siteDir);
 
   const processSummary = processStatuses.length === 0

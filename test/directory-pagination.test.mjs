@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { CATEGORIES } from '../lib/directory/model.mjs';
-import { DIRECTORY_PAGE_SIZE, filterProjects, projectPage, catalogPagePath, tableRows, catalogueItemList, updateCatalogueSchema } from '../web/catalog.mjs';
+import { DIRECTORY_PAGE_SIZE, filterProjects, sortProjects, projectPage, projectWindow, catalogPagePath, tableRows, catalogueItemList, updateCatalogueSchema } from '../web/catalog.mjs';
 import { mountDirectorySearch } from '../web/directory-search.mjs';
 
 const source = path.resolve(new URL('..', import.meta.url).pathname);
@@ -90,6 +91,20 @@ test('search spans every original field, intersects category and excludes every 
   assert.throws(() => catalogPagePath(2, '../defi'));
 });
 
+test('alphabetical windows are independent of feed order and grow without duplicates or mutating input',()=>{
+  const shuffled=[...entries].reverse(),before=shuffled.map(x=>x.id);
+  const ordered=filterProjects(shuffled);
+  assert.deepEqual(ordered.map(x=>x.id),entries.map(x=>x.id));assert.deepEqual(shuffled.map(x=>x.id),before);
+  for(const [batches,length] of [[1,50],[2,100],[3,127],[99,127]]){
+    const state=projectWindow(ordered,1,batches);assert.equal(state.items.length,length);assert.equal(state.last,length);
+    assert.equal(new Set(state.items.map(x=>x.id)).size,length);
+  }
+  assert.deepEqual(projectWindow(ordered,2,2).items.map(x=>x.id),entries.slice(50).map(x=>x.id));
+  assert.equal(projectWindow([],1,2).items.length,0);
+  const names=[{name:'zeta',id:'z'},{name:'Alpha',id:'a'},{name:'alpha',id:'b'},{name:'Project 10',id:'p10'},{name:'Project 2',id:'p2'}];
+  assert.deepEqual(sortProjects(names).map(x=>x.id),['a','b','p2','p10','z']);
+});
+
 test('fresh builds expose every verified ID once per global/category series with resolvable static links', async () => {
   const f = await fixture();
   try {
@@ -149,40 +164,73 @@ test('rebuild after withdrawals removes obsolete pages from disk, sitemap and re
   } finally { await f.cleanup(); }
 });
 
+test('new documents and module imports use content-addressed names across both build modes',async()=>{
+  const f=await fixture();
+  try{
+    for(const runtime of [false,true]){
+      if(runtime)execFileSync(process.execPath,['scripts/build.mjs'],{cwd:f.directory,env:{SITE_URL:baseUrl,VERCEL_GIT_COMMIT_SHA:'a'.repeat(40),DIRECTORY_DATA_BACKEND:'runtime-v1',DIRECTORY_RUNTIME_STORE_ID:'e38a1a2e-3602-4e3b-875b-ac80ce210c90'}});
+      for(const page of ['index.html','categories/defi/2.html','submit.html']){
+        const html=await fs.readFile(path.join(f.site,page),'utf8');
+        const scripts=[...html.matchAll(/<script type="module" src="([^"]+)"/g)].map(match=>new URL(match[1],baseUrl+'/'+page).pathname.slice(1));
+        assert(scripts.length>0);
+        for(const relative of scripts){
+          assert.match(relative,/assets\/cd-[a-z-]+\.[a-f0-9]{16}\.(?:mjs|js)$/);
+          const code=await fs.readFile(path.join(f.site,relative),'utf8');
+          assert(relative.includes(createHash('sha256').update(code).digest('hex').slice(0,16)));
+          assert(!code.includes("from './catalog.mjs'"),'New clients must not mix with an older cached module');
+          const dependency=code.match(/from '\.\/(cd-catalog\.[a-f0-9]{16}\.mjs)'/);
+          if(dependency)assert((await fs.stat(path.join(f.site,'assets',dependency[1]))).isFile());
+        }
+      }
+    }
+    const projectUrl='https://fixture.example/assets/catalog.mjs';
+    await f.write([{...entries[0],primary_url:projectUrl}]);f.build();
+    const html=await fs.readFile(path.join(f.site,'index.html'),'utf8');
+    assert(html.includes('href="'+projectUrl+'"'),'Module versioning must preserve project website links');
+    const graph=JSON.parse(html.match(/<script id="catalog-schema" type="application\/ld\+json">([^<]+)<\/script>/)[1]);
+    assert.equal(graph['@graph'].find(item=>item['@type']==='ItemList').itemListElement[0].item.url,projectUrl);
+  }finally{await f.cleanup();}
+});
+
 function searchFixture(fetch) {
   const nodes = new Map();
+  const created=[];
+  const makeNode=()=>{
+    const listeners=new Map();
+    return {value:'',innerHTML:'',textContent:'',hidden:false,disabled:false,parentNode:null,
+      get children(){return ids(this.innerHTML).map(id=>({id}));},
+      addEventListener:(event,handler)=>listeners.set(event,handler),emit:event=>listeners.get(event)?.(),
+      setAttribute(){},removeAttribute(){},insertAdjacentHTML(position,html){assert.equal(position,'beforeend');this.innerHTML+=html;},
+      replaceChildren(...children){this.innerHTML='';for(const child of children)child.parentNode=this;}};
+  };
   for (const id of ['search', 'category', 'rows', 'catalog-count', 'catalog-pagination', 'search-pagination',
     'search-previous', 'search-next', 'catalog-search-status', 'catalog-retry', 'search-page']) {
-    const listeners = new Map();
-    nodes.set(id, { value: '', innerHTML: '', textContent: '', hidden: false, disabled: false,
-      addEventListener: (event, handler) => listeners.set(event, handler),
-      emit: event => listeners.get(event)?.(), setAttribute() {}, removeAttribute() {} });
+    nodes.set(id,makeNode());
   }
   nodes.get('rows').innerHTML = tableRows(entries.slice(50, 100), '../');
   nodes.get('catalog-count').textContent = 'Showing 51–100 of 127 verified projects.';
   nodes.get('search-pagination').hidden = true;
-  const controls = { dataset: { source: '../data/projects.json', prefix: '../' } }, events = [];
-  const document = { querySelector: () => controls, getElementById: id => nodes.get(id), dispatchEvent: event => events.push(event.type) };
-  mountDirectorySearch({ document, fetch });
-  return { nodes, events, original: nodes.get('rows').innerHTML,
+  const controls = { dataset: { source: '../data/projects.json', prefix: '../',page:'2' } }, events = [];
+  const document = { querySelector: () => controls, getElementById: id => nodes.get(id), dispatchEvent: event => events.push(event.type),createElement:()=>{const node=makeNode();created.push(node);return node;} };
+  const ready=mountDirectorySearch({ document, fetch });
+  return { nodes, events,ready,more:()=>created.find(node=>node.id==='catalog-load-more'),original: nodes.get('rows').innerHTML,
     input: async (id, value) => { nodes.get(id).value = value; await nodes.get(id).emit(id === 'search' ? 'input' : 'change'); } };
 }
 const flush = () => new Promise(resolve => setImmediate(resolve));
 
-test('lazy search finds later-page records, pages all matches and restores the exact initial page', async () => {
+test('one feed request supports cumulative scroll, later-page search and restoring the initial page', async () => {
   let requests = 0;
   const f = searchFixture(async () => { requests += 1; return { ok: true, json: async () => allEntries }; });
-  assert.equal(requests, 0);
+  await f.ready;assert.equal(requests, 1);
   await f.input('search', 'Project 126');
   assert.deepEqual(ids(f.nodes.get('rows').innerHTML), ['project-126.md']);
   assert.match(f.nodes.get('rows').innerHTML, /href="..\/edit.html\?id=project-126.md"/);
   await f.input('search', 'Ethereum');
-  const collected = [...ids(f.nodes.get('rows').innerHTML)];
-  while (!f.nodes.get('search-next').disabled) {
-    f.nodes.get('search-next').emit('click'); await flush();
-    collected.push(...ids(f.nodes.get('rows').innerHTML));
+  while (!f.more().disabled) {
+    f.more().emit('click'); await flush();
   }
-  assert.deepEqual(collected, entries.map(entry => entry.id));
+  assert.deepEqual(ids(f.nodes.get('rows').innerHTML), entries.map(entry => entry.id));
+  f.more().emit('click');assert.equal(ids(f.nodes.get('rows').innerHTML).length,127);
   assert.equal(requests, 1);
   await f.input('category', 'Wallets');
   assert.deepEqual(ids(f.nodes.get('rows').innerHTML), entries.slice(102).map(entry => entry.id));
@@ -201,9 +249,9 @@ test('clearing search during the catalogue request cannot replace the restored p
   let resolve;
   const f = searchFixture(() => new Promise(done => { resolve = done; }));
   const pending = f.input('search', 'Project 126');
-  await f.input('search', '');
+  const cleared=f.input('search', '');
   resolve({ ok: true, json: async () => allEntries });
-  await pending;
+  await Promise.all([pending,cleared]);
   assert.equal(f.nodes.get('rows').innerHTML, f.original);
   assert.equal(f.nodes.get('catalog-pagination').hidden, false);
   assert.equal(f.nodes.get('catalog-search-status').textContent, '');
@@ -223,7 +271,7 @@ for (const failure of ['network', 'invalid-json']) test(`search ${failure} keeps
   assert.equal(f.nodes.get('rows').innerHTML, f.original);
   assert.equal(f.nodes.get('catalog-pagination').hidden, false);
   assert.equal(f.nodes.get('catalog-retry').hidden, false);
-  assert.match(f.nodes.get('catalog-search-status').textContent, /Search is unavailable/);
+  assert.match(f.nodes.get('catalog-search-status').textContent, /full directory could not be loaded/);
   await f.nodes.get('catalog-retry').emit('click');
   assert.deepEqual(ids(f.nodes.get('rows').innerHTML), ['project-126.md']);
   assert.equal(f.nodes.get('catalog-retry').hidden, true);

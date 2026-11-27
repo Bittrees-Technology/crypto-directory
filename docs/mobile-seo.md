@@ -17,10 +17,22 @@ the ENS mirror uses the same primary canonical. Explicit SITE_URL overrides
 continue to work. Every static pagination page remains self-canonical and in
 the sitemap. No fabricated modification dates or search ranking claims are added.
 
-A WebSite/CollectionPage graph describes public directory pages. Bounded ItemList
+The enhanced public directory, category pages and search results sort projects
+A–Z, ignoring case and ordering numbers naturally. They start with fifty rows
+and append fifty more near the end of the list. A keyboard-accessible Load more
+button also works without IntersectionObserver. Scrolling reuses the loaded feed
+and retains existing rows; filters restart the displayed range. Deep page links
+keep their starting range. Static page links remain available without JavaScript
+or when the full feed cannot load. Staff review pagination is unchanged.
+
+Generated browser modules use content-addressed filenames, including their shared
+catalogue import. New HTML can therefore load a consistent module graph despite
+an older ENS gateway cache. Legacy filenames remain available for compatibility.
+
+A WebSite/CollectionPage graph describes public directory pages. ItemList
 entries match the displayed verified rows; category and later pages also have
 breadcrumbs. Client search and runtime catalogue updates refresh the visible
-ItemList without changing the document's canonical URL. Clearing static search
+ItemList, including appended rows, without changing the document's canonical URL. Clearing static search
 restores the original structured data. JSON-LD safely escapes HTML delimiters.
 
 Sign-in, submission and edit-request workflows carry noindex metadata. Existing

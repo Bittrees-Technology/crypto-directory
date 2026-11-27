@@ -1,14 +1,19 @@
 // Shared by static directory pages and the optional client-side search.
 // The public data feed retains all records; only verified records enter discovery.
 export const DIRECTORY_PAGE_SIZE = 50;
+const alphabet = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+
+export function sortProjects(projects) {
+  return [...projects].sort((a, b) => alphabet.compare(a.name, b.name) || alphabet.compare(a.id || '', b.id || ''));
+}
 
 export function filterProjects(projects, { query = '', category = '' } = {}) {
   const q = String(query).trim().toLowerCase();
-  return projects.filter(project => {
+  return sortProjects(projects.filter(project => {
     if (project.verification_status !== 'verified' || (category && project.lead_category !== category)) return false;
     const haystack = [project.name, project.description, project.tags.join(' '), project.ecosystem.join(' ')].join(' ').toLowerCase();
     return !q || haystack.includes(q);
-  });
+  }));
 }
 
 export function projectPage(projects, requestedPage = 1, pageSize = DIRECTORY_PAGE_SIZE) {
@@ -19,6 +24,44 @@ export function projectPage(projects, requestedPage = 1, pageSize = DIRECTORY_PA
   const offset = (page - 1) * pageSize;
   return { items: projects.slice(offset, offset + pageSize), page, pageCount, total,
     first: total ? offset + 1 : 0, last: Math.min(offset + pageSize, total) };
+}
+
+export function projectWindow(projects, requestedPage = 1, batches = 1) {
+  const state = projectPage(projects, requestedPage);
+  const offset = (state.page - 1) * DIRECTORY_PAGE_SIZE;
+  const size = DIRECTORY_PAGE_SIZE * Math.max(1, Number.isSafeInteger(batches) ? batches : 1);
+  return { ...state, items: projects.slice(offset, offset + size), last: Math.min(offset + size, state.total) };
+}
+
+// One catalogue request, then bounded DOM additions. The same button provides
+// keyboard access and a fallback when automatic intersection detection is absent.
+export function createCatalogueScroller(document, pagination, onMore) {
+  if (!pagination) return null;
+  const button = document.createElement('button');
+  button.id = 'catalog-load-more'; button.type = 'button';
+  button.setAttribute('aria-controls', 'rows');
+  let more = false, busy = false, watching = false;
+  const load = () => {
+    if (!more || busy) return;
+    busy = true; button.disabled = true;
+    try { onMore(); } finally { busy = false; button.disabled = !more; }
+  };
+  button.addEventListener('click', load);
+  const Observer = document.defaultView?.IntersectionObserver;
+  const observer = Observer ? new Observer(entries => {
+    if (entries.some(entry => entry.isIntersecting)) load();
+  }, { rootMargin: '600px 0px' }) : null;
+  return {
+    update(state) {
+      more = state.last < state.total;
+      if (button.parentNode !== pagination) pagination.replaceChildren(button);
+      pagination.hidden = false; pagination.setAttribute('aria-label', 'More projects');
+      button.textContent = more ? 'Load more projects' : 'End of results';
+      button.hidden = !state.total; button.disabled = !more;
+      if (more && !watching && observer) { observer.observe(button); watching = true; }
+      if (!more && watching) { observer.unobserve(button); watching = false; }
+    }
+  };
 }
 
 export function catalogPagePath(page, categorySlug = '') {
