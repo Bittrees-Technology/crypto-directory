@@ -192,6 +192,36 @@ test('new documents and module imports use content-addressed names across both b
   }finally{await f.cleanup();}
 });
 
+test('incremental module builds stay bounded and preserve retired copies and unrelated assets',async()=>{
+  const f=await fixture();
+  try{
+    const assets=path.join(f.site,'assets'),catalog=path.join(f.directory,'web/catalog.mjs'),original=await fs.readFile(catalog,'utf8');
+    const initialFileCount=Object.keys(JSON.parse(await fs.readFile(path.join(f.site,'release.json'),'utf8')).files).length;
+    const firstName=(await fs.readdir(assets)).find(name=>/^cd-catalog\./.test(name));
+    const firstFile=path.join(assets,firstName),firstBytes=await fs.readFile(firstFile),firstStat=await fs.stat(firstFile);
+    await fs.writeFile(path.join(assets,'keep.txt'),'Preserve unrelated assets');
+    const custom='cd-catalog.0000000000000000.mjs';await fs.writeFile(path.join(assets,custom),'Preserve unrecognized content');
+    for(let revision=1;revision<=18;revision++){
+      await fs.writeFile(catalog,original+'\n// Incremental fixture revision '+revision+'\n');f.build();
+      const files=JSON.parse(await fs.readFile(path.join(f.site,'release.json'),'utf8')).files;
+      assert.equal(Object.keys(files).length,initialFileCount+2,'Old generated versions must not expand the public manifest');
+      const generated=(await fs.readdir(assets)).filter(name=>/^cd-[a-z-]+\.[a-f0-9]{16}\.(?:mjs|js)$/.test(name)&&name!==custom);
+      assert.equal(generated.length,4);
+    }
+    assert.equal(await fs.readFile(path.join(assets,'keep.txt'),'utf8'),'Preserve unrelated assets');
+    assert.equal(await fs.readFile(path.join(assets,custom),'utf8'),'Preserve unrecognized content');
+    const history=path.join(f.directory,'.cd-browser-module-history');let recovered;
+    for(const folder of await fs.readdir(history)){
+      const file=path.join(history,folder,firstName);
+      try{recovered={bytes:await fs.readFile(file),stat:await fs.stat(file)};break;}catch(error){if(error.code!=='ENOENT')throw error;}
+    }
+    assert(recovered);assert.deepEqual(recovered.bytes,firstBytes);assert.equal(recovered.stat.mode,firstStat.mode);assert.equal(recovered.stat.mtimeMs,firstStat.mtimeMs);
+    const target=path.join(f.directory,'retained-user-script.mjs'),content='Preserve linked files';await fs.writeFile(target,content);
+    const link=path.join(assets,'cd-catalog.'+createHash('sha256').update(content).digest('hex').slice(0,16)+'.mjs');await fs.symlink(target,link);
+    assert.throws(()=>f.build(),/symlinks/);assert((await fs.lstat(link)).isSymbolicLink());assert.equal(await fs.readFile(target,'utf8'),content);
+  }finally{await f.cleanup();}
+});
+
 function searchFixture(fetch) {
   const nodes = new Map();
   const created=[];

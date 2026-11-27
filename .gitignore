@@ -18,3 +18,4 @@ site/assets/cd-catalog.*.mjs
 site/assets/cd-runtime-catalogue.*.mjs
 site/assets/cd-directory-search.*.js
 site/assets/cd-directory-client.*.js
+.cd-browser-module-history/

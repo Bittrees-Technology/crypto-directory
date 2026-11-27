@@ -28,6 +28,10 @@ or when the full feed cannot load. Staff review pagination is unchanged.
 Generated browser modules use content-addressed filenames, including their shared
 catalogue import. New HTML can therefore load a consistent module graph despite
 an older ENS gateway cache. Legacy filenames remain available for compatibility.
+Incremental builds verify retired generated modules by their content hashes and
+move them to a sibling `.cd-browser-module-history` folder outside the published
+site. Earlier copies and their metadata are preserved; unrelated assets remain
+in place. Only the current generated module graph enters the release manifest.
 
 A WebSite/CollectionPage graph describes public directory pages. ItemList
 entries match the displayed verified rows; category and later pages also have
